@@ -1,0 +1,2669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-9: Action Research — Complete Answer Key</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f1117;
+  --surface: #181c27;
+  --surface2: #1e2335;
+  --border: #2a3050;
+  --accent1: #e8a838;
+  --accent2: #5b8dee;
+  --accent3: #e05c5c;
+  --accent4: #4caf82;
+  --text: #dde3f0;
+  --text-muted: #7a87a8;
+  --text-dim: #4a5570;
+  --paper-2018: #e05c5c;
+  --paper-2019: #e8a838;
+  --paper-2020: #26c6da;
+  --paper-2021: #5b8dee;
+  --paper-2023: #4caf82;
+  --paper-2025: #c45be0;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+/* ── HEADER ── */
+header {
+  background: linear-gradient(135deg, #0a0d14 0%, #141929 50%, #0f1520 100%);
+  padding: 3.5rem 2rem 3rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(232,168,56,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.header-eyebrow {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent1);
+  margin-bottom: 1rem;
+}
+
+header h1 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #fff;
+  line-height: 1.15;
+  margin-bottom: 0.5rem;
+}
+
+header h1 span { color: var(--accent1); }
+
+.header-sub {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  margin-top: 0.75rem;
+}
+
+/* ── PAPER SELECTOR TABS ── */
+.paper-tabs {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #0d1018;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.paper-tabs::-webkit-scrollbar { display: none; }
+
+.tab-btn {
+  flex-shrink: 0;
+  padding: 1rem 1.75rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active-2018 { color: var(--paper-2018); border-bottom-color: var(--paper-2018); }
+.tab-btn.active-2019 { color: var(--paper-2019); border-bottom-color: var(--paper-2019); }
+.tab-btn.active-2020 { color: var(--paper-2020); border-bottom-color: var(--paper-2020); }
+.tab-btn.active-2021 { color: var(--paper-2021); border-bottom-color: var(--paper-2021); }
+.tab-btn.active-2023 { color: var(--paper-2023); border-bottom-color: var(--paper-2023); }
+.tab-btn.active-2025 { color: var(--paper-2025); border-bottom-color: var(--paper-2025); }
+
+/* ── PAPER SECTIONS ── */
+.paper-section { display: none; }
+.paper-section.active { display: block; }
+
+.container { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.5rem 5rem; }
+
+/* Paper title banner */
+.paper-banner {
+  border-radius: 8px;
+  padding: 1.75rem 2rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.paper-banner::after {
+  content: attr(data-year);
+  position: absolute;
+  right: -10px; top: -20px;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 7rem;
+  font-weight: 700;
+  opacity: 0.06;
+  color: white;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.banner-2018 { background: linear-gradient(135deg, rgba(224,92,92,0.15), rgba(224,92,92,0.05)); border: 1px solid rgba(224,92,92,0.25); }
+.banner-2019 { background: linear-gradient(135deg, rgba(232,168,56,0.15), rgba(232,168,56,0.05)); border: 1px solid rgba(232,168,56,0.25); }
+.banner-2020 { background: linear-gradient(135deg, rgba(38,198,218,0.15), rgba(38,198,218,0.05)); border: 1px solid rgba(38,198,218,0.25); }
+.banner-2021 { background: linear-gradient(135deg, rgba(91,141,238,0.15), rgba(91,141,238,0.05)); border: 1px solid rgba(91,141,238,0.25); }
+.banner-2023 { background: linear-gradient(135deg, rgba(76,175,130,0.15), rgba(76,175,130,0.05)); border: 1px solid rgba(76,175,130,0.25); }
+.banner-2025 { background: linear-gradient(135deg, rgba(196,91,224,0.15), rgba(196,91,224,0.05)); border: 1px solid rgba(196,91,224,0.25); }
+
+.paper-banner h2 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: white;
+  margin-bottom: 0.3rem;
+}
+
+.paper-banner p {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+/* ── PART DIVIDER ── */
+.part-divider {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 2.5rem 0 2rem;
+}
+
+.part-divider-label {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  white-space: nowrap;
+  padding: 0.35rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.part-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── QUESTION CARD ── */
+.q-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 1.75rem;
+  overflow: hidden;
+}
+
+.q-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+
+.q-header:hover { background: var(--surface2); }
+
+.q-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.q-number {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 0.25rem 0.65rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.q-num-2018 { background: rgba(224,92,92,0.15); color: var(--paper-2018); border: 1px solid rgba(224,92,92,0.3); }
+.q-num-2019 { background: rgba(232,168,56,0.15); color: var(--paper-2019); border: 1px solid rgba(232,168,56,0.3); }
+.q-num-2020 { background: rgba(38,198,218,0.15); color: var(--paper-2020); border: 1px solid rgba(38,198,218,0.3); }
+.q-num-2021 { background: rgba(91,141,238,0.15); color: var(--paper-2021); border: 1px solid rgba(91,141,238,0.3); }
+.q-num-2023 { background: rgba(76,175,130,0.15); color: var(--paper-2023); border: 1px solid rgba(76,175,130,0.3); }
+.q-num-2025 { background: rgba(196,91,224,0.15); color: var(--paper-2025); border: 1px solid rgba(196,91,224,0.3); }
+
+.q-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0.02em;
+}
+
+.q-marks {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.chevron {
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--text-dim);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s, border-color 0.2s;
+  font-size: 0.6rem;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.q-card.open .chevron { transform: rotate(180deg); border-color: var(--text-muted); }
+
+.q-body {
+  display: none;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border);
+  animation: slideDown 0.25s ease;
+}
+
+.q-card.open .q-body { display: block; }
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── ANSWER CONTENT STYLES ── */
+.ans-section {
+  margin-bottom: 1.5rem;
+}
+
+.ans-section:last-child { margin-bottom: 0; }
+
+.ans-heading {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent1);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(232,168,56,0.2);
+}
+
+.ans-heading.blue { color: var(--accent2); border-bottom-color: rgba(91,141,238,0.2); }
+.ans-heading.green { color: var(--accent4); border-bottom-color: rgba(76,175,130,0.2); }
+.ans-heading.red { color: var(--accent3); border-bottom-color: rgba(224,92,92,0.2); }
+
+.definition-box {
+  background: rgba(232,168,56,0.06);
+  border-left: 3px solid var(--accent1);
+  border-radius: 0 6px 6px 0;
+  padding: 0.9rem 1.1rem;
+  margin: 0.75rem 0;
+  font-style: italic;
+  font-size: 0.93rem;
+  color: #c8d0e0;
+}
+
+.definition-box cite {
+  display: block;
+  font-style: normal;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+  font-family: 'Josefin Sans', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+p { margin-bottom: 0.7rem; color: #c0c8d8; font-size: 0.94rem; }
+
+ol, ul { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+li { margin-bottom: 0.45rem; font-size: 0.93rem; color: #b8c2d5; }
+li strong { color: var(--text); }
+
+/* Numbered steps with circles */
+.steps {
+  list-style: none;
+  padding: 0;
+  counter-reset: step-counter;
+}
+
+.steps > li {
+  counter-increment: step-counter;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+  align-items: flex-start;
+}
+
+.steps > li::before {
+  content: counter(step-counter);
+  flex-shrink: 0;
+  width: 1.9rem;
+  height: 1.9rem;
+  background: rgba(232,168,56,0.12);
+  border: 1.5px solid rgba(232,168,56,0.4);
+  color: var(--accent1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.78rem;
+  margin-top: 0.15rem;
+}
+
+.step-title {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.02em;
+}
+
+.step-desc { font-size: 0.9rem; color: #b0bbd0; line-height: 1.7; }
+
+/* Compare grid */
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 0.85rem;
+  margin: 0.85rem 0;
+}
+
+@media (max-width: 640px) {
+  .compare-grid { grid-template-columns: 1fr; }
+  .compare-grid-2 { grid-template-columns: 1fr !important; }
+}
+
+.compare-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+  margin: 0.85rem 0;
+}
+
+.compare-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.compare-card h4 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.6rem;
+}
+
+.compare-card ul { font-size: 0.85rem; }
+.compare-card li { margin-bottom: 0.3rem; }
+
+.card-gold h4 { color: var(--accent1); }
+.card-blue h4 { color: var(--accent2); }
+.card-green h4 { color: var(--accent4); }
+.card-red h4 { color: var(--accent3); }
+.card-purple h4 { color: var(--paper-2025); }
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.88rem;
+}
+
+thead tr { background: rgba(255,255,255,0.05); }
+
+thead th {
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+}
+
+tbody td {
+  padding: 0.55rem 0.75rem;
+  border-bottom: 1px solid rgba(42,48,80,0.6);
+  vertical-align: top;
+  color: #b0bbd0;
+}
+
+tbody tr:hover td { background: rgba(255,255,255,0.02); }
+tbody tr:last-child td { border-bottom: none; }
+
+/* Formula */
+.formula {
+  background: rgba(91,141,238,0.08);
+  border: 1px solid rgba(91,141,238,0.25);
+  border-radius: 6px;
+  padding: 0.85rem 1.25rem;
+  font-family: 'Courier New', monospace;
+  font-size: 1rem;
+  color: var(--accent2);
+  text-align: center;
+  margin: 0.85rem 0;
+  letter-spacing: 0.05em;
+}
+
+/* Callout boxes */
+.callout {
+  border-radius: 6px;
+  padding: 0.85rem 1.1rem;
+  margin: 0.85rem 0;
+  font-size: 0.9rem;
+}
+
+.callout-tip {
+  background: rgba(76,175,130,0.08);
+  border-left: 3px solid var(--accent4);
+}
+
+.callout-tip strong { color: var(--accent4); }
+
+.callout-important {
+  background: rgba(224,92,92,0.08);
+  border-left: 3px solid var(--accent3);
+}
+
+.callout-important strong { color: var(--accent3); }
+
+/* Interpretation box */
+.interpretation {
+  background: rgba(232,168,56,0.08);
+  border: 1px dashed rgba(232,168,56,0.3);
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: #c8b88a;
+}
+
+.interpretation strong { color: var(--accent1); }
+
+/* Marks total tag */
+.marks-tag {
+  display: inline-block;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 3px;
+  vertical-align: middle;
+  margin-left: 0.4rem;
+}
+
+.mt-gold { background: rgba(232,168,56,0.15); color: var(--accent1); border: 1px solid rgba(232,168,56,0.3); }
+
+/* Limitations list */
+.limitations {
+  background: rgba(224,92,92,0.05);
+  border: 1px solid rgba(224,92,92,0.15);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  margin: 0.75rem 0;
+}
+
+.limitations h4 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent3);
+  margin-bottom: 0.6rem;
+}
+
+/* Back to top */
+.back-top {
+  display: block;
+  text-align: center;
+  margin-top: 3rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.back-top:hover { color: var(--accent1); }
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid var(--border);
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-eyebrow">B.Ed. III Semester · CBCS Scheme · Education</div>
+  <h1>HC-9: <span>Action Research</span></h1>
+  <h1 style="font-size:clamp(1rem,2vw,1.4rem); font-weight:300; color:#8896b0; margin-top:0.3rem;">Complete Answer Key · All Question Papers</h1>
+  <div class="header-sub">Sept/Oct 2018 &nbsp;|&nbsp; Sept 2019 &nbsp;|&nbsp; March 2020 &nbsp;|&nbsp; Aug 2021 &nbsp;|&nbsp; Jun/Jul 2023 &nbsp;|&nbsp; Apr/May 2025</div>
+</header>
+
+<!-- TABS -->
+<div class="paper-tabs">
+  <button class="tab-btn active-2018" onclick="showPaper('2018')">📄 Sept/Oct 2018</button>
+  <button class="tab-btn" onclick="showPaper('2019')">📄 Sept 2019</button>
+  <button class="tab-btn" onclick="showPaper('2020')">📄 March 2020</button>
+  <button class="tab-btn" onclick="showPaper('2021')">📄 Aug 2021</button>
+  <button class="tab-btn" onclick="showPaper('2023')">📄 Jun/Jul 2023</button>
+  <button class="tab-btn" onclick="showPaper('2025')">📄 Apr/May 2025</button>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     PAPER 0: SEPTEMBER/OCTOBER 2018
+══════════════════════════════════════════════════ -->
+<div class="paper-section active" id="paper-2018">
+<div class="container">
+
+  <div class="paper-banner banner-2018" data-year="2018">
+    <h2>SS-010 · September/October 2018</h2>
+    <p>HC-9: Action Research &nbsp;·&nbsp; Time: 1½ Hours &nbsp;·&nbsp; Max. Marks: 35 &nbsp;·&nbsp; Part A: 2×10=20 &nbsp;·&nbsp; Part B: 3×5=15</p>
+  </div>
+
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part A — Answer Any Two (10 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card open" id="q2018-1">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2018">Q.1</span>
+        <span class="q-title">Define Educational Research · Importance · Types of Research</span>
+      </div>
+      <div class="q-marks"><span>2+6+2 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Define Educational Research — 2 Marks</div>
+        <div class="definition-box">Educational research is a systematic study directed toward gaining knowledge and understanding of the educational process, with the aim of finding solutions to educational problems and improving the quality of education.</div>
+        <p>It is a systematic effort to acquire new knowledge about all aspects of education. It primarily focuses on improving quality and searching for knowledge in the field of education.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Importance of Educational Research — 6 Marks</div>
+        <ol>
+          <li>Provides solution to all the problems related to education</li>
+          <li>Helps in the development of an organized body of scientific knowledge about educational issues</li>
+          <li>Helps in understanding, explaining, predicting and controlling the behavior of the learner</li>
+          <li>Helps in acquiring information regarding different aspects of education</li>
+          <li>Helps in curriculum development and reforms, educating slow learners, understanding psychological traits of physically challenged individuals</li>
+          <li>Helps in adapting methods of instruction to the needs of individual learners</li>
+          <li>Helps to achieve the goals and objectives of education in a more scientific way</li>
+          <li>Helps in adopting technology in education to improve quality</li>
+          <li>Helps improve teaching and learning methods through evidence-based practices</li>
+          <li>Helps in curriculum design based on research evidence</li>
+        </ol>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading green">(c) Types of Research — 2 Marks</div>
+        <p>There are three main types of research in education:</p>
+        <ul>
+          <li><strong>Fundamental Research:</strong> Done for the sake of knowledge; develops theories and principles; no immediate practical application</li>
+          <li><strong>Applied Research:</strong> Aims to solve an immediate practical problem; adapts theories from fundamental research to real settings</li>
+          <li><strong>Action Research:</strong> Conducted by teachers to solve local classroom problems; concerned with improving practice, not generalizing findings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="q2018-2">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2018">Q.2</span>
+        <span class="q-title">What is Action Research? & Steps with Classroom Problem</span>
+      </div>
+      <div class="q-marks"><span>2+8 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is Action Research? — 2 Marks</div>
+        <div class="definition-box">
+          Action research is a form of investigation designed for use by teachers to attempt to solve problems and improve professional practices in their own classrooms. It involves systematic observations and data collection which can be used by the practitioner-researcher in reflection, decision-making and the development of more effective classroom strategies.
+          <cite>— Parsons and Brown, 2002</cite>
+        </div>
+        <p>Action research is concerned with a local problem and is conducted within a local setting. The primary purpose is providing solution to the given problem, not contribution to science.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Steps of Action Research — 8 Marks</div>
+        <p><em>Example Problem: "Students of Class 7 are unable to solve problems involving fractions in Mathematics."</em></p>
+        <ol class="steps">
+          <li><div><div class="step-title">Identification of the Problem Area</div><div class="step-desc">Teacher notices students consistently failing in fraction problems. The broad problem area is identified: "poor performance in Mathematics."</div></div></li>
+          <li><div><div class="step-title">Pinpointing the Specific Problem</div><div class="step-desc">The specific problem is stated precisely: "Students of Class 7 are unable to solve word problems involving fractions in Mathematics."</div></div></li>
+          <li><div><div class="step-title">Analyzing Probable Causes</div><div class="step-desc">Causes identified: (i) Lack of understanding of fraction concepts, (ii) Insufficient practice, (iii) Only lecture method used, (iv) Students lack prerequisite multiplication skills.</div></div></li>
+          <li><div><div class="step-title">Listing Objectives</div><div class="step-desc">To identify specific errors; to improve performance through visual aids and activity-based learning; to verify whether intervention reduces errors.</div></div></li>
+          <li><div><div class="step-title">Formulating Action Hypotheses</div><div class="step-desc">"If activity-based learning is used while teaching fractions, then students' performance will improve." Written in "if…then" form.</div></div></li>
+          <li><div><div class="step-title">Designing the Action Plan</div><div class="step-desc">(i) Pre-test on fraction problems, (ii) Programme: activity-based lessons using fraction strips and real-life examples for 3 weeks, (iii) Post-test parallel to pre-test.</div></div></li>
+          <li><div><div class="step-title">Implementation of Action Plan</div><div class="step-desc">Execute the programme as scheduled — activity lessons, practice sessions, feedback given after each lesson.</div></div></li>
+          <li><div><div class="step-title">Statistical Analysis and Interpretation</div><div class="step-desc">Error analysis, marks lists prepared, mean calculated for pre and post tests, bar graphs drawn, individual comparisons made, interpretations stated.</div></div></li>
+          <li><div><div class="step-title">Verification of Hypotheses</div><div class="step-desc">If post-test mean is significantly higher, hypothesis is accepted. Conclusions apply only to this specific class.</div></div></li>
+          <li><div><div class="step-title">Reporting</div><div class="step-desc">A systematic report is prepared documenting all steps and findings for future reference and evidence.</div></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="q2018-3">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2018">Q.3</span>
+        <span class="q-title">Measures of Central Tendency & Main Components of Research Report</span>
+      </div>
+      <div class="q-marks"><span>2+8 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Measures of Central Tendency — 2 Marks</div>
+        <p>Central tendency refers to a statistical measure that identifies a single value as representative of an entire distribution. The three measures are:</p>
+        <ul>
+          <li><strong>Mean:</strong> Arithmetic average = Sum of all scores ÷ Number of scores (Σfx/N)</li>
+          <li><strong>Median:</strong> The mid-point of a distribution; 50% of scores fall below and 50% above. Formula: LRL + [(N/2 – fc)/fw] × i</li>
+          <li><strong>Mode:</strong> The most frequently occurring score in the distribution</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Main Components of Research Report Format — 8 Marks</div>
+        <p>The Action Research Report is written under three main headings:</p>
+        <div class="ans-heading" style="margin-top:1rem;">1. Preliminary Section</div>
+        <ul>
+          <li><strong>Cover Page:</strong> Title of study, institution, candidate name, date of submission, guided by</li>
+          <li><strong>Preface:</strong> Brief statement and scope of the report</li>
+          <li><strong>Acknowledgement:</strong> Thanks to people who helped complete the project</li>
+          <li><strong>Table of Contents:</strong> Major divisions with page numbers</li>
+          <li><strong>List of Tables</strong> and <strong>List of Figures</strong></li>
+        </ul>
+        <div class="ans-heading blue" style="margin-top:1rem;">2. Main Section</div>
+        <ul>
+          <li>Identification and pin-pointing of the problem</li>
+          <li>Analyzing probable causes (general and specific)</li>
+          <li>Objectives of Action Research</li>
+          <li>Formulation of action hypothesis</li>
+          <li>Designing the Action Plan</li>
+          <li>Execution of Action Plan</li>
+          <li>Data Analysis — marks lists, error analysis, graphical representation, individual and statistical comparison through mean/median</li>
+          <li>Verification of Action Hypothesis — key findings and discussion</li>
+          <li>Conclusion — summary in terms of the problem stated</li>
+        </ul>
+        <div class="ans-heading green" style="margin-top:1rem;">3. Reference Section</div>
+        <ul>
+          <li><strong>Bibliography:</strong> List of all sources and materials used throughout the project</li>
+          <li><strong>Appendix:</strong> Supporting material — test papers, data sheets etc. A report of 3000–5000 words is appropriate if publishing findings.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part B — Answer Any Three (5 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="q2018-4">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2018">Q.4</span>
+        <span class="q-title">Differentiate Fundamental Research and Action Research</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <table>
+        <thead><tr><th>Basis</th><th>Fundamental Research</th><th>Action Research</th></tr></thead>
+        <tbody>
+          <tr><td>Purpose</td><td>To develop theories and add to the general body of knowledge</td><td>To solve a specific local classroom or school problem</td></tr>
+          <tr><td>Conducted by</td><td>Professional researchers, scientists, university scholars</td><td>Classroom teachers, school administrators, guidance personnel</td></tr>
+          <tr><td>Setting</td><td>Laboratory or controlled scientific environment</td><td>Classroom or school — the local setting</td></tr>
+          <tr><td>Methodology</td><td>Strictly follows a particular methodology and paradigm</td><td>Not confined to any particular methodology; flexible</td></tr>
+          <tr><td>Generalizability</td><td>Results are meant to be generalized to the wider population</td><td>Results are NOT meant to be generalized beyond the specific group</td></tr>
+          <tr><td>Control</td><td>Strict experimental controls are maintained</td><td>Not characterized by the same kind of control evidence</td></tr>
+          <tr><td>Contribution</td><td>Primary purpose is to contribute to science</td><td>Primary purpose is to solve the given problem, not contribute to science</td></tr>
+          <tr><td>Time frame</td><td>Long-term research projects</td><td>Short-term; completed within a term or academic year</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="q2018-5">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2018">Q.5</span>
+        <span class="q-title">Uses of Graphical Representation & Differences between Frequency Polygon and Bar Graph</span>
+      </div>
+      <div class="q-marks"><span>2+3 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Uses of Graphical Representation of Data — 2 Marks</div>
+        <ul>
+          <li>Makes complex data simple and easy to understand visually</li>
+          <li>Allows quick comparison between two or more sets of data (e.g., pre-test vs post-test)</li>
+          <li>Facilitates identification of patterns, trends, and outliers in data</li>
+          <li>Saves time — communicates information faster than a table of numbers</li>
+          <li>Universal in nature — understood regardless of language</li>
+          <li>Helps in making conclusions during action research data analysis</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Differences between Frequency Polygon and Bar Graph — 3 Marks</div>
+        <table>
+          <thead><tr><th>Basis</th><th>Frequency Polygon</th><th>Bar Graph (Histogram)</th></tr></thead>
+          <tbody>
+            <tr><td>Representation</td><td>Points connected by straight lines forming a polygon</td><td>Rectangles (bars) drawn for each class interval</td></tr>
+            <tr><td>Based on</td><td>Mid-points of class intervals plotted</td><td>Class intervals used as base of rectangles</td></tr>
+            <tr><td>Shape</td><td>Appears as a line graph / bell-shaped curve</td><td>Appears as a series of adjacent rectangles</td></tr>
+            <tr><td>Comparison</td><td>Two or more distributions can be plotted on same graph easily</td><td>Harder to compare two distributions on the same graph</td></tr>
+            <tr><td>Continuity</td><td>Shows the continuous nature of data clearly</td><td>Shows discrete class intervals</td></tr>
+            <tr><td>Use in AR</td><td>Useful to show trend of improvement over time</td><td>Useful to show frequency distribution of scores</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="q2018-6">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2018">Q.6</span>
+        <span class="q-title">Achievement Test — Meaning & Differences from Diagnostic Test</span>
+      </div>
+      <div class="q-marks"><span>2+3 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is an Achievement Test? — 2 Marks</div>
+        <p>An achievement test is a mechanism used in any educational process to assess educational outcomes and evaluate different levels of learners.</p>
+        <div class="definition-box">"An achievement or proficiency test is used to ascertain what and how much has been learnt or how well a task has been performed."<cite>— Robert L. Ebel</cite></div>
+        <p>Achievement tests measure the extent to which a student has acquired certain knowledge or skills, usually as a result of instruction.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Differences between Achievement Test and Diagnostic Test — 3 Marks</div>
+        <table>
+          <thead><tr><th>Basis</th><th>Achievement Test</th><th>Diagnostic Test</th></tr></thead>
+          <tbody>
+            <tr><td>Purpose</td><td>To measure how much a student has learned after instruction</td><td>To identify specific learning difficulties, weaknesses and gaps</td></tr>
+            <tr><td>When used</td><td>Administered after the completion of a unit or course</td><td>Administered before or during instruction</td></tr>
+            <tr><td>Focus</td><td>Measures overall learning outcomes and achievement levels</td><td>Focuses on pinpointing specific errors and deficiencies</td></tr>
+            <tr><td>Result use</td><td>Used for grading, promotion, and evaluation of students</td><td>Used to plan remedial teaching and differentiated instruction</td></tr>
+            <tr><td>Scope</td><td>Broad — covers the entire syllabus or unit</td><td>Narrow — focuses on specific concepts or skills where difficulties exist</td></tr>
+            <tr><td>In Action Research</td><td>Used to measure overall improvement after intervention</td><td>Used as pre-test to identify problem areas before intervention</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="q2018-7">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2018">Q.7</span>
+        <span class="q-title">Why is Knowledge of Action Research Necessary for a Classroom Teacher?</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <p>Knowledge of Action Research is extremely necessary for a classroom teacher for the following reasons:</p>
+      <ul>
+        <li><strong>Solves classroom problems scientifically:</strong> Teachers face many day-to-day problems (poor attendance, low performance, discipline issues). Action research gives them a scientific method to identify, analyze and solve these problems systematically</li>
+        <li><strong>Improves teaching quality:</strong> By trying out new teaching strategies and evaluating their effectiveness through action research, teachers constantly improve their methods</li>
+        <li><strong>Professional development:</strong> Action research turns teachers into reflective practitioners who examine their own teaching, leading to continuous professional growth</li>
+        <li><strong>Understanding students better:</strong> Through systematic observation and data collection, teachers gain deeper insight into individual student needs, learning styles and difficulties</li>
+        <li><strong>Evidence-based decisions:</strong> Instead of making decisions based on intuition alone, the teacher makes decisions based on actual data and evidence collected from the classroom</li>
+        <li><strong>Develops research skills:</strong> The teacher gains practical skills in data collection, statistical analysis (mean, median, graphs) and interpretation of results</li>
+        <li><strong>School improvement:</strong> When teachers conduct action research and share findings, it contributes to overall school improvement</li>
+        <li><strong>Empowerment:</strong> Action research empowers teachers to take ownership of problems in their classroom and find their own solutions rather than waiting for external experts</li>
+        <li><strong>Helps slow learners:</strong> By identifying specific difficulties through diagnostic tools, teachers can plan targeted remedial programmes for slow learners</li>
+        <li><strong>Builds confidence:</strong> Seeing evidence of their own positive impact on student learning builds teacher confidence and motivation</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" id="q2018-8">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2018">Q.8</span>
+        <span class="q-title">Importance of Observation Schedule and Questionnaire in Action Research</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Observation Schedule in Action Research</div>
+        <p><strong>Meaning:</strong> An observation schedule is a form which directs a researcher to pay attention to certain behaviors and situational features when carrying out an observational study.</p>
+        <p><strong>Importance:</strong></p>
+        <ul>
+          <li>Helps the teacher systematically record student behavior in the classroom during and after the action programme</li>
+          <li>Provides direct, first-hand evidence about classroom interactions and student participation</li>
+          <li>Makes observation more focused and objective — the teacher knows exactly what to observe</li>
+          <li>Can be used to track changes in student behavior before and after the intervention</li>
+          <li>Data collected through observation schedules can be quantified and analyzed statistically</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Questionnaire in Action Research</div>
+        <p><strong>Meaning:</strong> A questionnaire is a list of questions used to gather data from respondents about their attitudes, experiences, or opinions.</p>
+        <p><strong>Importance:</strong></p>
+        <ul>
+          <li>Helps gather information about students' perceptions and attitudes related to the problem</li>
+          <li>Can identify probable causes of the problem from students' own perspective</li>
+          <li>Can be administered to an entire class simultaneously, saving time</li>
+          <li>Responses are standardized and easy to analyze</li>
+          <li>Useful as both a pre-action tool (to understand extent of the problem) and post-action tool (to assess change in attitudes)</li>
+          <li>Cost-effective and practical for classroom use</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <a href="#" class="back-top">↑ Back to Top</a>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     PAPER: MARCH 2020
+══════════════════════════════════════════════════ -->
+<div class="paper-section" id="paper-2020">
+<div class="container">
+
+  <div class="paper-banner banner-2020" data-year="2020">
+    <h2>81546 · March 2020</h2>
+    <p>HC-9: Action Research (CBCS Semester Scheme – 2 Years Course) &nbsp;·&nbsp; Time: 1½ Hours &nbsp;·&nbsp; Max. Marks: 35</p>
+  </div>
+
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part A — Answer Any Two (10 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card open" id="q2020-1">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2020">Q.1</span>
+        <span class="q-title">What is Research? · Importance of Educational Research · Differences: Basic vs Applied Research</span>
+      </div>
+      <div class="q-marks"><span>2+4+4 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is meant by Research? — 2 Marks</div>
+        <div class="definition-box">Research is a systematic investigative process employed to increase or revise current knowledge by discovering new facts. It is a careful investigation or enquiry especially through search for new facts in any branch of knowledge.</div>
+        <div class="definition-box">Research is systematic and objective analysis and recording of controlled observation that may lead to the development of generalizations, principles or theories resulting in prediction and possibly ultimate control of events.<cite>— Best and Khan, 1989</cite></div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Importance of Educational Research — 4 Marks</div>
+        <ol>
+          <li>Provides solution to all problems related to education</li>
+          <li>Helps in developing an organized body of scientific knowledge about educational issues</li>
+          <li>Helps in understanding, explaining, predicting and controlling the behavior of the learner</li>
+          <li>Helps in curriculum development, reforms and adapting instruction to individual learner needs</li>
+          <li>Helps achieve educational goals in a more scientific way</li>
+          <li>Helps in adopting technology to improve quality of education</li>
+          <li>Helps improve teaching and learning methods through evidence-based practices</li>
+        </ol>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading green">(c) Differences between Basic Research and Applied Research — 4 Marks</div>
+        <table>
+          <thead><tr><th>Basis</th><th>Basic (Fundamental) Research</th><th>Applied Research</th></tr></thead>
+          <tbody>
+            <tr><td>Purpose</td><td>To develop theories and add to the body of knowledge</td><td>To solve an immediate practical problem</td></tr>
+            <tr><td>Setting</td><td>Laboratory or controlled environment</td><td>Real-world educational or practical settings</td></tr>
+            <tr><td>Orientation</td><td>Theory-oriented</td><td>Problem-oriented</td></tr>
+            <tr><td>Application</td><td>No immediate practical application</td><td>Results directly applied in the field</td></tr>
+            <tr><td>Contribution to science</td><td>Primary objective</td><td>Secondary objective</td></tr>
+            <tr><td>Generalizability</td><td>Results generalized to wider population</td><td>Results applicable to a specific context</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="q2020-2">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2020">Q.2</span>
+        <span class="q-title">Questionnaire & Observation Schedule · How Diagnostic Test Helps a Classroom Teacher</span>
+      </div>
+      <div class="q-marks"><span>3+3+4 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a)(i) Questionnaire — 3 Marks</div>
+        <p><strong>Meaning:</strong> A questionnaire is a list of questions or items used to gather data from respondents about their attitudes, experiences, or opinions. It can collect both quantitative and qualitative information.</p>
+        <p><strong>Importance in Action Research:</strong></p>
+        <ul>
+          <li>Helps gather information about students' perceptions and attitudes related to the problem from students' own perspective</li>
+          <li>Can be administered to an entire class simultaneously, saving time</li>
+          <li>Responses are standardized and easy to analyze statistically</li>
+          <li>Useful as both pre-action and post-action tool to assess change in attitudes</li>
+          <li>Cost-effective and practical for classroom use</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(a)(ii) Observation Schedule — 3 Marks</div>
+        <p><strong>Meaning:</strong> An observation schedule is a form which directs a researcher to pay attention to certain behaviors and situational features when carrying out an observational study.</p>
+        <p><strong>Importance in Action Research:</strong></p>
+        <ul>
+          <li>Helps the teacher systematically record student behavior during and after the action programme</li>
+          <li>Provides direct, first-hand evidence about classroom interactions</li>
+          <li>Makes observation more focused and objective</li>
+          <li>Can be used to track changes in student behavior before and after the intervention</li>
+          <li>Data can be quantified and used for statistical analysis</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading green">(b) How is Diagnostic Test Helpful for a Classroom Teacher? — 4 Marks</div>
+        <p>A diagnostic test is primarily used to diagnose student difficulties. It is a form of pre-assessment that allows the teacher to determine students' individual strengths, weaknesses, knowledge, and skills.</p>
+        <ul>
+          <li>Helps evaluate students' level of prior knowledge before teaching begins — creates a baseline</li>
+          <li>Helps plan differentiated instruction, lesson plans, and teaching strategies for all students</li>
+          <li>Allows teachers to plan meaningful and efficient instruction by focusing on what students still need to learn</li>
+          <li>Provides information to individualize instruction for each learner</li>
+          <li>In action research, used as the pre-test tool to collect pre-experimental evidence</li>
+          <li>Helps identify specific areas of weakness that need to be addressed through the programme of action</li>
+          <li>Sets a baseline for assessing future learning and verifying the effectiveness of the action plan</li>
+          <li>Helps provide targeted remediation or enrichment as needed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="q2020-3">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2020">Q.3</span>
+        <span class="q-title">Define Action Research & Steps with Classroom Problem</span>
+      </div>
+      <div class="q-marks"><span>2+8 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Define Action Research — 2 Marks</div>
+        <div class="definition-box">Action research is a form of investigation designed for use by teachers to attempt to solve problems and improve professional practices in their own classrooms. It involves systematic observations and data collection which can be used by the practitioner-researcher in reflection, decision-making and the development of more effective classroom strategies.<cite>— Parsons and Brown, 2002</cite></div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Steps of Action Research — 8 Marks</div>
+        <p><em>Example Problem: "Students of Class 8 make frequent spelling errors while writing English."</em></p>
+        <ol class="steps">
+          <li><div><div class="step-title">Identification of the Problem Area</div><div class="step-desc">Teacher notices frequent spelling mistakes in students' written work. Broad area: "poor English writing skills."</div></div></li>
+          <li><div><div class="step-title">Pinpointing the Specific Problem</div><div class="step-desc">Specific problem stated: "Students of Class 8 make frequent spelling errors in English written work, especially in commonly used words."</div></div></li>
+          <li><div><div class="step-title">Analyzing Probable Causes</div><div class="step-desc">Causes: (i) Students do not read regularly, (ii) Poor retention of spelling rules, (iii) No regular dictation practice, (iv) Teacher does not give feedback on written work.</div></div></li>
+          <li><div><div class="step-title">Listing Objectives</div><div class="step-desc">To identify most common spelling errors; to improve spelling through daily word practice and dictation exercises; to verify improvement through pre and post tests.</div></div></li>
+          <li><div><div class="step-title">Formulating Action Hypotheses</div><div class="step-desc">"If daily spelling practice and dictation exercises are given, then the frequency of spelling errors will decrease significantly." Written as "if…then" statements.</div></div></li>
+          <li><div><div class="step-title">Designing the Action Plan</div><div class="step-desc">(i) Pre-test: dictation of 20 commonly misspelled words, (ii) Programme of Action: daily word lists, word walls, dictation exercises over 4 weeks, (iii) Post-test: parallel dictation of 20 words same difficulty level.</div></div></li>
+          <li><div><div class="step-title">Implementation of Action Plan</div><div class="step-desc">Programme executed as scheduled — daily word practice, weekly dictation, individual feedback on errors, word games.</div></div></li>
+          <li><div><div class="step-title">Statistical Analysis of Data</div><div class="step-desc">Error analysis of pre and post tests, marks lists prepared, mean scores calculated for both, bar graphs drawn to show improvement, individual comparisons made.</div></div></li>
+          <li><div><div class="step-title">Verification of Hypotheses</div><div class="step-desc">Hypotheses accepted or rejected based on pre-test vs post-test mean comparison. Conclusions applicable only to this specific class.</div></div></li>
+          <li><div><div class="step-title">Reporting</div><div class="step-desc">A detailed systematic report prepared for future evidence, following the same steps as carried out.</div></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part B — Answer Any Three (5 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="q2020-4">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2020">Q.4</span>
+        <span class="q-title">Achievement Test — Meaning & Two Types</span>
+      </div>
+      <div class="q-marks"><span>1+2+2 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is Achievement Test? — 1 Mark</div>
+        <div class="definition-box">"An achievement or proficiency test is used to ascertain what and how much has been learnt or how well a task has been performed."<cite>— Robert L. Ebel</cite></div>
+        <p>Achievement tests measure the extent to which a student has acquired knowledge or skills, usually as a result of instruction. They assess educational outcomes.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Two Types of Achievement Tests — 4 Marks</div>
+        <div class="compare-grid-2">
+          <div class="compare-card card-gold">
+            <h4>Standardized Achievement Test</h4>
+            <ul>
+              <li>Prepared by experts after extensive tryout and statistical analysis</li>
+              <li>Has established norms for comparison with large populations</li>
+              <li>Has high reliability and validity</li>
+              <li>Same test administered to students across different schools</li>
+              <li>Example: Board examination papers</li>
+            </ul>
+          </div>
+          <div class="compare-card card-blue">
+            <h4>Teacher-Made Achievement Test</h4>
+            <ul>
+              <li>Prepared by the classroom teacher for their own class</li>
+              <li>Based on the specific content taught in the classroom</li>
+              <li>Less standardized but more relevant to the specific class</li>
+              <li>Used for unit tests, terminal examinations</li>
+              <li>Example: Class test prepared by teacher after completing a chapter</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="q2020-5">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2020">Q.5</span>
+        <span class="q-title">Why is Knowledge of Action Research Necessary for a Classroom Teacher?</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <p>Knowledge of Action Research is absolutely necessary for a classroom teacher for the following reasons:</p>
+      <ul>
+        <li><strong>Solves classroom problems scientifically:</strong> Gives teachers a structured scientific method to identify, diagnose, and solve day-to-day classroom problems like poor attendance, low achievement, or discipline issues</li>
+        <li><strong>Improves teaching effectiveness:</strong> By trying and evaluating new teaching strategies, teachers can identify what works best for their specific students and context</li>
+        <li><strong>Promotes professional development:</strong> Action research turns teachers into reflective practitioners — they examine and improve their own practice continuously</li>
+        <li><strong>Develops data literacy:</strong> Teachers learn to collect data, compute mean and median, draw graphs and interpret results — valuable analytical skills</li>
+        <li><strong>Empowers teachers:</strong> Teachers become researchers in their own classrooms and take ownership of problems rather than depending on external experts</li>
+        <li><strong>Benefits students directly:</strong> When teachers investigate and solve learning problems, students' academic performance and wellbeing improve</li>
+        <li><strong>Helps identify slow learners:</strong> Through diagnostic tools used in action research, teachers can identify specific learning difficulties and plan remedial programmes</li>
+        <li><strong>Contributes to school improvement:</strong> When teachers share findings from action research, it leads to school-wide improvement in practices</li>
+        <li><strong>Makes teaching evidence-based:</strong> Decisions about teaching methods and strategies are based on real data from the classroom, not just assumptions</li>
+        <li><strong>Builds teacher confidence:</strong> Seeing measurable evidence of positive impact on student learning motivates and empowers teachers</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="q2020-6">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2020">Q.6</span>
+        <span class="q-title">Main Components of Action Research Report · Bibliography & Appendix</span>
+      </div>
+      <div class="q-marks"><span>2+3 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Main Components of Action Research Report — 2 Marks</div>
+        <p>The Action Research Report is written under three sections: <strong>Preliminary Section · Main Section · Reference Section</strong></p>
+        <p>Main components include: Cover page, Preface, Acknowledgement, Table of Contents, Problem identification, Probable causes, Objectives, Hypotheses, Action Plan, Data Analysis, Verification of hypotheses, Conclusion, Bibliography, and Appendix.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Bibliography and Appendix — 3 Marks</div>
+        <p><strong>Bibliography:</strong> The bibliography is the record of all sources and materials that have been used for the study. It provides a detailed list of all the sources of material used throughout the project. If the number of sources is large, the researcher may divide the bibliography into sections — one for books, one for periodicals and journals, one for websites etc. Each entry typically includes: Author's name, Year of publication, Title of the book/article, Publisher, Place of publication.</p>
+        <p><strong>Appendix:</strong> The appendix contains all the relevant supporting material that is important but not essential to understanding the main body of the report. It is placed at the end of the report. Examples include: Test papers (pre-test and post-test), Data analysis sheets, Questionnaires used, Observation schedules, Raw data tables, Photographs. If the researcher intends to publish the findings, a report of 3000–5000 words (excluding the Reference List) is appropriate.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="q2020-7">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2020">Q.7</span>
+        <span class="q-title">Graphical Representation of Data & Steps for Frequency Polygon</span>
+      </div>
+      <div class="q-marks"><span>2+3 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is Graphical Representation of Data? — 2 Marks</div>
+        <p>Graphical representation is a form of visually displaying data through various methods like graphs, diagrams, charts, and plots. It helps in sorting, visualizing, and presenting data in a clear and understandable manner.</p>
+        <p>In action research, graphical representations such as bar graphs, histograms, and frequency polygons are drawn to visually show the comparison between pre-test and post-test scores, helping in making interpretations about the effectiveness of the action plan.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Steps to Construct a Frequency Polygon — 3 Marks</div>
+        <ol class="steps">
+          <li><div><div class="step-title">Step 1</div><div class="step-desc">Choose the class interval and mark the values on the horizontal (X) axis.</div></div></li>
+          <li><div><div class="step-title">Step 2</div><div class="step-desc">Mark the mid-value of each class interval on the horizontal axis (e.g., for CI 10–14, mid-value = 12).</div></div></li>
+          <li><div><div class="step-title">Step 3</div><div class="step-desc">Mark the frequency of each class on the vertical (Y) axis.</div></div></li>
+          <li><div><div class="step-title">Step 4</div><div class="step-desc">Place a point at the intersection of each mid-value and its corresponding frequency.</div></div></li>
+          <li><div><div class="step-title">Step 5</div><div class="step-desc">Join all the plotted points by straight lines to obtain a bell-shaped curve.</div></div></li>
+          <li><div><div class="step-title">Step 6</div><div class="step-desc">Close the polygon by bringing the lines down to the X-axis at both ends. The result is a Frequency Polygon.</div></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" id="q2020-8">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2020">Q.8</span>
+        <span class="q-title">Compute Mean for Pre-Test & Post-Test — Students A to I</span>
+      </div>
+      <div class="q-marks"><span>4+1 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Computation of Mean — 4 Marks</div>
+        <p><strong>Formula:</strong></p>
+        <div class="formula">Mean = Σx / N</div>
+        <table>
+          <thead><tr><th>Student</th><th>Pre-Test Score</th><th>Post-Test Score</th></tr></thead>
+          <tbody>
+            <tr><td>A</td><td>12</td><td>14</td></tr>
+            <tr><td>B</td><td>8</td><td>10</td></tr>
+            <tr><td>C</td><td>4</td><td>5</td></tr>
+            <tr><td>D</td><td>11</td><td>13</td></tr>
+            <tr><td>E</td><td>13</td><td>15</td></tr>
+            <tr><td>F</td><td>9</td><td>11</td></tr>
+            <tr><td>G</td><td>3</td><td>6</td></tr>
+            <tr><td>H</td><td>7</td><td>9</td></tr>
+            <tr><td>I</td><td>5</td><td>8</td></tr>
+            <tr><td><strong>Total (Σx)</strong></td><td><strong>72</strong></td><td><strong>91</strong></td></tr>
+            <tr><td><strong>N</strong></td><td><strong>9</strong></td><td><strong>9</strong></td></tr>
+          </tbody>
+        </table>
+        <p><strong>Pre-Test Mean</strong> = 72 ÷ 9 = <strong style="color:var(--accent3)">8.0</strong></p>
+        <p><strong>Post-Test Mean</strong> = 91 ÷ 9 = <strong style="color:var(--accent4)">10.11</strong></p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Interpretation — 1 Mark</div>
+        <div class="interpretation">
+          <strong>Post-Test Mean (10.11) is higher than Pre-Test Mean (8.0).</strong> This shows that student performance improved after the action programme was implemented. The action hypothesis is <strong>accepted</strong> — the intervention had a positive effect on student learning.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#" class="back-top">↑ Back to Top</a>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     PAPER 2: SEPTEMBER 2019
+══════════════════════════════════════════════════ -->
+<div class="paper-section" id="paper-2019">
+<div class="container">
+
+  <div class="paper-banner banner-2019" data-year="2019">
+    <h2>GN-022 · September 2019</h2>
+    <p>HC-9: Action Research &nbsp;·&nbsp; Time: 1½ Hours &nbsp;·&nbsp; Max. Marks: 35 &nbsp;·&nbsp; Part A: 2×10=20 &nbsp;·&nbsp; Part B: 3×5=15</p>
+  </div>
+
+  <!-- PART A -->
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part A — Answer Any Two (10 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card open" id="q2019-1">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2019">Q.1</span>
+        <span class="q-title">What is Research? Types of Research & Importance in Education</span>
+      </div>
+      <div class="q-marks"><span>2+4+4 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+
+      <div class="ans-section">
+        <div class="ans-heading">(a) Meaning of Research — 2 Marks</div>
+        <div class="definition-box">
+          Research is systematic and objective analysis and recording of controlled observation that may lead to the development of generalizations, principles or theories resulting in prediction and possibly ultimate control of events.
+          <cite>— Best and Khan, 1989</cite>
+        </div>
+        <div class="definition-box">
+          Research is systematic, objective, and comprehensive investigation of certain phenomenon, which involves accurate gathering, recording, and critical analyzing and interpreting of all facts about the phenomenon.
+          <cite>— Ardales, 1992</cite>
+        </div>
+      </div>
+
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Types of Research — 4 Marks</div>
+        <div class="compare-grid">
+          <div class="compare-card card-gold">
+            <h4>Fundamental Research</h4>
+            <ul>
+              <li>Also called Basic Research</li>
+              <li>Done purely for the sake of knowledge</li>
+              <li>Conducted in laboratory settings, sometimes with animals</li>
+              <li>No immediate or planned practical application</li>
+              <li>Concerned with developing theories and principles</li>
+              <li>Most closely resembles scientific research</li>
+            </ul>
+          </div>
+          <div class="compare-card card-blue">
+            <h4>Applied Research</h4>
+            <ul>
+              <li>Aims to solve an immediate practical problem</li>
+              <li>Provides solutions to direct problems (Travers)</li>
+              <li>Making additions to scientific knowledge is secondary</li>
+              <li>Educationists use it to solve problems at appropriate level</li>
+              <li>Adapts theories developed through fundamental research</li>
+              <li>Uses sampling techniques and inferences about target population</li>
+            </ul>
+          </div>
+          <div class="compare-card card-green">
+            <h4>Action Research</h4>
+            <ul>
+              <li>Designed to reveal operative ways to deal with real-world problems</li>
+              <li>Not confined to a particular methodology or paradigm</li>
+              <li>Concerned with a local problem in a local setting</li>
+              <li>Not concerned with generalizability of results</li>
+              <li>Primary purpose: solve the problem, NOT contribute to science</li>
+              <li>Applies scientific methods in classroom setting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="ans-section">
+        <div class="ans-heading green">(c) Importance of Research in Education — 4 Marks</div>
+        <p>Research is an imperative area in the field of education. It primarily focuses on improving quality and searching for knowledge. It shows how to make provision of solutions to problems in a scientific way.</p>
+        <ol>
+          <li>Provides solution to all the problems related to education</li>
+          <li>Helps in the development of an organized body of scientific knowledge about the issues with which educators are concerned</li>
+          <li>Helps in understanding, explaining, predicting and controlling the behavior of the learner to an extent</li>
+          <li>Helps in acquiring information regarding different aspects of education</li>
+          <li>Helps in curriculum development and reforms, educating slow learners, understanding psychological traits of physically challenged individuals, and adapting methods of instruction to the needs of individual learners</li>
+          <li>Helps to achieve the goals and objectives of education in a more scientific way</li>
+          <li>Helps in adopting technology in the field of education to improve the quality of education</li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="q2019-2">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2019">Q.2</span>
+        <span class="q-title">Meaning of Action Research & Steps with Suitable Problem</span>
+      </div>
+      <div class="q-marks"><span>2+8 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+
+      <div class="ans-section">
+        <div class="ans-heading">(a) Meaning of Action Research — 2 Marks</div>
+        <div class="definition-box">
+          Action research is a form of investigation designed for use by teachers to attempt to solve problems and improve professional practices in their own classrooms. It involves systematic observations and data collection which can be then used by the practitioner-researcher in reflection, decision-making and the development of more effective classroom strategies.
+          <cite>— Parsons and Brown, 2002</cite>
+        </div>
+        <p>Action research is designed to reveal operative ways of dealing with problems in the real world. It is concerned with a local problem and is conducted within a local setting. The primary purpose is providing solution to the given problem.</p>
+      </div>
+
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Steps of Action Research — 8 Marks</div>
+        <p style="margin-bottom:1rem;"><em>Example Problem: "Students of Class 8 are weak in solving mathematical word problems."</em></p>
+        <ol class="steps">
+          <li>
+            <div>
+              <div class="step-title">Identification of the Problem Area</div>
+              <div class="step-desc">The first and most important step. The teacher feels self-dissatisfaction and identifies the problem area causing concern in day-to-day classroom activities. For example, the teacher notices that Class 8 students consistently fail in word problems in Mathematics.</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="step-title">Pinpointing the Specific Problem</div>
+              <div class="step-desc">A general problem area is usually exhaustive. The teacher selects a specific problem and states it precisely and unambiguously. Example: "Students of Class 8 of XYZ School are unable to solve word problems in Mathematics involving fractions."</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="step-title">Analyzing the Probable Causes of the Problem</div>
+              <div class="step-desc">The teacher diagnoses the specific difficulties. Probable causes identified: (i) Students lack reading comprehension skills, (ii) Students have not mastered basic fraction operations, (iii) Teacher uses only lecture method without visual aids. This helps fix the objectives of the study.</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="step-title">Listing the Objectives of the Study</div>
+              <div class="step-desc">Objectives are fixed to make the study purposeful and fruitful. Example objectives: (i) To identify the specific errors made by students in solving word problems, (ii) To improve students' performance through visual teaching aids, (iii) To verify whether use of visual aids reduces errors.</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="step-title">Formulating Action Hypotheses</div>
+              <div class="step-desc">The teacher restates the problem into specific, testable "if…then" hypotheses. A hypothesis is an intellectual guess about the relationship between variables. Example: "If visual aids are used while teaching word problems, then students' performance will improve." Action hypotheses act as guidelines for further process of action research.</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="step-title">Designing the Action Plan</div>
+              <div class="step-desc">This step involves three aspects:
+                <br><strong>(i)</strong> Preparation of Diagnostic Tool (pre-test): A pre-test paper is prepared based on the probable causes. Tools used: achievement tests, diagnostic tests, checklists, questionnaires.
+                <br><strong>(ii)</strong> Designing the Programme of Action: A plan is prepared based on the process of inquiry — e.g., teaching using visual aids, step-by-step problem solving demonstrations.
+                <br><strong>(iii)</strong> Preparation of Post-Test Tool: Parallel to the pre-test, same number of items, same level of difficulty, same objectives tested.</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="step-title">Implementation / Execution of Action Plan</div>
+              <div class="step-desc">The whole action plan is scheduled according to learners' needs. A timetable is prepared specifying what to do, how much to do, when to do, how long to do, and when to evaluate. The programme is executed as planned.</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="step-title">Statistical Analysis and Interpretation of Data</div>
+              <div class="step-desc">Steps: (i) Error analysis of pretest and posttest papers separately, (ii) Drawing error analysis graph, (iii) Preparing marks list of both tests, (iv) Analysis of individual performance by comparing scores, (v) In case of group performance, mean values in both tests are calculated and compared, (vi) Graphical representations such as histograms, frequency polygon or bar charts are drawn, (vii) Interpretations are made on the basis of analyzed data.</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="step-title">Verification of Action Hypotheses</div>
+              <div class="step-desc">The proposed action hypotheses are either accepted or rejected based on the comparisons of pretest and posttest performance. Conclusions are drawn with respect to the verified hypotheses. These conclusions hold good only for the group of learners involved in the action research process.</div>
+            </div>
+          </li>
+          <li>
+            <div>
+              <div class="step-title">Reporting</div>
+              <div class="step-desc">A systematic and detailed report of the action research undertaken is prepared for future evidence. The format of the report is not very rigid — it follows the same steps as it was carried out.</div>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="q2019-3">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2019">Q.3</span>
+        <span class="q-title">Mean and Median — Compute & Interpret (CI: 10-14 to 40-44, N=50)</span>
+      </div>
+      <div class="q-marks"><span>3+6+1 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+
+      <div class="ans-section">
+        <div class="ans-heading">(a) Definitions — 3 Marks</div>
+        <p><strong>Mean:</strong> Mean is an arithmetic average. It is obtained by adding all the scores or measures and dividing that by the number of scores.</p>
+        <div class="formula">Mean = Σfx / N</div>
+        <p><strong>Median:</strong> The mid-point in a distribution, below which 50% of scores fall and above which 50% of scores fall.</p>
+        <div class="formula">Median = LRL + [(N/2 – fc) / fw] × i</div>
+        <p style="font-size:0.82rem; color:var(--text-muted);">LRL = Lower Real Limit of median class | fc = Cumulative frequency before median class | fw = Frequency of median class | i = Class width</p>
+      </div>
+
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Computation — 6 Marks</div>
+        <table>
+          <thead>
+            <tr><th>CI</th><th>F</th><th>Mid Point (x)</th><th>fx</th><th>Cumulative f (cf)</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>10–14</td><td>3</td><td>12</td><td>36</td><td>3</td></tr>
+            <tr><td>15–19</td><td>5</td><td>17</td><td>85</td><td>8</td></tr>
+            <tr><td>20–24</td><td>10</td><td>22</td><td>220</td><td>18</td></tr>
+            <tr><td style="color:var(--accent1)"><strong>25–29</strong></td><td style="color:var(--accent1)"><strong>13</strong></td><td>27</td><td>351</td><td style="color:var(--accent1)"><strong>31 ← median class</strong></td></tr>
+            <tr><td>30–34</td><td>9</td><td>32</td><td>288</td><td>40</td></tr>
+            <tr><td>35–39</td><td>6</td><td>37</td><td>222</td><td>46</td></tr>
+            <tr><td>40–44</td><td>4</td><td>42</td><td>168</td><td>50</td></tr>
+            <tr><td><strong>N = 50</strong></td><td></td><td></td><td><strong>Σfx = 1370</strong></td><td></td></tr>
+          </tbody>
+        </table>
+
+        <p><strong>Mean</strong> = Σfx / N = 1370 / 50 = <strong style="color:var(--accent1)">27.4</strong></p>
+
+        <p><strong>Median:</strong> N/2 = 25. The 25th value falls in class 25–29 (cf before = 18, fw = 13).</p>
+        <p>Median = 24.5 + [(25 – 18) / 13] × 5 = 24.5 + (7/13) × 5 = 24.5 + 2.69 = <strong style="color:var(--accent2)">27.19</strong></p>
+      </div>
+
+      <div class="ans-section">
+        <div class="ans-heading green">(c) Interpretation — 1 Mark</div>
+        <div class="interpretation">
+          <strong>Mean (27.4) > Median (27.19)</strong> → The distribution is positively skewed. Since Mean is greater than Median, it indicates the <strong>test is difficult</strong>. Most students have scored below the mean, meaning a few high scores are pulling the mean up.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PART B -->
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part B — Answer Any Three (5 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="q2019-4">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2019">Q.4</span>
+        <span class="q-title">Importance of Action Research in Teaching-Learning Process</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <p>Teachers as researcher and students as change-receivers both profit much from action research. Action research provides a framework that guides the energies of teachers toward a better understanding of why, when, and how students become better learners.</p>
+      <ul>
+        <li>Teachers investigate their own practice in new ways, looking deeper in what they and their students actually do and fail to do</li>
+        <li>Teachers develop a deeper understanding of students, the teaching-learning process and their role in the education of both teachers and students</li>
+        <li>Teachers are viewed as equal partners in deciding what works best and what needs improvement in their classroom</li>
+        <li>Teachers are more committed to action research because they themselves identify the areas they view as problematical and in need of change</li>
+        <li>Professional development and school improvement are core aspects for any teacher who engages in action research</li>
+        <li>Teacher reflection can be conducted individually or in a school-based team composed of students, teachers and administrators</li>
+        <li>Helps acquire practical knowledge of various academic and administration aspects of running a school</li>
+        <li>Helps gain experience in solving day-to-day problems of classroom and school in a scientific manner</li>
+        <li>Helps develop critical-analytic thinking, improve problem solving and presentation skills</li>
+        <li>Action research is a systematic process that allows trying out different ways of doing things in the classroom that really work for students</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="q2019-5">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2019">Q.5</span>
+        <span class="q-title">Stages of Construction of Bar Graph</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <p>A Bar diagram is a graphical representation of a frequency distribution in the form of rectangles with class-interval as basis and corresponding frequencies as heights. It consists of a set of bars drawn vertically or horizontally. The scores are assumed to be spread uniformly over the entire class interval.</p>
+      <div class="ans-heading" style="margin-top:1rem;">Steps Involved in Drawing a Bar Graph</div>
+      <ol class="steps">
+        <li><div><div class="step-title">Convert Class Intervals</div><div class="step-desc">Convert the class interval into exclusive form if the given class intervals are inclusive (e.g., convert 10-14 to 9.5-14.5).</div></div></li>
+        <li><div><div class="step-title">Draw Axes</div><div class="step-desc">Draw two straight lines cutting each other at right angle at a point O, the origin. The horizontal line is the X-axis and the vertical line is the Y-axis.</div></div></li>
+        <li><div><div class="step-title">Mark Scale</div><div class="step-desc">Take a suitable scale. Mark the class intervals on the X-axis (starting from the lowest class interval) and the frequencies on the Y-axis.</div></div></li>
+        <li><div><div class="step-title">Construct Rectangles</div><div class="step-desc">Construct rectangles with class intervals as the base and the frequencies as the height. Each rectangle should be adjacent to the next without gaps.</div></div></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="q2019-6">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2019">Q.6</span>
+        <span class="q-title">Diagnostic Test — Meaning & Importance for Classroom Teacher</span>
+      </div>
+      <div class="q-marks"><span>2+3 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is a Diagnostic Test? — 2 Marks</div>
+        <p>A Diagnostic test is primarily used to diagnose student difficulties. It is a form of pre-assessment that allows the teacher to determine students' individual strengths, weaknesses, knowledge, and skills — sometimes before the instruction and sometimes after the instruction.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Importance for a Classroom Teacher — 3 Marks</div>
+        <ul>
+          <li>Helps evaluate students' level of academic achievement and learning potential</li>
+          <li>Used as a tool to determine students' level of prior knowledge before teaching begins</li>
+          <li>Helps plan differentiated instruction, lesson plans, and teaching strategies to help all students achieve their academic potential</li>
+          <li>Allows teachers to plan meaningful and efficient instruction by focusing on topics students still need to learn</li>
+          <li>Provides information to individualize instruction for each learner</li>
+          <li>Creates a baseline for assessing future learning</li>
+          <li>Shows both teacher and students what is known before instruction has occurred — sets a baseline on a topic</li>
+          <li>Helps provide remediation or enrichment as needed, making it very useful for a classroom teacher</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="q2019-7">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2019">Q.7</span>
+        <span class="q-title">Types of Interview & Importance in Action Research</span>
+      </div>
+      <div class="q-marks"><span>2+3 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Types of Interview — 2 Marks</div>
+        <p>There are three different formats of interviews: Structured, Semi-structured, and Unstructured.</p>
+        <div class="compare-grid">
+          <div class="compare-card card-gold">
+            <h4>Structured</h4>
+            <ul>
+              <li>Series of pre-determined questions</li>
+              <li>All interviewees answer in the same order</li>
+              <li>Data analysis is straightforward</li>
+              <li>Easy to compare and contrast different answers</li>
+            </ul>
+          </div>
+          <div class="compare-card card-red">
+            <h4>Unstructured</h4>
+            <ul>
+              <li>No questions prepared prior to interview</li>
+              <li>Conducted in an informal manner</li>
+              <li>Least reliable form from research viewpoint</li>
+              <li>High level of bias; comparison of answers is difficult</li>
+            </ul>
+          </div>
+          <div class="compare-card card-blue">
+            <h4>Semi-Structured</h4>
+            <ul>
+              <li>Contains components of both structured and unstructured</li>
+              <li>Same set of questions for all interviewees</li>
+              <li>Additional questions may be asked to clarify or further expand certain issues</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Importance of Interview in Action Research — 3 Marks</div>
+        <ul>
+          <li>Helps the teacher collect detailed information about the problem</li>
+          <li>Teacher can create a friendly atmosphere to get relevant data; percentage of response is high compared to other tools</li>
+          <li>Teacher can modify questions to seek further information based on the responses if required</li>
+          <li>Teacher can understand the feelings and attitudes of students during the process of interview</li>
+          <li>The sincerity and frankness of data can be judged through this method</li>
+          <li>It also helps in clarifying the doubts about the question during the process as needed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" id="q2019-8">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2019">Q.8</span>
+        <span class="q-title">Main Components of Research Report Format</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <p>Research reports are detailed and accurate accounts of the conduct of disciplined studies accomplished to solve problems. An Action Research Report is written under three main headings:</p>
+
+      <div class="ans-heading" style="margin-top:1rem;">1. Preliminary Section</div>
+      <p>Several pages of preliminary material are presented prior to the body of the research report. This consists of:</p>
+      <ul>
+        <li><strong>Cover Page:</strong> Title of the study, name of the institution to which the report is submitted, name of the candidate, date of submission, guided by</li>
+        <li><strong>Preface:</strong> A brief statement and scope of the report</li>
+        <li><strong>Acknowledgement:</strong> Opportunity to thank and appreciate those people who helped to complete the project</li>
+        <li><strong>Table of Contents:</strong> Includes major divisions of the report, the preface, acknowledgement, list of figures and list of tables — all entered with page numbers</li>
+        <li><strong>List of Tables</strong></li>
+        <li><strong>List of Figures</strong></li>
+      </ul>
+
+      <div class="ans-heading blue" style="margin-top:1rem;">2. Main Section</div>
+      <ul>
+        <li>Identification of the problem & Pin-pointing the problem</li>
+        <li>Analyzing the probable causes (General causes & Specific causes)</li>
+        <li>Objectives of Action Research</li>
+        <li>Formulation of action hypothesis</li>
+        <li>Designing the Action Plan</li>
+        <li>Execution of Action Plan</li>
+        <li>Data Analysis: Listing marks of pre-test and post-test, error analysis, graphical representation, individual comparison, statistical comparison through mean/median (for more than 20 students)</li>
+        <li>Verification of Action Hypothesis — key findings, discussion of findings in terms of the action hypothesis</li>
+        <li>Conclusion — summary of findings in terms of the problem stated</li>
+      </ul>
+
+      <div class="ans-heading green" style="margin-top:1rem;">3. Reference Section</div>
+      <ul>
+        <li><strong>Bibliography:</strong> Record of all sources and materials used throughout the project. If the number is large, the researcher may divide it into sections for books, periodicals, journals etc.</li>
+        <li><strong>Appendix:</strong> All relevant supporting material that is important but not essential to understanding the report — e.g., test papers, data analysis sheets. A report of 3000–5000 words (excluding Reference List) is appropriate if publishing findings.</li>
+      </ul>
+    </div>
+  </div>
+
+  <a href="#" class="back-top">↑ Back to Top</a>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     PAPER 2: AUGUST 2021
+══════════════════════════════════════════════════ -->
+<div class="paper-section" id="paper-2021">
+<div class="container">
+
+  <div class="paper-banner banner-2021" data-year="2021">
+    <h2>B.Ed. 2 Year Examination · August 2021</h2>
+    <p>HC-9: Action Research (CBCS Scheme) &nbsp;·&nbsp; Time: 1½ Hours &nbsp;·&nbsp; Max. Marks: 35</p>
+  </div>
+
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part A — Answer Any Two (10 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" id="q2021-1">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2021">Q.1</span>
+        <span class="q-title">Action Research Proposal — Meaning, Objectives & Report Components</span>
+      </div>
+      <div class="q-marks"><span>4+6 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is Action Research Proposal? Mention its Objectives — 4 Marks</div>
+        <p>An Action Research Proposal is a written plan or document prepared by a teacher or researcher before undertaking action research. It outlines the problem to be studied, the methods to be used, the objectives to be achieved, and the steps that will be followed.</p>
+        <div class="ans-heading blue" style="margin-top:0.85rem;">Objectives of Action Research Proposal</div>
+        <ul>
+          <li>To clearly identify and define the problem to be investigated</li>
+          <li>To state the specific objectives the researcher intends to achieve through the study</li>
+          <li>To identify the probable causes of the problem</li>
+          <li>To formulate testable action hypotheses based on the identified causes</li>
+          <li>To outline the programme of action — methods, tools, and strategies to be used</li>
+          <li>To specify the time schedule and plan for execution</li>
+          <li>To describe how data will be collected, analyzed and interpreted</li>
+          <li>To get prior approval and guidance from supervisors/principals</li>
+          <li>To serve as a blueprint so the research is systematic, focused and purposeful</li>
+          <li>To ensure the research is practical and feasible within the classroom setting</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading green">(b) Explain the Main Components of Action Research Report — 6 Marks</div>
+        <p>The Action Research Report can be written under three headings:</p>
+        <p><strong>1. Preliminary Section:</strong> Cover Page (title, institution, candidate name, date, guided by) · Preface (scope of report) · Acknowledgement · Table of Contents · List of Tables · List of Figures</p>
+        <p><strong>2. Main Section:</strong></p>
+        <ul>
+          <li>Identification and pin-pointing of the problem</li>
+          <li>Analyzing probable causes — general and specific</li>
+          <li>Objectives of Action Research</li>
+          <li>Formulation of action hypothesis</li>
+          <li>Designing the Action Plan</li>
+          <li>Execution of the Action Plan</li>
+          <li>Data Analysis (marks lists, error analysis, graphical representation, individual and group comparison through mean/median)</li>
+          <li>Verification of Action Hypothesis — key findings and discussion</li>
+          <li>Conclusion — summary in terms of the problem stated</li>
+        </ul>
+        <p><strong>3. Reference Section:</strong> Bibliography (all sources used) and Appendix (test papers, data sheets, supporting materials)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="q2021-2">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2021">Q.2</span>
+        <span class="q-title">Steps of Action Research & Its Limitations</span>
+      </div>
+      <div class="q-marks"><span>8+2 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Steps of Action Research — 8 Marks</div>
+        <ol class="steps">
+          <li><div><div class="step-title">Identification of the Problem Area</div><div class="step-desc">The teacher feels self-dissatisfaction in day-to-day classroom activities and identifies the broad problem area causing concern.</div></div></li>
+          <li><div><div class="step-title">Pinpointing the Specific Problem</div><div class="step-desc">From the broad problem area, a specific problem is selected. It is stated precisely and unambiguously with simple words.</div></div></li>
+          <li><div><div class="step-title">Analyzing Probable Causes</div><div class="step-desc">Diagnose specific difficulties in learning. Helps fix the objectives of the action research study by identifying why the problem exists.</div></div></li>
+          <li><div><div class="step-title">Listing Objectives of the Study</div><div class="step-desc">Objectives are fixed to make the research purposeful and fruitful. Helps the teacher plan procedures for action.</div></div></li>
+          <li><div><div class="step-title">Formulating Action Hypotheses</div><div class="step-desc">Problem is restated as testable "if…then" hypotheses. Each hypothesis contains the cause-effect relationship to guide further action.</div></div></li>
+          <li><div><div class="step-title">Designing the Action Plan</div><div class="step-desc">(i) Prepare diagnostic pre-test tool, (ii) Design programme of action based on hypotheses, (iii) Prepare post-test diagnostic tool parallel to the pre-test.</div></div></li>
+          <li><div><div class="step-title">Implementation / Execution of Action Plan</div><div class="step-desc">The whole action plan is scheduled — what to do, how much, when to do, how long, and when to evaluate.</div></div></li>
+          <li><div><div class="step-title">Statistical Analysis and Interpretation</div><div class="step-desc">Error analysis, preparing marks lists, individual and group performance comparison, graphical representation, and making interpretations.</div></div></li>
+          <li><div><div class="step-title">Verification of Action Hypotheses</div><div class="step-desc">Hypotheses accepted or rejected based on pretest-posttest comparison. Conclusions apply only to the specific group studied.</div></div></li>
+          <li><div><div class="step-title">Reporting</div><div class="step-desc">A systematic and detailed report is prepared for future evidence, following the same steps as carried out.</div></div></li>
+        </ol>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading red">(b) Limitations of Action Research — 2 Marks</div>
+        <div class="limitations">
+          <h4>Limitations</h4>
+          <ul>
+            <li>Results cannot be generalized to other settings or populations</li>
+            <li>It lacks the rigor and control of formal experimental research</li>
+            <li>The teacher-researcher may have personal bias influencing results</li>
+            <li>Limited time available for teachers to conduct thorough research alongside teaching duties</li>
+            <li>Sample size is usually small (one class), making statistical analysis less meaningful</li>
+            <li>Does not contribute to the general body of scientific knowledge</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="q2021-3">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2021">Q.3</span>
+        <span class="q-title">Meaning & Significance of Diagnostic Test & Questionnaire in Action Research</span>
+      </div>
+      <div class="q-marks"><span>5+5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(i) Diagnostic Test — 5 Marks</div>
+        <p><strong>Meaning:</strong> A diagnostic test is primarily used to diagnose student difficulties. It is a form of pre-assessment that allows the teacher to determine students' individual strengths, weaknesses, knowledge, and skills — before or after instruction.</p>
+        <p><strong>Significance in Action Research:</strong></p>
+        <ul>
+          <li>Used as a pre-test tool to collect pre-experimental evidence about students' existing deficiencies</li>
+          <li>Helps the teacher identify specific areas of weakness that need to be addressed through the programme of action</li>
+          <li>Also used as a post-test tool to collect post-experimental evidence to compare with pre-test results</li>
+          <li>Helps in planning differentiated instruction based on individual learning needs</li>
+          <li>Provides objective data for statistical analysis (error analysis, mean, median comparison)</li>
+          <li>Creates a baseline for assessing the effectiveness of the action plan</li>
+          <li>Helps verify whether the action hypotheses are accepted or rejected</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(ii) Questionnaire — 5 Marks</div>
+        <p><strong>Meaning:</strong> A questionnaire is a list of questions or items used to gather data from respondents about their attitudes, experiences, or opinions. It can collect both quantitative and qualitative information.</p>
+        <p><strong>Significance in Action Research:</strong></p>
+        <ul>
+          <li>Helps gather information about students' perceptions, attitudes, and experiences related to the problem</li>
+          <li>Can identify the probable causes of the problem from students' own perspective</li>
+          <li>Can be administered to a large number of students at once, saving time</li>
+          <li>Responses are standardized and easy to analyze statistically</li>
+          <li>Respondents (students) can answer at their own pace without pressure</li>
+          <li>Can be used as a pre-action tool (to understand the extent of the problem) or post-action tool (to assess change in attitudes)</li>
+          <li>Cost-effective data collection tool suitable for classroom use</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part B — Answer Any Three (5 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="q2021-4">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2021">Q.4</span>
+        <span class="q-title">Two Pin-Pointed Problems for Action Research & Analysis of Causes</span>
+      </div>
+      <div class="q-marks"><span>2½+2½ Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="compare-grid-2">
+        <div class="compare-card card-gold">
+          <h4>Problem 1</h4>
+          <p style="font-size:0.88rem; margin-bottom:0.5rem;"><em>"Students of Class 7 are unable to solve problems involving fractions in Mathematics."</em></p>
+          <p style="font-size:0.85rem;"><strong>Probable Causes:</strong></p>
+          <ul>
+            <li>Lack of understanding of basic fraction concepts</li>
+            <li>Insufficient practice given by the teacher</li>
+            <li>Students have poor reading comprehension for word problems</li>
+            <li>Teaching method is only lecture-based without visual aids</li>
+            <li>Students lack prerequisite knowledge of tables and multiplication</li>
+          </ul>
+        </div>
+        <div class="compare-card card-blue">
+          <h4>Problem 2</h4>
+          <p style="font-size:0.88rem; margin-bottom:0.5rem;"><em>"Students of Class 8 make frequent spelling errors while writing English."</em></p>
+          <p style="font-size:0.85rem;"><strong>Probable Causes:</strong></p>
+          <ul>
+            <li>Students do not read English texts regularly</li>
+            <li>Poor retention of spelling rules</li>
+            <li>Lack of practice in writing dictation exercises</li>
+            <li>Students do not correct errors in their notebooks</li>
+            <li>Teacher does not provide regular feedback on writing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="q2021-5">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2021">Q.5</span>
+        <span class="q-title">What is Research? Characteristics of Research</span>
+      </div>
+      <div class="q-marks"><span>1+4 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is Research? — 1 Mark</div>
+        <div class="definition-box">
+          Research is a careful investigation or enquiry, especially through search for new facts in any branch of knowledge. It is a systematic investigative process employed to increase or revise current knowledge by discovering new facts.
+        </div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Characteristics of Research — 4 Marks</div>
+        <ul>
+          <li><strong>Systematic:</strong> Research follows an orderly and step-by-step procedure</li>
+          <li><strong>Objective:</strong> Research findings are based on observed facts, not personal opinions or bias</li>
+          <li><strong>Empirical:</strong> Research is based on direct or indirect observation and experience</li>
+          <li><strong>Logical:</strong> Research uses valid procedures and principles</li>
+          <li><strong>Replicable:</strong> Research findings can be verified by repeating the study</li>
+          <li><strong>Analytical:</strong> Research involves analysis of data using statistical techniques</li>
+          <li><strong>Critical:</strong> Research procedures and methods are examined critically</li>
+          <li><strong>Directed towards solving a problem:</strong> Research is purposeful and problem-oriented</li>
+          <li><strong>Generalizability:</strong> Research findings (in fundamental and applied research) can be generalized to a wider population</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="q2021-6">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2021">Q.6</span>
+        <span class="q-title">What is Action Research? Importance of Action Research</span>
+      </div>
+      <div class="q-marks"><span>2+3 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is Action Research? — 2 Marks</div>
+        <div class="definition-box">
+          Action research is a form of investigation designed for use by teachers to attempt to solve problems and improve professional practices in their own classrooms. It involves systematic observations and data collection used in reflection, decision-making and developing more effective classroom strategies.
+          <cite>— Parsons and Brown, 2002</cite>
+        </div>
+        <p>Action research is concerned with a local problem and conducted within a local setting. The primary purpose is providing solution to the given problem, not contributing to science.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Importance of Action Research — 3 Marks</div>
+        <ul>
+          <li>Helps teachers solve immediate classroom problems scientifically</li>
+          <li>Encourages teachers to become reflective practitioners who examine their own teaching</li>
+          <li>Leads to professional development and improvement in teaching quality</li>
+          <li>Helps teachers develop and test new strategies in their specific classroom context</li>
+          <li>Promotes collaboration between teachers, students and administrators for school improvement</li>
+          <li>Helps improve student achievement by addressing specific learning difficulties</li>
+          <li>Builds the teacher's critical-analytic thinking and problem-solving skills</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="q2021-7">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2021">Q.7</span>
+        <span class="q-title">Fundamental Research & Applied Research — Explanation</span>
+      </div>
+      <div class="q-marks"><span>2½+2½ Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="compare-grid-2">
+        <div class="compare-card card-gold">
+          <h4>Fundamental Research</h4>
+          <p style="font-size:0.88rem;">Also called Basic Research. It is research done purely for the sake of knowledge, without any immediate practical application in mind.</p>
+          <ul>
+            <li>Conducted in laboratory or controlled settings</li>
+            <li>Focused on developing theories, principles and models</li>
+            <li>Not concerned with practical applicability</li>
+            <li>May later result in applied research</li>
+            <li>Controls and conditions resemble scientific research</li>
+            <li>Example: Study of memory and learning processes in psychology</li>
+          </ul>
+        </div>
+        <div class="compare-card card-blue">
+          <h4>Applied Research</h4>
+          <p style="font-size:0.88rem;">Research aimed at solving an immediate practical problem. According to Travers, it is carried out to provide solutions to a direct practical problem.</p>
+          <ul>
+            <li>Conducted in real-world educational settings</li>
+            <li>Focused on solving specific problems</li>
+            <li>Adapts theories from fundamental research</li>
+            <li>Making additions to science is secondary</li>
+            <li>Uses sampling techniques and inferences</li>
+            <li>Example: Study on effectiveness of cooperative learning on student achievement</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" id="q2021-8">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2021">Q.8</span>
+        <span class="q-title">Bar Graph & Frequency Polygon — Meaning and Uses</span>
+      </div>
+      <div class="q-marks"><span>2½+2½ Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(i) Bar Graph</div>
+        <p><strong>Meaning:</strong> A Bar diagram is a graphical representation of a frequency distribution in the form of rectangles. Class intervals are taken as the base and corresponding frequencies as heights. Bars can be drawn vertically or horizontally.</p>
+        <p><strong>Uses:</strong></p>
+        <ul>
+          <li>To visually display the distribution of data across categories or class intervals</li>
+          <li>To compare frequencies of different groups or intervals at a glance</li>
+          <li>Easy to interpret for both teachers and students</li>
+          <li>Used in action research to represent pre-test and post-test error analysis</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(ii) Frequency Polygon</div>
+        <p><strong>Meaning:</strong> A Frequency Polygon is a line graph of a frequency distribution. It is obtained by connecting the midpoints of the tops of all the bars in a histogram with straight lines. It appears as a polygon (many-sided figure).</p>
+        <p><strong>Uses:</strong></p>
+        <ul>
+          <li>To show the shape of a frequency distribution — whether it is symmetrical or skewed</li>
+          <li>To compare two or more frequency distributions on the same graph</li>
+          <li>Useful to display continuous data and show trends</li>
+          <li>Used in action research to graphically compare pre-test and post-test performance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <a href="#" class="back-top">↑ Back to Top</a>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     PAPER 3: JUNE/JULY 2023
+══════════════════════════════════════════════════ -->
+<div class="paper-section" id="paper-2023">
+<div class="container">
+
+  <div class="paper-banner banner-2023" data-year="2023">
+    <h2>III Semester B.Ed. (2 Years) · June/July 2023</h2>
+    <p>HC-9: Action Research (CBCS Scheme) &nbsp;·&nbsp; Time: 1½ Hours &nbsp;·&nbsp; Max. Marks: 35</p>
+  </div>
+
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part A — Answer Any Two (10 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" id="q2023-1">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2023">Q.1</span>
+        <span class="q-title">Define Educational Research · Differentiate Fundamental & Applied · Importance in Education</span>
+      </div>
+      <div class="q-marks"><span>2+4+4 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Define Educational Research — 2 Marks</div>
+        <div class="definition-box">Educational research is a systematic study directed toward gaining knowledge and understanding of the educational process, with the aim of finding solutions to educational problems and improving the quality of education.</div>
+        <p>It primarily focuses on improving quality and searching for knowledge in the field of education. It is a systematic effort to acquire new knowledge in all disciplines related to education.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Differentiate Fundamental and Applied Research — 4 Marks</div>
+        <table>
+          <thead><tr><th>Basis</th><th>Fundamental Research</th><th>Applied Research</th></tr></thead>
+          <tbody>
+            <tr><td>Purpose</td><td>To develop theories and knowledge for its own sake</td><td>To solve an immediate practical problem</td></tr>
+            <tr><td>Setting</td><td>Laboratory or controlled environment</td><td>Real-world educational settings</td></tr>
+            <tr><td>Orientation</td><td>Theory-oriented</td><td>Problem-oriented</td></tr>
+            <tr><td>Application</td><td>No immediate practical application</td><td>Results are directly applied in the field</td></tr>
+            <tr><td>Generalizability</td><td>Results can be generalized widely</td><td>Results applicable to a specific context</td></tr>
+            <tr><td>Example</td><td>Study of memory and learning processes</td><td>Study on best method to teach fractions</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading green">(c) Why Research is Important in Education — 4 Marks</div>
+        <ol>
+          <li>Provides solution to all the problems related to education</li>
+          <li>Helps in developing an organized body of scientific knowledge about educational issues</li>
+          <li>Helps in understanding, explaining, predicting and controlling the behavior of the learner</li>
+          <li>Helps in acquiring information about different aspects of education</li>
+          <li>Helps in curriculum development, reforms and adapting instruction to individual learner needs</li>
+          <li>Helps in achieving educational goals in a more scientific way</li>
+          <li>Helps in adopting technology to improve quality of education</li>
+          <li>Helps improve teaching and learning methods</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="q2023-2">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2023">Q.2</span>
+        <span class="q-title">Define Action Research & Steps of Action Research</span>
+      </div>
+      <div class="q-marks"><span>2+8 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Define Action Research — 2 Marks</div>
+        <div class="definition-box">
+          Action research is a form of investigation designed for use by teachers to attempt to solve problems and improve professional practices in their own classrooms. It involves systematic observations and data collection which can be used by the practitioner-researcher in reflection, decision-making and the development of more effective classroom strategies.
+          <cite>— Parsons and Brown, 2002</cite>
+        </div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Steps of Action Research — 8 Marks</div>
+        <p><em>Example problem: "Students of Class 9 are weak in reading comprehension in English."</em></p>
+        <ol class="steps">
+          <li><div><div class="step-title">Identification of the Problem Area</div><div class="step-desc">Teacher notices that students struggle with comprehension passages in English. The broad problem area is identified as "poor reading comprehension."</div></div></li>
+          <li><div><div class="step-title">Pinpointing the Specific Problem</div><div class="step-desc">From the broad area, the specific problem is pinpointed: "Students of Class 9 are unable to answer inference-based questions in English reading comprehension."</div></div></li>
+          <li><div><div class="step-title">Analyzing Probable Causes</div><div class="step-desc">Causes: (i) Students have limited vocabulary, (ii) Students do not read independently, (iii) Questions are never discussed after tests, (iv) Teacher only teaches factual recall questions.</div></div></li>
+          <li><div><div class="step-title">Listing Objectives</div><div class="step-desc">To identify types of errors in comprehension answers; to improve performance through vocabulary-building and higher-order questioning techniques.</div></div></li>
+          <li><div><div class="step-title">Formulating Action Hypotheses</div><div class="step-desc">"If vocabulary-building activities are incorporated in English lessons, then students will improve in reading comprehension." Hypotheses are written in "if…then" form.</div></div></li>
+          <li><div><div class="step-title">Designing the Action Plan</div><div class="step-desc">(i) Pre-test: Comprehension passage with inference questions, (ii) Programme of Action: Daily vocabulary activities, Socratic questioning sessions, guided reading, (iii) Post-test: Parallel comprehension passage of same difficulty.</div></div></li>
+          <li><div><div class="step-title">Implementation of Action Plan</div><div class="step-desc">Action plan is executed as scheduled — vocabulary sessions daily for 3 weeks, reading activities twice a week, guided discussions.</div></div></li>
+          <li><div><div class="step-title">Statistical Analysis of Data</div><div class="step-desc">Error analysis of pre and post tests, marks lists prepared, individual and group performance compared, mean calculated for both tests, bar graphs drawn.</div></div></li>
+          <li><div><div class="step-title">Verification of Hypotheses</div><div class="step-desc">If post-test mean is significantly higher than pre-test mean, hypothesis is accepted. Conclusions apply only to this class.</div></div></li>
+          <li><div><div class="step-title">Reporting</div><div class="step-desc">A detailed report is prepared documenting all steps, findings, and conclusions for future reference.</div></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="q2023-3">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2023">Q.3</span>
+        <span class="q-title">What is Central Tendency? Compute Mean for Pre-Test & Post-Test Data</span>
+      </div>
+      <div class="q-marks"><span>2+8 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is Central Tendency? — 2 Marks</div>
+        <p><strong>Central Tendency</strong> refers to a statistical measure that identifies a single value as representative of an entire distribution. It aims to provide an accurate description of the data by summarizing it in a single value that is most typical or central.</p>
+        <p>The three main measures of central tendency are:</p>
+        <ul>
+          <li><strong>Mean</strong> — Arithmetic average (sum of all scores ÷ number of scores)</li>
+          <li><strong>Median</strong> — The middle value when scores are arranged in order</li>
+          <li><strong>Mode</strong> — The most frequently occurring score</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Compute Mean for Pre-Test and Post-Test — 8 Marks</div>
+        <div class="compare-grid-2">
+          <div>
+            <p><strong>Pre-Test Data (N=25)</strong></p>
+            <table>
+              <thead><tr><th>CI</th><th>f</th><th>Mid x</th><th>fx</th></tr></thead>
+              <tbody>
+                <tr><td>1–5</td><td>8</td><td>3</td><td>24</td></tr>
+                <tr><td>6–10</td><td>8</td><td>8</td><td>64</td></tr>
+                <tr><td>11–15</td><td>4</td><td>13</td><td>52</td></tr>
+                <tr><td>16–20</td><td>3</td><td>18</td><td>54</td></tr>
+                <tr><td>21–25</td><td>2</td><td>23</td><td>46</td></tr>
+                <tr><td><strong>N=25</strong></td><td></td><td></td><td><strong>Σfx=240</strong></td></tr>
+              </tbody>
+            </table>
+            <p><strong>Pre-Test Mean</strong> = 240/25 = <strong style="color:var(--accent3)">9.6</strong></p>
+          </div>
+          <div>
+            <p><strong>Post-Test Data (N=25)</strong></p>
+            <table>
+              <thead><tr><th>CI</th><th>f</th><th>Mid x</th><th>fx</th></tr></thead>
+              <tbody>
+                <tr><td>1–5</td><td>1</td><td>3</td><td>3</td></tr>
+                <tr><td>6–10</td><td>3</td><td>8</td><td>24</td></tr>
+                <tr><td>11–15</td><td>4</td><td>13</td><td>52</td></tr>
+                <tr><td>16–20</td><td>8</td><td>18</td><td>144</td></tr>
+                <tr><td>21–25</td><td>9</td><td>23</td><td>207</td></tr>
+                <tr><td><strong>N=25</strong></td><td></td><td></td><td><strong>Σfx=430</strong></td></tr>
+              </tbody>
+            </table>
+            <p><strong>Post-Test Mean</strong> = 430/25 = <strong style="color:var(--accent4)">17.2</strong></p>
+          </div>
+        </div>
+        <div class="interpretation">
+          <strong>Interpretation:</strong> Post-Test Mean (17.2) is significantly higher than Pre-Test Mean (9.6). This shows a marked improvement in student performance after the action programme was implemented. The action hypothesis is <strong>accepted</strong>.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part B — Answer Any Three (5 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="q2023-4">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2023">Q.4</span>
+        <span class="q-title">Uses and Limitations of Action Research</span>
+      </div>
+      <div class="q-marks"><span>2½+2½ Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Uses of Action Research</div>
+        <ul>
+          <li>Helps teachers solve immediate classroom problems in a scientific manner</li>
+          <li>Helps improve the quality of teaching-learning process</li>
+          <li>Encourages professional development and self-reflection among teachers</li>
+          <li>Helps in identifying learning difficulties of individual students</li>
+          <li>Helps teachers try out new teaching strategies and evaluate their effectiveness</li>
+          <li>Helps in school improvement by solving day-to-day administrative and academic problems</li>
+          <li>Builds teachers' competence in data collection, analysis and interpretation</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading red">(b) Limitations of Action Research</div>
+        <ul>
+          <li>Results cannot be generalized beyond the specific classroom or school where the study was conducted</li>
+          <li>Lacks the scientific rigor and control of formal experimental research</li>
+          <li>Teacher-researcher may have personal bias that affects objectivity</li>
+          <li>Sample size is usually very small (one class), limiting statistical power</li>
+          <li>Teachers have limited time to conduct thorough research alongside their teaching responsibilities</li>
+          <li>Does not contribute directly to the general body of educational science</li>
+          <li>May be difficult to maintain objectivity when the researcher is also the teacher</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="q2023-5">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2023">Q.5</span>
+        <span class="q-title">Advantages of Graphical Representation & Steps for Frequency Polygon</span>
+      </div>
+      <div class="q-marks"><span>2+3 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Advantages of Graphical Representation — 2 Marks</div>
+        <ul>
+          <li>Makes complex data simple and easy to understand visually</li>
+          <li>Allows quick comparison between two or more sets of data</li>
+          <li>Facilitates identification of patterns, trends, and outliers in data</li>
+          <li>Saves time — a graph communicates information faster than numbers in a table</li>
+          <li>Helps in making comparisons between pre-test and post-test results in action research</li>
+          <li>Universal in nature — can be understood by people regardless of language</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Steps to Construct a Frequency Polygon — 3 Marks</div>
+        <ol class="steps">
+          <li><div><div class="step-title">Choose Class Interval</div><div class="step-desc">Choose the class interval and mark the values on the horizontal (X) axis.</div></div></li>
+          <li><div><div class="step-title">Mark Mid-Values</div><div class="step-desc">Mark the mid-value of each class interval on the horizontal axis. (e.g., for CI 10-14, mid-value = 12)</div></div></li>
+          <li><div><div class="step-title">Mark Frequencies</div><div class="step-desc">Mark the frequency of each class on the vertical (Y) axis.</div></div></li>
+          <li><div><div class="step-title">Plot Points</div><div class="step-desc">Place a point corresponding to each class's mid-value and its frequency.</div></div></li>
+          <li><div><div class="step-title">Join Points</div><div class="step-desc">Join all the plotted points by straight lines to obtain a bell-shaped curve.</div></div></li>
+          <li><div><div class="step-title">Complete the Polygon</div><div class="step-desc">Bring the line down to the X-axis at both ends to close the polygon. The result is a Frequency Polygon.</div></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="q2023-6">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2023">Q.6</span>
+        <span class="q-title">Format of an Action Research Proposal</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <p>An Action Research Proposal is a document prepared before conducting action research. It serves as a blueprint for the study. The format includes the following components:</p>
+      <ol class="steps">
+        <li><div><div class="step-title">Title of the Study</div><div class="step-desc">A clear and specific title that states the problem being investigated. Example: "Effect of Visual Aids on the Performance of Class 8 Students in Mathematics."</div></div></li>
+        <li><div><div class="step-title">Introduction / Background</div><div class="step-desc">Brief introduction to the context of the problem, why it is important, and the background of the school/class.</div></div></li>
+        <li><div><div class="step-title">Identification and Pinpointing of the Problem</div><div class="step-desc">Clear statement of the specific problem on which action research is to be conducted.</div></div></li>
+        <li><div><div class="step-title">Probable Causes</div><div class="step-desc">List of identified general and specific causes of the problem.</div></div></li>
+        <li><div><div class="step-title">Objectives of the Study</div><div class="step-desc">Clear, specific and measurable objectives that the study aims to achieve.</div></div></li>
+        <li><div><div class="step-title">Action Hypotheses</div><div class="step-desc">Testable "if…then" statements formulated based on the probable causes.</div></div></li>
+        <li><div><div class="step-title">Action Plan / Programme of Action</div><div class="step-desc">Detailed plan of what activities will be carried out, when, how and by whom.</div></div></li>
+        <li><div><div class="step-title">Tools for Data Collection</div><div class="step-desc">Description of the pre-test and post-test tools, questionnaires, observation schedules etc. to be used.</div></div></li>
+        <li><div><div class="step-title">Data Analysis Plan</div><div class="step-desc">How the collected data will be analyzed — error analysis, mean, graphical representation etc.</div></div></li>
+        <li><div><div class="step-title">Time Schedule</div><div class="step-desc">A table showing day-wise or week-wise schedule of activities from pre-test to reporting.</div></div></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="q2023-7">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2023">Q.7</span>
+        <span class="q-title">Questionnaire — Meaning & Prepare Open-Ended Questionnaire (8 Items)</span>
+      </div>
+      <div class="q-marks"><span>1+4 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is a Questionnaire? — 1 Mark</div>
+        <p>A questionnaire is a list of questions or items used to gather data from respondents about their attitudes, experiences, or opinions. It can be used to collect both quantitative and qualitative information. Questions can be open-ended (free response) or closed-ended (fixed options).</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Open-Ended Questionnaire — Topic: Difficulties in Learning Mathematics — 4 Marks</div>
+        <p><em>Sample open-ended questionnaire for Class 8 students on difficulties in learning Mathematics:</em></p>
+        <ol>
+          <li>What topics in Mathematics do you find most difficult to understand? Why?</li>
+          <li>What do you do when you do not understand a concept taught in the Mathematics class?</li>
+          <li>How do you feel about Mathematics as a subject? Describe your feelings.</li>
+          <li>Describe the problems you face while solving word problems in Mathematics.</li>
+          <li>What teaching method do you prefer for learning Mathematics? Give reasons.</li>
+          <li>What kind of help do you seek when you cannot solve a Mathematics problem?</li>
+          <li>How much time do you spend daily for Mathematics practice at home? Describe your study routine.</li>
+          <li>What changes would you suggest to make Mathematics learning easier and more interesting?</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" id="q2023-8">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2023">Q.8</span>
+        <span class="q-title">What is Observation? Explain its Types</span>
+      </div>
+      <div class="q-marks"><span>1+4 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) What is Observation? — 1 Mark</div>
+        <p>Observation is a method of data collection where the researcher directly watches and records behavior, events, or phenomena in their natural setting without manipulating them. It is a primary and fundamental method of gathering data in action research.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Types of Observation — 4 Marks</div>
+        <div class="compare-grid-2">
+          <div class="compare-card card-gold">
+            <h4>Participant Observation</h4>
+            <ul>
+              <li>The researcher actively participates in the group or activity being observed</li>
+              <li>Researcher becomes a part of the group</li>
+              <li>Provides insider perspective</li>
+              <li>Example: Teacher observing students while teaching</li>
+            </ul>
+          </div>
+          <div class="compare-card card-blue">
+            <h4>Non-Participant Observation</h4>
+            <ul>
+              <li>Researcher observes from outside without participating</li>
+              <li>Researcher remains a detached spectator</li>
+              <li>More objective; less influence on the group</li>
+              <li>Example: Principal observing a teacher's class</li>
+            </ul>
+          </div>
+          <div class="compare-card card-green">
+            <h4>Structured Observation</h4>
+            <ul>
+              <li>Uses a pre-determined checklist or observation schedule</li>
+              <li>Specific behaviors are decided in advance</li>
+              <li>More systematic and easier to analyze</li>
+              <li>Used in formal action research</li>
+            </ul>
+          </div>
+          <div class="compare-card card-red">
+            <h4>Unstructured Observation</h4>
+            <ul>
+              <li>No fixed checklist; researcher records whatever occurs</li>
+              <li>More flexible and open-ended</li>
+              <li>Used in exploratory stages of research</li>
+              <li>Can capture unexpected behaviors</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a href="#" class="back-top">↑ Back to Top</a>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     PAPER 4: APRIL/MAY 2025
+══════════════════════════════════════════════════ -->
+<div class="paper-section" id="paper-2025">
+<div class="container">
+
+  <div class="paper-banner banner-2025" data-year="2025">
+    <h2>Bangalore North University · April/May 2025</h2>
+    <p>HC-9: Action Research (CBCS Scheme) &nbsp;·&nbsp; Time: 1½ Hours &nbsp;·&nbsp; Max. Marks: 35</p>
+  </div>
+
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part A — Answer Any Two (10 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" id="q2025-1">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2025">Q.1</span>
+        <span class="q-title">Meaning of Action Research & Steps (10 Steps)</span>
+      </div>
+      <div class="q-marks"><span>2+8 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Meaning of Action Research — 2 Marks</div>
+        <div class="definition-box">
+          Action research is a form of investigation designed for use by teachers to attempt to solve problems and improve professional practices in their own classrooms. It involves systematic observations and data collection which can be used by the practitioner-researcher in reflection, decision-making and the development of more effective classroom strategies.
+          <cite>— Parsons and Brown, 2002</cite>
+        </div>
+        <p>Action research is concerned with a local problem conducted within a local setting. It is not concerned with whether the results are generalizable. The primary purpose is providing a solution to the given problem, not contribution to science.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Steps of Action Research — 8 Marks</div>
+        <ol class="steps">
+          <li><div><div class="step-title">Identification of the Problem Area</div><div class="step-desc">The first and most important step. The teacher feels self-dissatisfaction and identifies the problem area which causes concern in their day-to-day classroom or school activities. Example: "Students are not participating actively in class discussions."</div></div></li>
+          <li><div><div class="step-title">Pinpointing the Specific Problem</div><div class="step-desc">A general problem area is exhaustive. The teacher selects a specific problem and states it precisely. The statement should be direct, precise and unambiguous. Example: "Students of Class 9 do not participate in English oral discussion activities."</div></div></li>
+          <li><div><div class="step-title">Analyzing Probable Causes of the Problem</div><div class="step-desc">The purpose is to diagnose specific difficulties in the process of learning or deficiencies in prior capabilities. Causes: fear of making mistakes, lack of vocabulary, no practice given, teacher does not encourage participation. This helps fix the objectives of the study.</div></div></li>
+          <li><div><div class="step-title">Listing the Objectives of the Study</div><div class="step-desc">Action research cannot be purposeful unless objectives are fixed. Objectives help the teacher plan procedures for action. Example: To identify reasons for poor oral participation; To improve oral participation through group discussion activities.</div></div></li>
+          <li><div><div class="step-title">Formulating Action Hypotheses</div><div class="step-desc">The problem is restated as testable "if…then" hypotheses. Each hypothesis contains the cause and effect relationship. Example: "If group discussion activities are regularly conducted, then students' oral participation will improve." Hypotheses act as guidelines for further process.</div></div></li>
+          <li><div><div class="step-title">Designing the Action Plan</div><div class="step-desc">Three aspects: (i) Preparation of Diagnostic Tool (pre-test — observation checklist or oral test), (ii) Designing Programme of Action (regular group discussions, role plays, pair activities), (iii) Preparation of Post-Test tool parallel to pre-test.</div></div></li>
+          <li><div><div class="step-title">Implementation / Execution of Action Plan</div><div class="step-desc">The whole action plan is scheduled — what to do, how much to do, when to do, how long, and when to evaluate. The programme is implemented as planned in the timetable.</div></div></li>
+          <li><div><div class="step-title">Statistical Analysis and Interpretation of Data</div><div class="step-desc">Error analysis of pre and post test papers, error analysis graphs drawn, marks lists prepared, individual performance compared, group mean values calculated and compared, graphical representations (histograms, frequency polygon or bar charts) drawn, interpretations made.</div></div></li>
+          <li><div><div class="step-title">Verification of Action Hypotheses</div><div class="step-desc">Action hypotheses are either accepted or rejected based on comparison of pretest and posttest. Conclusions are drawn with respect to the verified hypotheses. These conclusions hold good only for the group of learners involved in the action research process.</div></div></li>
+          <li><div><div class="step-title">Reporting</div><div class="step-desc">A systematic and detailed report is prepared for future evidence. The format of the report is not very rigid — it follows the same steps as it was carried out.</div></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" id="q2025-2">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2025">Q.2</span>
+        <span class="q-title">Research — Meaning, Importance in Education & Types of Research</span>
+      </div>
+      <div class="q-marks"><span>2+4+4 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Meaning of Research — 2 Marks</div>
+        <div class="definition-box">Research is a systematic investigative process employed to increase or revise current knowledge by discovering new facts. Research is a careful investigation or enquiry, especially through search for new facts in any branch of knowledge.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Importance of Research in Education — 4 Marks</div>
+        <ul>
+          <li>It helps to improve teaching and learning methods — research identifies which methods are most effective for different learners</li>
+          <li>It helps in curriculum design — research-based evidence guides the development of relevant, effective curricula</li>
+          <li>It improves the quality of education — research provides scientific evidence to reform and upgrade educational practices</li>
+          <li>Helps in understanding learner behavior and finding solutions to learning difficulties</li>
+          <li>Helps in providing solutions to all educational problems</li>
+          <li>Helps in adopting technology effectively in the field of education</li>
+          <li>Helps achieve educational goals in a more scientific and systematic way</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading green">(c) Types of Research — 4 Marks</div>
+        <p><strong>1. Fundamental Research</strong> — Also known as basic research, focused on generating new knowledge and understanding of fundamental principles. Primarily concerned with advancing theoretical knowledge and developing new concepts, theories and models. Conducted in universities and research institutions using surveys, experiments, case studies.</p>
+        <p><strong>2. Applied Research</strong> — Also known as practical research, focused on solving real-world problems in education. Designed to produce practical and useful knowledge that can be applied in educational settings. Conducted in educational institutions, government agencies, and non-profit organizations.</p>
+        <p><strong>3. Action Research</strong> — Conducted by educators in their own classrooms or educational settings. The aim is to improve teaching and learning outcomes by identifying and implementing effective strategies and practices. Involves a cyclical process of planning, action, observation, and reflection.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" id="q2025-3">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2025">Q.3</span>
+        <span class="q-title">Questionnaire, Observation Schedule & Interview — Meaning, Types & Importance</span>
+      </div>
+      <div class="q-marks"><span>2½+2½+2½+2½ Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Questionnaire</div>
+        <p><strong>Meaning:</strong> A questionnaire is a list of questions or items used to gather data from respondents about their attitudes, experiences, or opinions. Questionnaires can collect both quantitative and qualitative information.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Observation Schedule</div>
+        <p><strong>Meaning:</strong> An observation schedule is a form which directs a researcher to pay attention to certain behaviors and situational features when carrying out an observational study. It is a structured tool that lists the specific behaviors or events to be observed and recorded.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading green">(c) Interview — Types</div>
+        <p>Interview is a process of communication or interaction in which the interviewee gives the needed information verbally to the interviewer in a face-to-face or one-to-one situation.</p>
+        <p><strong>Three types:</strong></p>
+        <ul>
+          <li><strong>Structured Interview:</strong> Pre-determined questions answered in the same order by all interviewees. Data analysis is straightforward as answers can be compared easily.</li>
+          <li><strong>Unstructured Interview:</strong> No questions prepared prior; conducted informally. Least reliable; high level of bias; comparison of answers is difficult.</li>
+          <li><strong>Semi-Structured Interview:</strong> Contains elements of both. Same set of questions for all, but additional questions may be asked to clarify or expand issues.</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading">(d) Diagnostic Test</div>
+        <p><strong>Meaning:</strong> A diagnostic test is primarily used to diagnose student difficulties or learning disabilities. It is a form of pre-assessment that allows the teacher to determine students' individual strengths, weaknesses and skills — before or after instruction.</p>
+        <p><strong>Importance:</strong> Evaluates students' academic achievement; helps plan differentiated instruction; allows teachers to plan meaningful and efficient instruction; creates a baseline for assessing future learning; helps provide remediation or enrichment; very useful for a classroom teacher to identify what is known before instruction begins.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <div class="part-divider-line"></div>
+    <div class="part-divider-label">Part B — Answer Any Three (5 Marks Each)</div>
+    <div class="part-divider-line"></div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" id="q2025-4">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2025">Q.4</span>
+        <span class="q-title">Graphical Representation — Meaning & Steps for Frequency Polygon</span>
+      </div>
+      <div class="q-marks"><span>2+3 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Graphical Representation — 2 Marks</div>
+        <p>Graphical representation is a form of visually displaying data through various methods like graphs, diagrams, charts, and plots. It helps in sorting, visualizing, and presenting data in a clear manner through different types of graphs. Statistics mainly use graphical representation to show data in a way that is easy to understand and interpret.</p>
+        <p><strong>Types:</strong> Histogram, Bar Graph, Frequency Polygon, Pie Chart, Line Graph, Scatter Plot.</p>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Steps to Draw a Frequency Polygon — 3 Marks</div>
+        <ol class="steps">
+          <li><div><div class="step-title">Step 1</div><div class="step-desc">Choose the class interval and mark the values on the horizontal (X) axis.</div></div></li>
+          <li><div><div class="step-title">Step 2</div><div class="step-desc">Mark the mid-value of each class interval on the horizontal axis.</div></div></li>
+          <li><div><div class="step-title">Step 3</div><div class="step-desc">Mark the frequency of each class on the vertical (Y) axis.</div></div></li>
+          <li><div><div class="step-title">Step 4</div><div class="step-desc">Place a point corresponding to each class and its frequency (at the intersection of mid-value and frequency).</div></div></li>
+          <li><div><div class="step-title">Step 5</div><div class="step-desc">Join all the plotted points by separate straight lines to obtain a bell-shaped curve.</div></div></li>
+          <li><div><div class="step-title">Step 6</div><div class="step-desc">The obtained representation is a Frequency Polygon. Close the polygon by bringing lines down to the X-axis at both ends.</div></div></li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" id="q2025-5">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2025">Q.5</span>
+        <span class="q-title">Action Research — Importance for Educators & Professional Development</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <p>Action research empowers educators to design personalized development plans. By identifying areas of improvement and setting targeted goals, educators can tailor their professional growth to nurture their strengths and address their weaknesses.</p>
+      <ul>
+        <li>Action research focuses on solving specific classroom or school problems, improving practice, and helping to make decisions at a local site</li>
+        <li>Encourages teachers to examine the dynamics of their classroom and challenge existing practices</li>
+        <li>Helps teachers engage in critical reflection — thinking deeply about what works and what does not in their teaching</li>
+        <li>Teachers become researchers — they develop skills of systematic observation, data collection, and evidence-based decision making</li>
+        <li>Helps improve student outcomes by identifying effective strategies through trial and reflection</li>
+        <li>Creates a culture of continuous improvement and professional learning in schools</li>
+        <li>Builds teacher confidence as they see evidence of their own impact on student learning</li>
+        <li>Promotes collaboration with colleagues — action research can be conducted individually or in teams</li>
+        <li>Contributes to school-wide improvement when findings are shared among staff</li>
+        <li>Helps teachers stay current with educational practices and adapt them to their own context</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" id="q2025-6">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2025">Q.6</span>
+        <span class="q-title">Main Components of Research Report Format</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <p>The Action Research Report is written under three main headings:</p>
+      <div class="ans-heading" style="margin-top:1rem;">A. Preliminary Section</div>
+      <ul>
+        <li><strong>Title Page</strong> — Title of study, institution, candidate name, date, guided by</li>
+        <li><strong>Acknowledgement</strong> — Thanks to all who helped</li>
+        <li><strong>Table of Contents</strong> — Major divisions with page numbers</li>
+        <li><strong>List of Tables</strong> (if any)</li>
+        <li><strong>List of Figures</strong> (if any)</li>
+      </ul>
+      <div class="ans-heading blue" style="margin-top:1rem;">B. Main Body</div>
+      <ul>
+        <li>Identification of the problem and Pin-pointing the problem</li>
+        <li>Analysis of the problem in terms of probable causes</li>
+        <li>Identifying the objectives</li>
+        <li>Formulation of hypotheses</li>
+        <li>Action Plan</li>
+        <li>Collection and Analysis of data (marks list, error analysis, graphical representation, individual and statistical comparison)</li>
+        <li>Conclusion / Findings — in relation to each hypothesis</li>
+      </ul>
+      <div class="ans-heading green" style="margin-top:1rem;">C. Reference Section</div>
+      <ul>
+        <li><strong>Bibliography</strong> — List of all books, journals, periodicals, and websites used</li>
+        <li><strong>Appendix</strong> — Test papers, data analysis sheets, questionnaires, and any supporting material not included in the main body</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" id="q2025-7">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2025">Q.7</span>
+        <span class="q-title">Achievement Test — Meaning & Importance</span>
+      </div>
+      <div class="q-marks"><span>2+3 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-heading">(a) Meaning of Achievement Test — 2 Marks</div>
+        <p>An achievement test is a mechanism used in any educational process to assess educational outcomes and evaluate different levels of learners.</p>
+        <div class="definition-box">
+          "An achievement or proficiency test is used to ascertain what and how much has been learnt or how well a task has been performed."
+          <cite>— Robert L. Ebel</cite>
+        </div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-heading blue">(b) Importance of Achievement Test — 3 Marks</div>
+        <ul>
+          <li>Provides systematic analysis of the objectives of the education curriculum; the identification and analysis of objectives is the first step in construction of the achievement test</li>
+          <li>Provides sufficient evidence for decision-making regarding a learner's transition from one level of learning to a higher level</li>
+          <li>Helps in diagnosing strengths and weaknesses in learners' performance, formulating educational plans that ensure development of strengths and treatment of weaknesses</li>
+          <li>Acts as a recognized mechanism for providing indications of each learner's academic development by matching that development to predetermined educational goals</li>
+          <li>Teaches teachers about the effectiveness of modern teaching methods they rely on in the classroom</li>
+          <li>Improves learners' skills and training in dealing with examination pressure</li>
+          <li>Helps identify truth regarding enrollment, retention, dropout, and quality of education</li>
+          <li>Helps build new knowledge regarding methodology, pedagogy, or other core subject areas</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" id="q2025-8">
+    <div class="q-header" onclick="toggleCard(this)">
+      <div class="q-header-left">
+        <span class="q-number q-num-2025">Q.8</span>
+        <span class="q-title">Problems / Pin-Pointed Problems on which Action Research can be Conducted</span>
+      </div>
+      <div class="q-marks"><span>5 Marks</span><div class="chevron">▼</div></div>
+    </div>
+    <div class="q-body">
+      <p>The following are common problems identified in classroom and school settings on which action research can be conducted:</p>
+      <ul>
+        <li><strong>Problems of spelling errors in languages</strong> — Students consistently make spelling mistakes in English or other languages</li>
+        <li><strong>Problem of wrong pronunciation</strong> — Students mispronounce words while reading aloud in English</li>
+        <li><strong>Problem of handwriting</strong> — Students have poor or illegible handwriting affecting their performance</li>
+        <li><strong>Problem of discipline and code of conduct</strong> — Students do not follow classroom rules and show disruptive behavior</li>
+        <li><strong>Problem of poor attendance</strong> — Students have irregular attendance affecting their learning</li>
+        <li><strong>Problem of school administration and organization</strong> — Inefficient management of school activities and schedules</li>
+        <li><strong>Problems of delinquency</strong> — Students showing anti-social or rule-breaking behavior in school</li>
+        <li><strong>Problem of students not participating in classroom activities</strong> — Passive learners who do not engage in discussions</li>
+        <li><strong>Problem of low performance in Mathematics</strong> — Students performing poorly in specific topics like fractions or geometry</li>
+        <li><strong>Problem of lack of reading habit</strong> — Students not developing independent reading skills</li>
+      </ul>
+      <div class="callout callout-tip">
+        <strong>Note:</strong> Each of these problems can be taken as the starting point for action research by identifying its probable causes, formulating hypotheses, designing a programme of action, and testing whether the intervention reduces or eliminates the problem.
+      </div>
+    </div>
+  </div>
+
+  <a href="#" class="back-top">↑ Back to Top</a>
+</div>
+</div>
+
+<footer>HC-9 Action Research · Complete Answer Key · 6 Question Papers (2018–2025) · B.Ed. III Semester CBCS Scheme · Good luck! 🎓</footer>
+
+<script>
+function showPaper(year) {
+  // Hide all sections
+  document.querySelectorAll('.paper-section').forEach(s => s.classList.remove('active'));
+  // Deactivate all tabs
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.className = 'tab-btn';
+  });
+  // Show selected
+  document.getElementById('paper-' + year).classList.add('active');
+  // Activate tab
+  event.target.classList.add('active-' + year);
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleCard(header) {
+  const card = header.parentElement;
+  card.classList.toggle('open');
+}
+
+// Open all cards in visible section by default for first paper
+document.querySelectorAll('#paper-2018 .q-card').forEach(c => c.classList.add('open'));
+</script>
+</body>
+</html>

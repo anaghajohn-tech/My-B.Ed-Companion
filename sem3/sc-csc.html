@@ -1,0 +1,2505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SC-CSC · Content & Pedagogy of Computer Science</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --accent: #00d9a3;
+    --accent2: #7c6bff;
+    --accent3: #ff6b6b;
+    --amber: #f5a623;
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --partA: #00d9a3;
+    --partB: #7c6bff;
+    --partC: #ff6b6b;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Literata', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d2018 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 260px; height: 260px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,217,163,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 30%;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(124,107,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 860px; margin: 0 auto; position: relative; }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+  header h1 span { color: var(--accent); }
+  .header-sub {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 1.2rem;
+    font-style: italic;
+  }
+  .header-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .meta-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+  }
+  .meta-chip .dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ── TABS ── */
+  .tabs-wrapper {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tabs {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 0 1rem;
+    gap: 0;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    padding: 14px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    flex-shrink: 0;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn.imp.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+  /* ── CONTAINER ── */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 4rem;
+  }
+
+  /* ── TAB SECTIONS ── */
+  .tab-section { display: none; }
+  .tab-section.active { display: block; }
+
+  /* ── PAPER HEADER ── */
+  .paper-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .paper-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .paper-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 4px;
+    border: 1px solid;
+  }
+  .badge.green { color: var(--partA); border-color: var(--partA); }
+  .badge.purple { color: var(--partB); border-color: var(--partB); }
+  .badge.red { color: var(--partC); border-color: var(--partC); }
+  .badge.amber { color: var(--amber); border-color: var(--amber); }
+
+  /* ── PART DIVIDER ── */
+  .part-divider {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 1.8rem 0 1rem;
+  }
+  .part-divider hr {
+    flex: 1;
+    border: none;
+    border-top: 1px solid var(--border);
+  }
+  .part-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .part-label.a { background: rgba(0,217,163,0.15); color: var(--partA); }
+  .part-label.b { background: rgba(124,107,255,0.15); color: var(--partB); }
+  .part-label.c { background: rgba(255,107,107,0.15); color: var(--partC); }
+  .part-info {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── Q CARDS ── */
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    overflow: hidden;
+  }
+  .q-card:hover { border-color: rgba(0,217,163,0.35); box-shadow: 0 0 0 1px rgba(0,217,163,0.1); }
+  .q-card.open { border-color: var(--accent); }
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+  }
+  .q-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    background: rgba(0,217,163,0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-num.b { color: var(--partB); background: rgba(124,107,255,0.1); }
+  .q-num.c { color: var(--partC); background: rgba(255,107,107,0.1); }
+  .q-text {
+    flex: 1;
+    font-size: 14px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .q-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .q-arrow {
+    font-size: 10px;
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 4px;
+    transition: transform 0.25s;
+  }
+  .q-card.open .q-arrow { transform: rotate(180deg); color: var(--accent); }
+  .q-body {
+    display: none;
+    padding: 0 1rem 1.1rem;
+    border-top: 1px solid var(--border);
+  }
+  .q-card.open .q-body { display: block; }
+
+  /* ── ANSWER CONTENT ── */
+  .answer-block { padding-top: 1rem; }
+  .sub-q {
+    font-family: 'Syne', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--accent);
+    margin: 1rem 0 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .def-box {
+    background: rgba(0,217,163,0.06);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 0.7rem 1rem;
+    font-size: 13.5px;
+    color: var(--text);
+    line-height: 1.65;
+    margin-bottom: 0.75rem;
+  }
+  .point-list { list-style: none; padding: 0; margin: 0.4rem 0 0.8rem; }
+  .point-list li {
+    display: flex;
+    gap: 0.6rem;
+    font-size: 13.5px;
+    padding: 0.3rem 0;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .point-list li::before {
+    content: '›';
+    color: var(--accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .point-list.b li::before { color: var(--partB); }
+  .point-list.c li::before { color: var(--partC); }
+
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--accent); font-style: normal; font-weight: 500; }
+
+  .note-box {
+    background: rgba(245,166,35,0.08);
+    border: 1px solid rgba(245,166,35,0.25);
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+    font-size: 12.5px;
+    color: var(--amber);
+    margin-top: 0.75rem;
+  }
+  .freq-badge {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .freq-hot { background: rgba(255,107,107,0.2); color: var(--partC); }
+  .freq-med { background: rgba(245,166,35,0.2); color: var(--amber); }
+
+  /* Important Questions tab */
+  .imp-section { margin-bottom: 2rem; }
+  .imp-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .imp-heading::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .imp-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    margin-bottom: 0.5rem;
+    font-size: 13.5px;
+  }
+  .imp-item .freq {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9.5px;
+    color: var(--muted);
+    margin-top: 4px;
+  }
+  .imp-item .freq span { color: var(--amber); }
+
+  /* section headers inside answers */
+  .ans-heading {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 1rem 0 0.3rem;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin: 0.75rem 0;
+  }
+  th {
+    background: var(--surface2);
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 6px 10px;
+    text-align: left;
+    border: 1px solid var(--border);
+  }
+  td {
+    padding: 5px 10px;
+    border: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-tag">III Semester B.Ed · CBCS 2-Year Course · Bangalore University</div>
+    <h1><span>SC-CSC</span> Content &amp; Pedagogy of Computer Science</h1>
+    <p class="header-sub">Subject Code variations: SN-019 / SS-008 / GN-024 / PJ-758 / AG-009 / BA-024 / FB-009 / ED-003 / ED-009</p>
+    <div class="header-meta">
+      <div class="meta-chip"><span class="dot"></span>Oct 2017 (SN-019)</div>
+      <div class="meta-chip"><span class="dot"></span>Sep/Oct 2018 (SS-008)</div>
+      <div class="meta-chip"><span class="dot"></span>Sep 2019 (GN-024)</div>
+      <div class="meta-chip"><span class="dot"></span>Feb/Mar 2020 (PJ-758)</div>
+      <div class="meta-chip"><span class="dot"></span>Aug 2021 (AG-009)</div>
+      <div class="meta-chip"><span class="dot"></span>Sep 2022 (BA-024)</div>
+      <div class="meta-chip"><span class="dot"></span>Apr 2023 (FB-009)</div>
+      <div class="meta-chip"><span class="dot"></span>Apr 2024 (ED-003)</div>
+      <div class="meta-chip"><span class="dot"></span>May/Jun 2025 (ED-009)</div>
+    </div>
+  </div>
+</header>
+
+<!-- STICKY TABS -->
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('t2017',this)">Oct 2017</button>
+    <button class="tab-btn" onclick="switchTab('t2018',this)">Oct 2018</button>
+    <button class="tab-btn" onclick="switchTab('t2019',this)">Sep 2019</button>
+    <button class="tab-btn" onclick="switchTab('t2020',this)">Mar 2020</button>
+    <button class="tab-btn" onclick="switchTab('t2021',this)">Aug 2021</button>
+    <button class="tab-btn" onclick="switchTab('t2022',this)">Sep 2022</button>
+    <button class="tab-btn" onclick="switchTab('t2023',this)">Apr 2023</button>
+    <button class="tab-btn" onclick="switchTab('t2024',this)">Apr 2024</button>
+    <button class="tab-btn" onclick="switchTab('t2025',this)">Jun 2025</button>
+    <button class="tab-btn imp" onclick="switchTab('timp',this)">★ Important Qs</button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════
+     TAB: OCT 2017 (SN-019)
+════════════════════════════════════════════════ -->
+<div id="t2017" class="tab-section active">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">October 2017 · SN-019</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px">III Semester B.Ed (CBCS-2 Years Course) · Batch 2015–17</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge green">Part A — 3×10 = 30</span>
+      <span class="badge purple">Part B — 5×5 = 25</span>
+      <span class="badge red">Part C — 3×5 = 15</span>
+      <span class="badge amber">Max 70 Marks</span>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="part-divider"><span class="part-label a">Part A</span><hr><span class="part-info">Answer any 3 · Each ≤ 3 pages · 10 marks</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <div class="q-text">What are the objectives of computer science fair? Explain the steps of organisation of computer science fair.
+        <div class="q-meta">(5+5 = 10 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Objectives of Computer Science Fair (5 marks)</div>
+        <div class="def-box">A <strong>Computer Science Fair</strong> is a co-curricular event where students exhibit their CS projects, innovations, and experiments to demonstrate scientific thinking and creativity.</div>
+        <ul class="point-list">
+          <li>To provide opportunities for independent and self-motivated study in computing</li>
+          <li>To develop scientific temper and problem-solving skills</li>
+          <li>To encourage creativity and innovation among students</li>
+          <li>To recognise talent and motivate bright students</li>
+          <li>To bring the outside world into the classroom environment</li>
+          <li>To develop the spirit of healthy competition</li>
+        </ul>
+        <div class="sub-q">b) Steps of Organisation (5 marks)</div>
+        <ul class="point-list">
+          <li><strong>Central Committee:</strong> Overall charge — decides date, venue, time, rules, budgeting</li>
+          <li><strong>Exhibits &amp; Resource Committee:</strong> Motivates students for exhibits, sets display rules, arranges rooms</li>
+          <li><strong>Reception Committee:</strong> Fixes guests, maintains register for public comments, manages inauguration</li>
+          <li><strong>Judgement Committee:</strong> Fixes judges, hospitality, criteria, prepares assessment sheets</li>
+          <li><strong>Arranging Exhibits:</strong> Adequate space for each entry; projects of same category placed together; proper labelling</li>
+          <li><strong>Publicity:</strong> Wide publicity through media — newspapers, pamphlets, invitation cards</li>
+          <li><strong>Prize Distribution:</strong> After evaluation, prizes distributed to winners</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <div class="q-text">What are the special features of computer science laboratory? What problems do we face in the maintenance of software and hardware laboratory materials?
+        <div class="q-meta">(5+5 = 10 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Special Features of CS Laboratory (5 marks)</div>
+        <div class="def-box">A <strong>Computer Science Laboratory</strong> is a space that provides computer services to a defined community — typically equipped with hardware, software, networking, and utilities for practical learning.</div>
+        <ul class="point-list">
+          <li>Adequate number of computers with updated configurations</li>
+          <li>High-speed internet connectivity</li>
+          <li>UPS and power backup for uninterrupted sessions</li>
+          <li>Licensed software relevant to the curriculum</li>
+          <li>Air-conditioned environment to protect equipment</li>
+          <li>Network infrastructure (LAN / Wi-Fi)</li>
+          <li>Projection system / interactive board</li>
+          <li>Proper seating and ergonomic arrangement</li>
+          <li>Security systems and access control</li>
+        </ul>
+        <div class="sub-q">b) Problems in Maintenance (5 marks)</div>
+        <div class="ans-heading">Hardware Problems</div>
+        <ul class="point-list">
+          <li>Overheating of CPUs and monitors</li>
+          <li>Frequent breakdown of peripherals (keyboards, mouse)</li>
+          <li>Power fluctuations damaging components</li>
+          <li>Dust accumulation causing system failures</li>
+        </ul>
+        <div class="ans-heading">Software Problems</div>
+        <ul class="point-list">
+          <li>Virus and malware attacks on systems</li>
+          <li>License expiry of software</li>
+          <li>Compatibility issues with newer OS updates</li>
+          <li>Slow network speeds affecting cloud-based tools</li>
+          <li>Unauthorised installation by students</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <div class="q-text">What are the characteristics of a good computer science textbook? Explain the criteria for evaluation of computer science text book.
+        <div class="q-meta">(5+5 = 10 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Characteristics of a Good CS Textbook (5 marks)</div>
+        <ul class="point-list">
+          <li>Author should be well-qualified and experienced in the subject</li>
+          <li>Content must be in line with the syllabus for the particular grade</li>
+          <li>Should include latest developments in each topic</li>
+          <li>Must help students understand basic concepts and principles</li>
+          <li>Language should be simple, clear and interesting</li>
+          <li>Should be activity-based and inspire further learning</li>
+          <li>Must be developed in line with national aims and objectives</li>
+          <li>Should satisfy demands of examinations</li>
+          <li>Must be easily available in the market at reasonable price</li>
+        </ul>
+        <div class="sub-q">b) Criteria for Evaluation — External Factors (2.5 marks)</div>
+        <ul class="point-list">
+          <li>Size must be standard and regular</li>
+          <li>Cover page should be stimulating and motivating</li>
+          <li>Quality of paper must be good</li>
+          <li>Printing clear; headings bold; important points in italics</li>
+          <li>Binding must be proper; pages numbered; price reasonable</li>
+        </ul>
+        <div class="sub-q">Criteria for Evaluation — Internal Factors (2.5 marks)</div>
+        <ul class="point-list">
+          <li><strong>Selection of Topics:</strong> Content must relate to syllabus and prior knowledge</li>
+          <li><strong>Presentation:</strong> Logical sequence from simple→complex; clear language; accurate terms</li>
+          <li><strong>Diagrams:</strong> Proper size, clear labels at appropriate places</li>
+          <li><strong>Exercises:</strong> Questions from knowledge to evaluation level; application-type problems</li>
+          <li><strong>Summary:</strong> Each chapter should end with key-points summary</li>
+          <li><strong>References:</strong> Books, websites, journals listed at the end</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <div class="q-text">What are social medias? List out important social medias. Explain how do social medias are very much helpful in the field of education.
+        <div class="q-meta">(2+2+6 = 10 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Definition (2 marks)</div>
+        <div class="def-box">Social media refers to a group of internet-based applications built on Web 2.0 foundations that allow creation and exchange of user-generated content. Examples: Facebook, Twitter, Instagram, LinkedIn, YouTube, Pinterest, Blogs.</div>
+        <div class="sub-q">b) Important Social Medias (2 marks)</div>
+        <ul class="point-list">
+          <li><strong>Facebook</strong> — Largest social network; multi-purpose (chat, photos, groups)</li>
+          <li><strong>Twitter</strong> — Microblogging; 140-character tweets; real-time information</li>
+          <li><strong>Instagram</strong> — Photo and video sharing; educational visual content</li>
+          <li><strong>LinkedIn</strong> — Professional networking; research collaboration</li>
+          <li><strong>YouTube</strong> — Video tutorials and e-learning</li>
+          <li><strong>Blogs / WordPress</strong> — Long-form content publishing</li>
+        </ul>
+        <div class="sub-q">c) Role of Social Media in Education (6 marks)</div>
+        <ul class="point-list">
+          <li>Promotes collaborative learning and group discussion</li>
+          <li>Provides access to updated information beyond textbooks</li>
+          <li>Encourages peer learning and knowledge sharing</li>
+          <li>Facebook groups used for homework help and doubt clearing</li>
+          <li>YouTube channels provide visual explanations of complex concepts</li>
+          <li>Blogs allow students to express and document their learning</li>
+          <li>LinkedIn connects students with professionals for career guidance</li>
+          <li>Promotes digital citizenship and responsible internet use</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <div class="q-text">What are teachers quality improvement programmes? Explain the roles of important quality improvement programmes that are helpful for teachers.
+        <div class="q-meta">(5+5 = 10 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Teacher Quality Improvement (5 marks)</div>
+        <div class="def-box">TQI (Teacher Quality Improvement) programmes are designed to enhance teacher competencies — pedagogical, personality, professional, and social — to make classroom learning more effective.</div>
+        <ul class="point-list">
+          <li>In-service training programmes</li>
+          <li>Refresher courses and orientation courses</li>
+          <li>Professional seminars and workshops</li>
+          <li>Extension lectures and conferences</li>
+          <li>Action research projects</li>
+          <li>Online professional development courses</li>
+        </ul>
+        <div class="sub-q">b) Role of Key Programmes (5 marks)</div>
+        <ul class="point-list">
+          <li><strong>Seminars:</strong> Improve quality of instruction; methods become interesting and effective; develops command over content</li>
+          <li><strong>Workshops:</strong> Solve problems in teaching; introduce new trends; develop skills for independent task performance</li>
+          <li><strong>Projects:</strong> Encourage research mindset; apply theory to practice; develops problem-solving ability</li>
+          <li><strong>Refresher Courses:</strong> Update knowledge with latest developments in CS field</li>
+          <li><strong>Conferences:</strong> Exposure to new ideas; networking with experts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART B -->
+  <div class="part-divider"><span class="part-label b">Part B</span><hr><span class="part-info">Answer any 5 · Each ≤ 1.5 pages · 5 marks</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <div class="q-text">Mention any four objectives of computer science club. Explain briefly the organisation of computer science club at secondary school level.
+        <div class="q-meta">(2+3 = 5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Four Objectives</div>
+        <ul class="point-list b">
+          <li>To develop scientific temper and spirit of inquiry</li>
+          <li>To provide opportunities for constructive, explorative activities</li>
+          <li>To develop healthy competition and cooperation</li>
+          <li>To create interest in latest scientific inventions and discoveries</li>
+        </ul>
+        <div class="sub-q">Organisation at Secondary Level</div>
+        <ul class="point-list b">
+          <li><strong>Functional Organisation:</strong> Publishing science magazine; organising field trips; arranging expert talks</li>
+          <li><strong>Structural Organisation:</strong> President, Secretary, Treasurer, Publicity Officer with defined duties</li>
+          <li><strong>Preliminary Organisation:</strong> Teacher calls formal meeting; discusses aims; constitution framed; membership drive launched</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <div class="q-text">Write the meaning and importance of computer science library. Explain the common sections available in the library.
+        <div class="q-meta">(2+3 = 5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Meaning &amp; Importance</div>
+        <div class="def-box">A <strong>CS library</strong> is a store-house of knowledge — books, journals, e-resources — that supports CS learning and research.</div>
+        <ul class="point-list b">
+          <li>Provides access to books students cannot afford to buy</li>
+          <li>Supplements classroom learning with reference materials</li>
+          <li>Encourages self-directed and wider reading</li>
+          <li>Supports research and project work</li>
+        </ul>
+        <div class="sub-q">Common Sections</div>
+        <ul class="point-list b">
+          <li><strong>Circulation Section:</strong> Security desk, circulation counter, property counter</li>
+          <li><strong>Acquisition Section:</strong> Purchase of new books and materials</li>
+          <li><strong>Classification Section:</strong> Organising books by subject/Dewey system</li>
+          <li><strong>Periodicals Section:</strong> Journals and magazines</li>
+          <li><strong>IT Section:</strong> Library management server, web portal, e-resources</li>
+          <li><strong>Reference Section:</strong> Encyclopedias, dictionaries</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <div class="q-text">What is computer science quiz programme? Explain the procedures in organising computer science quiz programme.
+        <div class="q-meta">(2+3 = 5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">What is a CS Quiz?</div>
+        <div class="def-box">A CS quiz is a co-curricular programme where reflective answers are given to questions based on computing concepts. It fosters scientific knowledge, competition, and team spirit.</div>
+        <div class="sub-q">Steps of Organisation</div>
+        <ul class="point-list b">
+          <li>Fix venue and date</li>
+          <li>Identify areas of quiz items (data structures, networking, programming, etc.)</li>
+          <li>Construct quiz questions for different rounds</li>
+          <li>Review and select the quiz items</li>
+          <li>Identify the quiz master and scorer</li>
+          <li>Give wide publicity via newspapers, pamphlets, invitation cards</li>
+          <li>Establish conducting procedure, rules and regulations</li>
+          <li>Prize distribution to winners</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.9</span>
+      <div class="q-text">What are records? List out the records maintained in computer science laboratory and explain in detail.
+        <div class="q-meta">(2+3 = 5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Definition</div>
+        <div class="def-box">Laboratory records are systematic written entries of all activities, experiments, equipment, and observations maintained to track the work done in the lab.</div>
+        <div class="sub-q">Records Maintained</div>
+        <ul class="point-list b">
+          <li><strong>Stock Register:</strong> List of all hardware and software with serial numbers, purchase dates, prices</li>
+          <li><strong>Attendance Register:</strong> Daily student attendance for each lab session</li>
+          <li><strong>Experiment Record Book:</strong> Student lab notebooks with date, aim, procedure, output, conclusion</li>
+          <li><strong>Maintenance Register:</strong> Record of repairs, AMC visits, breakdowns</li>
+          <li><strong>Issue and Return Register:</strong> For equipment borrowed by students/teachers</li>
+          <li><strong>Software License Record:</strong> Expiry dates, activation keys</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.10</span>
+      <div class="q-text">What are E-magazines? Explain the role of E-magazine in teaching computer science.
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box">An <strong>E-magazine (Electronic magazine)</strong> is a digital publication distributed online via websites, email, or apps. It contains articles, tutorials, news, and multimedia content related to a subject.</div>
+        <div class="sub-q">Creating an Online E-Magazine</div>
+        <ul class="point-list b">
+          <li>Choose a platform (Issuu, Canva, WordPress)</li>
+          <li>Design the layout with articles, images, videos</li>
+          <li>Add interactive elements (hyperlinks, quizzes)</li>
+          <li>Publish and share the link with students</li>
+        </ul>
+        <div class="sub-q">Role in Teaching CS</div>
+        <ul class="point-list b">
+          <li>Provides updated content beyond textbooks</li>
+          <li>Motivates students to read and explore CS topics</li>
+          <li>Students can contribute articles — developing writing and CS skills</li>
+          <li>Freely accessible anytime, anywhere</li>
+          <li>Disseminates knowledge widely</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.11</span>
+      <div class="q-text">Bring out the similarities and differences between Facebook and Twitter. How do they useful in teaching computer science?
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <table>
+          <tr><th>Aspect</th><th>Facebook</th><th>Twitter</th></tr>
+          <tr><td>Purpose</td><td>Multi-purpose social network</td><td>Microblogging platform</td></tr>
+          <tr><td>Post length</td><td>No strict limit</td><td>280 characters per tweet</td></tr>
+          <tr><td>Content</td><td>Photos, videos, notes, games</td><td>Short text updates, hashtags</td></tr>
+          <tr><td>Groups</td><td>Yes — closed/open groups</td><td>No groups (only lists)</td></tr>
+          <tr><td>Real-time</td><td>Moderate</td><td>Excellent for live updates</td></tr>
+        </table>
+        <div class="sub-q">Similarities</div>
+        <ul class="point-list b">
+          <li>Both are social media platforms used for communication and sharing</li>
+          <li>Both allow tagging, liking, and sharing content</li>
+          <li>Both can be used for educational groups/communities</li>
+        </ul>
+        <div class="sub-q">Use in Teaching CS</div>
+        <ul class="point-list b">
+          <li>Facebook groups for class discussions and doubt clearing</li>
+          <li>Twitter for following CS experts and trending tech topics</li>
+          <li>Both promote digital literacy and collaborative learning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.12</span>
+      <div class="q-text">What are blogs? Mention the important blogs related to computer science.
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box">A <strong>Blog</strong> (short for weblog) is a frequently updated online journal or personal website. It is a platform to share thoughts, tutorials, and expertise on any subject. Blog is short for "weblog".</div>
+        <div class="sub-q">Steps to Create a Blog</div>
+        <ul class="point-list b">
+          <li>Choose a platform (WordPress, Blogger, Medium)</li>
+          <li>Select domain name and hosting</li>
+          <li>Design the layout/theme</li>
+          <li>Write and publish posts regularly</li>
+          <li>Share via social media for wider reach</li>
+        </ul>
+        <div class="sub-q">Important CS Blogs</div>
+        <ul class="point-list b">
+          <li>Smashing Magazine (web development)</li>
+          <li>CSS-Tricks (frontend design)</li>
+          <li>Joel on Software (software engineering)</li>
+          <li>Coding Horror by Jeff Atwood</li>
+          <li>GeeksforGeeks blog</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.13</span>
+      <div class="q-text">What are professional competencies of computer science teacher? Explain.
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <ul class="point-list b">
+          <li><strong>Understanding Nature of CS:</strong> Deep knowledge of the subject and its applications</li>
+          <li><strong>Inquiry Skills:</strong> Ability to model problem-solving and algorithmic thinking</li>
+          <li><strong>General Teaching Skills:</strong> Effective communication, classroom management, lesson planning</li>
+          <li><strong>Curriculum:</strong> Develops coherent curriculum aligned to student needs, abilities, and interests</li>
+          <li><strong>Assessment:</strong> Knowledge of measurement and evaluation — formative and summative</li>
+          <li><strong>Professional Practice:</strong> Continuously updates knowledge; participates in training and workshops</li>
+          <li>Ability to integrate technology in teaching</li>
+          <li>Maintains ethical standards in professional conduct</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART C -->
+  <div class="part-divider"><span class="part-label c">Part C</span><hr><span class="part-info">Answer any 3 · Each ≤ 1.5 pages · 5 marks</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.14</span>
+      <div class="q-text">What is an internet? Explain the working principle of internet.
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box">The <strong>Internet</strong> is a global network of computers connected via dedicated routers and servers. It enables exchange of text, graphics, voice, video, and programs between any two connected devices worldwide.</div>
+        <div class="sub-q">Working Principle</div>
+        <ul class="point-list c">
+          <li><strong>TCP/IP Protocol:</strong> Data is broken into packets; each packet sent independently across the network</li>
+          <li><strong>IP Address:</strong> Unique address assigned to each device for identification</li>
+          <li><strong>Routers:</strong> Direct data packets along the most efficient path</li>
+          <li><strong>DNS:</strong> Translates domain names (google.com) to IP addresses</li>
+          <li><strong>HTTP/HTTPS:</strong> Protocol for web browsing and secure data transfer</li>
+          <li>Packets reassembled at destination into original data</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.15</span>
+      <div class="q-text">What is an Algorithm? Write a simple algorithm of solving a problem.
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box">An <strong>Algorithm</strong> is a step-by-step, finite, and unambiguous set of instructions to solve a problem or complete a task.</div>
+        <div class="sub-q">Characteristics</div>
+        <ul class="point-list c">
+          <li>Input — takes zero or more inputs</li>
+          <li>Output — produces at least one output</li>
+          <li>Definiteness — each step is clearly defined</li>
+          <li>Finiteness — must terminate after a finite number of steps</li>
+          <li>Effectiveness — each step must be basic and feasible</li>
+        </ul>
+        <div class="sub-q">Example: Algorithm to find the largest of two numbers</div>
+        <div class="def-box" style="font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:1.8">
+          Step 1: Start<br>
+          Step 2: Read two numbers A and B<br>
+          Step 3: If A &gt; B then print "A is larger"<br>
+          Step 4: Else print "B is larger"<br>
+          Step 5: Stop
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.16</span>
+      <div class="q-text">What are data base? Explain the applications of data base.
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box">A <strong>Database</strong> is an organised collection of structured data stored electronically, managed using a DBMS (Database Management System) through database models and query languages (e.g., SQL).</div>
+        <div class="sub-q">Applications</div>
+        <ul class="point-list c">
+          <li><strong>Banking:</strong> Customer accounts, transactions, loan records</li>
+          <li><strong>Airlines:</strong> Reservation and booking systems</li>
+          <li><strong>Education:</strong> Student records, exam results, attendance</li>
+          <li><strong>Healthcare:</strong> Patient records, prescription history</li>
+          <li><strong>E-commerce:</strong> Product catalogues, order management</li>
+          <li><strong>Telecom:</strong> Call records, billing systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.17</span>
+      <div class="q-text">What are LAN and Wi-Fi? Write the uses of LAN and Wi-Fi.
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box"><strong>LAN (Local Area Network):</strong> A network connecting computers within a limited area (school, office, building) using cables or Wi-Fi.</div>
+        <div class="def-box"><strong>Wi-Fi (Wireless Fidelity):</strong> A wireless networking technology using radio waves to provide internet access within a limited range.</div>
+        <div class="sub-q">Uses of LAN</div>
+        <ul class="point-list c">
+          <li>Sharing files, printers, and resources in a lab</li>
+          <li>Intranet communication within a school/office</li>
+          <li>Multiplayer gaming within a building</li>
+        </ul>
+        <div class="sub-q">Uses of Wi-Fi</div>
+        <ul class="point-list c">
+          <li>Wireless internet access for mobile devices</li>
+          <li>Smart classroom connectivity</li>
+          <li>IoT device connections</li>
+          <li>Hotspot sharing between devices</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.18</span>
+      <div class="q-text">What are Multi Media applications? Write some fundamentals of mobile computing.
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box"><strong>Multimedia Applications</strong> combine text, images, audio, video, and animation. Examples: VLC Media Player, YouTube, PowerPoint, educational simulations, virtual labs.</div>
+        <div class="sub-q">Fundamentals of Mobile Computing</div>
+        <ul class="point-list c">
+          <li>Portability — devices can be carried anywhere</li>
+          <li>Connectivity — via cellular, Wi-Fi, Bluetooth</li>
+          <li>Social interactivity — sharing and communication</li>
+          <li>Individuality — personalised apps and settings</li>
+          <li>Mobile OS — Android, iOS power mobile applications</li>
+          <li>Cloud integration — data accessible across devices</li>
+          <li>Location awareness — GPS and location-based services</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END 2017 -->
+
+<!-- ═══════════════════════════════════════════════
+     TAB: SEPT/OCT 2018 (SS-008)
+════════════════════════════════════════════════ -->
+<div id="t2018" class="tab-section">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">September / October 2018 · SS-008</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px">III Semester B.Ed (CBCS-2 Years Course) · Batch 2016–18</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge green">Part A — 3×10 = 30</span>
+      <span class="badge purple">Part B — 5×5 = 25</span>
+      <span class="badge red">Part C — 3×5 = 15</span>
+      <span class="badge amber">Max 70 Marks</span>
+    </div>
+  </div>
+
+  <div class="part-divider"><span class="part-label a">Part A</span><hr><span class="part-info">Answer any 3 · 10 marks each</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <div class="q-text">What are the importance of computer science quiz programme? Write the major objectives. Explain the steps of organizing computer science quiz programme.
+        <div class="q-meta">(2+2+6 = 10 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Importance of CS Quiz (2 marks)</div>
+        <ul class="point-list">
+          <li>Develops spirit of participation and cooperation</li>
+          <li>Encourages wider reading and inquiry</li>
+          <li>Recognises bright and talented students</li>
+          <li>Brings outside world knowledge into school</li>
+        </ul>
+        <div class="sub-q">Major Objectives (2 marks)</div>
+        <ul class="point-list">
+          <li>To explore scientific knowledge in computing</li>
+          <li>To develop sense of searching and inquiry</li>
+          <li>To foster scientific knowledge in students</li>
+          <li>To know developments of CS in different fields</li>
+        </ul>
+        <div class="sub-q">Steps of Organisation (6 marks)</div>
+        <ul class="point-list">
+          <li>Fix venue and date of the quiz</li>
+          <li>Identify areas of quiz items (algorithms, networks, programming)</li>
+          <li>Construct quiz questions for different rounds</li>
+          <li>Review and select questions</li>
+          <li>Identify quiz master and scorer</li>
+          <li>Wide publicity via newspaper, pamphlets, invitation cards</li>
+          <li>Establish conducting procedure, rules and regulations</li>
+          <li>Prize distribution</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <div class="q-text">Write the uses of computer science text book. What is the role of text book in teaching computer science? Explain the qualities of good computer science text book.
+        <div class="q-meta">(10 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Uses of CS Textbook</div>
+        <ul class="point-list">
+          <li>Primary resource for students for systematic study</li>
+          <li>Provides structured, syllabus-aligned content</li>
+          <li>Contains exercises for practice and self-assessment</li>
+          <li>Serves as reference for teachers in lesson planning</li>
+        </ul>
+        <div class="sub-q">Role in Teaching CS</div>
+        <ul class="point-list">
+          <li>Provides uniform content for all students</li>
+          <li>Helps teachers follow a systematic sequence of topics</li>
+          <li>Supports students in home study and revision</li>
+        </ul>
+        <div class="sub-q">Qualities of Good CS Textbook</div>
+        <ul class="point-list">
+          <li>Written by qualified and experienced author</li>
+          <li>Content aligned to syllabus and age-appropriate</li>
+          <li>Includes latest technological developments</li>
+          <li>Simple language with clear diagrams and illustrations</li>
+          <li>Activity-based content with programming examples</li>
+          <li>Exercises at multiple cognitive levels (knowledge to evaluation)</li>
+          <li>Chapter summaries and references</li>
+          <li>Proper external details — size, printing, binding, price</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <div class="q-text">Explain the role of seminars, workshops and projects for the quality improvement in teaching computer science.
+        <div class="q-meta">(10 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Seminars</div>
+        <ul class="point-list">
+          <li>Improve quality of instruction in CS teaching</li>
+          <li>Methods of instruction become interesting and effective</li>
+          <li>Teaching learning becomes permanent</li>
+          <li>Teaching strain reduces; develops command over content</li>
+          <li>Presentation of content becomes easy and effective</li>
+        </ul>
+        <div class="sub-q">Workshops</div>
+        <ul class="point-list">
+          <li>Solve practical problems in teaching CS</li>
+          <li>Introduce new trends and innovations in instruction</li>
+          <li>Develop skill to perform tasks independently</li>
+          <li>Determine teaching strategies in CS</li>
+          <li>Help realise higher cognitive objectives</li>
+          <li>Develop teaching proficiency</li>
+        </ul>
+        <div class="sub-q">Projects</div>
+        <ul class="point-list">
+          <li>Apply theoretical knowledge to practical CS problems</li>
+          <li>Develop research mindset and problem-solving ability</li>
+          <li>Encourage self-directed learning</li>
+          <li>Build collaborative skills among teachers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <div class="q-text">Define computer science laboratory. Explain the laboratory management and maintenance of records, discipline in the laboratory.
+        <div class="q-meta">(2+8 = 10 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Definition</div>
+        <div class="def-box">A <strong>Computer Science Laboratory</strong> is a space equipped with computers and networking facilities that provides an environment for students to develop practical skills in programming, hardware, and software applications.</div>
+        <div class="sub-q">Laboratory Management</div>
+        <ul class="point-list">
+          <li>Maintain a seating plan — one student per computer</li>
+          <li>Regular AMC (Annual Maintenance Contract) for hardware</li>
+          <li>Antivirus software updated regularly</li>
+          <li>Teacher to demonstrate before students attempt</li>
+        </ul>
+        <div class="sub-q">Maintenance of Records</div>
+        <ul class="point-list">
+          <li>Stock register for all equipment</li>
+          <li>Attendance register for each session</li>
+          <li>Experiment record books maintained by students</li>
+          <li>Maintenance register for repairs</li>
+          <li>Software license records</li>
+        </ul>
+        <div class="sub-q">Discipline in the Laboratory</div>
+        <ul class="point-list">
+          <li>No food or drinks near computers</li>
+          <li>No unauthorised installation of software</li>
+          <li>Students must log out after each session</li>
+          <li>Report any hardware malfunction immediately</li>
+          <li>Respect equipment and handle with care</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <div class="q-text">What is computer science club? Mention the objectives of computer science club. How do you organise computer science club activities in your school?
+        <div class="q-meta">(2+2+6 = 10 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Definition</div>
+        <div class="def-box">A <strong>Computer Science Club</strong> is a voluntary student organisation in school that promotes interest in computing through activities, competitions, and projects outside regular classroom sessions.</div>
+        <div class="sub-q">Objectives</div>
+        <ul class="point-list">
+          <li>To provide incentive for pursuit of scientific knowledge</li>
+          <li>To develop healthy competition for individual and social cause</li>
+          <li>To impart habit of self-reliance and manual work</li>
+          <li>To provide opportunity for constructive and inventive faculties</li>
+          <li>To create interest in latest inventions and discoveries</li>
+          <li>To develop training in scientific method of problem solving</li>
+        </ul>
+        <div class="sub-q">Organisation in School</div>
+        <ul class="point-list">
+          <li>Teacher takes initiative and calls a formal meeting of students</li>
+          <li>Discuss aims, objectives and constitution of the club</li>
+          <li>Elect office bearers: President, Secretary, Treasurer, Publicity Officer</li>
+          <li>Arrange finances from school funds / membership fees</li>
+          <li>Plan activities: coding contests, hackathons, tech exhibitions, guest lectures</li>
+          <li>Publish a CS club newsletter or e-magazine</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr><span class="part-info">Answer any 5 · 5 marks each</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <div class="q-text">Define science fair. How do you organise science fair in computer science?
+        <div class="q-meta">(2+3 = 5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box">A <strong>Science/CS Fair</strong> channels the energy of students and teachers, making use of their skills in satisfying their instincts of independent and self-motivated study in computing.</div>
+        <div class="sub-q">Organisation Steps</div>
+        <ul class="point-list b">
+          <li>Form Central Committee — decides date, venue, rules, budget</li>
+          <li>Exhibits Committee — motivates students for exhibits, arranges rooms</li>
+          <li>Reception Committee — guests, inauguration</li>
+          <li>Judgement Committee — judges, criteria, assessment sheets</li>
+          <li>Arrange exhibits with proper labelling; projects of same category together</li>
+          <li>Prize distribution after evaluation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <div class="q-text">What are online journal? Explain the stages of online journal publication.
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box">An <strong>Online Journal</strong> is a peer-reviewed scholarly publication distributed electronically via the internet. Examples: IEEE Transactions, ACM Digital Library, IJCS.</div>
+        <div class="sub-q">Stages of Online Journal Publication</div>
+        <ul class="point-list b">
+          <li><strong>Manuscript Submission:</strong> Author submits article via journal portal</li>
+          <li><strong>Editorial Review:</strong> Editor checks relevance and basic quality</li>
+          <li><strong>Peer Review:</strong> Two or more experts review the paper anonymously</li>
+          <li><strong>Revision:</strong> Author revises based on reviewer comments</li>
+          <li><strong>Acceptance:</strong> Editor accepts the revised manuscript</li>
+          <li><strong>Online First:</strong> Article published online before print issue</li>
+          <li><strong>Issue Publication:</strong> Included in journal volume/issue with DOI assigned</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.11</span>
+      <div class="q-text">What is the meaning and importance of twitter and instagram?
+        <div class="q-meta">(2½+2½ = 5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Twitter</div>
+        <div class="def-box"><strong>Twitter</strong> is a microblogging social media platform where users post short messages (tweets) up to 280 characters. It is ideal for real-time information sharing and following experts.</div>
+        <ul class="point-list b">
+          <li>Follow CS researchers, professionals, and companies</li>
+          <li>Track trending technology topics via hashtags (#AI, #coding)</li>
+          <li>Share CS learning resources with the community</li>
+        </ul>
+        <div class="sub-q">Instagram</div>
+        <div class="def-box"><strong>Instagram</strong> is a photo and video sharing platform that allows users to post visual content, stories, and reels.</div>
+        <ul class="point-list b">
+          <li>Share infographics and visual summaries of CS concepts</li>
+          <li>Follow CS educators for bite-sized learning</li>
+          <li>Promote student projects and innovations visually</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-divider"><span class="part-label c">Part C</span><hr><span class="part-info">Answer any 3 · 5 marks each</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.14</span>
+      <div class="q-text">What is cloud computing? Write the importance of cloud computing.
+        <div class="q-meta">(2+3 = 5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box"><strong>Cloud Computing</strong> is a technology that uses the internet and central remote servers to maintain data and applications. It allows users to access applications without local installation and access files from any internet-connected device.</div>
+        <div class="sub-q">Importance / Uses in Education</div>
+        <ul class="point-list c">
+          <li>Access learning resources from anywhere, anytime</li>
+          <li>Google Workspace / Microsoft 365 for collaborative work</li>
+          <li>Cost-effective — no need for expensive local software</li>
+          <li>Automatic backups — data never lost</li>
+          <li>Scalable storage for student projects and assignments</li>
+          <li>Supports LMS platforms (Moodle, Google Classroom)</li>
+        </ul>
+        <div class="sub-q">Types of Cloud Computing</div>
+        <ul class="point-list c">
+          <li><strong>IaaS</strong> — Infrastructure as a Service (AWS, Azure)</li>
+          <li><strong>PaaS</strong> — Platform as a Service (Google App Engine)</li>
+          <li><strong>SaaS</strong> — Software as a Service (Gmail, Google Docs)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.15</span>
+      <div class="q-text">Explain the elements of 'C' programming with suitable example.
+        <div class="q-meta">(5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Elements of C Programming</div>
+        <ul class="point-list c">
+          <li><strong>Data Types:</strong> char, int, float, double — determine type and size of data stored</li>
+          <li><strong>Variables:</strong> Named memory locations to store values</li>
+          <li><strong>Operators:</strong> Arithmetic (+, -, *, /), Relational (&gt;, &lt;, ==), Logical (&amp;&amp;, ||)</li>
+          <li><strong>Control Structures:</strong> if-else, switch (decision); for, while, do-while (loops)</li>
+          <li><strong>Functions:</strong> Reusable code blocks (main(), printf(), scanf())</li>
+          <li><strong>Arrays:</strong> Collection of similar data type elements</li>
+          <li><strong>Pointers:</strong> Variables that store memory addresses</li>
+        </ul>
+        <div class="sub-q">Data Types Table</div>
+        <table>
+          <tr><th>Data Type</th><th>Description</th><th>Size</th></tr>
+          <tr><td>char</td><td>Single character</td><td>1 byte</td></tr>
+          <tr><td>int</td><td>Integer number</td><td>4 bytes</td></tr>
+          <tr><td>float</td><td>Single precision decimal</td><td>4 bytes</td></tr>
+          <tr><td>double</td><td>Double precision decimal</td><td>8 bytes</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.16</span>
+      <div class="q-text">Mention the types of Network. Explain the categories of Network.
+        <div class="q-meta">(2+3 = 5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box">A <strong>Network</strong> is a group of computers, servers, and networking devices linked together to share resources. Connections are via cable or wireless media.</div>
+        <div class="sub-q">Types of Networks</div>
+        <ul class="point-list c">
+          <li><strong>PAN</strong> — Personal Area Network (Bluetooth devices, ~10m)</li>
+          <li><strong>LAN</strong> — Local Area Network (school, office, building)</li>
+          <li><strong>WLAN</strong> — Wireless LAN (Wi-Fi)</li>
+          <li><strong>CAN</strong> — Campus Area Network (university campus)</li>
+          <li><strong>MAN</strong> — Metropolitan Area Network (city-wide)</li>
+          <li><strong>WAN</strong> — Wide Area Network (country-wide, internet)</li>
+          <li><strong>SAN</strong> — Storage Area Network (high-speed data storage)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.17</span>
+      <div class="q-text">What are search engines? Explain any one of the search engines.
+        <div class="q-meta">(2+3 = 5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box">A <strong>Search Engine</strong> is a software system designed to search for information on the World Wide Web. Results are presented as Search Engine Results Pages (SERPs). Examples: Google, Bing, Yahoo, DuckDuckGo.</div>
+        <div class="sub-q">Google Search Engine</div>
+        <ul class="point-list c">
+          <li>Uses a web crawler (Googlebot) to discover and index web pages</li>
+          <li>PageRank algorithm ranks pages by relevance and authority</li>
+          <li>Supports various searches: web, images, news, videos, maps</li>
+          <li>Provides results in milliseconds from billions of indexed pages</li>
+          <li>Features: autocomplete, knowledge panels, featured snippets</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.18</span>
+      <div class="q-text">What is web design? Mention the procedure for the creation of web design.
+        <div class="q-meta">(2+3 = 5 marks)</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box"><strong>Web Design</strong> is the process of creating websites. Websites are built using HTML (HyperText Markup Language) for structure, CSS (Cascading Style Sheets) for appearance, and JavaScript for interactivity.</div>
+        <div class="sub-q">Procedure for Web Design Creation</div>
+        <ul class="point-list c">
+          <li><strong>Goal Identification:</strong> Define purpose and target audience</li>
+          <li><strong>Scope Definition:</strong> Decide number of pages and features</li>
+          <li><strong>Sitemap and Wireframe:</strong> Plan the structure and layout</li>
+          <li><strong>Content Creation:</strong> Write text, prepare images and media</li>
+          <li><strong>Visual Elements:</strong> Apply colours, fonts, design elements</li>
+          <li><strong>Testing:</strong> Check across browsers and devices</li>
+          <li><strong>Launch:</strong> Deploy to web hosting server</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END 2018 -->
+
+<!-- ═══════════════════════════════════════════════
+     TABS: 2019, 2020, 2021, 2022, 2023, 2024, 2025
+     — condensed for key unique questions —
+════════════════════════════════════════════════ -->
+
+<div id="t2019" class="tab-section">
+  <div class="paper-header">
+    <div><div class="paper-title">September 2019 · GN-024</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:3px">III Semester B.Ed · Batch 2017–18</div></div>
+    <div class="paper-badges">
+      <span class="badge green">Part A — 3×10=30</span>
+      <span class="badge purple">Part B — 5×5=25</span>
+      <span class="badge red">Part C — 3×5=15</span>
+      <span class="badge amber">Max 70 Marks</span>
+    </div>
+  </div>
+  <div class="part-divider"><span class="part-label a">Part A</span><hr><span class="part-info">Answer any 3 · 10 marks</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.1</span>
+      <div class="q-text">What is Library? Bring out the importance of Computer Science library. Explain the organisation of Computer Science library.
+        <div class="q-meta">(2+3+5 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">What is a Library?</div>
+      <div class="def-box">A <strong>library</strong> is a building or room containing a collection of books and resources — a store-house of knowledge that provides access to information and promotes reading.</div>
+      <div class="sub-q">Importance of CS Library (3 marks)</div>
+      <ul class="point-list">
+        <li>Provides access to books, journals, and e-resources beyond textbooks</li>
+        <li>Supports research and project work</li>
+        <li>Encourages self-directed learning and wider reading</li>
+        <li>Useful for poor students who cannot afford books</li>
+        <li>Houses reference materials like encyclopedias and dictionaries</li>
+      </ul>
+      <div class="sub-q">Organisation of CS Library (5 marks)</div>
+      <ul class="point-list">
+        <li><strong>Physical Setup:</strong> Adequate shelving; separate sections for books, journals, e-resources</li>
+        <li><strong>Classification System:</strong> Books classified by Dewey Decimal or similar system</li>
+        <li><strong>Sections:</strong> Circulation, Acquisition, Classification, Catalogue, Periodicals, IT Section, Reference Section</li>
+        <li><strong>IT Section:</strong> Library management server, web portal, e-journal access, institutional repository</li>
+        <li><strong>Borrowing System:</strong> Member cards; issue and return register maintained</li>
+        <li><strong>Software Library:</strong> Licensed CS software accessible to students for practice</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.2</span>
+      <div class="q-text">Bring out the meaning and objectives of computer science exhibition. As a teacher how do you organise computer science exhibition in your school?
+        <div class="q-meta">(5+5 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Meaning &amp; Objectives</div>
+      <div class="def-box">A <strong>Computer Science Exhibition</strong> is an event where students display their CS projects, models, and innovations to demonstrate practical knowledge and creativity.</div>
+      <ul class="point-list">
+        <li>To develop creativity and innovation in students</li>
+        <li>To provide platform for showcasing practical CS knowledge</li>
+        <li>To develop team spirit and cooperative learning</li>
+        <li>To encourage interest in latest technological developments</li>
+        <li>To connect school learning with real-world applications</li>
+      </ul>
+      <div class="sub-q">Organisation at School Level</div>
+      <ul class="point-list">
+        <li>Form committees: Central, Exhibits, Reception, Judgement</li>
+        <li>Announce theme and invite student participation</li>
+        <li>Guide students to prepare displays, working models, posters</li>
+        <li>Arrange venue with adequate space for each exhibit</li>
+        <li>Projects of same category placed together with proper labels</li>
+        <li>Invite judges and guests; inaugurate formally</li>
+        <li>Judge based on criteria: innovation, presentation, knowledge</li>
+        <li>Prize distribution and public display for community</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.3</span>
+      <div class="q-text">Define computer science club. Write the importance of computer science club. Explain the steps of organising computer science club in your class.
+        <div class="q-meta">(2+3+5 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Definition</div>
+      <div class="def-box">A <strong>Computer Science Club</strong> is a voluntary student organisation that promotes interest in computing through activities beyond the regular curriculum.</div>
+      <div class="sub-q">Importance</div>
+      <ul class="point-list">
+        <li>Develops scientific temper and coding skills</li>
+        <li>Provides platform for innovation and creativity</li>
+        <li>Builds team spirit and leadership qualities</li>
+        <li>Exposes students to latest trends in technology</li>
+        <li>Connects school learning to real-world CS applications</li>
+      </ul>
+      <div class="sub-q">Steps of Organisation</div>
+      <ul class="point-list">
+        <li>CS teacher calls an informal meeting of interested students</li>
+        <li>Discuss the need and purpose of the club</li>
+        <li>Draft a constitution with aims, objectives, membership criteria</li>
+        <li>Elect office bearers (President, Secretary, Treasurer)</li>
+        <li>Plan calendar of activities: coding contests, hackathons, workshops</li>
+        <li>Arrange funds from school + membership fees</li>
+        <li>Regular monthly meetings to plan and review activities</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.4</span>
+      <div class="q-text">What are textbooks? Mention the Internal and External qualities of Computer Science textbook. Explain the evaluation procedure of computer science textbooks.
+        <div class="q-meta">(5+5 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Textbooks</div>
+      <div class="def-box">A <strong>textbook</strong> is the primary learning resource used in classrooms providing systematic, syllabus-aligned content for a specific grade level.</div>
+      <div class="sub-q">External Qualities</div>
+      <ul class="point-list">
+        <li>Standard size; stimulating cover page</li>
+        <li>Good quality paper; clear printing</li>
+        <li>Bold headings; italics for key terms</li>
+        <li>Proper binding; numbered pages; affordable price</li>
+      </ul>
+      <div class="sub-q">Internal Qualities</div>
+      <ul class="point-list">
+        <li>Content aligned to syllabus and student's prior knowledge</li>
+        <li>Logical sequence: simple to complex</li>
+        <li>Accurate technical terms; interesting writing style</li>
+        <li>Diagrams, figures, and programming examples at appropriate places</li>
+        <li>Exercises from knowledge to evaluation level</li>
+        <li>Chapter summaries and references</li>
+      </ul>
+      <div class="sub-q">Evaluation Procedure</div>
+      <ul class="point-list">
+        <li>Evaluate external factors: size, cover, paper, binding, price</li>
+        <li>Evaluate internal factors: content accuracy, sequence, language</li>
+        <li>Check alignment with syllabus objectives</li>
+        <li>Review adequacy of diagrams, examples, exercises</li>
+        <li>Compare with other textbooks on the same topic</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.5</span>
+      <div class="q-text">What are the professional competencies of computer science teacher? Explain the role of Seminars, Workshops and Projects in quality improvement in teaching Computer Science.
+        <div class="q-meta">(4+6 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Professional Competencies (4 marks)</div>
+      <ul class="point-list">
+        <li>Deep subject knowledge — algorithms, programming, networking</li>
+        <li>Pedagogical skills — ability to simplify complex concepts</li>
+        <li>Technology integration — use of ICT tools in teaching</li>
+        <li>Assessment competency — designing practical and written tests</li>
+        <li>Professional development — staying updated with latest trends</li>
+        <li>Communication and classroom management skills</li>
+      </ul>
+      <div class="sub-q">Seminars, Workshops, Projects (6 marks)</div>
+      <ul class="point-list">
+        <li><em>Seminars</em> improve quality of instruction; develop command over content; make teaching interesting and effective</li>
+        <li><em>Workshops</em> solve teaching problems; introduce new trends; develop independent task performance skills</li>
+        <li><em>Projects</em> apply theory to practice; develop research mindset; encourage collaborative problem-solving</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr><span class="part-info">Answer any 5 · 5 marks each</span></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.6</span>
+      <div class="q-text">Write the objectives of computer science fair. Briefly explain the organisational procedure of computer science fair. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Objectives</div>
+      <ul class="point-list b"><li>Develop creativity and self-motivated study in CS</li><li>Encourage innovation and project-based learning</li><li>Recognise talent and inspire students</li></ul>
+      <div class="sub-q">Organisational Procedure</div>
+      <ul class="point-list b"><li>Central Committee → date, venue, rules, budget</li><li>Exhibits Committee → student entries, display rules</li><li>Reception + Judgement Committees</li><li>Publicity → newspapers, pamphlets</li><li>Arrange exhibits; same category together; proper labels</li><li>Prize distribution</li></ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.7</span>
+      <div class="q-text">What are the needs of computer science laboratory? Explain the essential infrastructure of computer science laboratory. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Needs</div>
+      <ul class="point-list b"><li>Practical skill development in programming and networking</li><li>Hands-on experience with hardware and software</li><li>Application of theoretical concepts</li></ul>
+      <div class="sub-q">Essential Infrastructure</div>
+      <ul class="point-list b"><li>Adequate number of updated computers (1 per student ideal)</li><li>High-speed internet (LAN + Wi-Fi)</li><li>UPS / power backup</li><li>Licensed software (compiler, OS, productivity tools)</li><li>Projector / interactive whiteboard</li><li>Air conditioning; ergonomic seating</li><li>Security systems</li></ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label c">Part C</span><hr><span class="part-info">Answer any 3 · 5 marks each</span></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.14</span>
+      <div class="q-text">What are the elements of 'C'-programming? Explain with suitable illustrations. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px;margin-bottom:0.5rem">Refer to the comprehensive answer in the 2018 tab (Q.15) — same question.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.16</span>
+      <div class="q-text">Define World Wide Web. Explain the functions of browsing and search engines. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="def-box">The <strong>World Wide Web (WWW)</strong> is a system of interlinked hypertext documents and resources accessed via the internet using a web browser.</div>
+      <div class="sub-q">Web Browsing Functions</div>
+      <ul class="point-list c"><li>Navigate to URLs and display web pages</li><li>Support HTTP/HTTPS protocols for secure communication</li><li>Store cookies, history, bookmarks</li><li>Execute JavaScript for interactive content</li><li>Examples: Chrome, Firefox, Safari, Edge</li></ul>
+      <div class="sub-q">Search Engine Functions</div>
+      <ul class="point-list c"><li>Crawling — bots discover new/updated web pages</li><li>Indexing — organise and store found pages</li><li>Ranking — algorithms rank results by relevance</li><li>Presentation — display as SERPs (Search Engine Results Pages)</li></ul>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.18</span>
+      <div class="q-text">What is Flow Chart? Explain the symbols used in the Flow Chart. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="def-box">A <strong>Flowchart</strong> is a diagrammatic representation of an algorithm or process using standard symbols connected by arrows to show the flow of execution.</div>
+      <div class="sub-q">Symbols</div>
+      <table>
+        <tr><th>Symbol</th><th>Name</th><th>Use</th></tr>
+        <tr><td>Oval</td><td>Terminal</td><td>Start / Stop</td></tr>
+        <tr><td>Parallelogram</td><td>Input/Output</td><td>Read / Print</td></tr>
+        <tr><td>Rectangle</td><td>Process</td><td>Calculations / Assignments</td></tr>
+        <tr><td>Diamond</td><td>Decision</td><td>If-else conditions</td></tr>
+        <tr><td>Arrow</td><td>Flow line</td><td>Direction of flow</td></tr>
+        <tr><td>Circle</td><td>Connector</td><td>Connect different parts</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+<!-- END 2019 -->
+
+<!-- 2020 TAB -->
+<div id="t2020" class="tab-section">
+  <div class="paper-header">
+    <div><div class="paper-title">February / March 2020 · PJ-758</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:3px">III Semester B.Ed · CBCS 2 Years Course · 2018-B University Bifurcated</div></div>
+    <div class="paper-badges"><span class="badge green">Part A — 3×10=30</span><span class="badge purple">Part B — 5×5=25</span><span class="badge red">Part C — 3×5=15</span><span class="badge amber">Max 70 Marks</span></div>
+  </div>
+  <div class="part-divider"><span class="part-label a">Part A</span><hr><span class="part-info">Answer any 3</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.1</span>
+      <div class="q-text">What is Computer Science Laboratory? Write the special features of Computer Science Laboratory. Explain the management and maintenance of records of Computer Science Laboratory. (2+4+4)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Definition</div>
+      <div class="def-box">A <strong>CS Laboratory</strong> is a dedicated space with computers, networking, and software tools that provides an environment for practical learning in programming, hardware, and digital technologies.</div>
+      <div class="sub-q">Special Features</div>
+      <ul class="point-list"><li>Adequate computers — one per student</li><li>High-speed internet (LAN + Wi-Fi)</li><li>UPS and power backup</li><li>Air conditioning to protect hardware</li><li>Licensed software for all subjects in curriculum</li><li>Projector / interactive board for demonstrations</li><li>Network printer and scanner</li></ul>
+      <div class="sub-q">Management &amp; Maintenance of Records</div>
+      <ul class="point-list"><li>Stock register — all hardware with serial numbers and purchase dates</li><li>Attendance register — daily session-wise</li><li>Experiment record book — students maintain with date, aim, procedure, output</li><li>Maintenance register — repairs and AMC visits</li><li>Software license record — expiry dates and activation keys</li><li>Issue-return register — for borrowed equipment</li></ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.2</span>
+      <div class="q-text">What is Computer Science Club? Mention the objectives of Computer Science Club. How do you Organize Computer Science Club in your school? (2+4+4)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">This is a standard question — refer to the comprehensive answer in the 2018 tab (Q.5). All details on definition, objectives, and organisation are covered there.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.3</span>
+      <div class="q-text">What is blog? Explain the steps to follow in creating a blog. Write the differences between 'Linkedin' and Facebook. (5+5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Blog — Definition &amp; Creation Steps</div>
+      <div class="def-box">A <strong>blog</strong> is a frequently updated online personal journal or website used to share thoughts, tutorials, and expertise on any topic.</div>
+      <ul class="point-list"><li>Choose platform: WordPress, Blogger, or Medium</li><li>Register and select a domain name</li><li>Choose a theme/template for the design</li><li>Create categories and write your first post</li><li>Add images, links, and multimedia</li><li>Publish and share via social media</li><li>Update regularly and engage with comments</li></ul>
+      <div class="sub-q">LinkedIn vs Facebook</div>
+      <table>
+        <tr><th>Aspect</th><th>LinkedIn</th><th>Facebook</th></tr>
+        <tr><td>Purpose</td><td>Professional networking</td><td>Social networking</td></tr>
+        <tr><td>Users</td><td>Professionals, researchers</td><td>General public</td></tr>
+        <tr><td>Content</td><td>Career, jobs, research</td><td>Personal life, entertainment</td></tr>
+        <tr><td>CS Use</td><td>Connect with CS professionals, research papers</td><td>CS groups, study communities</td></tr>
+      </table>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.4</span>
+      <div class="q-text">Explain the professional competencies of Computer Science teacher. Explain the programmes that help the Computer Science Teacher to improve professional growth. (4+6)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Professional Competencies</div>
+      <ul class="point-list"><li>Subject mastery — algorithms, data structures, networking, programming</li><li>Pedagogical competence — lesson planning, methods, classroom management</li><li>Technology integration — ICT tools, smart boards, coding platforms</li><li>Assessment skills — designing tests, practical evaluation</li><li>Communication — simplifying complex technical concepts</li><li>Research orientation — staying updated with CS developments</li></ul>
+      <div class="sub-q">Programmes for Professional Growth</div>
+      <ul class="point-list"><li>Professional Refresher Courses</li><li>Orientation Courses</li><li>Extension Lectures</li><li>Seminars and Workshops</li><li>Professional Conferences</li><li>In-service Training</li><li>Professional Writing and Research</li><li>Online Certification Courses (MOOC, NPTEL)</li></ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.5</span>
+      <div class="q-text">What is textbook? Write the characteristics of good Computer Science textbook. What is the role of textbook in learning Computer Science? (6+4)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Refer to the comprehensive textbook answer in the 2018 tab (Q.2) and 2019 tab (Q.4). All characteristics and evaluation criteria are detailed there.</p>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr><span class="part-info">Answer any 5 · 5 marks</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.9</span>
+      <div class="q-text">What is Online Journal? Briefly explain the stages of Online Journal. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Refer to 2018 tab Q.8 — full answer on online journal definition and stages of publication is given there.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.11</span>
+      <div class="q-text">Illustrate the role of E-magazines in knowledge dissemination. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="def-box">An <strong>E-magazine</strong> is a digital publication distributed electronically — combining articles, multimedia, and interactive elements for broad knowledge dissemination.</div>
+      <ul class="point-list b">
+        <li>Freely accessible to all students — bridges information inequality</li>
+        <li>Updated regularly — provides latest CS news and tutorials</li>
+        <li>Contains multimedia (videos, simulations, code demos) for richer understanding</li>
+        <li>Students can contribute articles — developing writing and technical skills</li>
+        <li>Shared via social media — reaches a wide audience instantly</li>
+        <li>Interactive features like quizzes enhance learning retention</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label c">Part C</span><hr><span class="part-info">Answer any 3 · 5 marks</span></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.15</span>
+      <div class="q-text">What is cloud computing? Explain the role of cloud computing in Education. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer available in 2018 tab Q.14 — cloud computing definition, types, and educational importance covered in detail.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.17</span>
+      <div class="q-text">How do internet working? Explain. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer available in 2017 tab Q.14 — Internet definition and working principle (TCP/IP, IP address, DNS, HTTP) explained in detail.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.18</span>
+      <div class="q-text">What is Algorithm? Write the characteristics of Algorithm. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer available in 2017 tab Q.15 — definition, 5 characteristics, and example algorithm provided.</p>
+    </div></div>
+  </div>
+</div>
+<!-- END 2020 -->
+
+<!-- 2021 TAB -->
+<div id="t2021" class="tab-section">
+  <div class="paper-header">
+    <div><div class="paper-title">August 2021 · AG-009</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:3px">III Semester B.Ed · 2019 Batch (COVID-19)</div></div>
+    <div class="paper-badges"><span class="badge green">Part A — 3×10=30</span><span class="badge purple">Part B — 5×5=25</span><span class="badge red">Part C — 3×5=15</span><span class="badge amber">Max 70 Marks</span></div>
+  </div>
+  <div class="part-divider"><span class="part-label a">Part A</span><hr><span class="part-info">Answer any 3</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.1</span>
+      <div class="q-text">Explain the characteristics of a good computer science text book. Critically analyse a computer science text book based on these characteristics. (5+5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Characteristics (5 marks)</div>
+      <ul class="point-list"><li>Author: well-qualified and experienced</li><li>Syllabus-aligned; age-appropriate content</li><li>Includes latest CS developments</li><li>Simple language; accurate technical terms</li><li>Activity-based; programming examples included</li><li>Exercises at all cognitive levels</li><li>Chapter summaries and references</li><li>Good external features: size, printing, binding, price</li></ul>
+      <div class="sub-q">Critical Analysis (5 marks)</div>
+      <div class="def-box">When analysing a CS textbook, check:<br>
+      ✓ Is content current? (updated within 3–5 years for fast-changing CS)<br>
+      ✓ Are programming examples correct and well-explained?<br>
+      ✓ Is the language suitable for the grade level?<br>
+      ✓ Are diagrams clear and properly labelled?<br>
+      ✓ Do exercises cover all Bloom's taxonomy levels?<br>
+      ✓ Are references to online resources (websites, tutorials) included?</div>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.2</span>
+      <div class="q-text">What is a computer science laboratory? How a computer science laboratory should be equipped? Explain computer science laboratory management. (2+4+4)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Refer to 2020 tab Q.1 for complete answer on CS lab definition, infrastructure, and records management.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.3</span>
+      <div class="q-text">What is a computer science club? Explain the organisation of computer science club. Mention the activities that can be organized under computer science club. (2+4+4)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Definition and organisation — refer to 2018 tab Q.5.</p>
+      <div class="sub-q">Activities under CS Club</div>
+      <ul class="point-list"><li>Coding competitions and hackathons</li><li>Tech quiz contests</li><li>CS exhibitions and project displays</li><li>Guest lectures by IT professionals</li><li>Publishing CS e-newsletter/e-magazine</li><li>Field trips to IT companies/data centres</li><li>Workshops on emerging technologies (AI, IoT, Blockchain)</li><li>Organising annual CS fair/exhibition</li></ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.4</span>
+      <div class="q-text">Explain the professional competencies of computer science teacher. Explain the programmes that help in improving the quality of teaching. (5+5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2020 tab Q.4 — professional competencies and quality improvement programmes listed in detail.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.5</span>
+      <div class="q-text">What is social media? Explain the importance of any two social media. Explain the role of social media in improving the skills of learning computer science. (5+5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Definition + Two Social Media</div>
+      <div class="def-box">Social media = internet-based applications for creation and exchange of user-generated content.</div>
+      <ul class="point-list"><li><strong>YouTube:</strong> World's largest video platform — CS tutorials, coding channels (CS50, FreeCodeCamp), live coding sessions; ideal for visual learners</li><li><strong>LinkedIn:</strong> Professional networking — connect with CS professionals, access research papers, follow companies for job trends</li></ul>
+      <div class="sub-q">Role in Learning CS</div>
+      <ul class="point-list"><li>Access to free tutorials and courses beyond textbooks</li><li>Peer learning through online CS communities</li><li>Track latest trends in AI, ML, cloud computing</li><li>Showcase projects (GitHub + LinkedIn) for career development</li><li>Develop digital literacy and responsible internet use</li></ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr><span class="part-info">Answer any 5</span></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.10</span>
+      <div class="q-text">What is e-magazine? Explain the role of e-magazine in broadening the perspective of learning computer science. (1+4=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2017 tab Q.10 — e-magazine definition, creation steps, and role in teaching CS.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.11</span>
+      <div class="q-text">What are online journals? Explain the role of online journals to understand computer science subject. (1+4=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="def-box">Online journals are scholarly publications distributed electronically — e.g., IEEE Transactions on Computers, ACM Journal.</div>
+      <ul class="point-list b"><li>Provide access to cutting-edge CS research</li><li>Help students and teachers stay updated with latest findings</li><li>Support literature reviews for projects and assignments</li><li>Free access via institutional subscriptions</li><li>Build research reading skills</li></ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label c">Part C</span><hr><span class="part-info">Answer any 3</span></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.14</span>
+      <div class="q-text">How would you create an e-mail id? How e-mails are useful? (3+2=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Creating an E-mail ID</div>
+      <ul class="point-list c"><li>Visit gmail.com or outlook.com</li><li>Click "Create Account" / "Sign up"</li><li>Enter name, desired username, and password</li><li>Provide phone number for verification</li><li>Verify OTP sent to phone</li><li>Complete profile setup</li></ul>
+      <div class="sub-q">Uses of E-mail</div>
+      <ul class="point-list c"><li>Instant communication anywhere in the world</li><li>Send assignments and documents to teacher</li><li>Professional communication for career</li><li>Store important messages and attachments</li><li>Subscribe to newsletters and course updates</li></ul>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.16</span>
+      <div class="q-text">What is Internet? Explain the types of 'network' with examples. (1+4=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Internet definition in 2017 tab Q.14. Network types with examples in 2018 tab Q.16.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.17</span>
+      <div class="q-text">What is web design? Create a web page using HTML. (1+4=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="def-box">Web design — refer to 2018 tab Q.18 for definition and procedure.</div>
+      <div class="sub-q">Simple HTML Web Page Example</div>
+      <div class="def-box" style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;line-height:2">
+        &lt;html&gt;<br>
+        &lt;head&gt;&lt;title&gt;My CS Page&lt;/title&gt;&lt;/head&gt;<br>
+        &lt;body&gt;<br>
+        &lt;h1&gt;Welcome to Computer Science&lt;/h1&gt;<br>
+        &lt;p&gt;CS is the study of computation and algorithms.&lt;/p&gt;<br>
+        &lt;/body&gt;<br>
+        &lt;/html&gt;
+      </div>
+    </div></div>
+  </div>
+</div>
+<!-- END 2021 -->
+
+<!-- 2022, 2023, 2024, 2025 — condensed format -->
+<div id="t2022" class="tab-section">
+  <div class="paper-header">
+    <div><div class="paper-title">September 2022 · BA-024</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:3px">III Semester B.Ed · Batch 2020–22</div></div>
+    <div class="paper-badges"><span class="badge green">Part A — 3×10=30</span><span class="badge purple">Part B — 5×5=25</span><span class="badge red">Part C — 3×5=15</span><span class="badge amber">Max 70 Marks</span></div>
+  </div>
+  <div class="note-box">📌 2022 paper has many questions repeated from earlier years. New/unique questions are highlighted below.</div>
+
+  <div class="part-divider"><span class="part-label a">Part A</span><hr><span class="part-info">New unique questions</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.1</span>
+      <div class="q-text">What is computer science library? What is software library? Explain the common sections available in the computer science library. (2+2+6)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Software Library</div>
+      <div class="def-box">A <strong>software library</strong> is a collection of pre-written code, routines, and modules that can be reused in programming. Examples: Python standard library, Java API, NumPy.</div>
+      <ul class="point-list"><li>Saves development time by providing ready-made functions</li><li>Tested and reliable code</li><li>Promotes code reuse and modularity</li></ul>
+      <div class="sub-q">CS Library + Common Sections</div>
+      <p style="color:var(--muted);font-size:13px">Refer to 2019 tab Q.1 for full answer on CS library importance and 10 sections.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.4</span>
+      <div class="q-text">What is 'Linkedin'? Write its importance. What is 'Instagram'? Write its importance. (5+5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">LinkedIn</div>
+      <div class="def-box"><strong>LinkedIn</strong> is a professional networking platform used for career development, job searching, and professional connections in any industry.</div>
+      <ul class="point-list"><li>Connect with CS professionals and researchers worldwide</li><li>Access published research articles and CS papers</li><li>Find internships and job opportunities</li><li>Follow CS companies (Google, Microsoft, Infosys) for updates</li><li>Showcase portfolio, certifications, and projects</li></ul>
+      <div class="sub-q">Instagram</div>
+      <div class="def-box"><strong>Instagram</strong> is a photo and video sharing social media platform owned by Meta.</div>
+      <ul class="point-list"><li>Share visual CS infographics and concept summaries</li><li>Follow CS educators and coding pages</li><li>Promote student CS projects and events</li><li>Short video reels for concept explanation (coding tips in 60 sec)</li></ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr><span class="part-info">Unique questions</span></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.10</span>
+      <div class="q-text">Explain briefly the role of 'twitter' and 'facebook' as social media. (3+2=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b"><li><strong>Twitter:</strong> Real-time information; follow CS experts; hashtag-based topic discovery; great for news and trends</li><li><strong>Facebook:</strong> Study groups; long-form posts; event announcements; community building for CS learners</li><li>Both promote knowledge sharing, peer learning, and networking</li></ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label c">Part C</span><hr><span class="part-info">Unique questions</span></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.17</span>
+      <div class="q-text">Explain the fundamentals of 'mobile computing'. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2017 tab Q.18 — mobile computing fundamentals covered (portability, connectivity, social interactivity, individuality, cloud integration).</p>
+    </div></div>
+  </div>
+</div>
+
+<!-- 2023 TAB -->
+<div id="t2023" class="tab-section">
+  <div class="paper-header">
+    <div><div class="paper-title">April 2023 · FB-009</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:3px">III Semester B.Ed · Batch 2021–23 (OUCMS)</div></div>
+    <div class="paper-badges"><span class="badge green">Part A — 3×10=30</span><span class="badge purple">Part B — 5×5=25</span><span class="badge red">Part C — 3×5=15</span><span class="badge amber">Max 70 Marks</span></div>
+  </div>
+  <div class="note-box">📌 2023 paper features new questions on seminars vs workshops and lesson plan for PowerPoint presentation.</div>
+
+  <div class="part-divider"><span class="part-label a">Part A</span><hr></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.4</span>
+      <div class="q-text">Explain the role of seminars, workshops and projects for the quality improvement in teaching computer science. (10)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer available in 2018 tab Q.3 — Seminars, Workshops, Projects for quality improvement in CS teaching.</p>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.9</span>
+      <div class="q-text">Explain the importance of seminars and workshops in enhancing learning of students in computer science class. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li>Seminars develop deep conceptual understanding through discussion and debate</li>
+        <li>Workshops provide hands-on practice with coding tools, IDEs, and software</li>
+        <li>Both develop communication and presentation skills in students</li>
+        <li>Bring industry professionals to share real-world CS knowledge</li>
+        <li>Encourage collaborative problem-solving — pairs/groups tackle CS challenges</li>
+        <li>Expose students to latest trends (AI, cloud, cybersecurity)</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.12</span>
+      <div class="q-text">How do workshops and projects helps in enhancing the professional competencies of a computer science teacher? (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li>Workshops update teachers with latest CS tools and technologies</li>
+        <li>Projects develop research mindset and apply theory to practice</li>
+        <li>Improve pedagogical strategies — new teaching methods introduced</li>
+        <li>Networking with other CS teachers — share best practices</li>
+        <li>Develop digital competency — coding, cloud, data science skills</li>
+        <li>Enhance confidence in teaching complex CS topics</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.13</span>
+      <div class="q-text">Explain the steps of preparing a lesson plan for power point presentation with suitable example. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Steps for PowerPoint Lesson Plan</div>
+      <ul class="point-list b">
+        <li><strong>Topic:</strong> Select topic (e.g., "Types of Networks")</li>
+        <li><strong>Learning Objectives:</strong> Students will be able to define LAN, WAN, MAN and compare them</li>
+        <li><strong>Introduction Slide:</strong> Hook question or image to engage students</li>
+        <li><strong>Content Slides:</strong> Each slide covers one concept with diagram; use animations sparingly</li>
+        <li><strong>Activity Slide:</strong> Quiz or group activity — "Which network type is used in your school?"</li>
+        <li><strong>Summary Slide:</strong> Key takeaways in bullet points</li>
+        <li><strong>Assessment:</strong> Q&amp;A or quick written test at end</li>
+        <li>Ensure slides are simple, readable, and not overcrowded</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label c">Part C</span><hr></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.16</span>
+      <div class="q-text">Explain the elements of 'C' programming with suitable example. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2018 tab Q.15 — C programming elements with data types table.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.18</span>
+      <div class="q-text">What is cloud computing? Write the importance of cloud computing. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2018 tab Q.14.</p>
+    </div></div>
+  </div>
+</div>
+
+<!-- 2024 TAB -->
+<div id="t2024" class="tab-section">
+  <div class="paper-header">
+    <div><div class="paper-title">April 2024 · ED-003 / 81537</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:3px">III Semester B.Ed · Batch 2022–24</div></div>
+    <div class="paper-badges"><span class="badge green">Part A — 3×10=30</span><span class="badge purple">Part B — 5×5=25</span><span class="badge red">Part C — 3×5=15</span><span class="badge amber">Max 70 Marks</span></div>
+  </div>
+  <div class="note-box">📌 Unique in 2024: "Difficulties faced by CS teacher while organising exhibition", "Facebook is useful for getting knowledge" (justify), "inservice quality improvement programmes".</div>
+
+  <div class="part-divider"><span class="part-label a">Part A</span><hr></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.3</span>
+      <div class="q-text">What is online journal? Explain any one of the online journal. Explain preparatory steps of online magazine. (2+3+5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Online Journal + Stages — see 2018 tab Q.8</div>
+      <div class="sub-q">Preparatory Steps of Online Magazine</div>
+      <ul class="point-list">
+        <li>Form editorial team: editor, contributors, designer</li>
+        <li>Choose theme/topic for the issue</li>
+        <li>Call for articles, code snippets, and project reports from students</li>
+        <li>Edit and review submitted content</li>
+        <li>Design layout using Canva, Adobe InDesign, or Issuu</li>
+        <li>Add multimedia: photos, code screenshots, tutorial videos</li>
+        <li>Publish in PDF or web format</li>
+        <li>Distribute via school website, WhatsApp, and social media</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.5</span>
+      <div class="q-text">Explain the role of inservice quality improvement programmes in teaching computer science. What is the difference between projects and workshops in quality improvement programmes? (5+5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">In-service Quality Improvement Programmes</div>
+      <ul class="point-list">
+        <li>Designed for practising teachers to upgrade skills</li>
+        <li>Include refresher courses, orientation programmes, STPs (Short-Term Programmes)</li>
+        <li>DIET, NCERT, and universities organise in-service training</li>
+        <li>Update teachers on new CS curriculum, tools, and pedagogy</li>
+        <li>Improve classroom competency and student outcomes</li>
+      </ul>
+      <div class="sub-q">Projects vs Workshops</div>
+      <table>
+        <tr><th>Aspect</th><th>Projects</th><th>Workshops</th></tr>
+        <tr><td>Duration</td><td>Long-term</td><td>Short-term (1–5 days)</td></tr>
+        <tr><td>Nature</td><td>Research-oriented</td><td>Skill-oriented</td></tr>
+        <tr><td>Output</td><td>Report/Product</td><td>Practical skill</td></tr>
+        <tr><td>Participation</td><td>Individual/Group</td><td>Group-based</td></tr>
+        <tr><td>Focus</td><td>Problem-solving</td><td>Hands-on practice</td></tr>
+      </table>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.11</span>
+      <div class="q-text">What are the difficulties faced by computer science teacher while organising computer science exhibition? (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li>Inadequate budget and funding for exhibition materials</li>
+        <li>Lack of student motivation to prepare working projects</li>
+        <li>Limited time due to heavy curriculum workload</li>
+        <li>Insufficient technical support staff</li>
+        <li>Difficulty in arranging qualified judges</li>
+        <li>Space constraints within school infrastructure</li>
+        <li>Ensuring safety of expensive computer equipment displayed</li>
+        <li>Coordinating between multiple committees and stakeholders</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.12</span>
+      <div class="q-text">"Facebook is useful for getting knowledge". Illustrate the statement with supporting points. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="def-box">Facebook, beyond social connection, serves as a powerful knowledge-sharing platform when used purposefully.</div>
+      <ul class="point-list b">
+        <li><strong>Groups:</strong> Join CS-specific groups (e.g., Python Programmers, AI Enthusiasts) for daily knowledge updates</li>
+        <li><strong>Pages:</strong> Follow CS educators, universities, and technology companies for articles and tutorials</li>
+        <li><strong>Events:</strong> Discover free webinars, coding bootcamps, and tech conferences</li>
+        <li><strong>Videos:</strong> Watch tutorials, lecture recordings, and CS demos shared by educators</li>
+        <li><strong>Discussions:</strong> Post doubts and get community answers quickly</li>
+        <li><strong>News Feed:</strong> Track developments in AI, cloud, blockchain, and cybersecurity</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label c">Part C</span><hr></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.14</span>
+      <div class="q-text">What is world wide web? Explain the functions of browsing and search engines. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2019 tab Q.16.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.16</span>
+      <div class="q-text">Explain the types of network with examples. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2018 tab Q.16 — 7 types of network with examples.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.17</span>
+      <div class="q-text">What is C-programme? Explain briefly the elements of 'C' programme. (1+4=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2018 tab Q.15.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.18</span>
+      <div class="q-text">What is cloud computing? Explain its types. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2018 tab Q.14 — definition and IaaS/PaaS/SaaS types covered.</p>
+    </div></div>
+  </div>
+</div>
+
+<!-- 2025 TAB -->
+<div id="t2025" class="tab-section">
+  <div class="paper-header">
+    <div><div class="paper-title">May / June 2025 · ED-009</div>
+    <div style="font-size:12px;color:var(--muted);margin-top:3px">III Semester B.Ed · Batch 2024–25</div></div>
+    <div class="paper-badges"><span class="badge green">Part A — 3×10=30</span><span class="badge purple">Part B — 5×5=25</span><span class="badge red">Part C — 3×5=15</span><span class="badge amber">Max 70 Marks</span></div>
+  </div>
+  <div class="note-box">📌 Most recent paper. Key unique question: "What are important indicators for quality improvement programs aimed at teacher development?" and "effectiveness of Instagram and blogs as social media in teaching."</div>
+
+  <div class="part-divider"><span class="part-label a">Part A</span><hr></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.5</span>
+      <div class="q-text">What are the professional qualities of a computer science teacher? What are important indicators for quality improvement programs aimed at teacher development? (5+5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Professional Qualities</div>
+      <ul class="point-list">
+        <li>Deep subject mastery in CS fundamentals and latest technologies</li>
+        <li>Effective communication — simplify complex topics</li>
+        <li>Patience and adaptability to diverse learners</li>
+        <li>Creative use of ICT tools in teaching</li>
+        <li>Research orientation — continuous learning and updating</li>
+        <li>Fair and effective assessment practices</li>
+        <li>Professional ethics and dedication</li>
+      </ul>
+      <div class="sub-q">Indicators for Quality Improvement Programs</div>
+      <ul class="point-list">
+        <li>Improvement in student learning outcomes after teacher training</li>
+        <li>Adoption of new teaching methods and ICT integration</li>
+        <li>Teacher's ability to design project-based and inquiry-based lessons</li>
+        <li>Reduction in student dropout from CS courses</li>
+        <li>Participation rate in professional development activities</li>
+        <li>Student satisfaction scores and feedback</li>
+        <li>Number of innovative projects and research output by teachers</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.7</span>
+      <div class="q-text">Explain the effectiveness of using instagram and blogs as social media in teaching. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Instagram in Teaching CS</div>
+      <ul class="point-list b">
+        <li>Visual infographics explain concepts like OSI layers, sorting algorithms</li>
+        <li>Reels (short videos) demonstrate coding concepts in 60 seconds</li>
+        <li>Stories for quick polls and formative assessments</li>
+        <li>Student projects shared publicly — builds confidence and portfolio</li>
+      </ul>
+      <div class="sub-q">Blogs in Teaching CS</div>
+      <ul class="point-list b">
+        <li>Students write technical blog posts — deepens understanding of topics</li>
+        <li>Teachers maintain class blogs with resources, notes, and assignments</li>
+        <li>Develops writing and documentation skills essential for CS professionals</li>
+        <li>Peer review of blogs develops critical thinking</li>
+        <li>Builds a public portfolio for career opportunities</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.8</span>
+      <div class="q-text">How would a teacher plan and organize a computer science exhibition in a school? (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li>Announce theme early (e.g., "AI in Daily Life") with sufficient notice</li>
+        <li>Form committees: Central, Exhibits, Reception, Judgement</li>
+        <li>Conduct orientation session guiding students on project requirements</li>
+        <li>Supervise project development — weekly check-ins</li>
+        <li>Arrange venue with adequate display space; each project clearly labelled</li>
+        <li>Invite judges from IT industry and academic institutions</li>
+        <li>Prepare assessment criteria and distribute to judges</li>
+        <li>Publicise — invite parents, other school students, and media</li>
+        <li>Inaugurate formally; judges evaluate; award prizes</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.11</span>
+      <div class="q-text">Mention the similarities and differences between facebook and twitter. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full comparison table in 2017 tab Q.11.</p>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label c">Part C</span><hr></div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.14</span>
+      <div class="q-text">What is world wide web? Explain the functions of browsing and search engines. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2019 tab Q.16.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.15</span>
+      <div class="q-text">Explain any five elements of 'C' programming. (5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2018 tab Q.15.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.17</span>
+      <div class="q-text">What is meant by a 'Network'? Briefly explain the types of Network. (1+4=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">Full answer in 2018 tab Q.16.</p>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num c">Q.18</span>
+      <div class="q-text">What is flow chart? Write a flow chart to find the circumference of a circle [C = 2πr]. (2+3=5)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Definition — see 2019 tab Q.18</div>
+      <div class="sub-q">Flowchart: Circumference of Circle (C = 2πr)</div>
+      <div class="def-box" style="font-family:'IBM Plex Mono',monospace;font-size:12px;line-height:2">
+        [OVAL] START<br>
+        ↓<br>
+        [PARALLELOGRAM] Input r (radius)<br>
+        ↓<br>
+        [RECTANGLE] C = 2 × 3.14159 × r<br>
+        ↓<br>
+        [PARALLELOGRAM] Print C<br>
+        ↓<br>
+        [OVAL] STOP
+      </div>
+    </div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+     IMPORTANT QUESTIONS TAB
+════════════════════════════════════════════════ -->
+<div id="timp" class="tab-section">
+  <div style="margin-bottom:1.5rem">
+    <div class="paper-title" style="color:var(--amber);font-size:1.2rem">★ Most Important Questions</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:0.3rem">Frequency analysis across all 9 papers (2017–2025)</div>
+  </div>
+
+  <div class="imp-section">
+    <div class="imp-heading">🔥 Part A — Extremely High Frequency (appear in 5+ papers)</div>
+
+    <div class="imp-item">
+      <strong>CS Laboratory</strong> — Definition, special features, management, maintenance of records, discipline<span class="freq-badge freq-hot">8/9 papers</span>
+      <div class="freq">Asked in: 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 — <span>MOST REPEATED question</span></div>
+    </div>
+
+    <div class="imp-item">
+      <strong>CS Club</strong> — Definition, objectives, organisation steps in school<span class="freq-badge freq-hot">7/9 papers</span>
+      <div class="freq">Asked in: 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>CS Textbook</strong> — Qualities (internal + external), evaluation criteria, role in teaching<span class="freq-badge freq-hot">7/9 papers</span>
+      <div class="freq">Asked in: 2017, 2018, 2019, 2020, 2021, 2022, 2024, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Professional Competencies of CS Teacher + Quality Improvement Programmes</strong><span class="freq-badge freq-hot">7/9 papers</span>
+      <div class="freq">Asked in: 2017, 2018, 2019, 2020, 2021, 2022, 2024, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Seminars, Workshops, Projects</strong> — Role in quality improvement in CS teaching<span class="freq-badge freq-hot">6/9 papers</span>
+      <div class="freq">Asked in: 2018, 2019, 2020, 2022, 2023, 2024, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Social Media in Education</strong> — Definition, types, role in CS teaching<span class="freq-badge freq-hot">6/9 papers</span>
+      <div class="freq">Asked in: 2017, 2018, 2019, 2021, 2024, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>CS Exhibition / Fair</strong> — Meaning, objectives, organisation steps<span class="freq-badge freq-hot">6/9 papers</span>
+      <div class="freq">Asked in: 2017, 2018, 2019, 2020, 2022, 2023, 2024, 2025</div>
+    </div>
+  </div>
+
+  <div class="imp-section">
+    <div class="imp-heading">⚡ Part A — High Frequency (3–5 papers)</div>
+
+    <div class="imp-item">
+      <strong>CS Library</strong> — Meaning, importance, organisation, common sections<span class="freq-badge freq-med">5/9 papers</span>
+      <div class="freq">2019, 2020, 2021, 2022, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>CS Quiz Programme</strong> — Importance, objectives, organisation steps<span class="freq-badge freq-med">5/9 papers</span>
+      <div class="freq">2017, 2018, 2019, 2022, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>LinkedIn / Instagram / Social Media tools</strong> — Meaning, role<span class="freq-badge freq-med">4/9 papers</span>
+      <div class="freq">2018, 2019, 2022, 2025</div>
+    </div>
+  </div>
+
+  <div class="imp-section">
+    <div class="imp-heading">📚 Part B — High Frequency Short Questions (3+ papers)</div>
+
+    <div class="imp-item">
+      <strong>E-magazine</strong> — Definition, creation, role in CS teaching<span class="freq-badge freq-hot">6/9 papers</span>
+      <div class="freq">2017, 2018, 2019, 2020, 2021, 2022</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Online Journal</strong> — Definition, stages of publication<span class="freq-badge freq-hot">5/9 papers</span>
+      <div class="freq">2017, 2018, 2019, 2020, 2022</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Facebook vs Blogs / Twitter vs Facebook</strong> — Differences, importance<span class="freq-badge freq-med">4/9 papers</span>
+      <div class="freq">2017, 2018, 2020, 2022</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Professional Competencies of CS Teacher</strong> (Part B version)<span class="freq-badge freq-med">4/9 papers</span>
+      <div class="freq">2017, 2018, 2019, 2022</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Lab Records</strong> — Definition, types of records maintained<span class="freq-badge freq-med">4/9 papers</span>
+      <div class="freq">2017, 2018, 2020, 2024</div>
+    </div>
+  </div>
+
+  <div class="imp-section">
+    <div class="imp-heading">💻 Part C — High Frequency Technical Questions</div>
+
+    <div class="imp-item">
+      <strong>Cloud Computing</strong> — Definition, importance, types (IaaS/PaaS/SaaS), role in education<span class="freq-badge freq-hot">7/9 papers</span>
+      <div class="freq">2017, 2018, 2019, 2020, 2022, 2023, 2024 — Part C staple</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Types of Network</strong> — PAN, LAN, WLAN, MAN, WAN etc. with examples<span class="freq-badge freq-hot">6/9 papers</span>
+      <div class="freq">2017, 2018, 2019, 2020, 2023, 2024</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Elements of C Programming</strong> — Data types, variables, operators, control structures<span class="freq-badge freq-hot">6/9 papers</span>
+      <div class="freq">2018, 2019, 2020, 2021, 2022, 2023</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Search Engines</strong> — Definition, functions, explain one<span class="freq-badge freq-med">4/9 papers</span>
+      <div class="freq">2017, 2018, 2019, 2020</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>World Wide Web + Browsing + Search Engines</strong><span class="freq-badge freq-med">4/9 papers</span>
+      <div class="freq">2019, 2020, 2024, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Database</strong> — Definition, applications<span class="freq-badge freq-med">3/9 papers</span>
+      <div class="freq">2017, 2018, 2019</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Algorithm / Flowchart</strong> — Definition, characteristics, example<span class="freq-badge freq-med">3/9 papers</span>
+      <div class="freq">2017, 2019, 2025</div>
+    </div>
+  </div>
+
+  <div class="note-box" style="margin-top:1.5rem">
+    💡 <strong>Exam Strategy:</strong> Focus on Lab, Club, Textbook, Teacher Competencies, Seminars/Workshops, and Social Media for Part A. Cloud Computing and Networks for Part C. E-magazine and Online Journals for Part B. These cover ~80% of all marks across all years.
+  </div>
+</div>
+
+</div><!-- end container -->
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function toggle(card) {
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>

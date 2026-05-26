@@ -1,0 +1,2942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-01 · Childhood & Growing Up — Exam Companion</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Josefin+Sans:wght@300;400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e28;
+    --surface3: #22273a;
+    --border: #2a3050;
+    --accent: #6ee7b7;
+    --accent2: #818cf8;
+    --accent3: #f59e0b;
+    --accent4: #f472b6;
+    --text: #e2e8f0;
+    --muted: #7c8aa0;
+    --highlight: rgba(110,231,183,0.08);
+    --part-a: #6ee7b7;
+    --part-b: #818cf8;
+    --important: #f59e0b;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─────────────────────────────────── */
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #13161e 50%, #1a1e28 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 2rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, rgba(110,231,183,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: 30%;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(129,140,248,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 960px; margin: 0 auto; position: relative; z-index: 1; }
+  .header-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    background: rgba(110,231,183,0.1);
+    border: 1px solid rgba(110,231,183,0.25);
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  header h1 span { color: var(--accent); }
+  .header-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+  .header-meta {
+    display: flex; flex-wrap: wrap; gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+  .meta-chip {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 13px; color: var(--muted);
+  }
+  .meta-chip .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .meta-chip .dot.b { background: var(--accent2); }
+  .meta-chip .dot.c { background: var(--accent3); }
+  .meta-chip .dot.d { background: var(--accent4); }
+
+  /* ─── LAYOUT ─────────────────────────────────── */
+  .container { max-width: 960px; margin: 0 auto; padding: 2rem; }
+
+  /* ─── TABS ───────────────────────────────────── */
+  .tabs-wrapper {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,15,20,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+  }
+  .tabs {
+    max-width: 960px; margin: 0 auto;
+    display: flex; gap: 0; overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none; border: none; cursor: pointer;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--muted);
+    padding: 14px 20px;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn.active.b { color: var(--accent2); border-bottom-color: var(--accent2); }
+  .tab-btn.active.c { color: var(--accent3); border-bottom-color: var(--accent3); }
+  .tab-btn.active.d { color: var(--accent4); border-bottom-color: var(--accent4); }
+
+  /* ─── SECTIONS ───────────────────────────────── */
+  .tab-section { display: none; }
+  .tab-section.active { display: block; }
+
+  /* ─── PAPER HEADER ───────────────────────────── */
+  .paper-header {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    display: flex; flex-wrap: wrap; gap: 1rem;
+    align-items: center; justify-content: space-between;
+  }
+  .paper-title { font-family: 'Libre Baskerville', serif; font-size: 1.4rem; color: #fff; }
+  .paper-badges { display: flex; flex-wrap: wrap; gap: 8px; }
+  .badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; padding: 4px 10px;
+    border-radius: 4px; letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  .badge.green { background: rgba(110,231,183,0.12); color: var(--accent); border: 1px solid rgba(110,231,183,0.2); }
+  .badge.purple { background: rgba(129,140,248,0.12); color: var(--accent2); border: 1px solid rgba(129,140,248,0.2); }
+  .badge.amber { background: rgba(245,158,11,0.12); color: var(--accent3); border: 1px solid rgba(245,158,11,0.2); }
+  .badge.pink { background: rgba(244,114,182,0.12); color: var(--accent4); border: 1px solid rgba(244,114,182,0.2); }
+
+  /* ─── PART DIVIDER ───────────────────────────── */
+  .part-divider {
+    display: flex; align-items: center; gap: 1rem;
+    margin: 2rem 0 1.5rem;
+  }
+  .part-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; font-weight: 500;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    padding: 5px 14px; border-radius: 20px;
+    white-space: nowrap;
+  }
+  .part-label.a { background: rgba(110,231,183,0.1); color: var(--part-a); border: 1px solid rgba(110,231,183,0.2); }
+  .part-label.b { background: rgba(129,140,248,0.1); color: var(--part-b); border: 1px solid rgba(129,140,248,0.2); }
+  .part-divider hr { flex: 1; border: none; border-top: 1px solid var(--border); }
+  .part-info { font-size: 12px; color: var(--muted); white-space: nowrap; }
+
+  /* ─── Q CARD ─────────────────────────────────── */
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .q-card:hover { border-color: rgba(110,231,183,0.3); }
+  .q-header {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1.1rem 1.4rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .q-header:hover { background: var(--highlight); }
+  .q-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; font-weight: 500;
+    color: var(--accent);
+    background: rgba(110,231,183,0.1);
+    border: 1px solid rgba(110,231,183,0.2);
+    padding: 2px 8px; border-radius: 4px;
+    margin-top: 2px; white-space: nowrap; flex-shrink: 0;
+  }
+  .q-num.b { color: var(--accent2); background: rgba(129,140,248,0.1); border-color: rgba(129,140,248,0.2); }
+  .q-num.imp { color: var(--accent3); background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.2); }
+  .q-text { flex: 1; font-size: 14.5px; font-weight: 600; color: var(--text); }
+  .q-meta { font-size: 12px; color: var(--muted); margin-top: 3px; font-weight: 400; }
+  .q-arrow {
+    font-size: 12px; color: var(--muted);
+    transition: transform 0.25s ease; flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .q-card.open .q-arrow { transform: rotate(180deg); }
+  .q-card.open .q-header { background: var(--highlight); }
+
+  /* ─── ANSWER BODY ────────────────────────────── */
+  .q-body {
+    display: none;
+    padding: 0 1.4rem 1.4rem;
+    border-top: 1px solid var(--border);
+  }
+  .q-card.open .q-body { display: block; }
+
+  .answer-block { margin-top: 1.2rem; }
+  .answer-block + .answer-block { margin-top: 1.5rem; border-top: 1px dashed var(--border); padding-top: 1.5rem; }
+
+  .sub-q {
+    font-size: 13px; font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.6rem;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 0.05em;
+  }
+  .sub-q.b { color: var(--accent2); }
+
+  .answer-text { font-size: 14.5px; color: #c8d5e8; line-height: 1.85; font-family: 'Libre Baskerville', serif; font-weight: 400; }
+  .answer-text p { margin-bottom: 0.8rem; }
+  .answer-text p:last-child { margin-bottom: 0; }
+
+  .def-box {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0;
+    padding: 0.8rem 1.1rem;
+    margin: 0.8rem 0;
+    font-size: 13.5px; color: #d0e4f7;
+    font-style: italic;
+  }
+  .def-box.b { border-left-color: var(--accent2); }
+  .def-box.c { border-left-color: var(--accent3); }
+
+  .point-list { list-style: none; padding: 0; margin: 0.5rem 0; }
+  .point-list li {
+    display: block;
+    font-size: 14px; color: #c8d5e8;
+    padding: 0.5rem 0 0.5rem 1.4rem;
+    line-height: 1.85;
+    font-family: 'Libre Baskerville', serif;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    position: relative;
+  }
+  .point-list li:last-child { border-bottom: none; }
+  .point-list li::before {
+    content: '›';
+    color: var(--accent);
+    font-weight: 700;
+    position: absolute;
+    left: 0; top: 0.52rem;
+  }
+  .point-list.b li::before { color: var(--accent2); }
+  .point-list.c li::before { color: var(--accent3); }
+  .point-list li strong {
+    color: #fff;
+    font-weight: 700;
+    display: inline;
+  }
+
+  .marks-note {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--accent3);
+    background: rgba(245,158,11,0.08);
+    border: 1px solid rgba(245,158,11,0.2);
+    padding: 2px 8px; border-radius: 4px;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-heading {
+    font-size: 13px; font-weight: 700;
+    color: var(--accent2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 1rem 0 0.4rem;
+  }
+
+  /* ─── IMPORTANT Q LIST ───────────────────────── */
+  .imp-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.6rem;
+  }
+  @media(max-width:600px) { .imp-grid { grid-template-columns: 1fr; } }
+  .imp-item {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.7rem 1rem;
+    font-size: 13.5px; color: #c8d5e8;
+    display: flex; gap: 0.6rem; align-items: flex-start;
+  }
+  .imp-item::before {
+    content: '★'; color: var(--accent3);
+    font-size: 11px; margin-top: 3px; flex-shrink: 0;
+  }
+
+  .tab-btn.active.e { color: #34d399; border-bottom-color: #34d399; }
+  #scrollTop {
+    position: fixed; bottom: 1.5rem; right: 1.5rem;
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--accent); font-size: 18px;
+    width: 42px; height: 42px; border-radius: 8px;
+    cursor: pointer; display: none;
+    align-items: center; justify-content: center;
+    transition: all 0.2s;
+    z-index: 999;
+  }
+  #scrollTop:hover { background: var(--surface3); border-color: var(--accent); }
+  #scrollTop.show { display: flex; }
+
+  /* ─── FOOTER ─────────────────────────────────── */
+  footer {
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--muted);
+    font-size: 12px;
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+    font-family: 'JetBrains Mono', monospace;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <div class="header-tag">I Semester B.Ed · CBCS 2-Year Course · Bangalore University</div>
+    <h1><span>HC-01</span> Childhood &amp; Growing Up</h1>
+    <p class="header-sub">Equivalent to Fundamentals of Educational Psychology</p>
+    <div class="header-meta">
+      <div class="meta-chip"><span class="dot d"></span>Aug 2016 (PG-1001) · 70 Marks</div>
+      <div class="meta-chip"><span class="dot" style="background:#34d399"></span>Oct 2017 (SN-001) + Official Key</div>
+      <div class="meta-chip"><span class="dot"></span>Oct 2021 (AG-001) · 70 Marks</div>
+      <div class="meta-chip"><span class="dot b"></span>July 2022 (BA-016) · 70 Marks</div>
+      <div class="meta-chip"><span class="dot c"></span>June 2023 (AB-001) · 70 Marks</div>
+    </div>
+  </div>
+</header>
+
+<!-- STICKY TABS -->
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn" style="color:var(--accent4);border-bottom-color:transparent" onclick="switchTab('t2016',this,'d')">Aug 2016</button>
+    <button class="tab-btn" style="color:#34d399;border-bottom-color:transparent" onclick="switchTab('t2017',this,'e')">Oct 2017 + Key</button>
+    <button class="tab-btn active" onclick="switchTab('t2021',this)">Oct 2021</button>
+    <button class="tab-btn b" onclick="switchTab('t2022',this,'b')">July 2022</button>
+    <button class="tab-btn c" onclick="switchTab('t2023',this,'c')">June 2023</button>
+    <button class="tab-btn d" onclick="switchTab('timp',this,'d')">★ Important Qs</button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══════════════════════════════════════════════
+     TAB 1: OCT 2021 (AG-001)
+     ═══════════════════════════════════════════════ -->
+<div id="t2021" class="tab-section active">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">October 2021 · AG-001</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">HC-1: Childhood and Growing Up · Time: 3 Hours</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge green">Part A — 3×10 = 30</span>
+      <span class="badge purple">Part B — 8×5 = 40</span>
+      <span class="badge amber">Max 70 Marks</span>
+    </div>
+  </div>
+
+  <!-- PART A -->
+  <div class="part-divider">
+    <span class="part-label a">Part A</span><hr>
+    <span class="part-info">Answer any 3 · Each ≤ 3 pages · 10 marks each</span>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <div class="q-text">
+        Define educational psychology. Briefly explain the scope of educational psychology. How is the knowledge of educational psychology helpful to teachers?
+        <div class="q-meta">2+4+4 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Define Educational Psychology (2 marks)</div>
+        <div class="def-box">
+          "Educational Psychology is the science of teaching and learning process. It is that branch of psychology which deals with teaching and learning." — Skinner<br><br>
+          "Educational psychology is the science of education." — Peel
+        </div>
+        <div class="answer-text">
+          <p>Educational psychology is a branch of applied psychology that studies how humans learn in educational settings. It focuses on the methods used to teach and the psychological aspects of the learner, the learning process, and the teacher.</p>
+        </div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Scope of Educational Psychology (4 marks)</div>
+        <ul class="point-list">
+          <li><strong>The Learner:</strong> Study of the learner's nature — physical, mental, emotional, social growth, individual differences, and special needs.</li>
+          <li><strong>The Learning Process:</strong> How learning takes place — theories of learning, memory, forgetting, transfer of learning, motivation, and attention.</li>
+          <li><strong>The Teacher:</strong> Role, qualities, mental health, professional development, classroom management skills of the teacher.</li>
+          <li><strong>Teaching Methods &amp; Techniques:</strong> Principles of teaching, effective instructional strategies, use of technology.</li>
+          <li><strong>Mental Health &amp; Hygiene:</strong> Factors affecting mental health, emotional adjustment of both students and teachers.</li>
+          <li><strong>Measurement &amp; Evaluation:</strong> Tests, examinations, psychological measurements to assess learning outcomes.</li>
+          <li><strong>Exceptional Children:</strong> Understanding gifted, slow learners, and children with disabilities — guidance and special education.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">c) Importance/Usefulness to a Classroom Teacher (4 marks)</div>
+        <ul class="point-list">
+          <li><strong>Understand the Learner:</strong> Helps the teacher understand developmental characteristics, individual differences, interests, and needs of students.</li>
+          <li><strong>Effective Teaching:</strong> Guides the teacher to select appropriate methods, materials, and strategies that suit the learner's level.</li>
+          <li><strong>Curriculum Planning:</strong> Assists in designing age-appropriate, psychologically sound curriculum content.</li>
+          <li><strong>Motivation:</strong> Teaches techniques to motivate students, arouse curiosity, and sustain interest in learning.</li>
+          <li><strong>Classroom Management:</strong> Helps manage discipline, handle indiscipline, and maintain a conducive classroom environment.</li>
+          <li><strong>Evaluation:</strong> Helps the teacher measure learning outcomes accurately and give meaningful feedback.</li>
+          <li><strong>Mental Health:</strong> Guides teachers to promote emotional well-being and handle students with anxiety or behavioral issues.</li>
+          <li><strong>Guiding Exceptional Children:</strong> Enables teachers to identify and appropriately support gifted or slow-learning students.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <div class="q-text">
+        Who are adolescents? List out the characteristics of adolescents. Explain the impact of urbanisation and economic change on adolescents.
+        <div class="q-meta">2+4+4 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Who are Adolescents? (2 marks)</div>
+        <div class="def-box">
+          "Adolescence is a period of great stress, strain, storm, and strife." — Stanley Hall<br>
+          "Adolescence is the age of great ideals and beginning of theories." — Jean Piaget
+        </div>
+        <div class="answer-text">
+          <p>Adolescents are individuals in the transitional stage between childhood and adulthood, typically ranging from 12–18 years. This period is marked by rapid physical, emotional, cognitive, and social changes. The word "adolescence" comes from the Latin "adolescere" meaning to grow to maturity.</p>
+        </div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Characteristics of Adolescents (4 marks)</div>
+        <div class="section-heading">Physical</div>
+        <ul class="point-list">
+          <li>Rapid physical growth — increase in height, weight, and muscle mass.</li>
+          <li>Development of secondary sexual characteristics (voice change, facial hair, breast development).</li>
+          <li>Onset of puberty — menstruation in girls, spermatogenesis in boys.</li>
+        </ul>
+        <div class="section-heading">Emotional</div>
+        <ul class="point-list">
+          <li>Heightened emotional sensitivity; mood swings and emotional instability.</li>
+          <li>Feelings of love, romance, and intense peer attachment.</li>
+          <li>Identity crisis — "Who am I?" — (Erikson's Identity vs Role Confusion).</li>
+        </ul>
+        <div class="section-heading">Social</div>
+        <ul class="point-list">
+          <li>Shift of loyalty from family to peer group; peer pressure becomes dominant.</li>
+          <li>Desire for independence and separation from parental authority.</li>
+          <li>Consciousness of gender roles and social identity.</li>
+        </ul>
+        <div class="section-heading">Cognitive</div>
+        <ul class="point-list">
+          <li>Development of abstract thinking (Piaget's Formal Operational Stage).</li>
+          <li>Capacity for idealism, hypothesis formation, and logical reasoning.</li>
+          <li>Interest in philosophical and moral questions.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">c) Impact of Urbanisation and Economic Change on Adolescents (4 marks)</div>
+        <div class="section-heading">Positive Impacts</div>
+        <ul class="point-list">
+          <li>Better access to quality schools, libraries, hospitals, coaching centers, and recreational facilities.</li>
+          <li>Greater awareness of world affairs through media and technology — more informed adolescents.</li>
+          <li>Higher family income enables better nutrition, education, and healthcare.</li>
+          <li>More opportunities for skill development, sports, cultural activities, and career exploration.</li>
+          <li>Reduced patriarchal mindset in urban areas promotes gender sensitivity.</li>
+        </ul>
+        <div class="section-heading">Negative Impacts</div>
+        <ul class="point-list">
+          <li>Social isolation — nuclear families, working parents, and lack of emotional support.</li>
+          <li>Increased exposure to crime, drug addiction, prostitution, and online dangers.</li>
+          <li>Obesity and sedentary lifestyle due to fast food and screen dependency.</li>
+          <li>Slums and overcrowding create unhygienic environments harmful to physical and mental health.</li>
+          <li>Excessive peer pressure and consumerism lead to stress and identity confusion.</li>
+          <li>Loss of traditional social values and family bonding.</li>
+          <li>High pollution levels in metro cities adversely affect adolescent health.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <div class="q-text">
+        What is learning? List out the characteristics of learning. Explain the influence of motivation on learning.
+        <div class="q-meta">2+4+4 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) What is Learning? (2 marks)</div>
+        <div class="def-box">
+          "Learning is the modification of behavior through experience and training." — Gates<br>
+          "The term learning covers every modification in behavior to meet environmental requirements." — Gardner Murphy
+        </div>
+        <div class="answer-text"><p>Learning is the relatively permanent change in behavior or knowledge that results from experience, practice, or instruction. It involves acquisition, retention, and modification of knowledge, skills, habits, and attitudes.</p></div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Characteristics of Learning (4 marks)</div>
+        <ul class="point-list">
+          <li><strong>Purposeful:</strong> Learning is goal-directed; it occurs with intention and purpose.</li>
+          <li><strong>Active:</strong> The learner must be actively engaged; passive reception is not learning.</li>
+          <li><strong>Product of Experience:</strong> Learning results from interaction with the environment through experience.</li>
+          <li><strong>Universal and Continuous:</strong> All living beings learn throughout their entire lifespan.</li>
+          <li><strong>Adjustment:</strong> Learning helps in intra-personal and inter-personal adjustment with the environment.</li>
+          <li><strong>Maturation-Linked:</strong> Learning is related to physical and mental maturation of the individual.</li>
+          <li><strong>Individual and Social:</strong> Learning can be personal (individual) or collaborative (social).</li>
+          <li><strong>Affects Conduct:</strong> True learning brings about observable behavioral change in the learner.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">c) Influence of Motivation on Learning (4 marks)</div>
+        <div class="def-box b">Motivation is the internal force that drives, directs, and sustains behavior toward a goal.</div>
+        <ul class="point-list b">
+          <li><strong>Direction:</strong> Motivation directs behavior toward specific learning goals, keeping the learner focused.</li>
+          <li><strong>Increased Effort:</strong> Motivated students put in more effort, time, and energy into their studies.</li>
+          <li><strong>Persistence:</strong> Motivation sustains engagement even when tasks are difficult, reducing dropouts.</li>
+          <li><strong>Better Cognitive Processing:</strong> Motivated learners engage in deeper processing — understanding, not just memorization.</li>
+          <li><strong>Determines Reinforcement:</strong> Motivation defines what counts as reward or punishment, shaping habits.</li>
+          <li><strong>Enhances Performance:</strong> Motivated students consistently perform better in examinations and tasks.</li>
+          <li><strong>Reduces Anxiety:</strong> Intrinsic motivation reduces exam anxiety and promotes self-confidence.</li>
+        </ul>
+        <div class="answer-text"><p><strong>Types:</strong> Intrinsic motivation (internal — curiosity, interest) and extrinsic motivation (external — rewards, praise, grades). Teachers should use both effectively — praise, encouragement, meaningful activities, and achievable challenges.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <div class="q-text">
+        What is trial and error learning? Explain Thorndike's experiment. Mention the educational implications.
+        <div class="q-meta">2+5+3 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) What is Trial and Error Learning? (2 marks)</div>
+        <div class="def-box">
+          "Learning is nothing but stamping in of the correct responses and stamping out of the incorrect responses through trial and error." — Thorndike
+        </div>
+        <div class="answer-text"><p>Trial and Error (S-R Bond Theory / Connectionism) is a method of learning in which various responses are tentatively tried until a satisfactory solution is found. Incorrect responses are gradually eliminated and the correct response is fixed through repetition.</p></div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Thorndike's Puzzle Box Experiment (5 marks)</div>
+        <div class="answer-text">
+          <p><strong>Subject:</strong> Hungry cat placed inside a puzzle box. Food (fish) kept outside the box as motivation.</p>
+          <p><strong>Process:</strong></p>
+        </div>
+        <ul class="point-list">
+          <li><strong>Drive:</strong> Hunger was intensified by sight of food outside.</li>
+          <li><strong>Goal:</strong> To get out of the box and reach the food.</li>
+          <li><strong>Block:</strong> Cat was confined inside with a latch mechanism.</li>
+          <li><strong>Random Movements:</strong> Cat scratched, bit, clawed, jumped — made various random movements to escape.</li>
+          <li><strong>Chance Success:</strong> By accident, the cat pressed the latch and the door opened.</li>
+          <li><strong>Selection:</strong> On repetition, the cat recognized the correct movement (pressing the latch).</li>
+          <li><strong>Fixation:</strong> Incorrect responses were eliminated; the correct response was stamped in through S-R bond.</li>
+        </ul>
+        <div class="answer-text"><p><strong>Laws of Learning derived:</strong> Law of Readiness, Law of Effect (satisfaction vs annoyance), Law of Exercise (use and disuse).</p></div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">c) Educational Implications (3 marks)</div>
+        <ul class="point-list c">
+          <li>Teacher must wait until the learner is ready — ensure psychological and physiological readiness before new learning.</li>
+          <li>Classroom experiences should be satisfying; avoid creating fear — allow students to experience success.</li>
+          <li>Give ample opportunities for repetition and practice — "Practice makes perfect."</li>
+          <li>Learning should be meaningful and applicable to real life situations.</li>
+          <li>Praise and encouragement reinforce correct responses; criticism should be constructive.</li>
+          <li>Break complex tasks into smaller, achievable sub-tasks to ensure some success at each step.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <div class="q-text">
+        What is insight learning? Explain Kohler's experiment. List the educational implications.
+        <div class="q-meta">2+5+3 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) What is Insight Learning? (2 marks)</div>
+        <div class="def-box">Insight learning is the abrupt realization of a problem's solution — the sudden perception of relationships among the elements of a problem. It is "Aha! experience."</div>
+        <div class="answer-text"><p>Insight is a completely cognitive experience involving perception of the whole problem situation at once, not through random trial and error, but through understanding relationships. It is a higher form of learning than trial and error.</p></div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Kohler's Experiment on Chimpanzee (5 marks)</div>
+        <div class="answer-text">
+          <p><strong>Subject:</strong> Sultan — a chimpanzee kept in a cage.</p>
+          <p><strong>Setup — Experiment 1 (Stick Problem):</strong> A banana was hung out of reach outside the cage. Two sticks (neither long enough alone) were kept inside.</p>
+          <p><strong>Sultan's Behavior:</strong> First tried each stick separately — failed. After resting, Sultan suddenly looked at both sticks, fitted them together, and used the longer combined stick to pull the banana in. — This was the INSIGHT moment (Aha!).</p>
+          <p><strong>Setup — Experiment 2 (Box Problem):</strong> Banana hung from ceiling. Several boxes placed inside.</p>
+          <p><strong>Sultan's Behavior:</strong> After pondering, Sultan stacked the boxes on top of each other and climbed up to reach the banana.</p>
+        </div>
+        <ul class="point-list">
+          <li>Sultan perceived the entire situation as a whole — not in isolated parts.</li>
+          <li>Solution appeared suddenly after a period of contemplation (not gradual).</li>
+          <li>Once achieved, the solution could be repeated in new similar situations — insight transfers!</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">c) Educational Implications (3 marks)</div>
+        <ul class="point-list c">
+          <li>Present subject matter in a Gestalt (whole) form rather than isolated facts — show the big picture first.</li>
+          <li>Minimize rote learning; encourage reasoning, understanding, and problem-solving.</li>
+          <li>Use Gestalt principles in curriculum planning — integrate subjects meaningfully.</li>
+          <li>Motivate learners by arousing curiosity and creating a "discovery" environment.</li>
+          <li>Encourage independent thinking; don't spoon-feed — use heuristic and problem-solving methods.</li>
+          <li>Help students see relevant relationships between concepts across subjects.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART B -->
+  <div class="part-divider">
+    <span class="part-label b">Part B</span><hr>
+    <span class="part-info">Answer any 8 · Each ≤ 1½ pages · 5 marks each</span>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <div class="q-text">Explain Albert Bandura's social learning theory.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">"Behavior is learned from the environment through the process of observational learning." — Bandura (1977)</div>
+        <div class="answer-text"><p>Social Learning Theory (SLT) states that humans are active information processors who learn by observing others' behavior and its consequences — without direct experience.</p></div>
+        <div class="section-heading">Types of Modeling Stimuli</div>
+        <ul class="point-list b">
+          <li><strong>Live Model:</strong> A real person demonstrating the behavior (teacher, parent, peer).</li>
+          <li><strong>Verbal Instruction:</strong> Describing behavior for the observer to follow.</li>
+          <li><strong>Symbolic:</strong> Media — TV, movies, books, internet — fictional or real characters.</li>
+        </ul>
+        <div class="section-heading">Four Processes of Observational Learning (ARRM)</div>
+        <ul class="point-list b">
+          <li><strong>Attention:</strong> Observer must notice and pay attention to the model's behavior.</li>
+          <li><strong>Retention:</strong> Observer must remember the behavior in memory (cognitive storage).</li>
+          <li><strong>Reproduction:</strong> Observer must have the physical and cognitive ability to reproduce the behavior.</li>
+          <li><strong>Motivation:</strong> Observer must be motivated to imitate — anticipation of reward or punishment.</li>
+        </ul>
+        <div class="answer-text"><p><strong>Educational Significance:</strong> Teachers should model positive behavior, values, and thinking skills. Students learn by watching their teachers — "Do as I do" is more powerful than "Do as I say."</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <div class="q-text">Explain Skinner's experiment on operant conditioning.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">"Operant conditioning is a method of learning that occurs through rewards and punishments for behavior — reinforcement shapes voluntary behavior." — B.F. Skinner</div>
+        <div class="section-heading">Skinner's Box Experiment</div>
+        <ul class="point-list b">
+          <li><strong>Setup:</strong> A hungry rat placed in a box with a lever. When the lever is pressed, food pellet is delivered automatically.</li>
+          <li><strong>Phase 1 — Random Movement:</strong> Rat explores the box, presses lever accidentally, food appears. This is the operant.</li>
+          <li><strong>Phase 2 — Reinforcement:</strong> Food (positive reinforcement) strengthens the lever-pressing behavior. Rat presses the lever more frequently.</li>
+          <li><strong>Phase 3 — Extinction:</strong> When food stops coming, the rat gradually stops pressing the lever.</li>
+          <li><strong>Phase 4 — Discrimination:</strong> Rat learns to press lever only when a light is on (stimulus control).</li>
+        </ul>
+        <div class="section-heading">Key Concepts</div>
+        <ul class="point-list b">
+          <li><strong>Positive Reinforcement:</strong> Adding a pleasant stimulus to increase behavior (praise, reward).</li>
+          <li><strong>Negative Reinforcement:</strong> Removing an unpleasant stimulus to increase behavior (removing punishment).</li>
+          <li><strong>Punishment:</strong> Adding unpleasant stimulus / removing pleasant stimulus to decrease behavior.</li>
+        </ul>
+        <div class="section-heading">Educational Implications</div>
+        <ul class="point-list b">
+          <li>Use praise, rewards, and positive feedback to reinforce good behavior and academic performance.</li>
+          <li>Curriculum should move from simple to complex in small steps — programmed instruction.</li>
+          <li>Immediate reinforcement is more effective than delayed feedback.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <div class="q-text">What is transfer of learning? Explain the types of transfer of learning.<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">"Transfer of learning is the application of skills, knowledge, and attitudes learned in one situation to another." — Transfer refers to carrying over knowledge from one learning situation to another.</div>
+        <div class="section-heading">Types of Transfer</div>
+        <ul class="point-list b">
+          <li><strong>Positive Transfer:</strong> Learning in one situation helps learning in another. E.g., Learning piano helps in learning the keyboard. Sanskrit helps in learning Hindi grammar.</li>
+          <li><strong>Negative Transfer:</strong> Learning in one situation interferes with learning in another. E.g., Learning to drive on the left side interferes when driving on the right side. Learning Kannada pronunciation may interfere with English pronunciation.</li>
+          <li><strong>Zero/Neutral Transfer:</strong> Learning in one situation has no effect on learning in another. E.g., Learning grammar has no effect on handwriting.</li>
+          <li><strong>Bilateral Transfer:</strong> A skill learned with one hand can be transferred to the other hand (within the same individual). Also called cross education.</li>
+        </ul>
+        <div class="answer-text"><p><strong>Theories of Transfer:</strong> Theory of Identical Elements (Thorndike) — transfer occurs when elements are similar; Theory of Generalization (Judd) — transfer through understanding of general principles.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.9</span>
+      <div class="q-text">What are thinking skills? How do you develop thinking skills among students?<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Thinking skills are the mental processes used to solve problems, make decisions, form concepts, plan, reason logically, and evaluate information creatively.</div>
+        <div class="section-heading">Types of Thinking Skills</div>
+        <ul class="point-list b">
+          <li>Convergent thinking (focused, analytical)</li>
+          <li>Divergent thinking (creative, multiple solutions)</li>
+          <li>Critical thinking (evaluation, judgement)</li>
+          <li>Creative thinking (originality, imagination)</li>
+        </ul>
+        <div class="section-heading">How to Develop Thinking Skills Among Students</div>
+        <ul class="point-list b">
+          <li>Use <strong>open-ended questions</strong> — "Why?", "What if?", "How?" — that demand reasoning, not recall.</li>
+          <li>Apply <strong>problem-based learning</strong> — real-world problems where students must reason and find solutions.</li>
+          <li>Encourage <strong>Socratic dialogue</strong> — guided questioning that pushes deeper thinking.</li>
+          <li>Classroom debate, group discussion, and collaborative projects develop reasoning and evaluation.</li>
+          <li>Teach metacognition — self-monitoring and reflection on one's own thinking process.</li>
+          <li>Create a <strong>safe, non-threatening</strong> classroom where students feel free to voice ideas.</li>
+          <li>Use <strong>Bloom's Taxonomy</strong> — plan activities at higher levels: Analysis, Evaluation, Synthesis/Creation.</li>
+          <li>Show models of good thinking — demonstrate how to analyze, compare, classify, and conclude.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.10</span>
+      <div class="q-text">What is remembering? How will you help your students to remember better?<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Remembering (Memory) is the cognitive process of encoding, storing, and retrieving previously learned information or experiences.</div>
+        <div class="section-heading">Types of Memory</div>
+        <ul class="point-list b">
+          <li><strong>Sensory Memory:</strong> Brief retention of sensory input (fraction of a second).</li>
+          <li><strong>Short-Term Memory (STM):</strong> Holds limited information for a short time (about 20 seconds).</li>
+          <li><strong>Long-Term Memory (LTM):</strong> Permanent storage — can hold unlimited information indefinitely.</li>
+        </ul>
+        <div class="section-heading">Helping Students Remember Better</div>
+        <ul class="point-list b">
+          <li><strong>Meaningful Learning:</strong> Teach concepts with real-life examples and connections to prior knowledge.</li>
+          <li><strong>Spaced Repetition:</strong> Review material at increasing intervals — avoids the forgetting curve.</li>
+          <li><strong>Mnemonics:</strong> Acronyms, rhymes, and memory tricks make retention easier.</li>
+          <li><strong>Active Recall:</strong> Self-testing and retrieval practice is far more effective than passive re-reading.</li>
+          <li><strong>Multi-sensory Learning:</strong> Engage visual, auditory, and kinesthetic channels — charts, models, recordings.</li>
+          <li><strong>Minimize Interference:</strong> Avoid teaching similar, confusing material back-to-back.</li>
+          <li><strong>Emotional Connection:</strong> Content linked to emotions is remembered more vividly.</li>
+          <li><strong>Adequate Sleep:</strong> Encourage proper sleep — memory consolidation happens during sleep.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.11</span>
+      <div class="q-text">Explain in brief the revised Bloom's taxonomy of educational objectives.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Bloom's Taxonomy (revised by Krathwohl et al., 2001) classifies educational objectives into three domains: Cognitive, Affective, and Psychomotor. The revised Cognitive Domain (by Anderson & Krathwohl) uses verbs:</div>
+        <div class="section-heading">Revised Cognitive Domain (Lower to Higher Order)</div>
+        <ul class="point-list b">
+          <li><strong>1. Remember:</strong> Recall facts — Define, List, Name, State. (e.g., Name the parts of a cell.)</li>
+          <li><strong>2. Understand:</strong> Explain in own words — Describe, Summarize, Classify, Explain. (e.g., Describe photosynthesis.)</li>
+          <li><strong>3. Apply:</strong> Use knowledge in new situations — Solve, Use, Demonstrate. (e.g., Solve a math problem.)</li>
+          <li><strong>4. Analyze:</strong> Break into parts, find relationships — Compare, Differentiate, Examine. (e.g., Compare mitosis and meiosis.)</li>
+          <li><strong>5. Evaluate:</strong> Make judgments using criteria — Justify, Critique, Assess. (e.g., Judge the effectiveness of a policy.)</li>
+          <li><strong>6. Create:</strong> Produce new and original work — Design, Construct, Compose. (e.g., Design an experiment.)</li>
+        </ul>
+        <div class="answer-text"><p>The key change from the original: <em>Synthesis</em> was replaced by <em>Create</em> and moved to the top, and <em>Evaluation</em> moved to fifth level. These represent Higher Order Thinking Skills (HOTS) — the goal of quality education.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.12</span>
+      <div class="q-text">Explain the determinants of personality.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">"Personality is the dynamic organization within the individual of those psychophysical systems that determine his unique adjustment to the environment." — G.W. Allport</div>
+        <div class="section-heading">Determinants of Personality</div>
+        <ul class="point-list b">
+          <li><strong>Heredity:</strong> Genetic inheritance from parents — temperament, intelligence, physical traits. "Nature vs Nurture" — heredity lays the foundation.</li>
+          <li><strong>Environment:</strong> Physical and social surroundings — home, neighborhood, school. Environment shapes behavior, values, and attitudes.</li>
+          <li><strong>Family Influence:</strong> Parent-child relationship, parenting style (authoritative, permissive, authoritarian), sibling relationships deeply mold personality.</li>
+          <li><strong>School &amp; Teachers:</strong> Teachers act as role models; school environment teaches discipline, social skills, and values.</li>
+          <li><strong>Peer Group:</strong> Friends and peers heavily influence habits, language, interests, and social identity especially during adolescence.</li>
+          <li><strong>Cultural Determinants:</strong> Cultural norms, traditions, religious beliefs, and community values shape personality.</li>
+          <li><strong>Physical Health:</strong> Physical conditions, disabilities, or illnesses affect personality development.</li>
+          <li><strong>Socio-Economic Status:</strong> Economic background influences opportunities, aspirations, and self-concept.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.13</span>
+      <div class="q-text">What is mental health? How do you promote mental health of adolescents?<div class="q-meta">2+3 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">"Mental health is the full and harmonious functioning of the whole personality." — It is the ability to make personal and social adjustments effectively.</div>
+        <div class="answer-text"><p>A mentally healthy person has a positive self-concept, can cope with stress, maintains good interpersonal relationships, and functions effectively in daily life.</p></div>
+        <div class="section-heading">How to Promote Mental Health of Adolescents</div>
+        <ul class="point-list b">
+          <li>Help the adolescent develop a proper understanding of himself — build self-awareness and self-acceptance.</li>
+          <li>Increase self-esteem and self-confidence through achievements and encouragement.</li>
+          <li>Show acceptance — encourage adolescents to express feelings without fear of judgment.</li>
+          <li>Teach social mores, norms, and reality — prepare them for social responsibilities.</li>
+          <li>Encourage thoughtful appraisal of oneself — develop realistic self-evaluation.</li>
+          <li>Teach tolerance of cultural and social differences — reduce prejudice and bias.</li>
+          <li>Provide counseling services in school for emotional and personal problems.</li>
+          <li>Ensure adequate physical activity, healthy diet, and proper sleep — physical health supports mental health.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.14</span>
+      <div class="q-text">List out the developmental tasks of adolescents.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Developmental tasks of adolescence were outlined by <strong>Havighurst</strong> — these are tasks that arise at a certain period in life that must be successfully achieved for healthy development and societal expectation.</div>
+        <ul class="point-list b">
+          <li>Achieving new and more mature relations with age-mates of both sexes.</li>
+          <li>Achieving a masculine or feminine social role (gender role identity).</li>
+          <li>Accepting one's physique and using the body effectively.</li>
+          <li>Achieving emotional independence from parents and other adults.</li>
+          <li>Preparing for an economic career and achieving assurance of economic independence.</li>
+          <li>Selecting and preparing for a specific occupation.</li>
+          <li>Preparing for marriage and family life.</li>
+          <li>Developing intellectual skills and concepts necessary for civic competency.</li>
+          <li>Desiring and achieving socially responsible behavior.</li>
+          <li>Acquiring a set of values and an ethical system as a guide to behavior.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.15</span>
+      <div class="q-text">Explain the emotional development of a child with special reference to diverse social and economic background.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="section-heading">Emotional Development in Childhood</div>
+        <div class="answer-text"><p>Infants initially experience only two basic emotions: pleasure and distress. By 9 months, children experience all basic emotions. Emotional development proceeds from simple to complex.</p></div>
+        <ul class="point-list">
+          <li><strong>Positive Emotions:</strong> Social smile (6 weeks), laughter (3–4 months), joy, love, happiness develop progressively.</li>
+          <li><strong>Negative Emotions:</strong> Anger, fear (stranger anxiety at 8–9 months), separation anxiety, sadness, jealousy develop as the child grows.</li>
+          <li><strong>Complex Emotions:</strong> Embarrassment, shame, guilt, pride develop around 18 months–3 years as self-awareness emerges.</li>
+        </ul>
+        <div class="section-heading">Impact of Diverse Social &amp; Economic Background</div>
+        <ul class="point-list">
+          <li><strong>Economically Disadvantaged:</strong> Chronic stress, poverty, food insecurity → emotional dysregulation, anxiety, lower self-esteem, aggression.</li>
+          <li><strong>Economically Privileged:</strong> May face emotional detachment from over-busy parents; pressure of expectations → anxiety, depression.</li>
+          <li><strong>Social Background:</strong> Children from neglectful or abusive homes show delayed emotional development, trust issues, and attachment disorders.</li>
+          <li><strong>Cultural Diversity:</strong> Different cultures have different norms about emotional expression — some suppress emotions (stoic cultures), some are expressive.</li>
+          <li><strong>Teacher's Role:</strong> Create emotionally safe classrooms, use empathy, allow emotional expression, and be sensitive to diverse backgrounds.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.16</span>
+      <div class="q-text">Define personality. Briefly explain the determinants of personality.<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><p><em>(See Q.12 above for the full detailed answer — same content applies.)</em></p>
+        <p>Personality = totality of one's psychological and behavioral characteristics. Determinants: Heredity, Environment, Family, School, Peers, Culture, Physical health, Socio-economic status.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.17</span>
+      <div class="q-text">What is maturation? What are the educational implications of maturation?<div class="q-meta">2+3 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">"Maturation is the process of becoming mature — the unfolding of innately determined patterns of growth and development that occur as a result of biological processes, not experience." Maturation is growth from within.</div>
+        <div class="answer-text"><p>Maturation involves qualitative biological changes in the organism that increase competency and adaptability — independent of practice or experience. E.g., a child can walk only when the muscles and nervous system have matured sufficiently.</p></div>
+        <div class="section-heading">Educational Implications of Maturation</div>
+        <ul class="point-list b">
+          <li><strong>Readiness:</strong> Maturation creates the capacity to learn — teaching before readiness wastes time and creates frustration.</li>
+          <li><strong>Timing:</strong> Effective learning depends on proper timing — the teacher must wait for the right stage of maturation.</li>
+          <li><strong>Individual Differences:</strong> Children mature at different rates — individualized teaching is essential.</li>
+          <li><strong>Curriculum Design:</strong> Curriculum should be planned according to maturational stages — what is appropriate at each age.</li>
+          <li><strong>Learned vs Maturational Behavior:</strong> Teachers must distinguish between behaviors that can be taught and those that await maturation.</li>
+          <li><strong>Avoid Pressure:</strong> Forcing learning before maturation leads to negative experiences and school phobia.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- end t2021 -->
+
+
+<!-- ═══════════════════════════════════════════════
+     TAB 2: JULY 2022 (BA-016)
+     ═══════════════════════════════════════════════ -->
+<div id="t2022" class="tab-section">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">July 2022 · BA-016</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">HC-01: Childhood and Growing Up · Time: 3 Hours</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge purple">Part A — 3×10 = 30</span>
+      <span class="badge green">Part B — 8×5 = 40</span>
+      <span class="badge amber">Max 70 Marks</span>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <span class="part-label a">Part A</span><hr>
+    <span class="part-info">Answer any 3 · Each ≤ 3 pages · 10 marks each</span>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <div class="q-text">
+        What is childhood? Explain briefly the intellectual and emotional development of childhood. List out the educational implications.
+        <div class="q-meta">1+6+3 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) What is Childhood? (1 mark)</div>
+        <div class="def-box">Childhood is the age span from birth to adolescence — typically from birth to 12–13 years. It refers to the years of youth before becoming a teenager. Childhood is NOT a uniform period — it includes infancy, early childhood, and late childhood.</div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Intellectual Development of Childhood (3 marks)</div>
+        <div class="answer-text"><p>According to Piaget, intellectual development in childhood passes through:</p></div>
+        <ul class="point-list">
+          <li><strong>Sensorimotor Stage (0–2 yrs):</strong> Child understands world through senses and motor actions. Object permanence develops.</li>
+          <li><strong>Pre-operational Stage (2–7 yrs):</strong> Language develops rapidly. Thinking is egocentric, symbolic, and pre-logical. Cannot conserve.</li>
+          <li><strong>Concrete Operational Stage (7–12 yrs):</strong> Logical thinking about concrete objects. Can conserve, classify, and seriate. Decentration and reversibility develop.</li>
+          <li>Vocabulary expands rapidly; reading, writing, and numerical skills develop.</li>
+          <li>Memory, attention span, and concentration improve significantly.</li>
+          <li>Curiosity and questioning are hallmarks — the "why" stage.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">c) Emotional Development of Childhood (3 marks)</div>
+        <ul class="point-list">
+          <li>Early childhood emotions are intense, brief, and directly linked to stimuli (tantrum, joy).</li>
+          <li>Late childhood shows increasing emotional control and social referencing.</li>
+          <li>Fear (of animals, dark, strangers), anger (frustration), love (for parents, pets), jealousy (siblings) are common emotions.</li>
+          <li>Empathy and guilt emerge as the child develops moral reasoning.</li>
+          <li>Emotional stability increases as children learn to manage emotions through social learning.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">d) Educational Implications (3 marks)</div>
+        <ul class="point-list c">
+          <li>Curriculum should use concrete materials — manipulatives, models, charts — before abstract concepts.</li>
+          <li>Learning activities should involve play, exploration, and discovery — especially in early childhood.</li>
+          <li>Teachers must recognize individual differences in cognitive development.</li>
+          <li>Emotional climate of the classroom must be safe, warm, and encouraging for emotional expression.</li>
+          <li>Avoid harsh punishment — it damages emotional development and self-concept.</li>
+          <li>Storytelling, art, music, and drama help children process emotions and develop creativity.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <div class="q-text">
+        Who are adolescents? Explain briefly any four characteristics of adolescents.
+        <div class="q-meta">4+6 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Who are Adolescents? (4 marks)</div>
+        <div class="def-box">Adolescence is the transitional phase from childhood to adulthood (12–18 years). It involves rapid physical, emotional, social, and cognitive changes. Stanley Hall called it "a period of storm and strife."</div>
+        <div class="answer-text"><p>Adolescents face the challenge of <strong>identity formation</strong> (Erikson's Identity vs. Role Confusion stage) — defining who they are in terms of values, beliefs, and goals. They are legally minors but psychologically seeking adult autonomy.</p></div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Any Four Characteristics of Adolescents (6 marks)</div>
+        <ul class="point-list">
+          <li><strong>1. Physical Growth and Puberty:</strong> Rapid increase in height and weight; development of secondary sexual characteristics; onset of menstruation in girls and sperm production in boys; heightened self-consciousness about physical appearance.</li>
+          <li><strong>2. Emotional Instability:</strong> Frequent mood swings, heightened sensitivity to criticism, intense feelings of love and infatuation, tendency toward idealism, and emotional conflict with parents and authority figures.</li>
+          <li><strong>3. Peer Group Dominance:</strong> Peers replace family as the primary social reference group. Adolescents conform strongly to peer norms in dress, speech, and behavior. Peer pressure can be positive (academic achievement) or negative (risky behavior).</li>
+          <li><strong>4. Identity Formation:</strong> Adolescents question who they are — exploring different roles, beliefs, and values. Erik Erikson's fifth stage: Identity vs. Role Confusion. Success leads to a stable sense of self; failure leads to confusion.</li>
+          <li><strong>5. Abstract Thinking:</strong> Piaget's formal operational stage — ability to think hypothetically, reason about possibilities, and engage in idealistic thinking about society and justice.</li>
+          <li><strong>6. Desire for Independence:</strong> Strong desire to make their own decisions and reduce dependence on parents — conflicts often arise from this tension.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <div class="q-text">
+        What is mental health? Write the characteristics of a mentally healthy person. Mention any eight programmes to promote mental health in schools.
+        <div class="q-meta">2+4+4 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) What is Mental Health? (2 marks)</div>
+        <div class="def-box">"Mental health is the ability of an individual to make personal and social adjustments." Mental hygiene is the science of preserving and promoting mental health.</div>
+        <div class="answer-text"><p>A mentally healthy person functions harmoniously — emotionally, intellectually, and socially. Mental health is not merely the absence of mental illness; it is a positive state of well-being.</p></div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Characteristics of a Mentally Healthy Person (4 marks)</div>
+        <ul class="point-list">
+          <li>Positive self-concept — accepts strengths and limitations without undue self-criticism.</li>
+          <li>Emotional maturity — able to express emotions appropriately and manage mood.</li>
+          <li>Good interpersonal relationships — empathetic, cooperative, and socially responsible.</li>
+          <li>Ability to cope with stress — uses healthy strategies to deal with pressure and failure.</li>
+          <li>Realistic perception of reality — not distorted by excessive fear, anxiety, or delusions.</li>
+          <li>Sense of purpose and meaning in life — has values, goals, and a sense of direction.</li>
+          <li>Independence and autonomy — makes decisions responsibly without excessive dependence.</li>
+          <li>Adaptability — adjusts flexibly to changing circumstances.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">c) Programmes to Promote Mental Health in Schools (4 marks)</div>
+        <ul class="point-list c">
+          <li>School counseling and guidance services — individual and group counseling.</li>
+          <li>Yoga, meditation, and mindfulness programmes for stress management.</li>
+          <li>Co-curricular activities (sports, arts, drama, music) for emotional expression and confidence.</li>
+          <li>Peer support programmes and buddy systems for social connection.</li>
+          <li>Life skills education — communication, decision-making, empathy, coping skills.</li>
+          <li>Anti-bullying campaigns and a safe, inclusive school culture.</li>
+          <li>Parent-teacher meetings to build a supportive home-school partnership.</li>
+          <li>Regular physical activity — proven to reduce depression and anxiety.</li>
+          <li>Mental health awareness programmes — destigmatize mental health issues.</li>
+          <li>Celebration of achievements — building self-esteem through recognition.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <div class="q-text">
+        What is learning? Explain briefly the factors influencing learning.
+        <div class="q-meta">2+8 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) What is Learning? (2 marks)</div>
+        <div class="def-box">"Learning is a relatively permanent change in behavior or knowledge that results from experience." — Relatively permanent = not temporary states like fatigue or drugs.</div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Factors Influencing Learning (8 marks)</div>
+        <div class="section-heading">Factors Related to the Learner</div>
+        <ul class="point-list">
+          <li><strong>Maturation &amp; Readiness:</strong> Learning is efficient only when the learner has reached the required maturational level. Premature teaching fails.</li>
+          <li><strong>Intelligence:</strong> Higher intelligence generally leads to faster and deeper learning, though motivation can compensate.</li>
+          <li><strong>Motivation:</strong> Internal drive (intrinsic) and external rewards (extrinsic) are the engine of learning. Unmotivated students do not learn effectively.</li>
+          <li><strong>Attention:</strong> Focused attention is a prerequisite for learning. Distraction = no learning.</li>
+          <li><strong>Prior Knowledge:</strong> New learning is easier when it connects to what the learner already knows (Ausubel's meaningful learning).</li>
+          <li><strong>Health:</strong> Physical illness, fatigue, hunger, and poor sensory functions severely hamper learning.</li>
+        </ul>
+        <div class="section-heading">Factors Related to the Environment</div>
+        <ul class="point-list">
+          <li><strong>Home Environment:</strong> Parental support, socio-economic status, educational atmosphere at home influence learning readiness.</li>
+          <li><strong>Classroom Environment:</strong> Orderly, emotionally safe, resource-rich classrooms enhance learning.</li>
+          <li><strong>Teacher's Quality:</strong> Teaching methods, personality, enthusiasm, and feedback quality directly affect student learning.</li>
+          <li><strong>Peer Influence:</strong> Cooperative peers facilitate learning; competitive or disruptive peers hinder it.</li>
+        </ul>
+        <div class="section-heading">Factors Related to the Learning Material</div>
+        <ul class="point-list">
+          <li><strong>Meaningfulness:</strong> Meaningful, well-organized content is learned and retained faster.</li>
+          <li><strong>Difficulty Level:</strong> Material too easy causes boredom; too difficult causes frustration. Optimal challenge (Zone of Proximal Development) is best.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <div class="q-text">
+        What is trial and error learning? Explain Thorndike's experiment. Bring out the educational implications.
+        <div class="q-meta">2+5+3 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>See October 2021 Q.4 above — identical question with identical answer structure.</em></div>
+        <div class="answer-block">
+          <div class="sub-q">Key Points to Emphasize</div>
+          <ul class="point-list">
+            <li>S-R Bond Theory (Connectionism) — Thorndike's core contribution.</li>
+            <li>Three Laws: Readiness, Effect, Exercise.</li>
+            <li>Puzzle Box: Cat, hunger drive, random movements, chance success, fixation of correct response.</li>
+            <li>Educational Implications: Readiness, meaningful practice, satisfaction, application.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART B 2022 -->
+  <div class="part-divider">
+    <span class="part-label b">Part B</span><hr>
+    <span class="part-info">Answer any 8 · Each ≤ 1½ pages · 5 marks each</span>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <div class="q-text">What is educational psychology? How is the knowledge of educational psychology helpful for a teacher?<div class="q-meta">2+3 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>See Oct 2021 Q.1 above — same content applies for definition and teacher usefulness.</em></div>
+        <div class="answer-text"><p><strong>Key Definition:</strong> "Educational psychology is the science of teaching and learning." (Skinner). <strong>Usefulness to Teacher:</strong> Understanding learner, effective teaching methods, classroom management, curriculum design, evaluation, motivation, guiding exceptional children.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <div class="q-text">Explain the social development of childhood period. Write the educational implications of social development of childhood.<div class="q-meta">3+2 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="section-heading">Social Development of Childhood</div>
+        <div class="def-box b">"Social development is the increasing ability to get along with others and oneself." — Sorenson</div>
+        <ul class="point-list b">
+          <li><strong>Infancy (0–2):</strong> Attachment to caregivers; basic trust vs. mistrust (Erikson). Social smile develops at 6 weeks.</li>
+          <li><strong>Early Childhood (2–6):</strong> Parallel play → associative play → cooperative play. Egocentric stage. Family is the main social unit. Learns to share, take turns.</li>
+          <li><strong>Late Childhood (6–12):</strong> Peer group becomes important. Gang age — children form small exclusive groups. Sex consciousness develops. Competition, cooperation, and social comparison emerge. Loyalty and group identity become strong.</li>
+          <li>Social development is influenced by: family atmosphere, school atmosphere, peer group, community, religious institutions, and mass media.</li>
+        </ul>
+        <div class="section-heading">Educational Implications</div>
+        <ul class="point-list b">
+          <li>Use cooperative learning activities — group projects, team games foster social skills.</li>
+          <li>Encourage respect, empathy, and inclusion — model and teach prosocial behavior.</li>
+          <li>Create mixed-group activities to reduce social hierarchies and in-group/out-group thinking.</li>
+          <li>Involve parents in school activities — home-school partnership strengthens social development.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <div class="q-text">Explain the impact of urbanisation and economic change on adolescents.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.2 (c) for the full detailed answer — positive and negative impacts of urbanisation on adolescents.</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.9</span>
+      <div class="q-text">Mention the developmental tasks of adolescent period.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.14 — Havighurst's 10 developmental tasks of adolescence (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.10</span>
+      <div class="q-text">What is personality? Explain the determinants of personality.<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.12 — Definition by Allport and the determinants: Heredity, Environment, Family, School, Peers, Culture, Physical health, SES (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.11</span>
+      <div class="q-text">What is transfer of learning? Explain briefly the types of transfer of learning.<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.8 — Types: Positive, Negative, Zero/Neutral, Bilateral transfer with examples (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.12</span>
+      <div class="q-text">What is insight learning? Explain Kohler's experiment on insight learning.<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.5 — Insight learning definition, Sultan the Chimpanzee experiment (stick problem + box problem), key features of insight (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.13</span>
+      <div class="q-text">What are thinking skills? How would you develop thinking skills among students?<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.9 — identical content on thinking skills and development strategies.</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.14</span>
+      <div class="q-text">Explain Albert Bandura's social learning theory.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.6 — ARRM Model (Attention, Retention, Reproduction, Motivation), types of modeling, educational significance (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.15</span>
+      <div class="q-text">Explain Skinner's experiment on operant conditioning.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.7 — Skinner's Box, rat experiment, positive/negative reinforcement, punishment, educational implications (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.16</span>
+      <div class="q-text">Explain any two learning skills of 21st century.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">21st Century Learning Skills are competencies needed to thrive in the modern world — framed by the Partnership for 21st Century Learning (P21) as the "4Cs."</div>
+        <div class="section-heading">1. Critical Thinking and Problem Solving</div>
+        <ul class="point-list b">
+          <li>The ability to analyze information, evaluate arguments, and draw well-reasoned conclusions.</li>
+          <li>Involves questioning assumptions, considering multiple perspectives, and identifying flaws in reasoning.</li>
+          <li>Developed through: case studies, debates, Socratic questioning, inquiry-based learning.</li>
+          <li>Essential in the age of misinformation — students must distinguish fact from opinion.</li>
+        </ul>
+        <div class="section-heading">2. Creativity and Innovation</div>
+        <ul class="point-list b">
+          <li>The ability to generate new and valuable ideas, products, or solutions.</li>
+          <li>Goes beyond art — creativity is needed in science, technology, business, and social life.</li>
+          <li>Developed through: project-based learning, design challenges, brainstorming, maker education.</li>
+          <li>Teachers should create a safe space for risk-taking and idea generation without fear of failure.</li>
+        </ul>
+        <div class="answer-text"><p>Other key 21st century skills: Collaboration (working in teams), Communication (verbal, written, digital), Digital Literacy, Information Literacy, Flexibility, Self-Direction, and Cultural Awareness.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.17</span>
+      <div class="q-text">Explain the cognitive domain according to revised Bloom's taxonomy.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.11 — all six levels of revised Bloom's Cognitive Domain with verbs and examples (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+</div><!-- end t2022 -->
+
+
+<!-- ═══════════════════════════════════════════════
+     TAB 3: JUNE 2023 (AB-001)
+     ═══════════════════════════════════════════════ -->
+<div id="t2023" class="tab-section">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">June 2023 · AB-001</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">HC-01: Childhood and Growing Up · Time: 3 Hours</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge amber">Part A — 3×10 = 30</span>
+      <span class="badge green">Part B — 8×5 = 40</span>
+      <span class="badge purple">Max 70 Marks</span>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <span class="part-label a">Part A</span><hr>
+    <span class="part-info">Answer any 3 · Each ≤ 3 pages · 10 marks each</span>
+  </div>
+
+  <!-- Q1 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">Q.1</span>
+      <div class="q-text">
+        What is childhood? Explain the physical and intellectual characteristics of childhood period. What are the educational implications of these characteristics?
+        <div class="q-meta">1+6+3 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) What is Childhood? (1 mark)</div>
+        <div class="def-box c">Childhood refers to the developmental period from birth to the onset of adolescence (approximately birth to 12 years). It is subdivided into: Infancy (0–2), Early Childhood (2–6), and Late Childhood (6–12). Childhood is a time of rapid all-round development.</div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Physical Characteristics of Childhood (3 marks)</div>
+        <div class="section-heading">Early Childhood (2–6 years)</div>
+        <ul class="point-list">
+          <li>Growth slows compared to infancy — average gain: 6–8 cm height, 1.5–3 kg weight per year.</li>
+          <li>Brain reaches 90% of adult size by age 5; myelination continues rapidly.</li>
+          <li>Gross motor skills develop (running, jumping, climbing); fine motor skills (drawing, buttoning) follow.</li>
+          <li>Baby teeth fall; permanent teeth begin appearing.</li>
+        </ul>
+        <div class="section-heading">Late Childhood (6–12 years)</div>
+        <ul class="point-list">
+          <li>Steady, slower growth — "latency period" of physical development.</li>
+          <li>Increased muscular strength and coordination — children excel at sports and physical activities.</li>
+          <li>Pre-pubescent changes begin toward end (ages 10–12): girls begin puberty earlier than boys.</li>
+          <li>Children are energetic and physically active — cannot sit still for long.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">c) Intellectual Characteristics (3 marks)</div>
+        <ul class="point-list">
+          <li><strong>Pre-operational (2–7):</strong> Symbolic thinking (language), egocentrism, centration, cannot conserve, animistic thinking.</li>
+          <li><strong>Concrete Operational (7–12):</strong> Logical reasoning about concrete objects, conservation, classification, seriation, decentration, and reversibility.</li>
+          <li>Rapid vocabulary growth; reading, writing, arithmetic skills develop.</li>
+          <li>Memory, attention, and problem-solving abilities improve steadily.</li>
+          <li>Curiosity-driven, love of exploration and "why" questions.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">d) Educational Implications (3 marks)</div>
+        <ul class="point-list c">
+          <li><strong>Concrete before Abstract:</strong> Use objects, models, and experiments before symbols and formulas.</li>
+          <li><strong>Activity-Based Learning:</strong> Incorporate movement, play, and hands-on activities — children learn by doing.</li>
+          <li><strong>Short Activity Spans:</strong> Vary activities frequently — young children cannot sustain attention for long.</li>
+          <li><strong>Readiness:</strong> Do not teach concepts before the child has reached the required cognitive stage.</li>
+          <li><strong>Discovery Learning:</strong> Allow exploration and questioning — do not give answers before children have thought.</li>
+          <li><strong>Physical Education:</strong> Regular physical activity is essential — it supports both physical development and cognitive function.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">Q.2</span>
+      <div class="q-text">
+        Explain the emotional and social development of adolescents. Explain the educational programmes suitable for emotional and social development of an adolescent learner.
+        <div class="q-meta">6+4 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Emotional Development of Adolescents (3 marks)</div>
+        <ul class="point-list">
+          <li><strong>Heightened Emotional Intensity:</strong> Emotions are more intense and volatile — joy, sadness, love, anger experienced deeply.</li>
+          <li><strong>Mood Swings:</strong> Hormonal changes cause rapid shifts between happiness and despair — normal in adolescence.</li>
+          <li><strong>Identity Emotions:</strong> Erikson's Identity vs. Role Confusion — the search for self causes anxiety and sometimes depression.</li>
+          <li><strong>Romantic Feelings:</strong> First experiences of love, infatuation, heartbreak — emotionally intense and confusing.</li>
+          <li><strong>Self-Consciousness:</strong> Heightened awareness of appearance, social judgment, and peer evaluation — imaginary audience phenomenon (Elkind).</li>
+          <li><strong>Emotional Independence:</strong> Desire to break from parental emotional control and establish own emotional identity.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Social Development of Adolescents (3 marks)</div>
+        <ul class="point-list">
+          <li><strong>Peer Group Dominance:</strong> Peer group replaces family as the primary social influence. Conformity to peer norms in dress, speech, music, and behavior.</li>
+          <li><strong>Social Identity:</strong> Adolescents develop group identities — belonging to cliques, subcultures, sports teams, etc.</li>
+          <li><strong>Romantic Relationships:</strong> First intimate partnerships develop; exploration of sexual and gender identity.</li>
+          <li><strong>Parent-Adolescent Conflict:</strong> Tension arises from desire for autonomy vs. parental authority.</li>
+          <li><strong>Social Responsibility:</strong> Beginning to understand civic duties, social justice, and community responsibility.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">c) Educational Programmes for Emotional and Social Development (4 marks)</div>
+        <ul class="point-list c">
+          <li><strong>Social-Emotional Learning (SEL):</strong> Structured programmes teaching empathy, self-awareness, responsible decision-making, and relationship management.</li>
+          <li><strong>Life Skills Education:</strong> Communication, cooperation, conflict resolution, stress management — essential skills for life.</li>
+          <li><strong>Counselling Services:</strong> Individual and group counselling for emotional adjustment, career guidance, and personal problems.</li>
+          <li><strong>Peer Support Groups:</strong> Trained peer counselors who help their fellow students — reduces isolation and bullying.</li>
+          <li><strong>Co-Curricular Activities:</strong> Sports, drama, art, NCC, NSS — provide healthy outlets for emotional energy and social belonging.</li>
+          <li><strong>Value Education:</strong> Moral and ethical education that guides adolescents in making responsible social choices.</li>
+          <li><strong>Yoga and Mindfulness:</strong> Techniques for emotional regulation, stress reduction, and self-awareness.</li>
+          <li><strong>Community Service:</strong> Participation in social work builds empathy, social awareness, and civic responsibility.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">Q.3</span>
+      <div class="q-text">
+        What is mental health? Explain the characteristics of a mentally healthy person. How would you promote good mental health among adolescent learners?
+        <div class="q-meta">2+4+4 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>This question has the same structure as July 2022 Q.3. Refer to that answer for all three parts: definition, characteristics of mentally healthy person, and promotion programmes in school.</em></div>
+        <div class="def-box c">Key addition for this version: The WHO defines mental health as "a state of well-being in which an individual realizes his or her own abilities, can cope with the normal stresses of life, can work productively, and is able to make a contribution to his or her community."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">Q.4</span>
+      <div class="q-text">Explain any five learning skills of 21st Century.<div class="q-meta">10 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box c">21st Century Skills are competencies required for success in the modern knowledge economy. The P21 Framework identifies them as the "4Cs" + additional skills.</div>
+        <div class="section-heading">1. Critical Thinking and Problem Solving (2 marks)</div>
+        <div class="answer-text"><p>The ability to analyze information, evaluate evidence, and think logically to solve complex problems. Involves reasoning, questioning assumptions, and drawing evidence-based conclusions. Developed through inquiry, debate, case studies.</p></div>
+        <div class="section-heading">2. Creativity and Innovation (2 marks)</div>
+        <div class="answer-text"><p>Generating original ideas and novel solutions. Thinking outside the box; taking creative risks. Involves imagination, elaboration, and openness to new experiences. Promoted through project-based and design-based learning.</p></div>
+        <div class="section-heading">3. Communication (2 marks)</div>
+        <div class="answer-text"><p>Effectively transmitting ideas and information in multiple modalities — oral, written, visual, and digital. Includes listening actively, presenting clearly, and adapting communication to audience. Digital communication skills (email, presentations, social media literacy) are critical today.</p></div>
+        <div class="section-heading">4. Collaboration (2 marks)</div>
+        <div class="answer-text"><p>Working effectively in diverse teams toward common goals. Involves flexibility, compromise, shared responsibility, and interpersonal skills. Global collaboration across cultures and time zones is a key 21st century requirement. Developed through group projects, cooperative learning.</p></div>
+        <div class="section-heading">5. Digital Literacy / ICT Literacy (2 marks)</div>
+        <div class="answer-text"><p>The ability to use, understand, and create digital technology responsibly. Includes using computers, internet, software, and digital communication tools. Also includes media literacy — critically evaluating digital information for credibility and bias. Essential in the age of AI and big data.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">Q.5</span>
+      <div class="q-text">
+        What is trial and error learning? Explain Thorndike's experiment. Mention the educational implications.
+        <div class="q-meta">2+5+3 = 10 marks</div>
+      </div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Identical to October 2021 Q.4 — refer to that complete answer for Trial and Error Learning, Puzzle Box experiment, and educational implications.</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART B 2023 -->
+  <div class="part-divider">
+    <span class="part-label b">Part B</span><hr>
+    <span class="part-info">Answer any 8 · Each ≤ 1½ pages · 5 marks each</span>
+  </div>
+
+  <!-- Q6 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <div class="q-text">Explain how diversified economic and cultural backgrounds have an impact on social development of childhood period children.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="section-heading">Impact of Economic Background on Social Development</div>
+        <ul class="point-list b">
+          <li><strong>Poverty:</strong> Children from low-income families may experience social exclusion, stigma, and lack of access to extracurricular activities that promote social skills.</li>
+          <li><strong>Affluence:</strong> Wealthy families may overschedule children, leaving less time for unstructured social play. Materialism can affect peer relationships.</li>
+          <li><strong>Working Parents:</strong> Economic necessity leads to children in institutional care (daycare, after-school programs) — affects attachment and social learning.</li>
+          <li><strong>Community Resources:</strong> Children in economically developed areas have better access to playgrounds, libraries, and social programs that enhance social development.</li>
+        </ul>
+        <div class="section-heading">Impact of Cultural Background on Social Development</div>
+        <ul class="point-list b">
+          <li><strong>Collectivist Cultures:</strong> Emphasize group harmony, cooperation, and respect for elders — children learn interdependence and social hierarchy early.</li>
+          <li><strong>Individualist Cultures:</strong> Promote assertiveness, self-expression, and independence — children learn to advocate for themselves.</li>
+          <li><strong>Language:</strong> Children who speak the home language (mother tongue) can develop social connections within their cultural community; those who don't may feel isolated in mainstream schools.</li>
+          <li><strong>Religious &amp; Traditional Practices:</strong> Cultural festivals, rituals, and community gatherings are important socializing agents that build group identity.</li>
+        </ul>
+        <div class="section-heading">Teacher's Responsibility</div>
+        <ul class="point-list b">
+          <li>Create an inclusive, multicultural classroom that celebrates diversity.</li>
+          <li>Avoid stereotyping children based on socioeconomic or cultural background.</li>
+          <li>Ensure all children have equal opportunities for social participation regardless of background.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q7 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <div class="q-text">Explain the developmental tasks of adolescent period.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.14 — Havighurst's developmental tasks of adolescence (identical 10-point list).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q8 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <div class="q-text">What is personality? Explain the determinants of personality.<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.12 — Allport's definition and all determinants of personality (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q9 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.9</span>
+      <div class="q-text">Explain Skinner's experiment on operant conditioning.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.7 — Skinner's Box, rat experiment, reinforcement types, extinction, educational implications (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.10</span>
+      <div class="q-text">What is learning? Explain briefly any two factors affecting learning.<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box c">Learning is a relatively permanent change in behavior, knowledge, or attitudes as a result of experience or practice.</div>
+        <div class="section-heading">Factor 1: Motivation</div>
+        <ul class="point-list">
+          <li>Motivation is the driving force of learning. Without motivation, even intelligent students fail to learn.</li>
+          <li><strong>Intrinsic Motivation:</strong> Internal drive — curiosity, interest, satisfaction of learning itself. Most powerful for deep, lasting learning.</li>
+          <li><strong>Extrinsic Motivation:</strong> External incentives — grades, praise, rewards. Effective in the short term; excessive use can undermine intrinsic motivation.</li>
+          <li>Teachers can enhance motivation through: meaningful tasks, achievable challenges, positive feedback, student autonomy, and connecting content to students' lives.</li>
+        </ul>
+        <div class="section-heading">Factor 2: Maturation and Readiness</div>
+        <ul class="point-list">
+          <li>A child cannot learn a task no matter how much practice is given if the necessary biological maturation has not occurred.</li>
+          <li>Readiness = state of physical, emotional, and intellectual preparedness to learn a specific task.</li>
+          <li>Teaching before readiness leads to frustration and failure; waiting until maturation occurs makes learning natural and efficient.</li>
+          <li>Teachers must assess readiness before introducing new concepts — use diagnostic assessment.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.11</span>
+      <div class="q-text">Explain Kohler's experiment on insight learning.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.5 (b) — full Kohler's chimpanzee Sultan experiment (stick problem + box problem) with features of insight (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.12</span>
+      <div class="q-text">Why there is a need for developing thinking skills for a learner?<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="section-heading">Need for Developing Thinking Skills in Learners</div>
+        <ul class="point-list b">
+          <li><strong>Navigating Complexity:</strong> Modern life presents complex, multi-faceted problems with no simple answers — thinking skills enable learners to analyze and solve them.</li>
+          <li><strong>Information Overload:</strong> In the digital age, learners are bombarded with information — critical thinking helps distinguish fact from fiction, credible from misleading.</li>
+          <li><strong>Career Readiness:</strong> Employers across all fields increasingly demand employees who can think independently, innovate, and solve problems — not just follow instructions.</li>
+          <li><strong>Autonomous Learning:</strong> Thinking skills enable self-directed learning — learners who can think well can teach themselves anything throughout life.</li>
+          <li><strong>Decision Making:</strong> Good thinking enables wise personal, social, and professional decisions — reduces impulsive and harmful choices.</li>
+          <li><strong>Scientific Temper:</strong> Indian Constitution (Article 51A) directs the development of scientific temper — this requires thinking skills.</li>
+          <li><strong>Social Responsibility:</strong> Democratic citizenship requires citizens who can critically evaluate political claims and social policies — not blindly follow leaders.</li>
+          <li><strong>Beyond Rote Learning:</strong> Traditional education focused on memorization — 21st century education demands comprehension, application, analysis, and creation (Bloom's higher order levels).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.13</span>
+      <div class="q-text">What is transfer of learning? Explain briefly the types of transfer of learning with suitable examples.<div class="q-meta">1+4 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.8 — complete answer with definition and all types (Positive, Negative, Zero, Bilateral) with examples (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q14 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.14</span>
+      <div class="q-text">Why the knowledge of educational psychology is needed for a teacher?<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.1 (c) — 8 reasons why educational psychology is useful to a classroom teacher (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q15 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.15</span>
+      <div class="q-text">Explain briefly Albert Bandura's social learning theory.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.6 — ARRM model, types of modeling, educational significance (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q16 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.16</span>
+      <div class="q-text">Explain the impact of urbanisation and economic change on adolescents.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.2 (c) — positive and negative impacts of urbanisation on adolescents (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q17 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.17</span>
+      <div class="q-text">Explain briefly the cognitive domain according to revised Bloom's taxonomy of educational objectives.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to October 2021 Q.11 — all six levels of revised Bloom's Cognitive Domain: Remember, Understand, Apply, Analyze, Evaluate, Create — with verbs and examples (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+</div><!-- end t2023 -->
+
+
+<!-- ═══════════════════════════════════════════════
+     TAB 4: IMPORTANT QUESTIONS BANK
+     ═══════════════════════════════════════════════ -->
+<div id="timp" class="tab-section">
+  <div class="paper-header" style="border-color:rgba(245,158,11,0.3);">
+    <div>
+      <div class="paper-title" style="color:var(--accent3);">★ Important Questions Bank</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">High-frequency questions · All years combined · HC-01</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge amber">Must Prepare</span>
+      <span class="badge green">Repeated Topics</span>
+    </div>
+  </div>
+
+  <div style="background:var(--surface2);border:1px solid rgba(245,158,11,0.2);border-radius:10px;padding:1.2rem 1.5rem;margin-bottom:2rem;">
+    <div style="font-size:13px;color:var(--accent3);font-weight:700;margin-bottom:0.8rem;font-family:'JetBrains Mono',monospace;">★ MOST REPEATED PART A TOPICS (10 marks each)</div>
+    <div class="imp-grid">
+      <div class="imp-item">Educational Psychology — definition, scope, teacher's use</div>
+      <div class="imp-item">Adolescents — characteristics, identity, developmental tasks (Havighurst)</div>
+      <div class="imp-item">Childhood — physical, intellectual, emotional development + implications</div>
+      <div class="imp-item">Trial & Error Learning — Thorndike's Puzzle Box + Laws + Implications</div>
+      <div class="imp-item">Insight Learning — Kohler's Chimpanzee experiment + Implications</div>
+      <div class="imp-item">Learning — definition, characteristics, factors + motivation</div>
+      <div class="imp-item">Mental Health — definition, characteristics, promotion in schools</div>
+      <div class="imp-item">21st Century Skills — any five skills in detail</div>
+      <div class="imp-item">Urbanisation impact on adolescents — positive & negative</div>
+      <div class="imp-item">Emotional & Social development of adolescents + programmes</div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface2);border:1px solid rgba(129,140,248,0.2);border-radius:10px;padding:1.2rem 1.5rem;margin-bottom:2rem;">
+    <div style="font-size:13px;color:var(--accent2);font-weight:700;margin-bottom:0.8rem;font-family:'JetBrains Mono',monospace;">MOST REPEATED PART B TOPICS (5 marks each)</div>
+    <div class="imp-grid">
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Albert Bandura's Social Learning Theory (ARRM model)</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Skinner's Operant Conditioning experiment</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Transfer of Learning — types with examples</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Thinking skills — definition and development</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Revised Bloom's Taxonomy — Cognitive Domain levels</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Determinants of Personality</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Maturation — definition and educational implications</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Developmental tasks of adolescents (Havighurst)</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Social development of childhood + implications</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Mental health — characteristics of mentally healthy person</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Memory — types, how to help students remember better</div>
+      <div class="imp-item" style="border-color:rgba(129,140,248,0.2);">Affective domain — Bloom's Taxonomy levels</div>
+    </div>
+  </div>
+
+  <!-- KEY DEFINITIONS QUICK REFERENCE -->
+  <div class="part-divider"><span class="part-label a">Quick Reference</span><hr><span class="part-info">Key Definitions to Memorize</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">DEF</span>
+      <div class="q-text">Key Definitions — All Theorists at a Glance<div class="q-meta">Memorize these for 1-2 mark definition questions</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <ul class="point-list c">
+          <li><strong>Educational Psychology</strong> — "Science of teaching and learning." — Skinner</li>
+          <li><strong>Learning</strong> — "Modification of behavior through experience and training." — Gates</li>
+          <li><strong>Adolescence</strong> — "Period of great stress, strain, storm and strife." — Stanley Hall</li>
+          <li><strong>Childhood</strong> — Age span from birth to adolescence, typically before age 13.</li>
+          <li><strong>Personality</strong> — "Dynamic organization within the individual of psychophysical systems that determine his unique adjustment to the environment." — G.W. Allport</li>
+          <li><strong>Mental Health</strong> — "Full and harmonious functioning of the whole personality." / "Ability to make personal and social adjustments."</li>
+          <li><strong>Maturation</strong> — "Process of becoming mature — biologically predetermined unfolding of development, independent of experience."</li>
+          <li><strong>Transfer of Learning</strong> — "Application of skills/knowledge from one learning situation to another."</li>
+          <li><strong>Insight Learning</strong> — "Abrupt realization of a problem's solution — sudden perception of relationships."</li>
+          <li><strong>Trial and Error</strong> — "Learning is nothing but stamping in correct responses and stamping out incorrect responses." — Thorndike</li>
+          <li><strong>Social Learning</strong> — "Behavior is learned from the environment through observational learning." — Bandura (1977)</li>
+          <li><strong>Motivation</strong> — "Internal force that drives, directs, and sustains behavior toward a goal."</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- THORNDIKE LAWS QUICK CARD -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">LAW</span>
+      <div class="q-text">Thorndike's Three Laws of Learning — Quick Summary<div class="q-meta">Always include these in Trial &amp; Error answers</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <ul class="point-list c">
+          <li><strong>Law of Readiness:</strong> When a conduction unit is ready to act, acting is satisfying. When not ready, acting is annoying. Teaching must wait for learner readiness.</li>
+          <li><strong>Law of Effect:</strong> Responses followed by a satisfying state are strengthened; responses followed by annoyance are weakened. Pleasure strengthens bonds; pain weakens them. (Basis of reinforcement.)</li>
+          <li><strong>Law of Exercise (Use &amp; Disuse):</strong> A bond strengthened by use; weakened by disuse. Practice and repetition are essential. "Practice makes perfect."</li>
+        </ul>
+        <div class="def-box c">Later Thorndike added: Law of Multiple Response, Law of Set/Attitude, Law of Associative Shifting, Law of Analogy — but the main three are most important for exams.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- HAVIGHURST TASKS FULL LIST -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">TASK</span>
+      <div class="q-text">Havighurst's Developmental Tasks — Complete List (Exam Ready)<div class="q-meta">5-mark question · Memorize all 10</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box c">Havighurst defined a developmental task as "a task which arises at or about a certain period in the life of the individual, successful achievement of which leads to his happiness and success with later tasks."</div>
+        <ul class="point-list c">
+          <li>Achieving new and more mature relations with age-mates of both sexes.</li>
+          <li>Achieving a masculine or feminine social role.</li>
+          <li>Accepting one's physique and using the body effectively.</li>
+          <li>Achieving emotional independence of parents and other adults.</li>
+          <li>Preparing for an economic career.</li>
+          <li>Preparing for marriage and family life.</li>
+          <li>Selecting and preparing for an occupation.</li>
+          <li>Developing intellectual skills and concepts necessary for civic competence.</li>
+          <li>Desiring and achieving socially responsible behavior.</li>
+          <li>Acquiring a set of values and an ethical system as a guide to behavior — developing an ideology.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- BLOOM'S QUICK CARD -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">BLOOM</span>
+      <div class="q-text">Revised Bloom's Taxonomy — Complete Quick Reference<div class="q-meta">All three domains for exam readiness</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">Cognitive Domain (Knowledge) — Revised by Anderson &amp; Krathwohl (2001)</div>
+        <ul class="point-list c">
+          <li><strong>1. Remember</strong> — Recall, Recognize: Define, List, Name, State</li>
+          <li><strong>2. Understand</strong> — Interpret, Classify: Describe, Explain, Summarize</li>
+          <li><strong>3. Apply</strong> — Execute, Implement: Solve, Demonstrate, Use</li>
+          <li><strong>4. Analyze</strong> — Differentiate, Compare: Examine, Break down, Distinguish</li>
+          <li><strong>5. Evaluate</strong> — Judge, Critique: Justify, Assess, Argue</li>
+          <li><strong>6. Create</strong> — Produce, Design: Construct, Compose, Plan</li>
+        </ul>
+        <div class="sub-q b" style="margin-top:1rem;">Affective Domain (Attitudes) — Krathwohl, Bloom, Masia (1964)</div>
+        <ul class="point-list b">
+          <li><strong>1. Receiving</strong> — Awareness, willingness to listen, selected attention</li>
+          <li><strong>2. Responding</strong> — Active participation, complying, willingness to respond</li>
+          <li><strong>3. Valuing</strong> — Accepting a value, preferring, committing</li>
+          <li><strong>4. Organization</strong> — Organizing values into priorities, reconciling conflicts</li>
+          <li><strong>5. Characterization</strong> — Having a value system that controls behavior (internalization)</li>
+        </ul>
+        <div class="sub-q" style="margin-top:1rem;color:var(--accent);">Psychomotor Domain (Skills) — Simpson</div>
+        <ul class="point-list">
+          <li>Perception → Set → Guided Response → Mechanism → Complex Overt Response → Adaptation → Origination</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- EXAM TIPS -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">TIPS</span>
+      <div class="q-text">Exam Writing Tips for HC-01<div class="q-meta">How to maximize marks in the 3-hour exam</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="section-heading">Part A (10-mark answers — max 3 pages)</div>
+        <ul class="point-list c">
+          <li>Start with a definition or opening statement — 1 mark secured immediately.</li>
+          <li>Use sub-headings (a, b, c) matching the question structure — examiners love clear structure.</li>
+          <li>Use bullet points/numbered lists for characteristics, implications, tasks — faster to write and easy to grade.</li>
+          <li>Include at least ONE theorist quote or definition with the theorist's name in every answer.</li>
+          <li>End each section with an educational implication if asked — always connect theory to practice.</li>
+          <li>Aim for 2–2.5 pages per 10-mark answer — do not exceed 3 pages.</li>
+        </ul>
+        <div class="section-heading">Part B (5-mark answers — max 1.5 pages)</div>
+        <ul class="point-list c">
+          <li>Write 4–6 well-elaborated points for 5-mark answers — quality over quantity.</li>
+          <li>Always write a 1–2 line definition/opening before the points.</li>
+          <li>For experiment-type questions (Thorndike, Kohler, Skinner): use DRIVE → BLOCK → RANDOM MOVEMENT → SUCCESS → FIXATION structure.</li>
+          <li>Time management: 30 min for Part A questions (3 × 10 min) + 60 min for Part B (8 × 7.5 min) + buffer.</li>
+        </ul>
+        <div class="section-heading">Most Likely Combinations to Prepare</div>
+        <ul class="point-list c">
+          <li>Trial & Error + Insight Learning (one of each always appears in Part A).</li>
+          <li>Adolescence question ALWAYS appears — developmental tasks, urbanisation, or emotional development.</li>
+          <li>Educational Psychology / Bloom's Taxonomy almost always in Part B.</li>
+          <li>Bandura + Skinner — both appear every year in Part B.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- end timp -->
+
+
+<!-- ═══════════════════════════════════════════════
+     TAB: AUG 2016 (PG-1001)
+     ═══════════════════════════════════════════════ -->
+<div id="t2016" class="tab-section">
+  <div class="paper-header" style="border-color:rgba(244,114,182,0.3);">
+    <div>
+      <div class="paper-title" style="color:var(--accent4);">August 2016 · PG-1001</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">HC-1: Childhood and Growing Up · Time: 3 Hours</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge pink">Part A — 3×10 = 30</span>
+      <span class="badge green">Part B — 8×5 = 40</span>
+      <span class="badge amber">Max 70 Marks</span>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <span class="part-label a">Part A</span><hr>
+    <span class="part-info">Answer any 3 · Each ≤ 3 pages · 10 marks each</span>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <div class="q-text">What is educational psychology? Explain the need of knowledge of educational psychology to a class room teacher.<div class="q-meta">2+8 = 10 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) What is Educational Psychology? (2 marks)</div>
+        <div class="def-box">"Educational Psychology is the branch of Psychology which deals with the behavior of the learner in relation to his educational needs and his environment." — Skinner: "Educational Psychology is that branch of psychology which deals with teaching and learning."</div>
+        <div class="answer-text"><p>Educational psychology applies psychological principles to the practical problems of the educational setting — understanding learners, designing teaching, evaluating outcomes, and promoting mental health in schools.</p></div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Need/Usefulness of Educational Psychology to a Classroom Teacher (8 marks)</div>
+        <ul class="point-list">
+          <li><strong>To Understand the Learner:</strong> Helps teachers understand developmental characteristics, individual differences, learning styles, interests, abilities, and needs of each student.</li>
+          <li><strong>Group Dynamics:</strong> Teachers understand how peer groups function, class cohesion, and how group learning can be harnessed effectively.</li>
+          <li><strong>Nature of Classroom Learning:</strong> Helps teachers understand how learning actually occurs in classroom situations and what conditions enhance or hinder it.</li>
+          <li><strong>Effective Teaching Methods:</strong> Guides teachers to select age-appropriate, subject-appropriate instructional strategies that match how students learn best.</li>
+          <li><strong>Catering to Individual Differences:</strong> Teachers learn to identify gifted, average, and slow learners and adapt teaching to meet each student's level.</li>
+          <li><strong>Designing Curriculum:</strong> Educational psychology principles guide curriculum developers and teachers to sequence content from simple to complex, concrete to abstract.</li>
+          <li><strong>Measuring Learning Outcomes:</strong> Helps teachers construct valid and reliable tests, interpret results, and give meaningful, growth-oriented feedback.</li>
+          <li><strong>Mental Health Knowledge:</strong> Equips teachers to recognize signs of emotional disturbance, anxiety, learning disabilities, and refer students to appropriate support.</li>
+          <li><strong>Mechanism of Heredity &amp; Environment:</strong> Teachers understand how genetic potential and environmental factors jointly shape a child's capabilities — avoiding fixed mindsets.</li>
+          <li><strong>Guiding Exceptional Children:</strong> Teachers learn strategies for supporting gifted students, slow learners, and students with physical or learning disabilities.</li>
+          <li><strong>Handling Indiscipline:</strong> Provides teachers with psychological understanding of why indiscipline occurs and constructive strategies to maintain a positive classroom environment.</li>
+          <li><strong>Framing Timetable &amp; Using AVA:</strong> Psychology of attention and fatigue helps teachers plan schedules and use audio-visual aids to optimize learning.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <div class="q-text">What is adolescence? Explain briefly the impact of urbanisation and social change on adolescents. List the developmental tasks of adolescents.<div class="q-meta">2+5+3 = 10 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) What is Adolescence? (2 marks)</div>
+        <div class="def-box">"Adolescence is a period of great stress, strain, storm and strife." — Stanley Hall<br>"Adolescence is the age of great ideals and beginning of theories as well as the time of simple adaptation to life." — Jean Piaget</div>
+        <div class="answer-text"><p>Adolescence (from Latin "adolescere" = to grow to maturity) is the transitional period from childhood to adulthood, typically ages 12–18. It is marked by rapid physical, emotional, cognitive, and social changes and involves the challenge of forming a stable identity (Erikson).</p></div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Impact of Urbanisation and Social Change on Adolescents (5 marks)</div>
+        <div class="section-heading">Positive Impacts</div>
+        <ul class="point-list">
+          <li>Adolescents today are more aware of their surroundings and better connected with the outside world due to technological advance.</li>
+          <li>Better availability and enhanced efficiency of the education system has helped increase learning ability.</li>
+          <li>Increase in economic status of the family helps in decreasing health problems among adolescents.</li>
+          <li>Reduced patriarchal mindset in urban areas leads to better gender sensitization.</li>
+          <li>More opportunities for schooling, recreation, scope for artistic development, and child rights awareness.</li>
+          <li>Urbanization comes with better health facilities — lower IMR and MMR in urban areas.</li>
+        </ul>
+        <div class="section-heading">Negative Impacts</div>
+        <ul class="point-list">
+          <li>New gadgets have isolated adolescents from the real world, making them habitual of the virtual world.</li>
+          <li>Instances of obesity have increased due to more consumption of fast food and sedentary lifestyle.</li>
+          <li>Family strife increases when adolescents seek more independence; working parents have less time for them.</li>
+          <li>Unchecked internet access has led to growth of anti-social behavior, cyberbullying, and online radicalization.</li>
+          <li>Slums, high pollution, crime, delinquency, drug addiction, and human trafficking are common in urban environments.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">c) Developmental Tasks of Adolescents — Havighurst (3 marks)</div>
+        <ul class="point-list c">
+          <li>Achieving new and more mature relations with age-mates of both sexes.</li>
+          <li>Achieving a masculine or feminine social role.</li>
+          <li>Accepting one's physique and using the body effectively.</li>
+          <li>Achieving emotional independence of parents and other adults.</li>
+          <li>Preparing for an economic career and achieving economic independence.</li>
+          <li>Selecting and preparing for an occupation / marriage and family life.</li>
+          <li>Developing intellectual skills and concepts necessary for civic competence.</li>
+          <li>Desiring and achieving socially responsible behavior.</li>
+          <li>Acquiring a set of values and an ethical system as a guide to behavior.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <div class="q-text">What is learning? List the characteristics of learning. Explain the influence of motivation on learning.<div class="q-meta">2+3+5 = 10 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to Oct 2021 Q.3 — identical question and content: definition of learning, 8 characteristics, and influence of motivation (types, effects on effort, persistence, cognitive processing, performance).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <div class="q-text">What is trial and error learning? Explain Thorndike's experiment. What are the educational implications?<div class="q-meta">2+5+3 = 10 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to Oct 2021 Q.4 — identical full answer: S-R Bond Theory, Puzzle Box experiment (drive→block→random→chance success→fixation), Three Laws, educational implications.</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <div class="q-text">What is insight learning? Explain Kohler's experiment. List the educational implications.<div class="q-meta">2+5+3 = 10 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to Oct 2021 Q.5 — identical full answer: definition, Sultan the chimpanzee (stick problem + box problem), features of insight, educational implications (Gestalt principle, minimize rote, problem-solving methods).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-divider">
+    <span class="part-label b">Part B</span><hr>
+    <span class="part-info">Answer any 8 · Each ≤ 1½ pages · 5 marks each</span>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <div class="q-text">What is childhood? What are the characteristics of childhood?<div class="q-meta">2+3 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Childhood is the age span ranging from birth to adolescence — typically birth to 12–13 years. It is NOT a uniform period. Every child is unique and special.</div>
+        <div class="section-heading">Characteristics of Childhood (3 key characteristics per 2016 key)</div>
+        <ul class="point-list b">
+          <li><strong>Dependency:</strong> Having a need for the support of something or someone in order to continue existing or to thrive. Children are entirely dependent on parents for food, shelter, clothing, protection.</li>
+          <li><strong>Vulnerability:</strong> Being more easily physically, emotionally, or mentally hurt, influenced, or attacked. Children are vulnerable to abuse, illness, and negative environmental influences.</li>
+          <li><strong>Resilience:</strong> The process of adapting well in the face of adversity, trauma, tragedy, threats, or significant sources of stress. Children can bounce back remarkably when given appropriate support.</li>
+        </ul>
+        <div class="answer-text"><p>Additional characteristics: Childhood thinking is characterized by idealism, impracticality, and by considerable ignorance (especially in regard to the realities of life). Children love toys, building blocks, tinker-toys, and sandboxes. These characteristics are influenced by both external and internal factors — not just biological forces but also environmental factors and children's own active contribution to their social environments.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <div class="q-text">Explain the emotional development of a child.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to Oct 2021 Q.15 — full emotional development answer: infants (2 emotions), positive emotions timeline, negative emotions (stranger wariness, separation anxiety), complex emotions (18 months–3 years), self-awareness.</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <div class="q-text">Explain the social development of adolescent.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">"Social development is the increasing ability to get along with others and oneself." — Sorenson. "Social Development means attainment of maturity in social relations." — Hurlock</div>
+        <ul class="point-list b">
+          <li><strong>Peer Group Dominance:</strong> In adolescence, peer group replaces family as the primary social influence. Adolescents seek approval, belonging, and identity through peer groups.</li>
+          <li><strong>Sex Consciousness/Awareness:</strong> Adolescents become increasingly aware of gender identity and begin forming romantic attachments and opposite-sex friendships.</li>
+          <li><strong>Loyalty and Group Identity:</strong> Strong loyalty develops toward their chosen peer group — gang, sports team, or clique. Intense emotions of friendship and rivalry.</li>
+          <li><strong>Friendly Relations:</strong> Adolescents develop deep, emotionally significant friendships — more intimate and loyal than childhood friendships.</li>
+          <li><strong>Social Widening:</strong> Interest widens from family and immediate peers to community, society, and civic responsibilities.</li>
+          <li><strong>Influencing Factors:</strong> Family atmosphere, school atmosphere, peer group influence, community, neighborhood, religious institutions all shape social development.</li>
+          <li><strong>Social Responsibility:</strong> Development of civic consciousness — understanding duties and responsibilities toward the broader society.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.9</span>
+      <div class="q-text">What is mental health? How do you promote mental health of adolescents?<div class="q-meta">2+3 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to Oct 2021 Q.13 — definition of mental health, and 8 ways to promote mental health of adolescents (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.10</span>
+      <div class="q-text">Explain briefly the affective domain of learning.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">The Affective Domain (Krathwohl, Bloom, Masia, 1973) includes the manner in which we deal with things emotionally — feelings, values, appreciation, enthusiasms, motivations, and attitudes.</div>
+        <div class="section-heading">Five Levels of the Affective Domain (Simple → Complex)</div>
+        <ul class="point-list b">
+          <li><strong>1. Receiving Phenomena:</strong> Awareness, willingness to hear, selected attention. The learner is passive but aware. E.g., listening attentively to a teacher's explanation.</li>
+          <li><strong>2. Responding to Phenomena:</strong> Active participation on the part of the learner. Attends and reacts to a particular phenomenon. Willingness to respond, satisfaction in responding. E.g., participating in class discussions.</li>
+          <li><strong>3. Valuing:</strong> The worth or value a person attaches to a particular object or behavior. Ranges from simple acceptance to complex commitment. E.g., showing commitment to environmental conservation.</li>
+          <li><strong>4. Organization:</strong> Organizes values into priorities by contrasting different values, resolving conflicts between them, and creating a unique value system. Emphasis is on comparing, relating, and synthesizing values. E.g., responsibility for one's behavior and understanding the role of ethics.</li>
+          <li><strong>5. Characterization (Internalizes Values):</strong> Has a value system that controls behavior. The behavior is pervasive, consistent, predictable, and characteristic of the learner. Instructional objectives concern the student's general adjustment (personal, social, emotional). E.g., a student who is consistently honest, self-disciplined, and shows independent judgment.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.11</span>
+      <div class="q-text">What is maturation? What are the educational implications of maturation?<div class="q-meta">2+3 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to Oct 2021 Q.17 — definition of maturation and 6 educational implications (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.12</span>
+      <div class="q-text">What is personality? Explain the determinants of personality.<div class="q-meta">2+3 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to Oct 2021 Q.12 — Allport's definition and all determinants: Heredity, Environment, Family, School, Peers, Culture, Physical health, SES (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.13</span>
+      <div class="q-text">What is thinking skill? How do you develop thinking skills among secondary school students?<div class="q-meta">2+3 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to Oct 2021 Q.9 — definition and strategies to develop thinking skills (identical content). For secondary students specifically: add debates, research projects, case analysis, hypothesis testing, and Socratic seminars.</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.14</span>
+      <div class="q-text">What is reinforcement? What are the educational implications of operant conditioning theory of learning?<div class="q-meta">2+3 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Reinforcement is a consequence that will strengthen an organism's future behavior whenever that behavior is preceded by a specific antecedent stimulus. Positive reinforcement: adding a pleasant stimulus (reward). Negative reinforcement: removing an unpleasant stimulus.</div>
+        <div class="section-heading">Educational Implications of Operant Conditioning (Skinner)</div>
+        <ul class="point-list b">
+          <li>Learning objectives should be defined very specifically in terms of observable behavior.</li>
+          <li>Objectives should be arranged in "simple to complex" order — mastery learning approach.</li>
+          <li>To motivate students, reinforcement like praise, blames, grades etc. should be used appropriately.</li>
+          <li>Positive and negative gestures by teachers also serve as reinforcers in the classroom.</li>
+          <li>Reinforcers should be used periodically to overcome forgetting of learnt material.</li>
+          <li>It gives scope for individual's pace of learning; attention is drawn towards the rate of learning.</li>
+          <li>Development of human personality can be successfully influenced through operant conditioning principles.</li>
+          <li>Gives guidance in curriculum construction — arrange content so each step is achievable (programmed instruction).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.15</span>
+      <div class="q-text">Explain Thorndike's laws of learning.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Thorndike (Connectionism / S-R Bond Theory) formulated three primary laws governing learning through his Puzzle Box experiments.</div>
+        <div class="section-heading">1. Law of Readiness</div>
+        <ul class="point-list b">
+          <li>When a conduction unit (animal/learner) is ready to act, acting is satisfying.</li>
+          <li>When not ready, acting is annoying.</li>
+          <li>When ready but forced not to act — that too is annoying.</li>
+          <li>Teaching must wait for the learner's physical, psychological, and intellectual readiness.</li>
+        </ul>
+        <div class="section-heading">2. Law of Effect</div>
+        <ul class="point-list b">
+          <li>When a modifiable connection between situation and response is made and is accompanied by a satisfying state, that connection's strength is increased.</li>
+          <li>When made and accompanied by an annoying state, its strength is decreased.</li>
+          <li>Simply: Pleasure (satisfaction) strengthens S-R bonds; Pain (annoyance) weakens them.</li>
+          <li>Rewards and punishments; nothing succeeds like success.</li>
+        </ul>
+        <div class="section-heading">3. Law of Exercise (Use and Disuse)</div>
+        <ul class="point-list b">
+          <li>Law of Use: A modifiable connection made between a situation and response — when that connection is used — the connection's strength is increased.</li>
+          <li>Law of Disuse: A connection not used for a length of time decreases in strength.</li>
+          <li>Connections between stimulus and response are strengthened as they are used (practice).</li>
+          <li>Connections are weakened when practice is discontinued — "Use it or lose it."</li>
+        </ul>
+        <div class="answer-text"><p>Secondary Laws: Law of Multiple Response, Law of Set/Attitude, Law of Associative Shifting, Law of Analogy. These elaborate on how learning transfers and adapts.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.16</span>
+      <div class="q-text">Explain Albert Bandura's social learning theory.<div class="q-meta">5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to Oct 2021 Q.6 — ARRM Model (Attention, Retention, Reproduction, Motivation), three types of modeling stimuli, and educational significance (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.17</span>
+      <div class="q-text">What is transfer of learning? Explain the types of transfer of learning.<div class="q-meta">2+3 = 5 marks</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>Refer to Oct 2021 Q.8 — definition and types: Positive, Negative, Zero, Bilateral transfer with examples (identical content).</em></div>
+      </div>
+    </div>
+  </div>
+</div><!-- end t2016 -->
+
+
+<!-- ═══════════════════════════════════════════════
+     TAB: OCT 2017 (SN-001) + OFFICIAL ANSWER KEY
+     ═══════════════════════════════════════════════ -->
+<div id="t2017" class="tab-section">
+  <div class="paper-header" style="border-color:rgba(52,211,153,0.3);">
+    <div>
+      <div class="paper-title" style="color:#34d399;">October 2017 · SN-001 + Official Answer Key</div>
+      <div style="font-size:13px;color:var(--muted);margin-top:4px">HC-1: Childhood and Growing Up · Chief Examiner: Dr. A. Somashekara Murthy</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge green">Part A — 3×10 = 30</span>
+      <span class="badge purple">Part B — 8×5 = 40</span>
+      <span class="badge amber">Official Key Included ★</span>
+    </div>
+  </div>
+
+  <div style="background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:1rem 1.4rem;margin-bottom:1.5rem;">
+    <div style="font-size:13px;color:#34d399;font-weight:700;font-family:'JetBrains Mono',monospace;margin-bottom:4px;">★ OFFICIAL SCHEME OF VALUATION</div>
+    <div style="font-size:13px;color:var(--muted);">This tab contains the official 2017 answer key (Scheme of Valuation) provided by the Chief Examiner, Bangalore University. Answers below are based directly on that key — use these as your gold-standard model answers.</div>
+  </div>
+
+  <div class="part-divider">
+    <span class="part-label a">Part A</span><hr>
+    <span class="part-info">Answer any 3 · Each ≤ 3 pages · 10 marks each</span>
+  </div>
+
+  <!-- Q1 2017 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">Q.1</span>
+      <div class="q-text">What are the characteristics of childhood? Explain the emotional development of the child with special reference to diverse social and economic background.<div class="q-meta">4+6 = 10 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Characteristics of Childhood (4 marks) — Official Key</div>
+        <div class="def-box c">Childhood is the age span ranging from birth to adolescence. Every child is unique and special in its own way. Three of the most important characteristics: Dependency, Vulnerability, and Resilience.</div>
+        <ul class="point-list c">
+          <li><strong>Dependency:</strong> Having a need for the support of something or someone in order to continue existing or to thrive. Children are dependent on their parents for basic essentials of life (food, shelter, clothing, protection from a hard world). They assume these basic essentials as given, pay no thought to them, are without care in regard to them.</li>
+          <li><strong>Vulnerability:</strong> Being more easily physically, emotionally, or mentally hurt, influenced, or attacked. Children are uniquely vulnerable to environmental harm.</li>
+          <li><strong>Resilience:</strong> The process of adapting well in the face of adversity, trauma, tragedy, threats, or significant sources of stress. Childhood is not uniform; children do not just acquire competencies according to predetermined biological forces — environmental factors and children's own active contribution to their social environments are of equal significance.</li>
+          <li>Childhood thinking is characterized by idealism, impracticality, and by considerable ignorance (especially in regard to the realities of life). Children love toys, building blocks, tinker-toys, and sand boxes.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Emotional Development — Official Key (6 marks)</div>
+        <div class="answer-text"><p>Infants experience only two general emotions: pleasure and distress. This rapidly changes, and more discrete emotions develop; by 9 months, infants are thought to experience all basic emotions.</p></div>
+        <div class="section-heading">Positive Emotions</div>
+        <ul class="point-list c">
+          <li><strong>Smiles:</strong> First month → reflex response. By 6 weeks → the social smile appears. By 7 months → smiles toward people; encourages interaction and bonding.</li>
+          <li><strong>Laughing:</strong> By 3 to 4 months → during activities (playing). By 1 year → response to unexpected events. By 2 years → response to own behavior or attempting to make others laugh.</li>
+        </ul>
+        <div class="section-heading">Negative Emotions</div>
+        <ul class="point-list c">
+          <li><strong>Generalized distress.</strong> Newborns → hunger, pain, overstimulation.</li>
+          <li><strong>Anger and/or sadness:</strong> 2 months → visible facial expression matches situation.</li>
+          <li><strong>Fear and/or distress:</strong> 6–7 months to 2 years → stranger wariness. 7 to 12 months → fear of novel toys, noises, sudden movements. 8 to 15 months → separation anxiety.</li>
+          <li><strong>Stranger Wariness:</strong> The distress that young children experience when exposed to unfamiliar people. A typical 6-month-old looks away and begins to fuss. Peaks at 12–15 months. Infants begin to realize all people are not the same, and their relationship with primary caregivers is special.</li>
+          <li><strong>Separation Anxiety:</strong> Intense fear that occurs when a parent/caregiver leaves the child. Develops around the same time as object permanence and is universal across cultures.</li>
+        </ul>
+        <div class="section-heading">Complex Emotions</div>
+        <ul class="point-list c">
+          <li>People feel complex emotions such as embarrassment, pride, guilt, and shame — known as "self-conscious emotions" that involve feelings of success when standards are met and feelings of failure when they are not.</li>
+          <li>These complex emotions usually develop between 18 months and 3 years.</li>
+          <li>Self-Awareness: A foundation for emotional development is the realization that we are distinct individuals — separate from other people. The emerging sense of "me" and "mine" fosters self-conscious emotions.</li>
+        </ul>
+        <div class="section-heading">Impact of Diverse Social and Economic Background</div>
+        <ul class="point-list c">
+          <li>Children from economically disadvantaged homes experience chronic stress, which affects emotional regulation and attachment.</li>
+          <li>Children from abusive or neglectful backgrounds show delayed emotional development and trust disorders.</li>
+          <li>Cultural norms differ in emotional expression — some cultures suppress certain emotions; others encourage open expression.</li>
+          <li>Teachers must create emotionally safe classrooms that are sensitive to diverse backgrounds.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 2017 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">Q.2</span>
+      <div class="q-text">What is mental hygiene? As a teacher how will you promote mental health of the adolescents?<div class="q-meta">3+7 = 10 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) What is Mental Hygiene? (3 marks) — Official Key</div>
+        <div class="def-box c">"Mental hygiene is a science that attempts to develop and apply principles and techniques for the prevention and promotion of mental health. Mental hygiene consists of measures to reduce the incidence of mental illness through prevention and early treatment and to promote mental health." — E.G. Boring: "The aim of mental hygiene is to aid people to achieve more satisfying and more productive life through the preventions of anxieties and maladjustments."</div>
+        <div class="answer-text"><p>Mental hygiene = the science of preserving and promoting mental health. It is prescriptive in nature and envisages certain rules, conditions, and steps to promote mental health. It prevents maladjustment and promotes positive psychological functioning.</p></div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Role of Teacher in Promoting Mental Health of Adolescents (7 marks) — Official Key</div>
+        <ul class="point-list c">
+          <li>Provision for physical education — healthy body supports healthy mind.</li>
+          <li>Emotional stability of the teacher — love for children, patience, empathy set the tone.</li>
+          <li>Democratic attitude and impartiality — treating all students equally, no favoritism.</li>
+          <li>Respect for the child's individuality — accepting each student as unique.</li>
+          <li>Provision for co-curricular activities — sports, arts, drama provide emotional outlets.</li>
+          <li>Developing healthy competition among students — not destructive rivalry.</li>
+          <li>Help students to set a proper level of aspiration based on their abilities.</li>
+          <li>Good environment — physical facilities, cleanliness, orderliness.</li>
+          <li>Health check-up — regular medical examinations identify health issues early.</li>
+          <li>Self-discipline — teach self-control and emotional regulation.</li>
+          <li>Sex education — age-appropriate, factual, non-judgmental.</li>
+          <li>Balanced curriculum — not overloaded; time for rest and play.</li>
+          <li>Healthy home and social environment — school-family partnership.</li>
+          <li>Close student and teacher bonding — trust and rapport.</li>
+          <li>Avoid mental conflicts and undesirable attitudes; provision of moral education.</li>
+          <li>Teach control over emotions and express them appropriately.</li>
+          <li>Help students adjust with their classmates — social skills.</li>
+          <li>Homework suitable to capacities of children — avoid unnecessary tension.</li>
+          <li>Provision of educational, vocational, and personal guidance.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 2017 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">Q.3</span>
+      <div class="q-text">What are the domains of learning? Explain Bloom's taxonomy of learning.<div class="q-meta">2+8 = 10 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Domains of Learning (2 marks) — Official Key</div>
+        <div class="def-box c">Bloom's Taxonomy was created in 1956 under the leadership of educational psychologist Dr. Benjamin Bloom in order to promote higher forms of thinking in education, such as analyzing and evaluating concepts, processes, procedures, and principles, rather than just remembering facts (rote learning). Three Domains of Learning: Cognitive (mental skills — knowledge), Affective (growth in feelings or emotional areas — attitude or self), Psychomotor (manual or physical skills — skills).</div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Bloom's Taxonomy — Full Explanation (8 marks) — Official Key</div>
+        <div class="section-heading">Cognitive Domain (Bloom, 1956)</div>
+        <div class="answer-text"><p>The cognitive domain involves knowledge and the development of intellectual skills. It includes the recall or recognition of specific facts, procedural patterns, and concepts that serve in the development of intellectual abilities and skills. Six major categories starting from simplest to most complex:</p></div>
+        <ul class="point-list c">
+          <li><strong>Knowledge:</strong> Recall of previously learned information. Define, list, name, state.</li>
+          <li><strong>Comprehension:</strong> Interpret and understand information. Describe, explain, paraphrase, summarize.</li>
+          <li><strong>Application:</strong> Use knowledge in new situations. Apply, demonstrate, solve, use.</li>
+          <li><strong>Analysis:</strong> Break information into parts. Analyze, compare, differentiate, examine.</li>
+          <li><strong>Synthesis:</strong> Combine elements to form a new whole. Compose, design, construct, create.</li>
+          <li><strong>Evaluation:</strong> Make judgments based on criteria. Assess, critique, justify, evaluate.</li>
+        </ul>
+        <div class="section-heading">Affective Domain (Krathwohl, Bloom, Masia, 1973)</div>
+        <div class="answer-text"><p>Includes the manner in which we deal with things emotionally — feelings, values, appreciation, enthusiasms, motivations, and attitudes:</p></div>
+        <ul class="point-list c">
+          <li>Receiving → Responding → Valuing → Organization → Characterization (Internalizes Values)</li>
+        </ul>
+        <div class="section-heading">Psychomotor Domain (Simpson, 1972)</div>
+        <div class="answer-text"><p>Includes physical movement, coordination, and use of the motor-skill areas. Development requires practice and is measured in terms of speed, precision, distance, procedures, or techniques in execution. Skills range from manual tasks to complex machinery operation: Imitation → Manipulation → Articulation → Naturalization.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 2017 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">Q.4</span>
+      <div class="q-text">Explain Skinner's experiment on operant conditioning. List out its educational implications.<div class="q-meta">7+3 = 10 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Skinner's Experiment — Official Key (7 marks)</div>
+        <div class="def-box c">The animal is placed in a situation in which it learns to make a response that brings about the satisfaction of a need. Hence the use of the word "operant" — the subject operates upon or modifies the environment. Operant conditioning refers to a kind of learning where by a response is made more probable or more frequent by reinforcement.</div>
+        <div class="answer-text"><p>Skinner identified three types of responses (operants) that can follow behavior:</p></div>
+        <ul class="point-list c">
+          <li><strong>Neutral operants:</strong> Responses from the environment that neither increase nor decrease the probability of a behavior being repeated.</li>
+          <li><strong>Re-inforcers:</strong> Responses from the environment that increase the probability of a behavior being repeated. Re-inforcers can be either positive (adding something pleasant) or negative (removing something unpleasant).</li>
+          <li><strong>Punishers:</strong> Response from the environment that decrease the likelihood of a behavior being repeated. Punishment weakens behavior.</li>
+        </ul>
+        <div class="answer-text"><p>BF Skinner coined the term operant conditioning — it means roughly changing of behavior by the use of reinforcement which is given after the desired response. Response occurs in the environment. Reward/reinforcer is not possible unless the response is emitted. Connection's strength between R-S is not increased, but the possibility of occurrence of the same Response is increased.</p></div>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Educational Implications — Official Key (3 marks)</div>
+        <ul class="point-list c">
+          <li>Learning objectives should be defined very specifically in terms of behavior.</li>
+          <li>Objectives should be arranged in "simple to complex" order.</li>
+          <li>To motivate students, reinforcement like praise, blames, grades etc. should be used.</li>
+          <li>The positive and negative gestures also serve as reinforcers.</li>
+          <li>Reinforcers should be used periodically to overcome forgetting of learnt material.</li>
+          <li>Gives scope for individual's pace of learning; attention is drawn towards the rate of learning.</li>
+          <li>The development of human personality can be successfully manipulated through operant conditioning.</li>
+          <li>Gives guidance in curriculum construction.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 2017 -->
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num imp">Q.5</span>
+      <div class="q-text">Explain Albert Bandura's social learning theory. Mention its educational implications.<div class="q-meta">7+3 = 10 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="sub-q">a) Bandura's Social Learning Theory — Official Key (7 marks)</div>
+        <div class="def-box c">Albert Bandura (1977) states that behavior is learned from the environment through the process of observational learning. Bandura believes that humans are active information processors and think about the relationship between their behavior and its consequences. Observational learning cannot occur unless cognitive processes were at work.</div>
+        <div class="answer-text"><p>Social learning theory draws heavily on the concept of modeling — learning by observing a behavior. Bandura outlined three types of modeling stimuli:</p></div>
+        <ul class="point-list c">
+          <li><strong>1. Live model:</strong> An actual person demonstrating the desired behavior.</li>
+          <li><strong>2. Verbal instruction:</strong> An individual describes the desired behavior in detail and instructs the participant in how to engage in the behavior.</li>
+          <li><strong>3. Symbolic:</strong> Modeling occurs by means of the media — movies, television, internet, literature, radio. Stimuli can be real or fictional characters.</li>
+        </ul>
+        <div class="answer-text"><p>Bandura hypothesized a four-step pattern (ARRM) that combined cognitive and operant view of learning:</p></div>
+        <ul class="point-list c">
+          <li><strong>1. Attention:</strong> Notices something in the environment — observer must attend to the modeled behavior.</li>
+          <li><strong>2. Retention:</strong> Remembers what was noticed — stored in memory for future use.</li>
+          <li><strong>3. Reproduction:</strong> Produces an action that is a copy of what was noticed — must have physical/cognitive capability.</li>
+          <li><strong>4. Motivation:</strong> Consequence changes the probability that the behavior will be emitted again — anticipation of reward.</li>
+        </ul>
+      </div>
+      <div class="answer-block">
+        <div class="sub-q">b) Educational Implications — Official Key (3 marks)</div>
+        <ul class="point-list c">
+          <li>Observational learning helps in increasing knowledge of learners, retention, and life skills.</li>
+          <li>Teacher should model positive behaviors on himself/herself — "Do as I do."</li>
+          <li>Teacher should expose students to a variety of other models — breaks down traditional stereotypes.</li>
+          <li>Vicarious reinforcement and modeling can be used by teachers to increase and focus learner's attention.</li>
+          <li>Students often learn a great deal simply by observing other people.</li>
+          <li>Describing consequences of behavior can effectively increase appropriate behaviors and decrease inappropriate ones.</li>
+          <li>Teacher and parents must model appropriate behaviors and take care not to model inappropriate behaviors.</li>
+          <li>Students must believe that they are capable of accomplishing school tasks — develop a sense of self-efficacy.</li>
+          <li>Teacher should help students to set realistic expectations for their academic accomplishments.</li>
+          <li>Self-regulation techniques provide an effective method for improving student behavior.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PART B 2017 -->
+  <div class="part-divider">
+    <span class="part-label b">Part B</span><hr>
+    <span class="part-info">Answer any 8 · Each ≤ 1½ pages · 5 marks each</span>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <div class="q-text">Explain creative and communicative skills of 21st century.<div class="q-meta">5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">The 21st century learning skills are often called the 4 C's: critical thinking, creative thinking, communicating, and collaborating. These skills help students learn, and so they are vital to success in school and beyond.</div>
+        <div class="section-heading">Creative Skills — Official Key</div>
+        <ul class="point-list b">
+          <li>Creative thinking is expansive, open-ended invention and discovery of possibilities — "right brain" activity.</li>
+          <li><strong>Brainstorming:</strong> Asking a question and rapidly listing all answers, even those that are far-fetched, impractical, or impossible.</li>
+          <li><strong>Creating:</strong> Forming something by combining materials according to a plan or based on impulse.</li>
+          <li><strong>Designing:</strong> Finding the conjunction between form and function, shaping materials for a specific purpose.</li>
+          <li><strong>Imagining:</strong> Reaching into the unknown and impossible — as Einstein did with thought experiments.</li>
+          <li><strong>Improvising:</strong> Using something in a novel way to solve a problem.</li>
+          <li><strong>Innovating:</strong> Creating something that hasn't existed before — an object, procedure, or idea.</li>
+          <li><strong>Overturning:</strong> Flipping something to get a new perspective — redefining givens, reversing cause and effect.</li>
+          <li><strong>Problem solving:</strong> Using many creative abilities to figure out possible solutions and putting them into action.</li>
+          <li><strong>Questioning:</strong> Actively reaching into what is unknown to make it known — seeking information or a new way to do something.</li>
+        </ul>
+        <div class="section-heading">Communicative Skills — Official Key</div>
+        <ul class="point-list b">
+          <li>Analyzing the situation — thinking about subject, purpose, sender, receiver, medium, and context of a message.</li>
+          <li>Choosing a medium — deciding the most appropriate way to deliver a message.</li>
+          <li>Evaluating messages — deciding whether they are correct, complete, reliable, authoritative, and up-to-date.</li>
+          <li>Following conventions — communicating using expected norms for the medium chosen.</li>
+          <li>Listening actively — carefully paying attention, taking notes, asking questions.</li>
+          <li>Speaking — using spoken words, tone of voice, body language, gestures, facial expressions, and visual aids to convey ideas.</li>
+          <li>Writing — encoding messages into words, sentences, and paragraphs for communicating across distance and time.</li>
+          <li>Using technology — understanding the abilities and limitations of technological communication.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <div class="q-text">Define educational psychology. Briefly explain the need of Educational Psychology to a teacher.<div class="q-meta">2+3 = 5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Educational Psychology is the branch of Psychology which deals with the behavior of the learner in relation to his educational needs and his environment. According to Skinner: "Educational Psychology is that branch of psychology which deals with teaching and learning."</div>
+        <div class="section-heading">Need of Educational Psychology to a Teacher — Official Key</div>
+        <div class="answer-text"><p>To understand: the learner, developmental characteristics of the learner, group dynamics, nature of classroom learning, learning process, effective methods of teaching, catering to individual differences, designing curriculum, measuring learning outcome, mental health, mechanism of heredity and environment, guiding exceptional children, handling problems of indiscipline, framing timetable, teaching situations, production of textbooks, measurement and evaluation and so on.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <div class="q-text">Explain the developmental task of childhood.<div class="q-meta">5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="section-heading">a) Developmental Tasks of Infancy and Early Childhood — Official Key</div>
+        <ul class="point-list b">
+          <li>Learning to walk.</li>
+          <li>Learning to talk.</li>
+          <li>Learning to take solid food.</li>
+          <li>Learning to control elimination of body wastes.</li>
+          <li>Learning sex differences and sexual modesty.</li>
+          <li>Forming concepts and language to describe social and physical reality.</li>
+          <li>Getting ready to read.</li>
+        </ul>
+        <div class="section-heading">b) Developmental Tasks of Middle Childhood (6 to 12 years) — Official Key</div>
+        <ul class="point-list b">
+          <li>Learning physical skills necessary for ordinary games.</li>
+          <li>Building wholesome attitude towards oneself as a growing organism.</li>
+          <li>Learning to get along with age-mates.</li>
+          <li>Learning an appropriate masculine or feminine social role.</li>
+          <li>Developing fundamental skills in reading, writing and calculating.</li>
+          <li>Developing concepts necessary for everyday living.</li>
+          <li>Developing conscience, morality, and a scale of values.</li>
+          <li>Achieving personal independence.</li>
+          <li>Developing open attitude towards social groups and institutions.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.9</span>
+      <div class="q-text">List out the characteristics of Adolescents.<div class="q-meta">5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Characteristics of Adolescents per Official Key: Rapid Physical Development, Mental Development, Emotional immaturity, Social Consciousness, Moral Consciousness, Hero-worshipping, Hetero-sexuality, Creative imagination, Development of personal Independence.</div>
+        <ul class="point-list b">
+          <li>It is the most crucial and significant period in an individual's life.</li>
+          <li>It is a period of rapid revolutionary changes — new learning, anxieties and worries, conflicts, aesthetics, gratitude, grief, hatred, reverence, and more complex emotion of admiration and shame develops.</li>
+          <li>It is the period of becoming independent, acquiring great ideas, interests in adult life.</li>
+          <li>It is a period of skill development.</li>
+          <li>It is the period of rapidity, variety, the bewildering, exciting, and extensive forces of body development.</li>
+          <li>Physical developments are strong and can make adolescents conscious of their bodies.</li>
+          <li>A period of transition — from childhood to maturity; period of stress and strain; they have an image of adulthood.</li>
+          <li>Girls are more than a year ahead of boys in most phases of development.</li>
+          <li>Moral and spiritual development takes place; they are concerned about honesty and other values.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.10</span>
+      <div class="q-text">Explain the moral development of adolescents.<div class="q-meta">5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Lawrence Kohlberg's theory of moral development was dependent on the thinking of Jean Piaget and John Dewey. Kohlberg believed that people progressed in their moral reasoning through a series of stages — six identifiable stages more generally classified into three levels.</div>
+        <div class="section-heading">Kohlberg's 3 Levels and 6 Stages</div>
+        <ul class="point-list b">
+          <li><strong>Level 1 — Pre-conventional (Elementary school age):</strong>
+            <br>Stage 1: Obedience and Punishment — behave to avoid punishment.
+            <br>Stage 2: Individualism, Instrumentalism, and Exchange — right behavior means acting in one's own best interests.</li>
+          <li><strong>Level 2 — Conventional (Generally found in society):</strong>
+            <br>Stage 3: "Good boy/girl" — seeks to do what will gain approval of others.
+            <br>Stage 4: Law and Order — oriented to abiding by the law and responding to obligations of duty.</li>
+          <li><strong>Level 3 — Post-conventional (Not reached by majority of adults):</strong>
+            <br>Stage 5: Social Contract — understanding of social mutuality and genuine interest in welfare of others.
+            <br>Stage 6: Principled Conscience — based on respect for universal principles and demands of individual conscience.</li>
+        </ul>
+        <div class="answer-text"><p>Kohlberg believed individuals can only progress one stage at a time and cannot "jump" stages. According to Kohlberg, it was important to present moral dilemmas for discussion which would help see reasonableness of a "higher stage" morality. Most moral development occurs through social interaction. The discussion approach is based on the insight that individuals develop as a result of cognitive conflicts at their current stage.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.11</span>
+      <div class="q-text">List out the developmental tasks of adolescents.<div class="q-meta">5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Havighurst's Developmental Tasks of Adolescence — Official Key 2017</div>
+        <ul class="point-list b">
+          <li>Acquiring a set of values as a guide to behavior.</li>
+          <li>Establishing new relations with age-mates of both sexes.</li>
+          <li>Designing and achieving as a guide to behavior (socially responsible behavior).</li>
+          <li>Achieving a masculine or feminine role.</li>
+          <li>Developing intellectual skills for success in examination.</li>
+          <li>Selecting suitable courses for prospection to an occupation.</li>
+          <li>Using the body effectively.</li>
+          <li>Preparing for marriage and family life.</li>
+          <li>Achieving emotional independence of parents and adults.</li>
+          <li>Achieving assurance of economic independence.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.12</span>
+      <div class="q-text">What are the thinking skills? Explain any two types of thinking skills.<div class="q-meta">2+3 = 5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Thinking Skills — mental processes we use to do things like: solve problems, make decisions, ask questions, construct plans, evaluate ideas, organize information, and create objects. Thinking skills can be put into two broad categories: cognitive and strategic/reflective.</div>
+        <div class="section-heading">A. Cognitive Thinking — Official Key</div>
+        <ul class="point-list b">
+          <li><strong>1. Information Gathering:</strong> Sensing (seeing, hearing, touching) + Retrieving (memory skills).</li>
+          <li><strong>2. Basic Understanding:</strong> Organizing gathered information. Forming concepts. Linking ideas together.</li>
+          <li><strong>Productive Thinking:</strong> Using information and understanding — Creating, Deciding, Analyzing, Evaluating.</li>
+        </ul>
+        <div class="section-heading">B. Strategic/Reflective Thinking Skills — Official Key</div>
+        <div class="answer-text"><p>This is metacognition — thinking about thinking. It can involve planning, monitoring, and evaluating your use of the cognitive skills above. Strategic thinking enables learners to self-regulate their own thinking processes for maximum effectiveness.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.13</span>
+      <div class="q-text">What is trial and error learning? List out its educational implications.<div class="q-meta">2+3 = 5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">"LEARNING is nothing but stamping in, of the correct responses and stamping out of the incorrect responses through trial and error. Learning takes place through a process of approximation and correction. All learning is a matter of bond connections. A stimulus (S) is connected with a response (R) by S-R bond." — Thorndike</div>
+        <div class="section-heading">Educational Implications — Official Key (Complete List)</div>
+        <ul class="point-list b">
+          <li>Teacher must wait till the learner is ready to learn and should give experiences which help enhance readiness. Physiological and psychological maturity is important.</li>
+          <li>Aptitude tests in various subjects may be given to determine the thoroughness of learners.</li>
+          <li>The most fundamental duty of a teacher is to develop in children a readiness to learn lessons.</li>
+          <li>Classroom experiences should be satisfactory and pleasant — do not create fear complex in students.</li>
+          <li>Learning experiences must be meaningful and understandable in terms of the personal life of learners.</li>
+          <li>School experiences and activities must be arranged so learners may have confidence and success in their work — create a situation where everyone in the class can succeed in the given task.</li>
+          <li>Material in the classroom should be provided in ways so that novelty is introduced — break monotony in teaching, bring something new, sing a song for a few minutes, let them become happy.</li>
+          <li>Guidance, praise, and encouragement that give pleasure and satisfaction of knowing that the student is on the right path should be properly used.</li>
+          <li>More and more opportunities should be given to students to use and repeat the knowledge they get in class — application is important.</li>
+          <li>To maintain connections between S and R for longer period, review of learned material is necessary.</li>
+          <li>Repetition is of great value when interest and purpose are coupled with it — practice makes perfect. Practice without interest and attention is meaningless.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.14</span>
+      <div class="q-text">Explain the determinants of personality.<div class="q-meta">5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">Official Key: Determinants of Personality — Heredity and Environment, Social determinants, Cultural determinants.</div>
+        <ul class="point-list b">
+          <li><strong>Heredity:</strong> Genetic inheritance from parents — temperament, intelligence, physical characteristics, and potential abilities. Nature lays the biological foundation for personality.</li>
+          <li><strong>Environment:</strong> Physical and social surroundings — home, neighborhood, school, community. Environment shapes behavior, values, attitudes, and character.</li>
+          <li><strong>Social Determinants:</strong> Family atmosphere, parenting styles, peer group, school, and community social norms all contribute significantly to personality formation. Social interactions teach communication, empathy, and social norms.</li>
+          <li><strong>Cultural Determinants:</strong> Cultural traditions, religious beliefs, social customs, and community values create the framework within which personality develops. Culture defines what is considered appropriate, desirable, and successful behavior.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.15</span>
+      <div class="q-text">What is the importance of transfer of learning? Write the educational implications of transfer of learning.<div class="q-meta">3+2 = 5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">The process of carrying over knowledge, skills, and attitudes from one learning situation to another is Transfer of Learning. Transfer of learning occupies a significant place in the process of education — it brings economy and effectiveness in the learning process.</div>
+        <div class="section-heading">Importance of Transfer of Learning — Official Key</div>
+        <ul class="point-list b">
+          <li>Knowledge of one subject is transferable to another.</li>
+          <li>Transfer of learning leads to generalization.</li>
+          <li>Similar types of learning conditions or situations lead to transfer of learning.</li>
+          <li>Relating the old experiences with the new one facilitates transfer.</li>
+          <li>It depends upon the ability of the learner.</li>
+          <li>Concepts which are interdependent can be taught easily — transfer reinforces learning.</li>
+        </ul>
+        <div class="section-heading">Educational Implications — Official Key</div>
+        <ul class="point-list b">
+          <li>Curriculum must provide adequate opportunities for the transfer of knowledge, skills, habits, and attitudes acquired in the classroom to life situations and experiences.</li>
+          <li>Subject matter of all subjects should be taught and learnt in close contact with its application. Superiority of one subject over another in terms of transfer has little relevance — degree of transfer depends upon the applicability of the outcome of learning.</li>
+          <li>Knowledge of one subject is transferable to another — curriculum should capitalize on this.</li>
+          <li>Transfer of learning leads to generalization — teach principles and general laws, not just specific facts.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.16</span>
+      <div class="q-text">Explain how urbanisation and economic change impacts on adolescents.<div class="q-meta">5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="answer-text"><em>The Official Key for Q.16 has the most complete and detailed list — refer to Oct 2021 Q.2(c) for the full answer which directly mirrors the official key content. Both positive (technology awareness, better education, economic stability, gender sensitization, better health facilities) and negative (gadgets isolation, obesity, family strife, internet dangers, slums, crime, pollution) impacts.</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.17</span>
+      <div class="q-text">What is attention? How do you draw the attention of the children in the classroom?<div class="q-meta">2+3 = 5 marks · Official Key Available</div></div>
+      <span class="q-arrow">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-block">
+        <div class="def-box b">"Attention is a process of bringing an object into consciousness. Attention is a process of getting an object of thought clearly before the mind." — J.S. Ross</div>
+        <div class="section-heading">Suggestions to Draw Attention of Pupils in the Classroom — Official Key</div>
+        <ul class="point-list b">
+          <li>Nature of stimulus — use stimuli appropriate to the learner's interest and age.</li>
+          <li>Use colour pictures vs B&amp;W pictures to capture maximum attention.</li>
+          <li>Intensity and size of the stimulus — large, bright objects capture more attention.</li>
+          <li>Loud noise, bright colours/light, perfume, large objects — sensory variety attracts attention.</li>
+          <li>Contrast, change, and variety in teaching methods and materials.</li>
+          <li>Contrast makes forceful — use surprising, unexpected content strategically.</li>
+          <li>Newness attracts — introduce novel elements, current events, or puzzles.</li>
+          <li>Repetition of stimulus secures attention — but has diminishing results if used too much.</li>
+          <li>Movement of the stimulus — moving stimuli vs static ones attract more attention.</li>
+          <li>Create novelty and familiarity — balance between something new and something known.</li>
+          <li>Break routine — use illustrations and examples in the lesson; frequent use of AVA.</li>
+          <li>Relate lessons to actual life situations — relevance captures attention.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- end t2017 -->
+
+</div><!-- end container -->
+
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>HC-01 · Childhood &amp; Growing Up · Exam Companion · Bangalore University B.Ed · Built for focused exam preparation</footer>
+
+<script>
+function switchTab(id, btn, cls) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active','b','c','d','e'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  if (cls) btn.classList.add(cls);
+}
+
+function toggle(card) {
+  card.classList.toggle('open');
+}
+
+// Scroll to top button
+window.addEventListener('scroll', function() {
+  const btn = document.getElementById('scrollTop');
+  if (window.scrollY > 400) btn.classList.add('show');
+  else btn.classList.remove('show');
+});
+
+// Auto-open first card in each section for context
+document.addEventListener('DOMContentLoaded', function() {
+  const firstCard = document.querySelector('#t2021 .q-card');
+  if (firstCard) firstCard.classList.add('open');
+});
+</script>
+</body>
+</html>
