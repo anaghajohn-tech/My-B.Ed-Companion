@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-02 · Education in Contemporary India</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --accent: #58a6ff;
+    --accent2: #f78166;
+    --accent3: #d2a8ff;
+    --amber: #f5a623;
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --partA: #58a6ff;
+    --partB: #f78166;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Literata', Georgia, serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  header {
+    background: linear-gradient(135deg, #0d1117 0%, #0d1f2d 60%, #1a0d2d 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(88,166,255,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 860px; margin: 0 auto; position: relative; }
+  .header-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.6rem;
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2.4rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 0.4rem;
+  }
+  header h1 span { color: var(--accent); }
+  .header-sub { font-size: 13px; color: var(--muted); margin-bottom: 1.2rem; font-style: italic; }
+  .header-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .meta-chip {
+    display: flex; align-items: center; gap: 6px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 20px; padding: 4px 12px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 10.5px; color: var(--muted);
+  }
+  .meta-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+  .tabs-wrapper {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .tabs {
+    max-width: 860px; margin: 0 auto;
+    display: flex; overflow-x: auto; scrollbar-width: none; padding: 0 1rem; gap: 0;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    background: none; border: none; color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace; font-size: 11.5px;
+    padding: 14px 16px; cursor: pointer; white-space: nowrap;
+    border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; flex-shrink: 0;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn.imp.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 1.5rem 1rem 4rem; }
+  .tab-section { display: none; }
+  .tab-section.active { display: block; }
+
+  .paper-header {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 1rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+  }
+  .paper-title { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 700; color: var(--text); }
+  .paper-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+  .badge {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px;
+    padding: 3px 10px; border-radius: 4px; border: 1px solid;
+  }
+  .badge.blue { color: var(--partA); border-color: var(--partA); }
+  .badge.red { color: var(--partB); border-color: var(--partB); }
+  .badge.amber { color: var(--amber); border-color: var(--amber); }
+
+  .part-divider { display: flex; align-items: center; gap: 0.75rem; margin: 1.8rem 0 1rem; }
+  .part-divider hr { flex: 1; border: none; border-top: 1px solid var(--border); }
+  .part-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 600;
+    letter-spacing: 0.1em; padding: 3px 10px; border-radius: 3px; flex-shrink: 0;
+  }
+  .part-label.a { background: rgba(88,166,255,0.15); color: var(--partA); }
+  .part-label.b { background: rgba(247,129,102,0.15); color: var(--partB); }
+  .part-info { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+
+  .q-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; margin-bottom: 0.75rem; cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s; overflow: hidden;
+  }
+  .q-card:hover { border-color: rgba(88,166,255,0.35); box-shadow: 0 0 0 1px rgba(88,166,255,0.1); }
+  .q-card.open { border-color: var(--accent); }
+  .q-header { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.9rem 1rem; }
+  .q-num {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; font-weight: 500;
+    color: var(--accent); background: rgba(88,166,255,0.1);
+    padding: 2px 8px; border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+  }
+  .q-num.b { color: var(--partB); background: rgba(247,129,102,0.1); }
+  .q-text { flex: 1; font-size: 14px; color: var(--text); line-height: 1.55; }
+  .q-meta { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 4px; }
+  .q-arrow { font-size: 10px; color: var(--muted); flex-shrink: 0; margin-top: 4px; transition: transform 0.25s; }
+  .q-card.open .q-arrow { transform: rotate(180deg); color: var(--accent); }
+  .q-body { display: none; padding: 0 1rem 1.1rem; border-top: 1px solid var(--border); }
+  .q-card.open .q-body { display: block; }
+
+  .answer-block { padding-top: 1rem; }
+  .sub-q {
+    font-family: 'Syne', sans-serif; font-size: 12.5px; font-weight: 600;
+    color: var(--accent); margin: 1rem 0 0.4rem; text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .sub-q.b { color: var(--partB); }
+  .def-box {
+    background: rgba(88,166,255,0.06); border-left: 3px solid var(--accent);
+    border-radius: 0 6px 6px 0; padding: 0.7rem 1rem;
+    font-size: 13.5px; color: var(--text); line-height: 1.65; margin-bottom: 0.75rem;
+  }
+  .point-list { list-style: none; padding: 0; margin: 0.4rem 0 0.8rem; }
+  .point-list li {
+    display: flex; gap: 0.6rem; font-size: 13.5px;
+    padding: 0.3rem 0; line-height: 1.5; color: var(--text);
+  }
+  .point-list li::before { content: '›'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+  .point-list.b li::before { color: var(--partB); }
+
+  .note-box {
+    background: rgba(245,166,35,0.08); border: 1px solid rgba(245,166,35,0.25);
+    border-radius: 6px; padding: 0.6rem 0.9rem; font-size: 12.5px;
+    color: var(--amber); margin-top: 0.75rem;
+  }
+  .freq-badge {
+    display: inline-block; font-family: 'IBM Plex Mono', monospace; font-size: 9px;
+    padding: 2px 6px; border-radius: 3px; margin-left: 6px; vertical-align: middle;
+  }
+  .freq-hot { background: rgba(247,129,102,0.2); color: var(--partB); }
+  .freq-med { background: rgba(245,166,35,0.2); color: var(--amber); }
+
+  .imp-section { margin-bottom: 2rem; }
+  .imp-heading {
+    font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700;
+    color: var(--amber); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.5rem;
+  }
+  .imp-heading::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .imp-item {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 0.5rem; font-size: 13.5px;
+  }
+  .imp-item .freq { font-family: 'IBM Plex Mono', monospace; font-size: 9.5px; color: var(--muted); margin-top: 4px; }
+  .imp-item .freq span { color: var(--amber); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 0.75rem 0; }
+  th { background: var(--surface2); color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 6px 10px; text-align: left; border: 1px solid var(--border); }
+  td { padding: 5px 10px; border: 1px solid var(--border); color: var(--text); vertical-align: top; }
+  tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="header-tag">I Semester B.Ed · CBCS 2-Year Course · Bangalore University</div>
+    <h1><span>HC-02</span> Education in Contemporary India</h1>
+    <p class="header-sub">Equivalent to Philosophical and Sociological Principles of Education</p>
+    <div class="header-meta">
+      <div class="meta-chip"><span class="dot"></span>Oct 2017</div>
+      <div class="meta-chip"><span class="dot"></span>June 2023</div>
+      <div class="meta-chip"><span class="dot"></span>July 2024</div>
+      <div class="meta-chip"><span class="dot"></span>May/June 2025</div>
+    </div>
+  </div>
+</header>
+
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('t2017',this)">Oct 2017</button>
+    <button class="tab-btn" onclick="switchTab('t2023',this)">June 2023</button>
+    <button class="tab-btn" onclick="switchTab('t2024',this)">July 2024</button>
+    <button class="tab-btn" onclick="switchTab('t2025',this)">June 2025</button>
+    <button class="tab-btn imp" onclick="switchTab('timp',this)">★ Important Qs</button>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ═══ 2017 ═══ -->
+<div id="t2017" class="tab-section active">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">October 2017 · I Semester B.Ed</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px">HC-2: Education in Contemporary India · Scheme of Valuation by G.P. Bahubali, Asst. Professor, University College of Education</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge blue">Part A — 3×10 = 30</span>
+      <span class="badge red">Part B — 8×5 = 40</span>
+      <span class="badge amber">Max 70 Marks</span>
+    </div>
+  </div>
+
+  <div class="part-divider"><span class="part-label a">Part A</span><hr><span class="part-info">Answer any 3 · Each ≤ 3 pages · 10 marks</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.1</span>
+      <div class="q-text">a) What is Education? b) Differentiate between narrow and broader meaning of education. c) Discuss the general aims of Education with respect to Contemporary Society.
+        <div class="q-meta">(2+3+5 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) What is Education? (2 marks)</div>
+      <div class="def-box">Education is a lifelong process of developing the individual's physical, mental, social, and spiritual faculties. It begins when the child enters the world and continues until death. It is the systematic development of knowledge, skills, values, and attitudes.</div>
+      <div class="sub-q">b) Narrow vs Broader Meaning (3 marks)</div>
+      <table>
+        <tr><th>Narrow Meaning</th><th>Broader Meaning</th></tr>
+        <tr><td>Planned, organised, deliberate</td><td>Non-planned, life-long, informal</td></tr>
+        <tr><td>Equivalent to schooling</td><td>Equivalent to life itself</td></tr>
+        <tr><td>Fixed entry and exit</td><td>Takes place in all stages of life</td></tr>
+        <tr><td>Fixed aims, curriculum, evaluation</td><td>Complete experiences, knowledge-oriented</td></tr>
+        <tr><td>Formal means and ends</td><td>Informal means and ends</td></tr>
+        <tr><td>Students are homogeneous group</td><td>Belongs to all ages</td></tr>
+      </table>
+      <div class="sub-q">c) General Aims of Education in Contemporary Society (5 marks)</div>
+      <ul class="point-list">
+        <li>Vocational aim — prepare students for earning a livelihood</li>
+        <li>Development of culture — preserve and promote cultural heritage</li>
+        <li>Quality of life — improve living standards</li>
+        <li>Health — develop physically and mentally healthy citizens</li>
+        <li>Economic development — contribute to national progress</li>
+        <li>Increasing production — train skilled workforce</li>
+        <li>Democratic values — develop democratic citizenship</li>
+        <li>Emotional integration — foster national unity</li>
+        <li>Human values — develop ethical and moral character</li>
+        <li>National values, International understanding, Gender equality, promotion of patriotism</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.2</span>
+      <div class="q-text">a) What is social change? b) How does education become an instrument of social change? c) What is the role of teacher in bringing social change among students?
+        <div class="q-meta">(2+4+4 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Meaning of Social Change (2 marks)</div>
+      <div class="def-box">Social change refers to alterations in the structure and functioning of society over time — changes in values, norms, institutions, relationships, and ways of life. It is universal and continuous.</div>
+      <div class="sub-q">b) Education as Instrument of Social Change (4 marks)</div>
+      <ul class="point-list">
+        <li>Changes outlook and attitudes of people</li>
+        <li>Imparts knowledge, skill, and social values</li>
+        <li>Works as progress and conservation of social change</li>
+        <li>Brings radical improvement in economic development</li>
+        <li>Develops scientific and social attitudes</li>
+        <li>Increases political awareness which drives social change</li>
+        <li>Changes the pattern of social relations</li>
+        <li>Promotes national and social values</li>
+      </ul>
+      <div class="sub-q">c) Role of Teacher in Social Change (4 marks)</div>
+      <ul class="point-list">
+        <li>Teacher is an agent — imparts social education</li>
+        <li>Trains students to become good citizens</li>
+        <li>Works as coordinator between education and society</li>
+        <li>Organises social service programmes</li>
+        <li>Conducts vocational classes</li>
+        <li>Works for mass literacy upliftment of women</li>
+        <li>Promotes communal harmony</li>
+        <li>Uses community resources for learning</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.3</span>
+      <div class="q-text">a) How are 'Education' and 'Philosophy' related to each other? b) What are the educational contributions of J.J. Rousseau?
+        <div class="q-meta">(5+5 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Relationship between Education and Philosophy (5 marks)</div>
+      <ul class="point-list">
+        <li>Philosophy is the foundation of education — education is the practical activity</li>
+        <li>Philosophy is the source of knowledge — education applies knowledge to real life</li>
+        <li>Education is the laboratory in which all philosophical thoughts are tested</li>
+        <li>Philosophy supplies values — education inculcates those values</li>
+        <li>Philosophy solves the problems of education</li>
+        <li>Great philosophers are also great educationists</li>
+        <li>Philosophy is the soul — education is the body; philosophy is contemplative, education is dynamic</li>
+        <li>They are two sides of the same coin</li>
+      </ul>
+      <div class="sub-q">b) Educational Contributions of J.J. Rousseau (5 marks)</div>
+      <ul class="point-list">
+        <li><strong>Meaning of Education:</strong> Book "Emile" — 3 sources of education: nature, man, and things</li>
+        <li><strong>Negative Education:</strong> Do not impose adult values on children</li>
+        <li><strong>Aims:</strong> Natural development, stages — physical development, sense training, intellectual development</li>
+        <li><strong>Education for manhood</strong> through nature</li>
+        <li><strong>Curriculum:</strong> Play activities, health activities, physical exercises, sensory education, language, geography, mathematics, nature study, moral education, history, music, culture, family life, sex education</li>
+        <li>Child-centred education — respect for child's nature</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.4</span>
+      <div class="q-text">a) What is socialisation? b) How do you socialise the child through 'curricular' and 'co-curricular' activities of the school?
+        <div class="q-meta">(2+8 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Meaning of Socialisation (2 marks)</div>
+      <div class="def-box">Socialisation is the process where the original nature of a person is transferred into human nature — the process by which an individual becomes a social being, learning the values, norms, and roles of society.</div>
+      <div class="sub-q">b) Curricular and Co-curricular Activities for Socialisation (8 marks)</div>
+      <ul class="point-list">
+        <li>Time for public contact — training for communication skills and leadership qualities</li>
+        <li>Organising the Work Experience and SUPW activities and vocational training</li>
+        <li>Visiting social institutions like cooperative societies, associations, health centres</li>
+        <li>Celebration of socially significant national days — birthdays of social reformers, population day, women's day</li>
+        <li>Organising the PTA, cultural activities, sports activities, interschool meets</li>
+        <li>Common uniform, NSS Activities, NCC</li>
+        <li>Swach Bharat programmes, exhibitions and film shows</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.5</span>
+      <div class="q-text">a) What are the purposes of 'Questioning' as a device of teaching? b) What are the characteristics of good questions? c) Write two critical thinking questions on any topic.
+        <div class="q-meta">(4+4+2 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Purposes of Questioning (4 marks)</div>
+      <ul class="point-list">
+        <li>To know what the child already knows</li>
+        <li>Keep students alert and attentive</li>
+        <li>Know whether students are following the lesson</li>
+        <li>Revise the lesson and fix knowledge</li>
+        <li>Directs and encourages thought; stimulates curiosity</li>
+        <li>Tests amount of learning</li>
+        <li>Knows the gap in learning</li>
+        <li>Finds reason for failure of learning</li>
+      </ul>
+      <div class="sub-q">b) Characteristics of Good Questions (4 marks)</div>
+      <ul class="point-list">
+        <li>Simple, clear, specific and precise</li>
+        <li>Concise — not too lengthy</li>
+        <li>According to age, level and ability of the child</li>
+        <li>Direct and purposeful</li>
+        <li>Thought-provoking</li>
+        <li>Sequential — relevant to the topic</li>
+        <li>Free from vagueness</li>
+        <li>Should not contain too many ideas in a single question</li>
+      </ul>
+      <div class="sub-q">c) Two Critical Thinking Questions (2 marks)</div>
+      <ul class="point-list">
+        <li>"If education were available to all equally, how would Indian society be different today?"</li>
+        <li>"Should technology replace traditional classroom teaching? Justify with reasons."</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr><span class="part-info">Answer any 8 · Each ≤ 1.5 pages · 5 marks</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.6</span>
+      <div class="q-text">Differentiate formal and informal education. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <table>
+        <tr><th>Formal Education</th><th>Informal Education</th></tr>
+        <tr><td>Pre-planned and deliberate</td><td>Non-planned and incidental</td></tr>
+        <tr><td>Direct and intentional</td><td>Indirect and life-long</td></tr>
+        <tr><td>Fixed entry and exit</td><td>Takes place in all stages of life</td></tr>
+        <tr><td>Fixed aims, means, curriculum, evaluation</td><td>Complete experiences, knowledge-oriented</td></tr>
+        <tr><td>Life-oriented, expensive</td><td>Non-expensive</td></tr>
+        <tr><td>Formal means and ends</td><td>Informal means and ends</td></tr>
+        <tr><td>Students are homogeneous group</td><td>Belongs to all ages</td></tr>
+      </table>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.7</span>
+      <div class="q-text">a) Name the schools of philosophy. b) Explain in brief any one of them. (1+4 = 5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Schools of Philosophy</div>
+      <ul class="point-list b"><li>Idealism</li><li>Naturalism</li><li>Pragmatism</li></ul>
+      <div class="sub-q">Naturalism (explanation)</div>
+      <div class="def-box">Naturalism holds that nature is the ultimate reality. Education should follow the natural development of the child — "Back to Nature" is its slogan.</div>
+      <ul class="point-list b">
+        <li><strong>Aim:</strong> Natural development of the child — physical, mental, and moral</li>
+        <li><strong>Curriculum:</strong> Natural sciences, physical activities, sensory training</li>
+        <li><strong>Methods:</strong> Play-way, activity-based, learning by doing</li>
+        <li><strong>Teacher's role:</strong> Guide, not authority — creates environment for natural growth</li>
+        <li><strong>Discipline:</strong> Natural consequences — child learns from nature's rewards and punishments</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.8</span>
+      <div class="q-text">Analyse the relationship between education and economic development. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li>Education is one of the effective instruments of economic development</li>
+        <li>Provides human and technical resources</li>
+        <li>Plays a vital role in generating human resources by imparting useful knowledge</li>
+        <li>Training of manual and technical skills</li>
+        <li>Develops innovation, research, technical and managerial competencies</li>
+        <li>Inculcation of right type of values and conduct</li>
+        <li>Promotes human capital — education helps in economic development at individual and national level</li>
+        <li>Promotes human abilities, excellence and technical skills</li>
+        <li>Educational programmes create awareness and educate people to participate in developmental programmes</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.10</span>
+      <div class="q-text">How do you consider 'school as a miniature society'? (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li>To make the society worth living, the school and society should be close to each other — they depend on each other for their growth</li>
+        <li>The school is a miniature where students and teachers function together by a code of the school culture</li>
+        <li>Organisation of activities and events are the integral part of social life</li>
+        <li>To cultivate community feeling, teaching subjects like history, music, art, literature should be recognised</li>
+        <li>Students' self-government should be organised to provide training for leadership and community living</li>
+        <li>School promotes social change by imparting social education</li>
+        <li>School is based on the needs and aspirations of the pupil — child is part of society</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.11</span>
+      <div class="q-text">a) What is the meaning of Strategies of Teaching? b) Explain briefly the importance of strategies of teaching. (1+4 = 5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Meaning</div>
+      <div class="def-box">Teaching strategies are methods used to help students learn the desired course contents and develop the ability to achieve goals in the future.</div>
+      <div class="sub-q">Importance</div>
+      <ul class="point-list b">
+        <li>Actively involves students in learning</li>
+        <li>Promotes peer learning</li>
+        <li>Promotes critical learning</li>
+        <li>Facilitates exchange of ideas and awareness and mutual concerns</li>
+        <li>Provides immediate feedback</li>
+        <li>Promotes self-confidence</li>
+        <li>Stimulates learner interest</li>
+        <li>Adds variety to teaching</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.12</span>
+      <div class="q-text">Explain the contributions of Rabindranath Tagore to the field of education. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li>Vedantist — Idealist — Humanist — Naturalist</li>
+        <li>Realisation of harmony with all things</li>
+        <li>Principle of freedom, Sympathy and Joy</li>
+        <li>The Union of man and nature</li>
+        <li>Literature as the true vehicle of Education</li>
+        <li>Unity of all races of the world</li>
+        <li>Emphasis on the child's Mind</li>
+        <li>Meaning of Education according to Tagore — Aims of Education — Curriculum — Subjects — Methods of teaching</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.14</span>
+      <div class="q-text">How is social change different from social mobility? (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <table>
+        <tr><th>Social Change</th><th>Social Mobility</th></tr>
+        <tr><td>Social necessity — refers to structure and function of society</td><td>Movement of people from one social status to another</td></tr>
+        <tr><td>Change in activities of people — new techniques, ways of living</td><td>Involves consolidation of elements of new position — occupation, type of house</td></tr>
+        <tr><td>Universal and continuous — occurs in all societies</td><td>Not universal — more individualistic</td></tr>
+        <tr><td>May be planned or unplanned</td><td>Depends on education, occupation, income</td></tr>
+        <tr><td>Always at progress</td><td>May be vertical (upward/downward) or horizontal</td></tr>
+      </table>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.15</span>
+      <div class="q-text">How is the knowledge of philosophy useful to a teacher? (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li>Helps to understand the theory and practice of education</li>
+        <li>To understand the aims and ideals of education</li>
+        <li>To understand and direct the students</li>
+        <li>To understand the curriculum and methodology</li>
+        <li>Helps the teacher to understand the society and culture</li>
+        <li>For professional growth</li>
+        <li>For personality development of the teachers</li>
+        <li>Helps teacher in understanding and solving problems in education</li>
+        <li>To inculcate human values among young children</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.16</span>
+      <div class="q-text">a) What is project based teaching? b) What is the importance of project based teaching? (2+3 = 5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Definition</div>
+      <div class="def-box">Project-based teaching is a dynamic classroom approach in which students actively explore real-world challenges and acquire deeper knowledge — students not only gain knowledge but also gain skills by working.</div>
+      <div class="sub-q">Importance</div>
+      <ul class="point-list b">
+        <li>Students acquire deeper knowledge through active exploration of real-world challenges</li>
+        <li>PBL integrates knowing and doing</li>
+        <li>Students learn knowledge and elements of the core curriculum but also apply what they know to solve authentic problems</li>
+        <li>Helps greater depth of understanding of concepts, broader knowledge base</li>
+        <li>Improved communication and interpersonal skills</li>
+        <li>Enhanced leadership skills, increased creativity, improved writing skills</li>
+        <li>Students develop confidence and self-direction</li>
+        <li>Assessment of project-based work is more meaningful to them</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.17</span>
+      <div class="q-text">a) What is culture? b) How can education help in preserving the culture of a society? (2+3 = 5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Meaning of Culture</div>
+      <div class="def-box">Culture is the total pattern of human behaviour — the sum total of a society's values, beliefs, customs, traditions, art, language, and achievements passed from generation to generation.</div>
+      <div class="sub-q">Education in Preservation of Culture</div>
+      <ul class="point-list b">
+        <li>School and teacher are active agencies of cultural development</li>
+        <li>School can spread and preserve culture by conducting cultural camps, literacy activities, programmes</li>
+        <li>Inter-cultural competitions, cultural exchange programmes</li>
+        <li>Teaching folk culture, exhibitions on cultural heritage</li>
+        <li>Collection of books on Indian culture</li>
+        <li>Excursions — visit important cultural monuments</li>
+        <li>Crafts, dance, music; conducting rallies etc.</li>
+      </ul>
+    </div></div>
+  </div>
+</div>
+<!-- END 2017 -->
+
+<!-- ═══ 2023 ═══ -->
+<div id="t2023" class="tab-section">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">June 2023 · AB-002</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px">I Semester B.Ed (CBCS-2 Years Course) · First Semester Examination</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge blue">Part A — 3×10 = 30</span>
+      <span class="badge red">Part B — 8×5 = 40</span>
+      <span class="badge amber">Max 70 Marks</span>
+    </div>
+  </div>
+  <div class="note-box">📌 2023 has a unique Part B structure — 8×5 = 40 marks (not seen in other years). New questions: Gandhiji's Basic Education, John Dewey, Swami Vivekananda.</div>
+
+  <div class="part-divider"><span class="part-label a">Part A</span><hr><span class="part-info">Answer any 3 · 10 marks each</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.1</span>
+      <div class="q-text">a) Differentiate formal, informal and non-formal education. b) Explain the general aims of education with respect to contemporary India.
+        <div class="q-meta">(6+4 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Formal, Informal and Non-formal Education (6 marks)</div>
+      <table>
+        <tr><th>Aspect</th><th>Formal</th><th>Informal</th><th>Non-formal</th></tr>
+        <tr><td>Nature</td><td>Planned, deliberate</td><td>Incidental, lifelong</td><td>Organised but flexible</td></tr>
+        <tr><td>Setting</td><td>School/college</td><td>Home, community</td><td>Outside school</td></tr>
+        <tr><td>Curriculum</td><td>Fixed, structured</td><td>No fixed curriculum</td><td>Need-based</td></tr>
+        <tr><td>Age group</td><td>Homogeneous</td><td>All ages</td><td>All ages</td></tr>
+        <tr><td>Certification</td><td>Formal degrees</td><td>None</td><td>May or may not</td></tr>
+        <tr><td>Examples</td><td>Schools, universities</td><td>Family, peers</td><td>Open schools, NFE</td></tr>
+      </table>
+      <div class="sub-q">b) General Aims in Contemporary India (4 marks)</div>
+      <ul class="point-list">
+        <li>Vocational aim — prepare for employment in modern economy</li>
+        <li>Democratic citizenship — develop responsible, aware citizens</li>
+        <li>National integration — foster unity in diversity</li>
+        <li>Economic development — contribute to India's growth</li>
+        <li>Scientific temper — rational, evidence-based thinking</li>
+        <li>Environmental awareness — sustainable development</li>
+        <li>Gender equality and social justice</li>
+        <li>Digital literacy — prepare for knowledge economy</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.2</span>
+      <div class="q-text">a) Analyze the relationship between Education and Philosophy. b) How does Naturalism differ from Idealism in an Educational Philosophy?
+        <div class="q-meta">(5+5 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Relationship between Education and Philosophy</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.3a — full answer with 8 points on this relationship.</p>
+      <div class="sub-q">b) Naturalism vs Idealism in Educational Philosophy</div>
+      <table>
+        <tr><th>Aspect</th><th>Naturalism</th><th>Idealism</th></tr>
+        <tr><td>Reality</td><td>Nature is ultimate reality</td><td>Mind/spirit is ultimate reality</td></tr>
+        <tr><td>Aim of Education</td><td>Natural development of child</td><td>Self-realisation, spiritual development</td></tr>
+        <tr><td>Curriculum</td><td>Natural sciences, physical activities</td><td>Humanities, arts, moral education</td></tr>
+        <tr><td>Child's role</td><td>Child is central — natural instincts</td><td>Child shaped by ideal values</td></tr>
+        <tr><td>Teacher's role</td><td>Guide — creates environment</td><td>Role model — moral guide</td></tr>
+        <tr><td>Discipline</td><td>Natural consequences</td><td>Inner discipline — moral conscience</td></tr>
+        <tr><td>Method</td><td>Play-way, activity, learning by doing</td><td>Discussion, contemplation, storytelling</td></tr>
+      </table>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.3</span>
+      <div class="q-text">a) List out the important devices of teaching. b) Explain any two teaching devices you use as a teacher.
+        <div class="q-meta">(2+8 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Important Devices of Teaching</div>
+      <ul class="point-list">
+        <li>Questioning</li><li>Explanation</li><li>Illustration / Examples</li>
+        <li>Narration / Story telling</li><li>Demonstration</li><li>Discussion</li>
+        <li>Problem solving</li><li>Team teaching</li>
+      </ul>
+      <div class="sub-q">b) Explanation (4 marks)</div>
+      <div class="def-box">Explanation is a teaching device where the teacher clarifies a concept, principle, or process systematically to help students understand.</div>
+      <ul class="point-list">
+        <li>Makes abstract concepts concrete</li>
+        <li>Uses examples, analogies, and comparisons</li>
+        <li>Criteria for good explanation: clarity, logical sequence, appropriate language, use of examples</li>
+      </ul>
+      <div class="sub-q">Questioning (4 marks)</div>
+      <div class="def-box">Questioning is a device to stimulate thinking, check understanding, and create active participation.</div>
+      <ul class="point-list">
+        <li>Keeps students alert and attentive</li>
+        <li>Checks prior knowledge and learning</li>
+        <li>Stimulates critical and creative thinking</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.4</span>
+      <div class="q-text">a) What is Socialization? b) What is the role of the family and peer group in Socializing a child?
+        <div class="q-meta">(2+8 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Socialisation — Definition</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.4a for definition.</p>
+      <div class="sub-q">b) Role of Family (4 marks)</div>
+      <ul class="point-list">
+        <li>First and most important agent of socialisation</li>
+        <li>Teaches basic values, norms, language, and customs</li>
+        <li>Develops emotional security and personality</li>
+        <li>Models behaviour — children imitate parents</li>
+        <li>Teaches gender roles, religious values, and cultural heritage</li>
+      </ul>
+      <div class="sub-q">Role of Peer Group (4 marks)</div>
+      <ul class="point-list">
+        <li>Provides experience of equality — children learn to negotiate</li>
+        <li>Teaches cooperation, competition, and conflict resolution</li>
+        <li>Develops independence from family influence</li>
+        <li>Strong influence on attitudes, language, and behaviour</li>
+        <li>Helps develop identity and sense of belonging</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.5</span>
+      <div class="q-text">a) What is Philosophy? b) What is the importance of philosophy? c) What are the educational contributions of Swami Vivekananda?
+        <div class="q-meta">(2+3+5 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) What is Philosophy?</div>
+      <div class="def-box">Philosophy is the love of wisdom — it is the systematic study of fundamental questions about existence, knowledge, values, reason, mind, and language. It is the search for truth through critical thinking and logical reasoning.</div>
+      <div class="sub-q">b) Importance of Philosophy</div>
+      <ul class="point-list">
+        <li>Foundation of all knowledge and education</li>
+        <li>Develops critical and rational thinking</li>
+        <li>Guides the aims, curriculum, and methods of education</li>
+        <li>Helps develop values and character</li>
+        <li>Guides professional practice of teachers</li>
+      </ul>
+      <div class="sub-q">c) Educational Contributions of Swami Vivekananda</div>
+      <ul class="point-list">
+        <li><strong>Meaning of Education:</strong> "Education is the manifestation of the perfection already in man"</li>
+        <li><strong>Aim:</strong> Man-making education — physical, mental, and spiritual development</li>
+        <li><strong>Method:</strong> Concentration and meditation; Guru-Shishya tradition</li>
+        <li><strong>Curriculum:</strong> Western science + Indian spirituality; vocational education</li>
+        <li><strong>Women's education:</strong> Strong advocate for education of women</li>
+        <li><strong>Mass education:</strong> Education should reach the poor and downtrodden</li>
+        <li>Founded Ramakrishna Mission — practical education for all</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr><span class="part-info">Answer any 8 · 5 marks each</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.13</span>
+      <div class="q-text">What are the characteristics of Gandhiji's concept of Basic Education? State the reasons for its failure. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Characteristics of Basic Education (Nai Talim)</div>
+      <ul class="point-list b">
+        <li>Free and compulsory education for 7 years</li>
+        <li>Mother tongue as medium of instruction</li>
+        <li>Craft-centred — learning through productive work (spinning, weaving, agriculture)</li>
+        <li>Self-supporting — education to pay for itself through craft production</li>
+        <li>Integrated curriculum — all subjects taught through the craft</li>
+        <li>Moral and spiritual development</li>
+        <li>Develop the whole personality — head, heart, and hand</li>
+      </ul>
+      <div class="sub-q">Reasons for Failure</div>
+      <ul class="point-list b">
+        <li>Teachers were not trained in craft-based teaching</li>
+        <li>Self-supporting concept was impractical</li>
+        <li>Craft products had no market value</li>
+        <li>Parents preferred academic education for white-collar jobs</li>
+        <li>Lack of funds and government support</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.14</span>
+      <div class="q-text">Explain briefly the educational contributions of John Dewey. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li><strong>Philosophy:</strong> Pragmatism — "learning by doing"; truth is what works</li>
+        <li><strong>Aim:</strong> Growth itself is the aim — "Education is not preparation for life; education is life itself"</li>
+        <li><strong>Child-centred education:</strong> Child's interests and experience are the starting point</li>
+        <li><strong>Curriculum:</strong> Activity-based; connected to real life and social environment</li>
+        <li><strong>Method:</strong> Project method, problem-solving, experimentation</li>
+        <li><strong>School as society:</strong> School is a miniature democratic society</li>
+        <li><strong>Democracy and Education:</strong> His famous work — education must prepare citizens for democracy</li>
+        <li>Emphasis on social experience and cooperative learning</li>
+      </ul>
+    </div></div>
+  </div>
+</div>
+<!-- END 2023 -->
+
+<!-- ═══ 2024 ═══ -->
+<div id="t2024" class="tab-section">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">July 2024 · ED-002</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px">I Semester B.Ed (CBCS-2 Years Course)</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge blue">Part A — 3×10 = 30</span>
+      <span class="badge red">Part B — 8×5 = 40</span>
+      <span class="badge amber">Max 70 Marks</span>
+    </div>
+  </div>
+
+  <div class="part-divider"><span class="part-label a">Part A</span><hr></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.1</span>
+      <div class="q-text">a) What is Education? b) Explain the narrow and broader meaning of Education. c) What is the role of non-formal education in the present context in India.
+        <div class="q-meta">(2+4+4 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) What is Education?</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.1a — definition of education.</p>
+      <div class="sub-q">b) Narrow and Broader Meaning</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.1b — comparison table.</p>
+      <div class="sub-q">c) Role of Non-formal Education in India (4 marks)</div>
+      <ul class="point-list">
+        <li>Reaches those excluded from formal education — dropouts, working children, adults</li>
+        <li>Open schools (NIOS) provide flexible certification to millions</li>
+        <li>Skill development programmes (ITI, vocational training)</li>
+        <li>Adult literacy programmes — National Literacy Mission</li>
+        <li>Distance education — IGNOU, correspondence courses</li>
+        <li>Bridges the gap between formal education and the needs of underprivileged communities</li>
+        <li>Especially important for girl children and rural populations in India</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.2</span>
+      <div class="q-text">a) How is education related to philosophy? b) Why is the knowledge of philosophy necessary for a teacher? Explain.
+        <div class="q-meta">(5+5 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Education related to Philosophy</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.3a — 8-point answer on relationship.</p>
+      <div class="sub-q">b) Knowledge of Philosophy for Teachers</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.15 — 9-point answer on importance of philosophy for teachers.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.3</span>
+      <div class="q-text">a) What is Socialization? b) What is the role of the school and family in socializing the students?
+        <div class="q-meta">(2+8 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Socialisation</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.4a for definition.</p>
+      <div class="sub-q">b) Role of School (4 marks)</div>
+      <ul class="point-list">
+        <li>Formal agent of socialisation — teaches values, norms, and citizenship</li>
+        <li>Co-curricular activities develop leadership, teamwork, and communication</li>
+        <li>Sports — develop fair play, cooperation, healthy competition</li>
+        <li>NSS, NCC — develop social service orientation</li>
+        <li>School as miniature society — prepares children for adult life</li>
+        <li>Develops respect for diversity and democratic values</li>
+      </ul>
+      <div class="sub-q">Role of Family (4 marks)</div>
+      <p style="color:var(--muted);font-size:13px">See 2023 tab Q.4b — family's role in socialisation.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.4</span>
+      <div class="q-text">a) What are maxims of teaching? b) List out the maxims of teaching. c) Explain any two maxims of teaching with suitable examples.
+        <div class="q-meta">(2+4+4 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Meaning of Maxims of Teaching</div>
+      <div class="def-box">Maxims of teaching are general principles or guidelines derived from psychology and experience that help teachers make their teaching more effective and learner-friendly.</div>
+      <div class="sub-q">b) List of Maxims</div>
+      <ul class="point-list">
+        <li>From Known to Unknown</li>
+        <li>From Simple to Complex</li>
+        <li>From Concrete to Abstract</li>
+        <li>From Particular to General</li>
+        <li>From Whole to Part</li>
+        <li>From Indefinite to Definite</li>
+        <li>From Psychological to Logical</li>
+        <li>From Analysis to Synthesis</li>
+      </ul>
+      <div class="sub-q">c) Two Maxims with Examples</div>
+      <ul class="point-list">
+        <li><strong>From Known to Unknown:</strong> When teaching addition of fractions, start with whole number addition (known) before introducing fractions (unknown)</li>
+        <li><strong>From Concrete to Abstract:</strong> When teaching place value, use actual blocks or counters (concrete) before introducing the abstract concept of ones, tens, hundreds</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.5</span>
+      <div class="q-text">Explain the contributions of Mahatma Gandhiji and J.J. Rousseau to the field of Education.
+        <div class="q-meta">(5+5 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Mahatma Gandhi's Contributions (5 marks)</div>
+      <ul class="point-list">
+        <li><strong>Basic Education (Nai Talim):</strong> Free and compulsory; craft-centred; self-supporting</li>
+        <li><strong>Aim:</strong> Development of whole personality — head, heart, and hand</li>
+        <li><strong>Medium:</strong> Mother tongue for all instruction</li>
+        <li><strong>Curriculum:</strong> Productive work (spinning, weaving, agriculture) as centre</li>
+        <li><strong>Moral education:</strong> Non-violence, truth, and service to society</li>
+        <li><strong>Women's education:</strong> Strong believer in equal education for girls</li>
+        <li>Education should be connected to the daily life and needs of the community</li>
+      </ul>
+      <div class="sub-q">J.J. Rousseau's Contributions (5 marks)</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.3b — full answer on Rousseau.</p>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr><span class="part-info">Answer any 8 · 5 marks each</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.6</span>
+      <div class="q-text">What is the reason for considering school as a miniature society? (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.10 — full answer on school as miniature society.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.9</span>
+      <div class="q-text">Explain the salient features of Naturalism. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li>Nature is the ultimate reality — "Back to Nature" is the slogan</li>
+        <li>Child is naturally good — society corrupts</li>
+        <li>Education should follow the natural development of the child</li>
+        <li>Learning by doing — activity-based education</li>
+        <li>Play-way method — children learn through play</li>
+        <li>Physical development is primary in early years</li>
+        <li>Natural consequences as discipline — not punishment</li>
+        <li>Teacher is a facilitator — creates a natural environment</li>
+        <li>Rousseau's "Emile" — the bible of Naturalism</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.11</span>
+      <div class="q-text">"Education is considered as an investment as well as consumption." Explain this statement. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Education as Investment</div>
+      <ul class="point-list b">
+        <li>Education increases earning capacity — higher education = higher income</li>
+        <li>Develops human capital — skilled workforce drives economic growth</li>
+        <li>Returns on investment in education are long-term — productivity increases over career</li>
+        <li>National investment — governments invest in education for economic development</li>
+        <li>Research and innovation emerging from educated population generates wealth</li>
+      </ul>
+      <div class="sub-q">Education as Consumption</div>
+      <ul class="point-list b">
+        <li>Education is enjoyed for its own sake — reading, learning, cultural enrichment</li>
+        <li>Immediate satisfaction — knowledge, skills, social interaction</li>
+        <li>Resources are used up — fees, time, materials consumed in the process</li>
+        <li>Like any consumer good, education satisfies the need for intellectual growth</li>
+      </ul>
+    </div></div>
+  </div>
+</div>
+<!-- END 2024 -->
+
+<!-- ═══ 2025 ═══ -->
+<div id="t2025" class="tab-section">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">May / June 2025 · ED-002</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:3px">I Semester B.Ed (2 Years Course) · CBCS Scheme</div>
+    </div>
+    <div class="paper-badges">
+      <span class="badge blue">Part A — 3×10 = 30</span>
+      <span class="badge red">Part B — 8×5 = 40</span>
+      <span class="badge amber">Max 70 Marks</span>
+    </div>
+  </div>
+
+  <div class="part-divider"><span class="part-label a">Part A</span><hr></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.1</span>
+      <div class="q-text">a) Differentiate between formal and informal education. b) Why is non-formal education necessary in the present Indian context?
+        <div class="q-meta">(6+4 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Formal vs Informal</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.6 — comparison table.</p>
+      <div class="sub-q">b) Non-formal Education in Indian Context (4 marks)</div>
+      <p style="color:var(--muted);font-size:13px">See 2024 tab Q.1c — role of non-formal education in India.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.2</span>
+      <div class="q-text">a) What is philosophy? b) "Education and philosophy are complementary to each other" — explain the relationship. c) Why is the knowledge of philosophy essential to the teacher?
+        <div class="q-meta">(2+4+4 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Philosophy</div>
+      <p style="color:var(--muted);font-size:13px">See 2023 tab Q.5a for definition.</p>
+      <div class="sub-q">b) "Education and Philosophy are Complementary"</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.3a — 8 points on relationship.</p>
+      <div class="sub-q">c) Philosophy Essential for Teachers</div>
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.15 — 9 points on importance of philosophy for teachers.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.3</span>
+      <div class="q-text">a) What is socialization? b) What is the role of the school and family in socializing the students?
+        <div class="q-meta">(2+8 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">See 2024 tab Q.3 — full answer on socialisation with roles of school and family.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.4</span>
+      <div class="q-text">a) Mention the important devices of teaching. b) Explain any two teaching devices, you can use as a teacher in your classroom.
+        <div class="q-meta">(2+8 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">See 2023 tab Q.3 — list of teaching devices and explanation of two.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num">Q.5</span>
+      <div class="q-text">a) Which are the important schools of philosophy? b) Explain the contributions of Mahatma Gandhiji and John Dewey to the field of education.
+        <div class="q-meta">(1+9 = 10 marks)</div></div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">a) Schools of Philosophy</div>
+      <ul class="point-list"><li>Idealism</li><li>Naturalism</li><li>Pragmatism</li></ul>
+      <div class="sub-q">b) Gandhiji's Contributions</div>
+      <p style="color:var(--muted);font-size:13px">See 2024 tab Q.5 — Gandhiji's educational contributions.</p>
+      <div class="sub-q">John Dewey's Contributions</div>
+      <p style="color:var(--muted);font-size:13px">See 2023 tab Q.14 — John Dewey's educational contributions.</p>
+    </div></div>
+  </div>
+
+  <div class="part-divider"><span class="part-label b">Part B</span><hr><span class="part-info">Answer any 8 · 5 marks each</span></div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.6</span>
+      <div class="q-text">Differentiate between narrow and broader meaning of education. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.1b — comparison table of narrow vs broader meaning.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.7</span>
+      <div class="q-text">Explain the salient features of Idealism. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <ul class="point-list b">
+        <li>Mind or spirit is the ultimate reality — matter is secondary</li>
+        <li><strong>Aim:</strong> Self-realisation — development of the spiritual self</li>
+        <li><strong>Curriculum:</strong> Humanities, arts, moral and religious education, classics</li>
+        <li><strong>Teacher:</strong> Role model and moral guide — most important person in education</li>
+        <li><strong>Method:</strong> Discussion, lecture, contemplation, storytelling, Socratic method</li>
+        <li><strong>Discipline:</strong> Inner discipline through moral conscience, not external punishment</li>
+        <li>Education transmits cultural heritage and universal values</li>
+        <li>Child should be shaped according to ideal values</li>
+        <li>Plato and Hegel are major idealist philosophers in education</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.10</span>
+      <div class="q-text">"Education is both process and product." Analyse this statement. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <div class="sub-q">Education as Process</div>
+      <ul class="point-list b">
+        <li>Education is a continuous, lifelong activity — never ends</li>
+        <li>It is a dynamic interaction between teacher, student, and environment</li>
+        <li>Involves teaching, learning, experiencing, reflecting</li>
+        <li>The journey of learning is itself valuable — not just the destination</li>
+      </ul>
+      <div class="sub-q">Education as Product</div>
+      <ul class="point-list b">
+        <li>Results in measurable outcomes — knowledge, skills, values, attitudes</li>
+        <li>Certificates, degrees, competencies are the products</li>
+        <li>Behavioural changes in the individual are the product</li>
+        <li>Contributes to national development — educated citizenry is the product</li>
+      </ul>
+      <div class="note-box">Both aspects are inseparable — you cannot have a meaningful product without a sound process, and the process is given direction by the desired product.</div>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.13</span>
+      <div class="q-text">Explain the relationship between education and economic development. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">See 2017 tab Q.8 — full answer with 9 points on education and economic development.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggle(this)">
+    <div class="q-header"><span class="q-num b">Q.17</span>
+      <div class="q-text">Explain the contributions of Swamy Vivekananda to the field of education. (5 marks)</div>
+      <span class="q-arrow">▼</span></div>
+    <div class="q-body"><div class="answer-block">
+      <p style="color:var(--muted);font-size:13px">See 2023 tab Q.5c — full answer on Swami Vivekananda's educational contributions.</p>
+    </div></div>
+  </div>
+</div>
+<!-- END 2025 -->
+
+<!-- ═══ IMPORTANT QS ═══ -->
+<div id="timp" class="tab-section">
+  <div style="margin-bottom:1.5rem">
+    <div class="paper-title" style="color:var(--amber);font-size:1.2rem">★ Most Important Questions</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:0.3rem">Frequency analysis across all 4 papers (2017–2025)</div>
+  </div>
+
+  <div class="imp-section">
+    <div class="imp-heading">🔥 Part A — Extremely High Frequency (3–4 papers)</div>
+
+    <div class="imp-item">
+      <strong>Education — Narrow vs Broader Meaning + Aims of Education in Contemporary India</strong><span class="freq-badge freq-hot">4/4 papers</span>
+      <div class="freq">Asked in every single paper — <span>most repeated question in HC-02</span></div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Relationship between Education and Philosophy + Knowledge of Philosophy for Teacher</strong><span class="freq-badge freq-hot">4/4 papers</span>
+      <div class="freq">Asked in 2017, 2023, 2024, 2025 — always combined</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Socialisation — Definition + Role of Family/School/Peer Group</strong><span class="freq-badge freq-hot">4/4 papers</span>
+      <div class="freq">Asked in 2017, 2023, 2024, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Devices of Teaching — List + Explain any two (Questioning, Explanation)</strong><span class="freq-badge freq-hot">3/4 papers</span>
+      <div class="freq">Asked in 2023, 2024, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Contributions of Philosophers</strong> — Gandhiji + Dewey / Rousseau / Vivekananda / Tagore<span class="freq-badge freq-hot">4/4 papers</span>
+      <div class="freq">At least one philosopher asked in every paper</div>
+    </div>
+  </div>
+
+  <div class="imp-section">
+    <div class="imp-heading">⚡ Part A — High Frequency (2–3 papers)</div>
+
+    <div class="imp-item">
+      <strong>Social Change — Meaning, Education as Instrument, Teacher's Role</strong><span class="freq-badge freq-med">2/4 papers</span>
+      <div class="freq">2017, 2023</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Maxims of Teaching — List + Explain any two with examples</strong><span class="freq-badge freq-med">2/4 papers</span>
+      <div class="freq">2024, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Formal, Informal, Non-formal Education — Differentiate</strong><span class="freq-badge freq-med">3/4 papers</span>
+      <div class="freq">2017, 2023, 2025</div>
+    </div>
+  </div>
+
+  <div class="imp-section">
+    <div class="imp-heading">📚 Part B — High Frequency (2+ papers)</div>
+
+    <div class="imp-item">
+      <strong>School as Miniature Society</strong><span class="freq-badge freq-hot">3/4 papers</span>
+      <div class="freq">2017, 2023, 2024</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Social Change vs Social Mobility — Difference</strong><span class="freq-badge freq-med">2/4 papers</span>
+      <div class="freq">2017, 2024</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Strategies of Teaching — Meaning + Importance</strong><span class="freq-badge freq-med">2/4 papers</span>
+      <div class="freq">2017, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Project Based Teaching — Meaning + Importance</strong><span class="freq-badge freq-med">2/4 papers</span>
+      <div class="freq">2017, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Culture — Meaning + Education in Preservation of Culture</strong><span class="freq-badge freq-med">2/4 papers</span>
+      <div class="freq">2017, 2024</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Education and Economic Development</strong><span class="freq-badge freq-med">2/4 papers</span>
+      <div class="freq">2017, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Salient Features of Naturalism / Idealism</strong><span class="freq-badge freq-med">2/4 papers</span>
+      <div class="freq">2024, 2025</div>
+    </div>
+
+    <div class="imp-item">
+      <strong>Knowledge of Philosophy useful to a Teacher</strong><span class="freq-badge freq-med">2/4 papers</span>
+      <div class="freq">2017, 2023</div>
+    </div>
+  </div>
+
+  <div class="note-box" style="margin-top:1.5rem">
+    💡 <strong>Exam Strategy:</strong> Focus on the BIG FOUR for Part A — (1) Education/Aims, (2) Education &amp; Philosophy, (3) Socialisation, (4) Philosophers. These alone cover 12–15 marks guaranteed. For Part B, prepare School as Miniature Society, Strategies of Teaching, Culture, and Social Change/Mobility.
+  </div>
+</div>
+
+</div>
+
+<script>
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggle(card) { card.classList.toggle('open'); }
+</script>
+</body>
+</html>
