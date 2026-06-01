@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-03 · Development & Management in School Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0e0c;
+  --surface: #1a1916;
+  --surface2: #232119;
+  --border: #2e2c27;
+  --accent: #c8a96e;
+  --accent2: #8fbc88;
+  --accent3: #7eb8c9;
+  --text: #e8e4dc;
+  --muted: #8a8578;
+  --tag-bg: #2a2720;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; line-height: 1.7; min-height: 100vh; }
+header { background: var(--surface); border-bottom: 1px solid var(--border); padding: 2rem 1.5rem 1.5rem; position: sticky; top: 0; z-index: 100; }
+.header-inner { max-width: 960px; margin: 0 auto; display: flex; align-items: center; gap: 1.2rem; flex-wrap: wrap; }
+.back-btn { color: var(--muted); text-decoration: none; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; letter-spacing: 0.05em; transition: color 0.2s; white-space: nowrap; }
+.back-btn:hover { color: var(--accent); }
+.header-divider { color: var(--border); font-size: 1.4rem; }
+.header-text { flex: 1; }
+.subject-badge { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; letter-spacing: 0.12em; color: var(--accent); text-transform: uppercase; background: rgba(200,169,110,0.12); padding: 0.2rem 0.6rem; border-radius: 3px; border: 1px solid rgba(200,169,110,0.25); display: inline-block; margin-bottom: 0.35rem; }
+.subject-title { font-family: 'Playfair Display', serif; font-size: clamp(1.1rem, 3vw, 1.5rem); font-weight: 700; color: var(--text); line-height: 1.2; }
+.subject-sub { font-size: 0.82rem; color: var(--muted); margin-top: 0.2rem; font-style: italic; }
+.tabs-bar { background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; position: sticky; top: 82px; z-index: 99; }
+.tabs-bar::-webkit-scrollbar { display: none; }
+.tabs-inner { max-width: 960px; margin: 0 auto; display: flex; padding: 0 1rem; }
+.tab-btn { background: none; border: none; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 0.06em; padding: 0.85rem 1.1rem; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; white-space: nowrap; }
+.tab-btn:hover { color: var(--text); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab-btn.imp.active { color: #e07b6a; border-bottom-color: #e07b6a; }
+main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.year-panel { display: none; }
+.year-panel.active { display: block; }
+.paper-meta { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.4rem; margin-bottom: 2rem; display: flex; gap: 2rem; flex-wrap: wrap; align-items: center; }
+.meta-item { font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; color: var(--muted); }
+.meta-item strong { color: var(--accent); font-weight: 500; }
+.section-heading { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin: 2rem 0 1.2rem; }
+.q-card { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 1rem; overflow: hidden; transition: border-color 0.2s; }
+.q-card:hover { border-color: #3a3830; }
+.q-card.open { border-color: rgba(200,169,110,0.35); }
+.q-header { display: flex; align-items: flex-start; gap: 0.9rem; padding: 1rem 1.2rem; cursor: pointer; user-select: none; }
+.q-num { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--accent); background: rgba(200,169,110,0.1); border: 1px solid rgba(200,169,110,0.2); border-radius: 4px; padding: 0.15rem 0.45rem; white-space: nowrap; margin-top: 0.15rem; flex-shrink: 0; }
+.q-marks { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); margin-left: auto; white-space: nowrap; flex-shrink: 0; margin-top: 0.15rem; }
+.q-text { font-size: 0.95rem; color: var(--text); flex: 1; line-height: 1.55; }
+.q-arrow { color: var(--muted); font-size: 0.85rem; transition: transform 0.25s; margin-top: 0.2rem; flex-shrink: 0; }
+.q-card.open .q-arrow { transform: rotate(180deg); }
+.q-answer { display: none; padding: 0 1.2rem 1.2rem 3.4rem; border-top: 1px solid var(--border); }
+.q-card.open .q-answer { display: block; }
+.q-answer-inner { padding-top: 1rem; font-size: 0.92rem; color: #ccc9c0; line-height: 1.78; }
+.q-answer-inner h4 { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--accent); margin: 1rem 0 0.4rem; font-weight: 700; }
+.q-answer-inner h4:first-child { margin-top: 0; }
+.q-answer-inner ul { margin: 0.5rem 0 0.5rem 1.2rem; }
+.q-answer-inner ul li { margin-bottom: 0.3rem; }
+.q-answer-inner p { margin-bottom: 0.6rem; }
+.q-answer-inner .note { background: rgba(143,188,136,0.08); border-left: 3px solid var(--accent2); padding: 0.6rem 0.9rem; margin-top: 0.8rem; border-radius: 0 4px 4px 0; font-size: 0.87rem; color: var(--accent2); }
+.q-answer-inner table { width: 100%; border-collapse: collapse; margin: 0.8rem 0; font-size: 0.87rem; }
+.q-answer-inner table th { background: rgba(200,169,110,0.1); color: var(--accent); padding: 0.5rem 0.75rem; text-align: left; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; }
+.q-answer-inner table td { padding: 0.5rem 0.75rem; border: 1px solid var(--border); color: #ccc9c0; vertical-align: top; }
+.q-answer-inner table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.imp-grid { display: grid; gap: 0.8rem; }
+.imp-item { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.2rem; display: flex; gap: 1rem; align-items: flex-start; }
+.imp-freq { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; background: rgba(200,169,110,0.12); color: var(--accent); border: 1px solid rgba(200,169,110,0.25); padding: 0.2rem 0.5rem; border-radius: 4px; white-space: nowrap; flex-shrink: 0; }
+.imp-freq.high { background: rgba(224,123,106,0.12); color: #e07b6a; border-color: rgba(224,123,106,0.25); }
+.imp-freq.med { background: rgba(143,188,136,0.12); color: var(--accent2); border-color: rgba(143,188,136,0.25); }
+.imp-text { font-size: 0.93rem; line-height: 1.55; }
+.imp-years { font-family: 'JetBrains Mono', monospace; font-size: 0.73rem; color: var(--muted); margin-top: 0.3rem; }
+.open-all-btn { background: none; border: 1px solid var(--border); color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; padding: 0.4rem 0.9rem; border-radius: 4px; cursor: pointer; transition: all 0.2s; margin-bottom: 1.2rem; }
+.open-all-btn:hover { color: var(--accent); border-color: rgba(200,169,110,0.4); }
+footer { text-align: center; padding: 2rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 0.73rem; border-top: 1px solid var(--border); }
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="../index.html" class="back-btn">← Back</a>
+    <span class="header-divider">|</span>
+    <div class="header-text">
+      <div class="subject-badge">HC-03 · Semester 1</div>
+      <div class="subject-title">Development &amp; Management in School Education</div>
+      <div class="subject-sub">I Semester B.Ed. (CBCS – 2 Year Course) · Max Marks: 70</div>
+    </div>
+  </div>
+</header>
+<div class="tabs-bar">
+  <div class="tabs-inner">
+    <button class="tab-btn imp active" onclick="showTab('imp',this)">★ Important</button>
+    <button class="tab-btn" onclick="showTab('2025',this)">2025</button>
+    <button class="tab-btn" onclick="showTab('2024',this)">2024</button>
+    <button class="tab-btn" onclick="showTab('2022',this)">2022</button>
+    <button class="tab-btn" onclick="showTab('2021',this)">2021</button>
+    <button class="tab-btn" onclick="showTab('2020',this)">2020</button>
+    <button class="tab-btn" onclick="showTab('2019b',this)">Sep 2019</button>
+    <button class="tab-btn" onclick="showTab('2019a',this)">Apr 2019</button>
+    <button class="tab-btn" onclick="showTab('2017',this)">2017 + Key</button>
+    <button class="tab-btn" onclick="showTab('2016',this)">2016</button>
+  </div>
+</div>
+<main>
+<!-- IMPORTANT QUESTIONS -->
+<div class="year-panel active" id="tab-imp">
+  <div class="section-heading">High-Frequency Questions — Across All Years</div>
+  <div class="imp-grid">
+    <div class="imp-item"><div><div class="imp-freq high">8× asked</div></div><div><div class="imp-text">Write the flow chart of Educational Administration in Karnataka. Explain responsibilities of DDPI and BEO.</div><div class="imp-years">2017, 2019a, 2019b, 2020, 2021, 2022, 2024, 2025</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq high">8× asked</div></div><div><div class="imp-text">Constitutional provisions related to education of SC's, ST's and Minorities. Steps taken by government to promote these groups.</div><div class="imp-years">2017, 2019a, 2019b, 2021, 2022, 2024, 2025 + others</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq high">7× asked</div></div><div><div class="imp-text">Objectives and features of Navodaya School and Morarji Desai Residential Schools. Differences between government and unaided schools.</div><div class="imp-years">2017, 2019a, 2019b, 2020, 2021, 2024, 2025</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq high">7× asked</div></div><div><div class="imp-text">What is secondary education? Explain objectives and place of secondary education.</div><div class="imp-years">2017, 2019a, 2020, 2021, 2022, 2025 + more</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq med">6× asked</div></div><div><div class="imp-text">Salient features of Indian Constitution and write a Preamble for Constitution. RTE 2009 — meaning and importance.</div><div class="imp-years">2017, 2019b, 2020, 2021, 2022, 2024, 2025</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq med">6× asked</div></div><div><div class="imp-text">Qualities and functions of Headmaster in a school. Human Resource Management in school.</div><div class="imp-years">2017, 2019a, 2019b, 2021, 2022, 2024</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq med">6× asked</div></div><div><div class="imp-text">Major recommendations of Secondary Education Commission 1952-53 (Mudaliar Commission).</div><div class="imp-years">2017, 2019b, 2020, 2021, 2022, 2024</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq med">6× asked</div></div><div><div class="imp-text">School discipline — meaning, causes of indiscipline, steps to overcome indiscipline.</div><div class="imp-years">2017, 2019b, 2020, 2021, 2022, 2024, 2025</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq med">5× asked</div></div><div><div class="imp-text">Principles, process and purpose of Educational Management.</div><div class="imp-years">2017, 2019a, 2019b, 2022, 2025</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq med">5× asked</div></div><div><div class="imp-text">School time table — definition, necessity and factors to consider while framing a good timetable.</div><div class="imp-years">2017, 2019b, 2020, 2024, 2025</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq med">5× asked</div></div><div><div class="imp-text">Institutional Planning — meaning, objectives and procedure/stages.</div><div class="imp-years">2017, 2019b, 2020, 2022, 2025</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq med">5× asked</div></div><div><div class="imp-text">Importance of co-curricular activities. Types and organisation of co-curricular activities.</div><div class="imp-years">2017, 2019b, 2020, 2021, 2022</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq med">5× asked</div></div><div><div class="imp-text">Factors affecting teacher motivation. Role performance of teacher in education.</div><div class="imp-years">2017, 2019b, 2021, 2024, 2025</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq">4× asked</div></div><div><div class="imp-text">Important functions of DSERT. Functions of NCERT. Objectives of SSA and RMSA.</div><div class="imp-years">2017, 2021, 2022, 2024</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq">4× asked</div></div><div><div class="imp-text">School records — types, importance and procedure of maintaining records in secondary school.</div><div class="imp-years">2017, 2019b, 2021, 2024</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq">4× asked</div></div><div><div class="imp-text">Kothari Education Commission 1964-66 — objectives and recommendations for secondary education.</div><div class="imp-years">2016, 2017, 2024, 2025</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq">4× asked</div></div><div><div class="imp-text">Parent-Teacher Association (PTA) — objectives, importance and activities.</div><div class="imp-years">2017, 2019b, 2021, 2024</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq">3× asked</div></div><div><div class="imp-text">Total Quality Management (TQM) — concept and principles.</div><div class="imp-years">2019b, 2019a, 2025</div></div></div>
+    <div class="imp-item"><div><div class="imp-freq">3× asked</div></div><div><div class="imp-text">National Policy of Education 1986 — salient features. Programme of Action 1992.</div><div class="imp-years">2019b, 2020, 2021, 2022</div></div></div>
+  </div>
+</div>
+<!-- 2025 TAB -->
+<div class="year-panel" id="tab-2025">
+  <div class="paper-meta">
+    <div class="meta-item"><strong>Exam</strong> May/June 2025</div>
+    <div class="meta-item"><strong>Code</strong> ED-003</div>
+    <div class="meta-item"><strong>Marks</strong> 70 (Part A: 30, Part B: 40)</div>
+  </div>
+  <button class="open-all-btn" onclick="toggleAll('tab-2025')">Expand All</button>
+  <div class="section-heading">Part A — Answer any 3 (10 marks each)</div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q1</span><span class="q-text">a) What is secondary education? b) Explain the objectives of secondary education. c) Explain the place of secondary education.</span><span class="q-marks">2+4+4</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) What is Secondary Education?</h4>
+      <p>Secondary education is the stage of education that comes after primary/elementary and before higher education (generally Classes 8–12). It serves as a <strong>link between elementary and higher education</strong> and plays a crucial role in a child's future. The Mudaliar Commission (1952-53) defined it as education provided in high schools and intermediate colleges.</p>
+      <h4>b) Objectives of Secondary Education</h4>
+      <ul>
+        <li>To develop democratic citizenship — knowledge, spiritual values and scientific attitude.</li>
+        <li>To acquire knowledge, skills and attitudes for development of self and the nation.</li>
+        <li>To promote love for and loyalty to the nation; promote harmonious co-existence.</li>
+        <li>To develop mentally, socially, morally, physically and spiritually.</li>
+        <li>To enhance understanding and respect for own and other people's cultures.</li>
+        <li>To promote positive environmental and health practices.</li>
+        <li>To build a firm foundation for further education and training.</li>
+        <li>To develop ability for enquiry, critical thinking and rational judgment.</li>
+        <li>To develop into a responsible and socially well-adjusted person.</li>
+        <li>To identify individual talents and develop them.</li>
+        <li>To develop into a self-disciplined individual who manages time properly.</li>
+      </ul>
+      <h4>c) Place of Secondary Education</h4>
+      <ul>
+        <li><strong>Bridge role:</strong> Connects elementary education with higher education and world of work.</li>
+        <li><strong>Career preparation:</strong> Students identify vocational and academic streams.</li>
+        <li><strong>Personality development:</strong> Adolescence — key stage for character formation.</li>
+        <li><strong>National development:</strong> Produces citizens who contribute to democracy, economy and society.</li>
+        <li><strong>Social mobility:</strong> Quality secondary education crucial for upward mobility especially for SC/ST.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q2</span><span class="q-text">Explain the educational administration structure of Karnataka.</span><span class="q-marks">10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Educational Administration Structure of Karnataka</h4>
+      <p><strong>Top Level:</strong> Minister for Education → Secretary (Primary and Secondary Education)</p>
+      <p><strong>Directorate Level (Multiple Directors):</strong> Director of Primary Education, Director of Secondary Education, Director (Ministry Schools), Director of Secondary Examinations, Director of Other Examinations, Director of Adult Education, Director of Vocational Education, Director of Education Research &amp; Training/Textbooks, Director (PUC).</p>
+      <p><strong>Below Directorates:</strong> Joint Directors (JD) for each wing → KSEEB at Division Level (Bangalore, Mysore, Belgaum, Gulbarga) → DDPI (District Deputy Director) — one per district → BEO (Block Education Officer) at Taluk level.</p>
+      <p>Also: <strong>DIET</strong> (District Institute of Education &amp; Training) and <strong>CTE</strong> (College of Teacher Education) for training.</p>
+      <h4>Responsibilities of DDPI</h4>
+      <ul>
+        <li>Chief coordinator of all educational activities at school/district stage.</li>
+        <li>Power to impose penalties; permit changes in working hours.</li>
+        <li>Power to sanction pension; make temporary appointments; renew recognition to schools.</li>
+        <li>Surprise visits to exam centers; recommending national and state awards.</li>
+        <li>Power to permit opening of additional sections; change of medium of instruction.</li>
+      </ul>
+      <h4>Responsibilities of BEO</h4>
+      <ul>
+        <li>Review inspection reports; conduct enquiries relating to HM's supervision.</li>
+        <li>Implementation of plans and schemes; inspect taluk education officers.</li>
+        <li>Organise seminars, teacher conferences and educational films.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q3</span><span class="q-text">a) What are the constitutional provisions related to education of SC's and ST's? b) What are the steps taken by Karnataka Government to promote girls education?</span><span class="q-marks">5+5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) Constitutional Provisions for SC's and ST's Education</h4>
+      <ul>
+        <li><strong>Article 15(4):</strong> State may make special provisions for advancement of socially and educationally backward classes or SC/STs.</li>
+        <li><strong>Article 17:</strong> Abolition of untouchability — prevents discrimination in educational access.</li>
+        <li><strong>Article 29 &amp; 30:</strong> Protection of interests of minorities in education; right to establish and manage educational institutions.</li>
+        <li><strong>Article 45:</strong> Free and compulsory education for children (now RTE 2009).</li>
+        <li><strong>Article 46:</strong> State shall promote with special care educational and economic interests of SC/STs and protect them from social injustice.</li>
+        <li><strong>Article 330/332:</strong> Reservation of seats for SC/ST in Lok Sabha and State Legislatures.</li>
+        <li><strong>Article 338:</strong> National Commission for SC to investigate matters relating to safeguards for SC/STs.</li>
+      </ul>
+      <h4>b) Steps by Karnataka Government to Promote Girls' Education</h4>
+      <ul>
+        <li><strong>Kasturba Gandhi Balika Vidyalaya (KGBV):</strong> Residential schools for girls from marginalised communities.</li>
+        <li><strong>Bhagyalakshmi Scheme:</strong> Financial assistance at birth of a girl child to encourage education.</li>
+        <li><strong>Vidya Siri Scheme:</strong> Scholarships and bicycles for girl students in rural areas.</li>
+        <li><strong>Mid-Day Meal Scheme:</strong> Attracts girl students and reduces dropout.</li>
+        <li><strong>Free uniform and textbooks:</strong> Reduces financial burden on poor families.</li>
+        <li><strong>Kanya Samruddi Scheme:</strong> Financial incentives for families sending girls to school.</li>
+        <li>SSA/RMSA initiatives — separate toilets and hygiene facilities for girls.</li>
+        <li>Legal protection through ban on child marriage.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q4</span><span class="q-text">Explain the principles, purpose and process of educational management.</span><span class="q-marks">10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Educational Management — Meaning</h4>
+      <p>Educational management refers to the administration of the education system in which a group of individuals make and implement decisions to educate students. It involves planning, organising, directing and evaluating educational activities to achieve educational goals.</p>
+      <h4>Principles of Educational Management</h4>
+      <ul>
+        <li><strong>Democratic Administration:</strong> Involves all stakeholders in decision-making.</li>
+        <li><strong>Division of Work:</strong> Tasks distributed based on skills and ability.</li>
+        <li><strong>Unity of Command:</strong> Each employee answers to one supervisor.</li>
+        <li><strong>Flexibility:</strong> Administration adapts to changing circumstances.</li>
+        <li><strong>Coordination:</strong> All units work together toward common goals.</li>
+        <li><strong>Leadership:</strong> Effective leaders inspire and guide stakeholders.</li>
+        <li><strong>Accountability:</strong> Every person is responsible for their work.</li>
+      </ul>
+      <h4>Purpose/Objectives</h4>
+      <ul>
+        <li>To provide quality education to all students.</li>
+        <li>To effectively utilise available resources — human, financial and material.</li>
+        <li>To maintain smooth functioning of educational institutions.</li>
+        <li>To achieve the broad goals of national education policy.</li>
+        <li>To develop teacher competence and motivation.</li>
+      </ul>
+      <h4>Process of Educational Management</h4>
+      <ul>
+        <li><strong>Planning</strong> — defining goals and strategies</li>
+        <li><strong>Organization</strong> — arranging resources and tasks</li>
+        <li><strong>Direction</strong> — guiding the staff</li>
+        <li><strong>Coordination</strong> — integrating all activities</li>
+        <li><strong>Control</strong> — monitoring and correcting deviations</li>
+        <li><strong>Recording &amp; Reporting</strong> — maintaining and communicating records</li>
+        <li><strong>Evaluation</strong> — assessing outcomes</li>
+        <li><strong>Decision Making</strong> — choosing best course of action</li>
+        <li><strong>Budgeting</strong> — financial planning and allocation</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q5</span><span class="q-text">a) What is institutional planning? b) What are the objectives of institutional planning? c) Explain the procedure of institutional planning.</span><span class="q-marks">2+4+4</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) Institutional Planning</h4>
+      <p>Institutional planning is a <strong>comprehensive program</strong> that involves every educational institution and all human factors connected with it — teachers, students and the local community. It aims at both qualitative and quantitative improvement of education in the school.</p>
+      <h4>b) Objectives</h4>
+      <ul>
+        <li>To improve the overall quality of education in the school.</li>
+        <li>To make optimum use of available resources — human, physical and financial.</li>
+        <li>To involve all stakeholders in school improvement.</li>
+        <li>To achieve national and state goals of education at the institutional level.</li>
+        <li>To identify gaps and systematically address them year by year.</li>
+        <li>To develop a sense of ownership among teachers for school development.</li>
+      </ul>
+      <h4>c) Procedure/Stages of Institutional Planning</h4>
+      <ul>
+        <li><strong>Stage 1 — Identifying the needs:</strong> Diagnosing current status, identifying strengths and weaknesses.</li>
+        <li><strong>Stage 2 — Pooling resources:</strong> Stock of available resources — teachers, infrastructure, finances, community support.</li>
+        <li><strong>Stage 3 — Preparing the plan of action:</strong> Setting specific goals with timelines, responsibilities and success indicators.</li>
+        <li><strong>Stage 4 — Implementing the plan:</strong> Executing planned activities with proper coordination.</li>
+        <li><strong>Stage 5 — Evaluating and taking corrective action:</strong> Reviewing progress, measuring outcomes and making adjustments.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="section-heading">Part B — Answer any 8 (5 marks each)</div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q6</span><span class="q-text">Write the differences between government and unaided schools.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <table><tr><th>Government Schools</th><th>Unaided Schools</th></tr>
+      <tr><td>Fully funded and managed by government</td><td>Privately managed; no government grant</td></tr>
+      <tr><td>Free education; no fee charged</td><td>Fees charged from students</td></tr>
+      <tr><td>Teachers appointed by government (KPSC etc.)</td><td>Management appoints own teachers</td></tr>
+      <tr><td>Follow government curriculum strictly</td><td>May follow CBSE/ICSE/State board with flexibility</td></tr>
+      <tr><td>Infrastructure funded by government</td><td>Infrastructure funded by management/trust</td></tr>
+      <tr><td>Admission based on locality/zone</td><td>Admission at management's discretion</td></tr>
+      <tr><td>Reservations for SC/ST/OBC strictly followed</td><td>25% reservation under RTE; rest at management discretion</td></tr></table>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q7</span><span class="q-text">Mention the important functions of D.S.E.R.T.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>DSERT — Directorate of State Educational Research and Training (Karnataka's state-level equivalent of NCERT).</p>
+      <ul>
+        <li>Development of curriculum and syllabus for school education in Karnataka.</li>
+        <li>Preparation and publication of textbooks for all classes.</li>
+        <li>Conducting in-service training programmes for teachers (through DIET network).</li>
+        <li>Undertaking educational research relevant to Karnataka's context.</li>
+        <li>Evaluation of educational programmes and innovations.</li>
+        <li>Providing academic support to schools and teacher-training institutions.</li>
+        <li>Implementing CCE (Continuous and Comprehensive Evaluation) and other reforms.</li>
+        <li>Organizing workshops, seminars and conferences for educational improvement.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q8</span><span class="q-text">List the features of Constitution of India and write a Preamble for Constitution.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Salient Features of Indian Constitution</h4>
+      <ul>
+        <li>Largest written constitution in the world</li>
+        <li>Blend of rigidity and flexibility</li>
+        <li>Sovereign, Socialist, Secular, Democratic Republic</li>
+        <li>Parliamentary system of government; Federal structure with unitary bias</li>
+        <li>Fundamental Rights guaranteed to citizens</li>
+        <li>Directive Principles of State Policy; Fundamental Duties</li>
+        <li>Independent Judiciary; Single citizenship; Universal adult franchise</li>
+      </ul>
+      <h4>Preamble of the Constitution</h4>
+      <p><em>"WE, THE PEOPLE OF INDIA, having solemnly resolved to constitute India into a SOVEREIGN SOCIALIST SECULAR DEMOCRATIC REPUBLIC and to secure to all its citizens: JUSTICE, social, economic and political; LIBERTY of thought, expression, belief, faith and worship; EQUALITY of status and of opportunity; and to promote among them all FRATERNITY assuring the dignity of the individual and the unity and integrity of the Nation."</em></p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q9</span><span class="q-text">Explain the importance of RTE-2009.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Right to Education Act 2009</h4>
+      <p>The RTE Act came into force on 1st April 2010. It gives <strong>legal right to free and compulsory education</strong> to every child between ages 6 to 14 years under Article 21-A of the Constitution.</p>
+      <h4>Importance</h4>
+      <ul>
+        <li>Makes elementary education a <strong>fundamental right</strong> — no child can be denied.</li>
+        <li><strong>25% reservation</strong> in private unaided schools for EWS and disadvantaged groups.</li>
+        <li>Bans detention, expulsion and corporal punishment up to Class 8.</li>
+        <li>Mandates minimum infrastructure — classrooms, toilets, drinking water, library.</li>
+        <li>Requires Pupil-Teacher Ratio (PTR) of 30:1 (primary) and 35:1 (upper primary).</li>
+        <li>Makes schools <strong>neighbourhood-based</strong> to avoid commuting burden.</li>
+        <li>Provides for <strong>School Management Committees (SMC)</strong> with parent participation.</li>
+        <li>Promotes <strong>CCE</strong> — no board exam until Class 8.</li>
+        <li>Ensures out-of-school children are enrolled and given age-appropriate education.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q10</span><span class="q-text">What is school time table? Mention the importance of School time table.</span><span class="q-marks">2+3</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>School Time Table</h4>
+      <p>A school time table is a <strong>systematic schedule</strong> that allots specific time periods to different subjects, teachers and classes. It is considered the <strong>"second clock of the school"</strong> as it regulates the entire academic life of the institution.</p>
+      <h4>Importance</h4>
+      <ul>
+        <li>Ensures <strong>proper utilisation</strong> of school time for all subjects.</li>
+        <li>Prevents clash of periods; ensures all teachers are productively engaged.</li>
+        <li>Maintains discipline and systematic order in the school.</li>
+        <li>Ensures equal distribution of curricular and co-curricular activities.</li>
+        <li>Helps HM plan teacher deployment and classroom management efficiently.</li>
+        <li>Takes into account biological rhythms — difficult subjects in fresh morning hours.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q11</span><span class="q-text">What is school discipline? Explain the causes of indiscipline in school.</span><span class="q-marks">2+3</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>School Discipline</h4>
+      <p>In the <strong>broader sense</strong>: training of mind, manners and attitudes; sublimation of instincts; formation of right habits; development of character — not merely obedience to rules.</p>
+      <h4>Causes of Indiscipline</h4>
+      <ul>
+        <li>Loss of leadership and authority of teachers</li>
+        <li>Growth of economic difficulties in students' families</li>
+        <li>Defects in the existing system of education</li>
+        <li>General loss of idealism and values</li>
+        <li>Political interference and communal tensions</li>
+        <li>Unhealthy influence of social media and cinema</li>
+        <li>Lack of adequate co-curricular activities</li>
+        <li>Poor school environment and inadequate infrastructure</li>
+        <li>Overcrowded classrooms and insufficient teachers</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q12</span><span class="q-text">What is school calendar? Mention the importance of school calendar.</span><span class="q-marks">2+3</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>School Calendar (School Panchanga)</h4>
+      <p>An annual schedule listing all academic activities, holidays, examinations, co-curricular events and important dates for the entire academic year. Prepared before the start of the academic year.</p>
+      <h4>Importance</h4>
+      <ul>
+        <li>Provides a roadmap for the entire academic year.</li>
+        <li>Helps in advance planning of teaching, exams and events.</li>
+        <li>Ensures systematic and balanced coverage of curriculum.</li>
+        <li>Informs parents and students about school schedule in advance.</li>
+        <li>Helps in resource allocation and staff deployment planning.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q13</span><span class="q-text">Mention the different types of school records. Explain its importance.</span><span class="q-marks">2+3</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Types of School Records</h4>
+      <ul>
+        <li>Admission/General Register; Attendance Registers (students and teachers)</li>
+        <li>Progress Cards / Cumulative Record Cards; Stock Register</li>
+        <li>Cash Book / Financial Records; Log Book; Visitor's Book</li>
+        <li>Service Register of staff; Library Register; Scholarship Records</li>
+      </ul>
+      <h4>Importance</h4>
+      <ul>
+        <li>Serve as <strong>evidence</strong> of all activities, results and honours received.</li>
+        <li>Essential for Total Quality Management and planning.</li>
+        <li>Help in resource acquisition and utilisation.</li>
+        <li>Required for government inspections, audits and accreditation.</li>
+        <li>Provide historical data for future planning and decision-making.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q14</span><span class="q-text">Mention the qualities and functions of Head Master.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Qualities of Headmaster</h4>
+      <ul>
+        <li>Leadership of the school and society; efficient administrator and organizer</li>
+        <li>Sympathetic and friendly attitude; scholarship and curiosity</li>
+        <li>Democratic outlook; efficient speaker; ideal character; impartiality and justice</li>
+        <li>Self-discipline, control and confidence; dutifulness, efficiency and punctuality</li>
+        <li>Influential personality</li>
+      </ul>
+      <h4>Functions of Headmaster</h4>
+      <ul>
+        <li>Supervision of teaching and learning; curriculum development and evaluation</li>
+        <li>Co-curricular programme coordination; school plant and equipment management</li>
+        <li>School business and office management; staff management</li>
+        <li>Liaison with parents, community and educational authorities</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q15</span><span class="q-text">Explain the meaning and purpose of institutional planning.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner"><div class="note">Same as Q5 — see above for full answer on Institutional Planning (meaning and objectives/purpose).</div></div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q16</span><span class="q-text">Explain the importance and activities of Parent Teacher Association in school.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Importance of PTA</h4>
+      <ul>
+        <li>Brings home and school into close contact; promotes welfare of children.</li>
+        <li>Helps in growth and development of child's progress.</li>
+        <li>PTA helps school inform the community of what it is doing and the problems it faces.</li>
+        <li>Bridges communication gap between parents and teachers.</li>
+        <li>Mobilises community resources for school development.</li>
+      </ul>
+      <h4>Activities of PTA</h4>
+      <ul>
+        <li>Regular meetings to discuss student progress and school issues.</li>
+        <li>Organizing parent orientation and awareness programmes.</li>
+        <li>Assisting in school functions, cultural events and sports day.</li>
+        <li>Contributing to school infrastructure improvement.</li>
+        <li>Monitoring attendance and dropout prevention.</li>
+        <li>Grievance redressal between parents and school management.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q17</span><span class="q-text">Explain the concept and principles of total quality management.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Total Quality Management (TQM)</h4>
+      <p>TQM is a management philosophy that integrates all organizational functions to focus on meeting student/parent/society needs and organizational objectives through continuous improvement.</p>
+      <h4>Principles of TQM</h4>
+      <ul>
+        <li><strong>Customer Focus:</strong> Student is the primary "customer" — their learning outcomes are the measure of quality.</li>
+        <li><strong>Total Involvement:</strong> Every member participates in quality improvement.</li>
+        <li><strong>Continuous Improvement (Kaizen):</strong> Ongoing effort to improve all processes.</li>
+        <li><strong>Process Orientation:</strong> Focus on improving processes that lead to results.</li>
+        <li><strong>Data-Driven Decisions:</strong> Decisions based on facts and evidence.</li>
+        <li><strong>Leadership Commitment:</strong> HM and management must lead by example.</li>
+        <li><strong>Prevention over Inspection:</strong> Build quality in from the start.</li>
+      </ul>
+    </div></div>
+  </div>
+</div><!-- end 2025 -->
+
+<!-- 2024 TAB -->
+<div class="year-panel" id="tab-2024">
+  <div class="paper-meta">
+    <div class="meta-item"><strong>Exam</strong> July 2024</div>
+    <div class="meta-item"><strong>Code</strong> ED-003</div>
+    <div class="meta-item"><strong>Marks</strong> 70 (Part A: 30, Part B: 40)</div>
+  </div>
+  <button class="open-all-btn" onclick="toggleAll('tab-2024')">Expand All</button>
+  <div class="section-heading">Part A — Answer any 3 (10 marks each)</div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q1</span><span class="q-text">Mention the objectives and features of: a) Navodaya school. b) Kittur Rani Chennamma School.</span><span class="q-marks">5+5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) Navodaya School (Jawahar Navodaya Vidyalaya)</h4>
+      <p><strong>Objectives:</strong> Provide quality education to talented rural children irrespective of socioeconomic background; promote national integration; develop leadership and all-round personality; special emphasis on science and mathematics.</p>
+      <p><strong>Features:</strong></p>
+      <ul>
+        <li>Alternate schools for gifted students — residential, autonomous, run by Navodaya Vidyalaya Samithi (New Delhi) under HRD Ministry.</li>
+        <li>Equity and social justice — opportunities for talented largely rural children.</li>
+        <li>Adventure activities, physical education, environmental awareness.</li>
+        <li>Entrance on basis of merit; reservation for rural SC/ST and girl students.</li>
+        <li>Co-educational residential schools with free education.</li>
+        <li>Adherence to 3-language formula; promotion of national integration.</li>
+        <li>Migration scheme — students go to different state schools to learn languages.</li>
+      </ul>
+      <h4>b) Kittur Rani Chennamma School</h4>
+      <p><strong>Objectives:</strong> Provide quality residential education to girls from backward communities in Karnataka; promote girls' education; empower girls socially and economically.</p>
+      <p><strong>Features:</strong></p>
+      <ul>
+        <li>Residential schools exclusively for girl students from SC/ST/OBC communities.</li>
+        <li>Run by Karnataka Government (Social Welfare Department).</li>
+        <li>Free education, boarding, lodging, uniform and textbooks.</li>
+        <li>Named after brave queen Kittur Rani Chennamma — inspires values of courage and leadership.</li>
+        <li>Focuses on academic excellence along with life skills and personality development.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q2</span><span class="q-text">a) Write flow chart of Educational Administration in Karnataka. b) Write the duties of J.D.P.I and D.D.P.I.</span><span class="q-marks">5+5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>For flow chart — see 2025 Q2 above.</p>
+      <h4>Duties of JDPI (Joint Director of Public Instruction)</h4>
+      <ul>
+        <li>Supervise and coordinate all educational activities in the division/region.</li>
+        <li>Inspect and evaluate schools, DIETs and training institutions.</li>
+        <li>Implement state education policies and schemes at regional level.</li>
+        <li>Monitor utilisation of funds and resources.</li>
+        <li>Review performance of DDPIs and BEOs under jurisdiction.</li>
+      </ul>
+      <h4>Duties of DDPI</h4>
+      <ul>
+        <li>Chief coordinator of all educational activities at school/district stage.</li>
+        <li>Power to impose penalties; permit changes in working hours.</li>
+        <li>Power to sanction pension; make temporary appointments; renew school recognition.</li>
+        <li>Conduct surprise visits to exam centers; recommend national and state awards.</li>
+        <li>Permit opening of additional sections; change of medium of instruction.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q3</span><span class="q-text">Explain the Constitutional provisions of education of SC's, ST's and minorities groups.</span><span class="q-marks">10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>See 2025 Q3(a) for SC/ST provisions. Additional provisions for Minorities:</p>
+      <h4>Constitutional Provisions for Minorities</h4>
+      <ul>
+        <li><strong>Article 29:</strong> Any section having distinct language/script/culture has right to conserve it. No citizen denied admission to state educational institutions on grounds of religion, race, caste or language.</li>
+        <li><strong>Article 30(1):</strong> All minorities (religious or linguistic) have right to establish and administer educational institutions of their choice.</li>
+        <li><strong>Article 30(2):</strong> State shall not discriminate against minority-run institutions in granting aid.</li>
+        <li><strong>Article 28:</strong> No religious instruction in educational institutions wholly maintained by state funds.</li>
+        <li><strong>Article 350-A:</strong> Adequate facilities for instruction in mother tongue at primary stage for linguistic minority children.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q4</span><span class="q-text">a) What are the factors affecting teacher motivation? b) Explain the role performance of the teacher in education.</span><span class="q-marks">5+5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) Factors Affecting Teacher Motivation</h4>
+      <ul>
+        <li>School climate and existing norms; class size; resources and facilities</li>
+        <li>Teacher's own personality and subject mastery</li>
+        <li>Activity structure within the institution; collegial relations</li>
+        <li>General expectations regarding student potential; feedback system</li>
+        <li>Leadership style and decision-making process</li>
+        <li>Working conditions; job satisfaction; valuing and rewarding good work</li>
+        <li>Salary and service conditions; reinforcements</li>
+      </ul>
+      <h4>b) Role Performance of Teacher in Education</h4>
+      <ul>
+        <li><strong>Instructor:</strong> Delivers lessons, explains concepts, demonstrates skills.</li>
+        <li><strong>Guide and Counsellor:</strong> Helps students make career and personal decisions.</li>
+        <li><strong>Evaluator:</strong> Assesses student learning through various methods.</li>
+        <li><strong>Manager of Learning:</strong> Organises classroom environment for effective learning.</li>
+        <li><strong>Curriculum Developer:</strong> Adapts curriculum to meet student needs.</li>
+        <li><strong>Role Model:</strong> Demonstrates values, attitudes and behaviour.</li>
+        <li><strong>Community Liaison:</strong> Connects school with parents and community.</li>
+        <li><strong>Co-curricular Organiser:</strong> Plans and conducts extracurricular activities.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q5</span><span class="q-text">a) What is school time table? b) Why is it necessary for a school? c) What factors do you consider while framing a good time table?</span><span class="q-marks">2+2+6</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>See 2025 Q10 for definition and importance. Additional factors for framing a timetable:</p>
+      <h4>Factors to Consider While Framing a Good Time Table</h4>
+      <ul>
+        <li><strong>Biological factors:</strong> Difficult subjects in morning when students are fresh; light subjects after lunch.</li>
+        <li><strong>Teacher availability:</strong> Ensure no teacher has too many consecutive periods.</li>
+        <li><strong>Subject weight:</strong> Core subjects (Math, Science, Language) get adequate periods per week.</li>
+        <li><strong>Co-curricular activities:</strong> Dedicated periods for art, sports, library.</li>
+        <li><strong>Laboratory periods:</strong> Double periods for practicals when needed.</li>
+        <li><strong>Break periods:</strong> Adequate rest to prevent fatigue.</li>
+        <li><strong>Flexibility:</strong> Allow for adjustments due to teacher absence or special events.</li>
+        <li><strong>Examination schedule:</strong> Revision time built in before exams.</li>
+        <li><strong>Legal requirements:</strong> Minimum prescribed periods per subject as per DSERT/CBSE norms.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="section-heading">Part B — Answer any 8 (5 marks each)</div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q9</span><span class="q-text">Discuss the major recommendations of Secondary Education Commission 1952–53.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Secondary Education Commission 1952-53 (Mudaliar Commission)</h4>
+      <p>Chaired by Dr. A. Lakshmanaswami Mudaliar. Objectives and recommendations:</p>
+      <ul>
+        <li>To develop ethics and human values; to produce ideal citizens.</li>
+        <li>To develop capacity for earning; quality leadership; scientific outlook.</li>
+        <li>To promote social cooperation and true patriotism.</li>
+        <li><strong>3-year secondary course</strong> (Classes 8-10) after 7 years of primary.</li>
+        <li>Introduction of <strong>diversified courses</strong> — academic, technical, commercial, agricultural.</li>
+        <li>Emphasis on <strong>craft education</strong> as part of curriculum.</li>
+        <li>Recommendations for <strong>examination reform</strong> — external exam at end of secondary only.</li>
+        <li>Strengthening teacher training and improving teacher qualifications.</li>
+        <li>Introduction of <strong>activity-based teaching methods</strong>.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q14</span><span class="q-text">Explain the recommendations made by Kothari Education Commission to Secondary Education.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Kothari Commission (1964-66) Recommendations for Secondary Education</h4>
+      <ul>
+        <li><strong>Restructuring:</strong> 10+2+3 pattern introduced.</li>
+        <li><strong>Work experience:</strong> Socially useful productive work (SUPW) as integral part of curriculum.</li>
+        <li><strong>Science and Mathematics:</strong> Compulsory for all students up to Class 10.</li>
+        <li><strong>Vocationalization:</strong> Higher secondary to have vocational streams.</li>
+        <li><strong>Language:</strong> Three-language formula.</li>
+        <li><strong>Examination reform:</strong> More objective evaluation methods.</li>
+        <li><strong>Teacher education:</strong> Strengthening of teacher training; improved service conditions.</li>
+        <li><strong>Equalisation:</strong> Special attention to SC/ST, girls and rural areas.</li>
+        <li><strong>School complex:</strong> Formation of school complexes to share resources.</li>
+        <li>Spending 6% of GNP on education.</li>
+      </ul>
+    </div></div>
+  </div>
+
+</div><!-- end 2024 -->
+
+<!-- 2022 TAB -->
+<div class="year-panel" id="tab-2022">
+  <div class="paper-meta">
+    <div class="meta-item"><strong>Exam</strong> July 2022</div>
+    <div class="meta-item"><strong>Code</strong> BA-018</div>
+    <div class="meta-item"><strong>Marks</strong> 70 (Part A: 30, Part B: 40)</div>
+  </div>
+  <button class="open-all-btn" onclick="toggleAll('tab-2022')">Expand All</button>
+  <div class="section-heading">Part A</div>
+  <div class="q-card" onclick="toggleCard(this)"><div class="q-header"><span class="q-num">Q1–Q3</span><span class="q-text">Secondary education (Q1), Educational administration Karnataka (Q2), Constitutional provisions SC/ST + Girls education (Q3)</span><span class="q-marks">10 each</span><span class="q-arrow">▼</span></div><div class="q-answer"><div class="q-answer-inner"><div class="note">All three questions are identical to 2025 Q1, Q2, Q3. See 2025 tab for complete answers.</div></div></div></div>
+  <div class="q-card" onclick="toggleCard(this)"><div class="q-header"><span class="q-num">Q4</span><span class="q-text">What is educational management? Explain the process and principles of educational management.</span><span class="q-marks">10</span><span class="q-arrow">▼</span></div><div class="q-answer"><div class="q-answer-inner"><div class="note">See 2025 Q4 for complete answer on Educational Management.</div></div></div></div>
+  <div class="q-card" onclick="toggleCard(this)"><div class="q-header"><span class="q-num">Q5</span><span class="q-text">Briefly explain the qualities and functions of Headmaster.</span><span class="q-marks">5+5</span><span class="q-arrow">▼</span></div><div class="q-answer"><div class="q-answer-inner"><div class="note">See 2025 Q14 for complete answer on Headmaster qualities and functions.</div></div></div></div>
+  <div class="section-heading">Part B — Unique Questions</div>
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q7</span><span class="q-text">Explain the objectives of SSA and RMSA.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>SSA — Sarva Shiksha Abhiyana</h4>
+      <ul>
+        <li>Universalisation of elementary education — enroll all children aged 6-14.</li>
+        <li>Bridge all gender and social category gaps.</li>
+        <li>Improve quality of education; retention and learning outcomes.</li>
+        <li>Provide minimum infrastructure standards to all elementary schools.</li>
+        <li>Community ownership of schools through VEC/SMC.</li>
+      </ul>
+      <h4>RMSA — Rashtriya Madhyamika Shiksha Abhiyana</h4>
+      <ul>
+        <li>Universalisation of secondary education — increase enrollment at Classes 9-10.</li>
+        <li>Achieve 75% gross enrollment ratio at secondary level.</li>
+        <li>Universal access to secondary schooling within 5 km of every habitation.</li>
+        <li>Improve quality through teacher training, labs, libraries.</li>
+        <li>Promote equity — focus on girls, SC/ST, minorities and disabled students.</li>
+      </ul>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q8</span><span class="q-text">Mention the objectives and functions of NCERT.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>NCERT — National Council of Educational Research and Training</h4>
+      <p><strong>Objectives:</strong> Improve quality of school education through research, training and development; promote and coordinate research; develop curricular materials and textbooks; assist state governments.</p>
+      <p><strong>Functions:</strong></p>
+      <ul>
+        <li>Development of National Curriculum Framework (NCF).</li>
+        <li>Preparation and publication of model textbooks (NCERT books).</li>
+        <li>Conducting educational research and sharing findings.</li>
+        <li>Training teachers, principals and other educational functionaries.</li>
+        <li>Providing technical support to state SCERTs and DIETs.</li>
+        <li>Organisation of workshops, seminars and conferences.</li>
+        <li>Development of evaluation tools and assessment frameworks.</li>
+      </ul>
+    </div></div>
+  </div>
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q15</span><span class="q-text">Explain the meaning and techniques of classroom management.</span><span class="q-marks">2+3</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Classroom Management</h4>
+      <p>Techniques and strategies teachers use to maintain an organised, productive and positive learning environment — setting rules, managing behaviour, arranging physical space, keeping students engaged.</p>
+      <h4>Techniques</h4>
+      <ul>
+        <li><strong>Behaviour modification:</strong> Positive reinforcement for desired behaviours.</li>
+        <li><strong>Making students responsible:</strong> Students aware of their own responsibilities.</li>
+        <li><strong>Open communication:</strong> Building trust through transparent dialogue.</li>
+        <li><strong>Cooperative learning:</strong> Group activities that promote positive interdependence.</li>
+        <li><strong>Monitoring:</strong> Consistent scanning of the room; anticipating problems.</li>
+        <li><strong>Proximity control:</strong> Moving around the classroom to manage behaviour.</li>
+        <li><strong>Clear expectations:</strong> Rules and routines established from Day 1.</li>
+      </ul>
+    </div></div>
+  </div>
+</div><!-- end 2022 -->
+<!-- 2021 TAB -->
+<div class="year-panel" id="tab-2021">
+  <div class="paper-meta">
+    <div class="meta-item"><strong>Exam</strong> October 2021</div>
+    <div class="meta-item"><strong>Code</strong> AG-004</div>
+    <div class="meta-item"><strong>Max Marks</strong> 70</div>
+    <div class="meta-item"><strong>Part A</strong> 3×10=30 | <strong>Part B</strong> 8×5=40</div>
+  </div>
+  <button class="open-all-btn" onclick="toggleAll('tab-2021')">Expand / Collapse All</button>
+  <div class="section-heading">Part A — Long Answer (Any 3 × 10 marks)</div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q1</span><span class="q-text">a) Mention the objectives and features of Navodaya School and Residential School. b) Write the differences between government and unaided schools.</span><span class="q-marks">4+4+2 = 10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) Navodaya School — Objectives & Features</h4>
+      <p>Navodaya Vidyalayas are autonomous residential schools run by Navodaya Vidyalaya Samithi under the Ministry of Education (HRD). They aim to provide quality education to talented rural children irrespective of their socio-economic background.</p>
+      <ul>
+        <li>Residential, co-educational schools offering free education including boarding.</li>
+        <li>Admission purely on merit through JNV Selection Test; 75% seats for rural students.</li>
+        <li>Reservation for SC, ST, and girl students.</li>
+        <li>Promotes national integration through migration scheme.</li>
+        <li>Follows three-language formula; affiliated to CBSE.</li>
+        <li>Focus on adventure, environment awareness, and physical education.</li>
+      </ul>
+      <h4>Residential School (Morarji Desai / Kittur Rani Chennamma) — Features</h4>
+      <ul>
+        <li>Run by Karnataka Government for SC/ST/OBC and minority communities.</li>
+        <li>Provides free boarding, lodging, uniform, textbooks, and food.</li>
+        <li>Education from Class 6 to 10 or PUC level.</li>
+        <li>Aims to reduce dropout rates and improve literacy among weaker sections.</li>
+        <li>Kittur Rani Chennamma Residential Schools cater exclusively to rural girls.</li>
+      </ul>
+      <h4>b) Government vs Unaided Schools</h4>
+      <table>
+        <tr><th>Government Schools</th><th>Unaided Schools</th></tr>
+        <tr><td>Fully funded and managed by government</td><td>Funded and managed privately</td></tr>
+        <tr><td>Free education, textbooks, midday meals</td><td>Charge tuition and other fees</td></tr>
+        <tr><td>Teachers appointed by KPSC/DSE</td><td>Teachers appointed by management</td></tr>
+        <tr><td>Follow state syllabus</td><td>May follow CBSE/ICSE/State board</td></tr>
+        <tr><td>Open to all; no selection criteria</td><td>May have admission tests/interviews</td></tr>
+      </table>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q2</span><span class="q-text">a) Write flow chart of educational administration in Karnataka. b) Explain responsibilities of the J.D.P.I. and B.E.O.</span><span class="q-marks">4+3+3 = 10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) Flow Chart of Educational Administration in Karnataka</h4>
+      <p>Minister for Education → Secretary (Primary & Secondary Education) → Directors (Primary / Secondary / Ministry Schools / Sec.Exams / Other Exams / Adult Edn / Voc.Edn / Edu.Research & Textbooks / PUC) → Joint Directors → Ex-officio JD & Sec, KSEEB (Division Level) → DDPI (District Level) → B.E.O. (Taluk Level) → Headmaster (School Level)</p>
+      <h4>b) Responsibilities of J.D.P.I.</h4>
+      <ul>
+        <li>Assists Director in implementing educational policies at regional/divisional level.</li>
+        <li>Supervises DDPIs and reviews their reports.</li>
+        <li>Coordinates educational activities across multiple districts.</li>
+        <li>Monitors government schemes at divisional level.</li>
+      </ul>
+      <h4>Responsibilities of B.E.O.</h4>
+      <ul>
+        <li>Reviews inspection reports; conducts enquiries relating to Headmasters.</li>
+        <li>Supervision of schools; conducts surprise visits.</li>
+        <li>Implements educational plans and government schemes at block level.</li>
+        <li>Organises seminars, teacher conferences, and educational film shows.</li>
+        <li>Maintains statistics and records; forwards reports to DDPI.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q3</span><span class="q-text">a) What are the constitutional provisions related to education of SC's and ST's? b) What are the steps taken by Karnataka government to promote girls' education?</span><span class="q-marks">5+5 = 10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) Constitutional Provisions for SC/ST Education</h4>
+      <ul>
+        <li><strong>Article 15(4):</strong> State may make special provisions for advancement of SCs and STs.</li>
+        <li><strong>Article 16(4):</strong> Reservation in government employment for backward classes.</li>
+        <li><strong>Article 17:</strong> Abolishes untouchability; prevents discrimination in schools.</li>
+        <li><strong>Article 46:</strong> State shall promote educational and economic interests of weaker sections.</li>
+        <li><strong>Article 338:</strong> National Commission for SCs to safeguard rights.</li>
+        <li><strong>Article 21A:</strong> Free and compulsory education for all children 6–14 years.</li>
+      </ul>
+      <h4>b) Steps by Karnataka Government for Girls' Education</h4>
+      <ul>
+        <li>Kittur Rani Chennamma Residential Schools exclusively for rural girls.</li>
+        <li>Kasturba Gandhi Balika Vidyalaya (KGBV) — residential schools for SC/ST/OBC girls.</li>
+        <li>Free bicycles for girl students in rural areas to prevent dropout.</li>
+        <li>Sanitary napkin scheme to retain adolescent girls in schools.</li>
+        <li>Pre-metric and post-metric scholarships for SC/ST girls.</li>
+        <li>Free textbooks and uniforms under Vidya Vikasa scheme.</li>
+        <li>Beti Bachao Beti Padhao awareness campaigns in rural areas.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q4</span><span class="q-text">What is school discipline? What are the causes of students' indiscipline in schools? What steps would you suggest to overcome the problem of indiscipline?</span><span class="q-marks">2+4+4 = 10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>School Discipline</h4>
+      <p>In the narrow sense: subjection to authority, obedience to laws framed by others. In the broader sense: training of mind, manners and attitudes; sublimation of instincts; formation of right habits; development of character. School discipline is the orderly conduct of students enabling effective learning.</p>
+      <h4>Causes of Indiscipline</h4>
+      <ul>
+        <li>Loss of leadership and effective classroom management by teachers.</li>
+        <li>Economic difficulties and family problems.</li>
+        <li>Defects in the existing education system — examination pressure, rote learning.</li>
+        <li>General loss of idealism and moral values.</li>
+        <li>Political interference; influence of social media.</li>
+        <li>Overcrowded classrooms and poor facilities.</li>
+        <li>Upsurge of undesirable influences among peer groups.</li>
+      </ul>
+      <h4>Steps to Overcome Indiscipline</h4>
+      <ul>
+        <li>Pupil self-government — student councils take ownership.</li>
+        <li>Restoration of teacher authority through competence and mutual respect.</li>
+        <li>Parent-teacher meetings and counselling for troubled students.</li>
+        <li>Co-curricular activities to channel energy constructively.</li>
+        <li>Clear school rules consistently applied.</li>
+        <li>Positive reinforcement — rewards for good behaviour.</li>
+        <li>Activity-based learning to reduce monotony and frustration.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q5</span><span class="q-text">What are co-curricular activities? Why should they be organised in schools? How do you organise an interschool music competition?</span><span class="q-marks">2+4+4 = 10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Co-Curricular Activities</h4>
+      <p>Activities that supplement the regular academic curriculum — sports, cultural events, debates, NCC/NSS, science clubs, hobby clubs, and community service — aimed at holistic development.</p>
+      <h4>Why They Should Be Organised</h4>
+      <ul>
+        <li>Develop emotional health and sublimation of instincts.</li>
+        <li>Provide civic training and develop social skills.</li>
+        <li>Provide healthy recreation and stress relief.</li>
+        <li>Develop healthy traditions and group loyalty.</li>
+        <li>Provide leadership training and personality development.</li>
+        <li>Discover and nurture hidden talents.</li>
+        <li>Foster social values, patriotism, and national integration.</li>
+      </ul>
+      <h4>Organising an Interschool Music Competition</h4>
+      <ul>
+        <li>Planning: Fix date, venue, categories (vocal/instrumental), age groups well in advance.</li>
+        <li>Form an organising committee with teachers and student representatives.</li>
+        <li>Send official invitations to neighbouring schools with rules and regulations.</li>
+        <li>Collect registration entries with participant names and school details.</li>
+        <li>Invite qualified music teachers or external experts as judges with clear criteria.</li>
+        <li>Arrange sound system, stage, seating, and practice rooms.</li>
+        <li>Event day: fixed time slots per participant; MC for proceedings; orderly conduct.</li>
+        <li>Awards: certificates and prizes; dignified prize distribution ceremony.</li>
+        <li>Maintain records of participants, scores, and results.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="section-heading">Part B — Short Answer (Any 8 × 5 marks)</div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q6</span><span class="q-text">Write the objectives of S.S.A. and R.M.S.A.</span><span class="q-marks">2½+2½ = 5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>SSA:</strong> Universalise elementary education for 6–14 age group; bridge social/gender gaps; ensure all children in school; quality education; reduce dropout rates; build school infrastructure.</p>
+      <p><strong>RMSA:</strong> Achieve 90% enrolment at secondary level; school within 5 km; reduce barriers for girls and disadvantaged groups; improve quality through curriculum reform, infrastructure, and trained teachers.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q7</span><span class="q-text">Mention the functions of D.S.E.R.T.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <ul>
+        <li>Conducts in-service and pre-service teacher training programmes.</li>
+        <li>Develops and revises state-level curriculum and textbooks.</li>
+        <li>Conducts educational research to improve school education quality.</li>
+        <li>Organises orientation programmes for teachers, HMs, and education officers.</li>
+        <li>Coordinates with NCERT for implementation of national education policies.</li>
+        <li>Evaluates and monitors academic activities in schools.</li>
+        <li>Organises workshops, seminars, and training camps.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q8</span><span class="q-text">Mention the salient features of Indian Constitution.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Largest written constitution; blend of rigidity and flexibility; democratic republic; parliamentary system of government; federal structure with strong centre; fundamental rights; directive principles of state policy; fundamental duties; secular state; independent judiciary; single citizenship; universal adult suffrage.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q9</span><span class="q-text">What is Right to Education – 2009? What are the importance of RTE – 2009?</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>RTE 2009:</strong> The Right of Children to Free and Compulsory Education Act — makes education a fundamental right for children 6–14 years under Article 21A.</p>
+      <p><strong>Importance:</strong> Legal right to schooling; free education in government schools; 25% seats in private schools for EWS; prohibits corporal punishment; mandates infrastructure and teacher norms; CCE for stress-free evaluation; no-detention policy; reduces dropout rates; promotes universal elementary education.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q10</span><span class="q-text">Discuss the features of National Policy of Education – 1986.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>10+2+3 structure uniformly across India; universalisation of elementary education; Operation Blackboard for primary schools; Navodaya Vidyalayas for gifted rural students; vocationalisation at +2; expansion of adult education; women's education; value-based education; technology in education; open universities.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q11</span><span class="q-text">Discuss the major recommendations of Secondary Education Commission – 1952-53.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Mudaliar Commission (1952-53): Develop ethics, human values and democratic citizenship; produce ideal citizens; develop scientific outlook; capacity for earning through vocational education; quality leadership; true patriotism; social co-operation; restructure secondary into 3+2 years; diversify curriculum streams; reform examinations; three-language formula.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q12</span><span class="q-text">Explain the functions of school teacher.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <ul>
+        <li><strong>Instructional:</strong> Plan and deliver lessons using varied methods.</li>
+        <li><strong>Evaluative:</strong> Assess learning through tests, assignments, and observation.</li>
+        <li><strong>Counselling:</strong> Guide students in academic, personal, and career matters.</li>
+        <li><strong>Administrative:</strong> Maintain attendance registers, records, and reports.</li>
+        <li><strong>Co-curricular:</strong> Organise and supervise activities and competitions.</li>
+        <li><strong>Community liaison:</strong> Bridge between school and parents/community.</li>
+        <li><strong>Role model:</strong> Demonstrate good values, punctuality, and discipline.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q13</span><span class="q-text">Which are the important records to be maintained in a secondary school? How should they be maintained?</span><span class="q-marks">3+2 = 5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Records:</strong> Admission register, attendance register, progress reports, service register, cash book, stock register, log book, inspection book, correspondence file, TC register.</p>
+      <p><strong>Maintenance:</strong> Accurate, updated regularly; data clearly presented; easy to access and update; stored safely; verified by HM; entries made promptly; confidentiality maintained.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q14</span><span class="q-text">What is annual programming? How does it improve school efficiency?</span><span class="q-marks">2+3 = 5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Annual Programming:</strong> Systematic planning of all educational activities for an academic year — academic, co-curricular, administrative, and community activities — prepared at the year's beginning.</p>
+      <p><strong>Improvement:</strong> Provides a clear roadmap; avoids duplication; ensures efficient use of time and resources; coordinates academic and co-curricular activities; facilitates timely syllabus completion; enables monitoring and review of progress.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q15</span><span class="q-text">Explain the role and responsibilities of office staff in school.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <ul>
+        <li>Maintain all official records and registers.</li>
+        <li>Handle correspondence — receive, dispatch, and file letters and circulars.</li>
+        <li>Manage school accounts — cash book, receipts, and payment vouchers.</li>
+        <li>Assist Headmaster in preparing reports, statements, and returns.</li>
+        <li>Maintain stock register and verify stocks periodically.</li>
+        <li>Handle TC and student documentation.</li>
+        <li>Co-ordinate with government departments and agencies.</li>
+        <li>Maintain confidentiality of staff and examination records.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q16</span><span class="q-text">Write the objectives and activities of Parent-Teacher Association in schools.</span><span class="q-marks">3+2 = 5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>Objectives of PTA</h4>
+      <ul>
+        <li>Facilitate school-community collaborative relationship.</li>
+        <li>Bring home and school in close contact for child welfare.</li>
+        <li>Promote welfare of children both at home and in school.</li>
+        <li>Help in growth and development of child's overall progress.</li>
+        <li>Inform community about school activities and challenges.</li>
+      </ul>
+      <h4>Activities</h4>
+      <ul>
+        <li>Regular meetings to discuss student performance.</li>
+        <li>Cultural programmes, fairs, and exhibitions.</li>
+        <li>Monitoring school cleanliness and infrastructure.</li>
+        <li>Awareness programmes for parents on child rights and hygiene.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q17</span><span class="q-text">How do you schedule tests and examinations in a high school?</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Prepare annual examination calendar at the beginning of the year; divide year into terms with unit tests, mid-term, and final exams; ensure adequate gap between subjects; avoid festivals and public holidays; announce schedule well in advance; prepare question papers securely; arrange supervision duties, seating plans, and invigilation rosters; complete evaluation promptly and provide feedback.</p>
+    </div></div>
+  </div>
+</div><!-- end 2021 -->
+
+<!-- 2020 TAB -->
+<div class="year-panel" id="tab-2020">
+  <div class="paper-meta">
+    <div class="meta-item"><strong>Exam</strong> February/March 2020</div>
+    <div class="meta-item"><strong>Code</strong> PJ-753</div>
+    <div class="meta-item"><strong>Max Marks</strong> 70</div>
+    <div class="meta-item"><strong>Part A</strong> 3×10=30 | <strong>Part B</strong> 8×5=40</div>
+  </div>
+  <button class="open-all-btn" onclick="toggleAll('tab-2020')">Expand / Collapse All</button>
+  <div class="section-heading">Part A — Long Answer (Any 3 × 10 marks)</div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q1</span><span class="q-text">a) What are National Open Schools? b) What are their objectives? c) Explain their Curriculum and Methods of Instruction.</span><span class="q-marks">2+3+5 = 10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) National Open Schools</h4>
+      <p>NIOS (National Institute of Open Schooling) was established in 1989 under the Ministry of Education. It provides flexible, distance-mode education to those who cannot attend formal schools — dropouts, working youth, and people in remote areas. It is the world's largest open schooling system.</p>
+      <h4>b) Objectives</h4>
+      <ul>
+        <li>Provide educational opportunities to school dropouts and out-of-school youth.</li>
+        <li>Facilitate access for weaker sections through flexible learning.</li>
+        <li>Offer vocational and life enrichment courses alongside academic programmes.</li>
+        <li>Promote self-paced, open credit accumulation learning.</li>
+        <li>Complement formal education for universalisation of secondary education.</li>
+      </ul>
+      <h4>c) Curriculum and Methods</h4>
+      <p><strong>Curriculum:</strong> Open Basic Education (OBE), Secondary, Senior Secondary, and vocational courses. Flexible subject choices; students choose from a wide range of options.</p>
+      <p><strong>Methods:</strong> Distance learning through self-learning materials; Personal Contact Programmes (PCPs); audio-visual materials; radio broadcasts; online content; on-demand examination system; tutor-marked assignments for continuous assessment.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q2</span><span class="q-text">What are the objectives and functions of the following agencies? a) NCERT b) CTE</span><span class="q-marks">5+5 = 10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) NCERT</h4>
+      <p><strong>Objectives:</strong> Develop national curriculum framework; improve school education quality; provide academic support to states; research and innovation in education.</p>
+      <p><strong>Functions:</strong> Develops textbooks and teaching-learning materials; conducts NTSE; provides teacher training; undertakes educational research; assists states in curriculum reform; publishes journals; coordinates with international educational bodies.</p>
+      <h4>b) CTE — College of Teacher Education</h4>
+      <p><strong>Objectives:</strong> Train secondary and senior secondary level teachers; improve quality of teacher education; conduct research in pedagogy.</p>
+      <p><strong>Functions:</strong> Offers B.Ed., M.Ed., and teacher education programmes; provides in-service training for secondary teachers; acts as resource centre; conducts orientation courses for school teachers and HMs; assists DSERT in curriculum development.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q3</span><span class="q-text">a) What are the major recommendations of "Education and National Development" Report? b) Write the salient features of NCF for School Education – 2005.</span><span class="q-marks">5+5 = 10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) Kothari Commission — "Education and National Development" (1964-66)</h4>
+      <ul>
+        <li>Education as investment in national development.</li>
+        <li>Common neighbourhood schools to promote social cohesion.</li>
+        <li>10+2+3 structure recommended.</li>
+        <li>Science education and technology as priority.</li>
+        <li>Work experience integrated in school curriculum.</li>
+        <li>Vocationalisation of secondary education.</li>
+        <li>Three-language formula at school level.</li>
+        <li>Teacher education improvement; spend 6% of national income on education.</li>
+      </ul>
+      <h4>b) NCF 2005 — Salient Features</h4>
+      <ul>
+        <li>Connecting knowledge to life outside school.</li>
+        <li>Shift from rote learning to understanding and application.</li>
+        <li>Making examinations flexible and integrated into classroom learning.</li>
+        <li>Constructivist approach — child as active learner.</li>
+        <li>Inclusive education; mother-tongue in early years.</li>
+        <li>Peace education and gender sensitivity.</li>
+        <li>Emphasis on critical thinking and problem solving.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q4</span><span class="q-text">a) What is School Discipline? b) Explain the causes of indiscipline. c) Write the measures to overcome indiscipline.</span><span class="q-marks">2+4+4 = 10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) School Discipline</h4>
+      <p>Orderly conduct of students in school. Broadly: development of self-control, good character, and responsible behaviour essential for effective teaching and learning.</p>
+      <h4>b) Causes</h4>
+      <ul>
+        <li>Loss of effective leadership by teachers; examination stress.</li>
+        <li>Economic difficulties and family problems.</li>
+        <li>General loss of moral values; political and social tensions.</li>
+        <li>Negative influence of social media and peer groups.</li>
+        <li>Overcrowded classrooms and poor facilities.</li>
+      </ul>
+      <h4>c) Measures</h4>
+      <ul>
+        <li>Pupil self-government; restoration of teacher authority.</li>
+        <li>Counselling for troubled students; regular parent-teacher meetings.</li>
+        <li>Co-curricular activities; clear school rules consistently applied.</li>
+        <li>Positive reinforcement; improving school environment.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q5</span><span class="q-text">a) What are Co-Curricular activities? b) Importance in secondary schools? c) Explain the organisation of any one co-curricular activity.</span><span class="q-marks">2+3+5 = 10</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <h4>a) Co-Curricular Activities</h4>
+      <p>Activities alongside the regular curriculum — sports, cultural events, debates, NCC/NSS, science clubs, community service — for holistic development.</p>
+      <h4>b) Importance</h4>
+      <ul>
+        <li>All-round personality development beyond academics.</li>
+        <li>Leadership, teamwork, and communication skills.</li>
+        <li>Healthy recreation and stress relief; talent discovery.</li>
+        <li>Social values, patriotism, and national integration.</li>
+      </ul>
+      <h4>c) Organising a Debate Competition</h4>
+      <ul>
+        <li>Select relevant topic; announce 2 weeks in advance.</li>
+        <li>Form teams — 2–3 speakers per side (for/against).</li>
+        <li>Fix date, venue; appoint chairperson and timekeeper.</li>
+        <li>Invite qualified judges with clear evaluation criteria.</li>
+        <li>Orderly conduct — set time limit; no interruptions.</li>
+        <li>Announce results; distribute prizes; debrief participants.</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="section-heading">Part B — Short Answer (Any 8 × 5 marks)</div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q6</span><span class="q-text">What is Secondary Education? What are the objectives of Secondary Education?</span><span class="q-marks">2+3 = 5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Secondary education is the stage between elementary and higher education (Classes 8–12). It serves as the link preparing students for higher education or employment. A child's future depends greatly on the quality of secondary education received.</p>
+      <p><strong>Objectives:</strong> Democratic citizenship; national development; critical thinking; national integration; all-round development; foundation for higher education; talent identification.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q7</span><span class="q-text">Write the flow chart of Educational Administration in Karnataka. Responsibilities of Education Minister?</span><span class="q-marks">2½+2½ = 5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Flow Chart:</strong> Minister → Secretary → Director → JD → KSEEB → DDPI → BEO → Headmaster</p>
+      <p><strong>Education Minister:</strong> Formulates state education policy; presents education budget; approves major decisions; coordinates with Central Government; answers legislature questions regarding education.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q8</span><span class="q-text">Mention the salient features of Indian Constitution.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Largest written constitution; blend of rigidity and flexibility; democratic republic; parliamentary system; federal with strong centre; fundamental rights; directive principles; fundamental duties; secular state; independent judiciary; single citizenship; universal adult suffrage.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q9</span><span class="q-text">Explain the importance of RTE-2009.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Makes education a fundamental right under Article 21A for children 6–14 years; free education in government schools; 25% reservation in private schools for EWS; prohibits corporal punishment; mandates infrastructure and teacher norms; CCE for stress-free learning; reduces dropout rates; promotes universal elementary education.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q10</span><span class="q-text">Explain the concept of Total Quality Management in the school.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>TQM is a management philosophy focused on continuous improvement of all aspects with involvement of all stakeholders. In school: student-focused approach; total involvement of teachers, parents, management; continuous review of processes; data-based decisions; headmaster as quality champion; emphasis on professional development and teamwork.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q11</span><span class="q-text">Which are the important records to be maintained in secondary schools? How should they be maintained?</span><span class="q-marks">3+2 = 5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Records:</strong> Admission register, attendance, progress sheets, service register, cash book, stock register, log book, inspection book, TC register.</p>
+      <p><strong>Maintenance:</strong> Accurate and updated; clearly presented; easy to fill and verify; stored safely; accessible only to authorised staff; verified regularly by HM.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q12</span><span class="q-text">What is school time table? Why should a school have a good time table?</span><span class="q-marks">2+3 = 5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Time Table:</strong> Systematic arrangement of all school activities — subjects, periods, games, assembly — for each day of the week. Called the "second clock of the school".</p>
+      <p><strong>Necessity:</strong> Orderly functioning; no waste of time; balance between academics and co-curricular; teachers can plan in advance; reduces monotony by varying subjects; fair distribution of workload among teachers.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q13</span><span class="q-text">Explain the techniques of classroom management.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Behaviour modification; making students aware of responsibility through instruction; open communication; co-operative problem-solving; group activities; monitoring and proximity control; maintaining student attention through varied instruction; clear routines; positive reinforcement.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q14</span><span class="q-text">Explain in brief the functions of Headmaster.</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Supervision and instruction; curriculum development and evaluation; co-curricular programme coordination; school plant management; school business and accounts management; school office management; staff management; community liaison and PTA coordination.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q15</span><span class="q-text">What is School Complex? Write the functions of School Complex.</span><span class="q-marks">2+3 = 5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>School Complex:</strong> A cluster of schools in a geographic area — one senior school and several feeder schools — that share resources and activities for mutual benefit.</p>
+      <p><strong>Functions:</strong> Share library, lab, sports facilities; organise joint teacher training; academic monitoring of feeder schools; joint cultural and sports events; facilitate smooth student transition.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q16</span><span class="q-text">What is Stress Management? As a teacher how would you overcome Stress?</span><span class="q-marks">2+3 = 5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Stress Management:</strong> Process of identifying sources of stress and using strategies to reduce or cope with their negative effects.</p>
+      <p><strong>As a teacher:</strong> Time management; yoga and meditation; peer support; professional development; healthy work-life balance; positive attitude; exercise; delegation; mentoring and guidance.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" onclick="toggleCard(this)">
+    <div class="q-header"><span class="q-num">Q17</span><span class="q-text">What is time table? What principles are to be followed while preparing a good time table?</span><span class="q-marks">5</span><span class="q-arrow">▼</span></div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>A timetable is a systematic schedule of all school activities for each day. Principles: psychological fit (difficult subjects in morning); balance heavy and light subjects; equitable teacher workload; all curriculum subjects covered; co-curricular time included; flexibility for adjustments; special rooms accounted for; comply with department guidelines on number of periods per subject per week.</p>
+    </div></div>
+  </div>
+</div><!-- end 2020 -->
+
+<!-- SEP 2019 TAB -->
+<div class="year-panel" id="tab-2019b">
+  <div class="paper-meta">
+    <div class="meta-item"><strong>Exam</strong> September 2019</div>
+    <div class="meta-item"><strong>Code</strong> GN-004</div>
+    <div class="meta-item"><strong>Max Marks</strong> 70</div>
+  </div>
+  <div class="expand-all-bar"><button class="expand-all-btn" onclick="toggleAll('tab-2019b')">Expand All</button></div>
+
+  <div class="year-section">PART A — Long Answers (3×10=30)</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.1</span><span class="q-marks">4+3+3=10</span></div>
+      <div class="q-text">a) Write flow chart of Educational Administration in Karnataka. b) Explain responsibilities of the J.D.P.I and D.D.P.I.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>a) Flow Chart of Educational Administration in Karnataka:</strong></p>
+      <p>Minister for Education → Secretary (Primary & Secondary Education) → Directors (Pri.Edn, Sec.Edn, Ministry Schools, Sec.Exams, Adult Edn, Voc.Edn, PUC, Edn Research & Training) → Joint Directors (JD Sec.Edn, JD Admn, JD Mid-day Meal) → Ex-officio JD & Secretary KSEEB (Bangalore/Mysore/Belgaum/Gulbarga) → DDPI for each district → BEO at taluk level → Schools. DIET and CTE work under the directorate for teacher education.</p>
+      <p><strong>b) Responsibilities of JDPI:</strong> Assists Director of Education in administrative matters; supervises and co-ordinates work of DDPIs across the division; reviews inspection reports; conducts enquiries at divisional level; acts as Ex-officio Secretary of KSEEB at division level; implements state educational policies at division.</p>
+      <p><strong>Responsibilities of DDPI:</strong> Chief coordinator of all educational activities at school/district stage; power to impose penalties; permit changes in working hours without reducing total periods; sanction pension; make temporary appointments; renew recognition to schools; surprise visits to exam centres; strengthen teachers; students welfare fund; recommend for national and state awards; permit opening of additional sections; change of medium of instruction.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.2</span><span class="q-marks">3+7=10</span></div>
+      <div class="q-text">What are the main purposes of Educational Management? Explain the various processes of Educational Management.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Purposes of Educational Management:</strong> To achieve the stated educational goals; effective utilisation of human and material resources; maintain discipline and order; provide quality education to all students; develop good relationships between school, staff, students and community; ensure proper implementation of curriculum and educational policies.</p>
+      <p><strong>Process of Educational Management:</strong> (1) Planning — setting objectives and determining course of action; (2) Organization — arranging resources and tasks; (3) Direction — guiding and leading the staff; (4) Adjustment — making changes based on feedback; (5) Control — monitoring performance against standards; (6) Co-ordination — synchronizing all activities; (7) Recording — maintaining records; (8) Reporting — communicating progress; (9) Evaluation — assessing achievements; (10) Decision Making — choosing best alternatives; (11) Prediction — forecasting future needs; (12) Budgeting — allocating financial resources.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.3</span><span class="q-marks">10</span></div>
+      <div class="q-text">Explain the Constitutional provisions of education of SC's, ST's and minorities groups.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Article 46:</strong> The State shall promote educational and economic interests of SC and ST and protect them from social injustice and exploitation.</p>
+      <p><strong>Article 45:</strong> Free and compulsory education for all children up to 14 years (now strengthened by RTE 2009 / Article 21A).</p>
+      <p><strong>Article 15(4):</strong> The State can make special provisions for the advancement of socially and educationally backward classes.</p>
+      <p><strong>Article 338 / 338-A:</strong> National Commissions for SC and ST to investigate all matters relating to constitutional safeguards.</p>
+      <p><strong>Article 330:</strong> Reservation of seats for SC/ST in the House of the People (Lok Sabha).</p>
+      <p><strong>Article 29:</strong> Protection of interests of minorities — any section of citizens with distinct language, script or culture has the right to conserve the same.</p>
+      <p><strong>Article 30:</strong> All minorities (religious or linguistic) have the right to establish and administer educational institutions of their choice.</p>
+      <p><strong>Article 350-A:</strong> Instruction in mother tongue at primary stage for children belonging to linguistic minority groups.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.4</span><span class="q-marks">5+5=10</span></div>
+      <div class="q-text">a) What are the factors affecting teacher motivation? b) Explain the role performance of the teacher in education.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>a) Factors Affecting Teacher Motivation:</strong> School climate and existing norms; class size, resources and facilities; teacher's personality; activity structure within institution; collegial relations; definition of teacher's role by colleagues and authorities; general expectations regarding student potential; feedback system; leadership and decision-making; working conditions; job satisfaction; salary, promotions and service conditions; valuing and rewarding good work; reinforcements.</p>
+      <p><strong>b) Role Performance of Teacher:</strong> <em>Instructor</em> — transmitting knowledge and facilitating learning; <em>Guide and counsellor</em> — academic and personal guidance; <em>Evaluator</em> — assessing learning and providing feedback; <em>Manager</em> — managing classroom effectively; <em>Motivator</em> — inspiring students; <em>Role model</em> — demonstrating ethical and professional conduct; <em>Curriculum developer</em> — contributing to lesson planning; <em>Community liaison</em> — connecting school with community; <em>Co-curricular leader</em> — guiding extracurricular activities.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.5</span><span class="q-marks">2+2+6=10</span></div>
+      <div class="q-text">a) What is School time table? b) Why is it necessary for a school? c) What factors do you consider while framing a good time table?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>a) School Time Table:</strong> A systematic plan allocating specific periods of time for different subjects and activities during the school day throughout the week. The school's "second clock".</p>
+      <p><strong>b) Necessity:</strong> Ensures proper utilisation of school time; prevents waste and confusion; helps teachers plan lessons; ensures balanced allocation for all subjects; brings discipline and regularity; helps students plan home study.</p>
+      <p><strong>c) Factors for Framing:</strong> Difficult subjects in morning (fresh mind); no teacher with continuous periods without a free period; physical education later in the day; equal distribution of periods for all subjects; co-curricular and sports periods scheduled regularly; special periods for assembly and prayer; library and laboratory periods included; practical subjects need longer periods; flexibility for rescheduling; balance between heavy and light subjects; school hours and student age considered.</p>
+    </div></div>
+  </div>
+
+  <div class="year-section">PART B — Short Answers (8×5=40)</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.6</span><span class="q-marks">5</span></div>
+      <div class="q-text">What are the objectives of National Open Schools?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>National Open Schools (NIOS) objectives: (1) Provide education to those who have dropped out of formal schooling; (2) Provide flexible, learner-paced education without age restrictions; (3) Cater to working children, rural, tribal and remote area populations; (4) Provide vocational and life skills education; (5) Promote lifelong learning and continuing education; (6) Provide secondary and senior secondary level education to out-of-school youth; (7) Bridge the gap in educational attainment between urban and rural, male and female populations.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.9</span><span class="q-marks">2+3=5</span></div>
+      <div class="q-text">What is Right to Education (RTE 2009)? What are the importance of RTE 2009?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>RTE 2009:</strong> The Right to Education Act 2009 makes education a fundamental right of every child between 6–14 years. Enforced on 1st April 2010. The state is obligated to provide free and compulsory education.</p>
+      <p><strong>Importance:</strong> Education made a fundamental right — no child can be denied; free and compulsory elementary education for all 6–14 year olds; 25% reservation in private schools for weaker sections; no detention policy up to Class 8; prohibition of physical punishment and mental harassment; prescribed norms for pupil-teacher ratio and school infrastructure; prohibition of capitation fees for admission; inclusive education — children with disabilities included.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.10</span><span class="q-marks">5</span></div>
+      <div class="q-text">Explain the concept of Total Quality Management in the School.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>TQM:</strong> An approach that involves all members in continuously improving the quality of education, processes and learning environment. Aims to meet or exceed student, parent and community expectations.</p>
+      <p><strong>Principles:</strong> (1) Student focus — all efforts centred on student success; (2) Continuous improvement (Kaizen) — never-ending improvement; (3) Total involvement — every staff member responsible for quality; (4) Leadership commitment — HM must lead by example; (5) Data-driven decisions — use data to make improvements; (6) Process orientation — focus on improving processes; (7) Teamwork — collaborative approach.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.12</span><span class="q-marks">2+3=5</span></div>
+      <div class="q-text">What is school budget? How should school budget be planned and prepared?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>School Budget:</strong> A financial plan estimating income and expenditure of the school for a specific period (usually academic year). Helps in proper allocation and utilisation of financial resources.</p>
+      <p><strong>How to Plan and Prepare:</strong> Identify all income sources — fees, government grants, donations; estimate all expenditures — salaries, maintenance, books, equipment; consult all departments for their requirements; prioritize needs (essential vs desirable); prepare draft budget and get approved by management committee; monitor expenditure throughout the year; conduct periodic reviews and adjustments; maintain transparency and accountability.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.14</span><span class="q-marks">5</span></div>
+      <div class="q-text">Discuss the major recommendations of Secondary Education Commission (1952-53).</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>The <strong>Mudaliar Commission</strong> (1952–53) recommended: Duration of 7 years (multi-purpose school after primary); diversification of curriculum — Humanities, Science, Technology, Commerce, Agriculture; develop Ethics and Human Values; produce ideal citizens; develop capacity for earning through vocational education; develop scientific outlook and quality leadership; promote social co-operation and true patriotism; improve teaching methods (activity-based, project method); examination reform — reduce overemphasis on external exams; adequate provision for physical education and co-curricular activities; better teacher training and service conditions.</p>
+    </div></div>
+  </div>
+
+</div><!-- end sep 2019 -->
+
+<!-- APR 2019 TAB -->
+<div class="year-panel" id="tab-2019a">
+  <div class="paper-meta">
+    <div class="meta-item"><strong>Exam</strong> April/May 2019</div>
+    <div class="meta-item"><strong>Code</strong> GS-002</div>
+    <div class="meta-item"><strong>Max Marks</strong> 70</div>
+  </div>
+  <div class="expand-all-bar"><button class="expand-all-btn" onclick="toggleAll('tab-2019a')">Expand All</button></div>
+
+  <div class="year-section">PART A — Long Answers (3×10=30)</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.1</span><span class="q-marks">5+5=10</span></div>
+      <div class="q-text">a) Write the major objectives of Secondary Education. b) Write objectives and features of Navodaya Schools.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>a) Objectives of Secondary Education:</strong> Develop democratic citizenship with knowledge, spiritual values and scientific attitude; acquire necessary knowledge, skills and attitudes for self and national development; promote love for and loyalty to the nation; promote harmonious co-existence; develop mentally, socially, morally, physically and spiritually; build firm foundation for further education; develop ability for enquiry, critical thinking and rational judgment; develop into responsible and socially well-adjusted person; identify and develop individual talents; build foundation for technological development.</p>
+      <p><strong>b) Navodaya Schools — Objectives:</strong> Provide good quality modern education to talented children from rural areas; ensure equitable access for SC/ST and girls; promote national integration through multilingual education; develop physical, mental and moral faculties.</p>
+      <p><strong>Features:</strong> Alternate schools for gifted children; autonomous under Navodaya Vidyalaya Samithi (HRD); best residential school system; equity and social justice; entrance on merit basis; reservation for rural SC/ST and girl students; co-educational with free education; adherence to 3-language formula; promotion of national integration; adventure activity and physical education.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.2</span><span class="q-marks">5+5=10</span></div>
+      <div class="q-text">a) Write flow chart of Educational Administration in Karnataka State. b) List the functions of taluk level education officer.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>a) Flow Chart:</strong> Minister → Secretary → Directors (State level) → Joint Directors (Divisional) → DDPI (District level) → BEO (Taluk/Block level) → Schools. Key bodies: DSERT, DIET, KSEEB, CTE operate under the Directorate.</p>
+      <p><strong>b) Functions of Taluk Level Education Officer (BEO):</strong> Overall supervision and inspection of schools in the taluk; review inspection reports and conduct enquiries relating to HMs; surprise visits to schools; implementation of government plans and schemes at taluk level; organize seminars and teacher conferences; ensure proper implementation of mid-day meals scheme; monitor attendance of teachers and students; report to DDPI about educational status; handle grievances of teachers and students at taluk level.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.3</span><span class="q-marks">5+5=10</span></div>
+      <div class="q-text">a) Constitutional provisions related to Education of SC's and ST's? b) Steps taken by Karnataka Government to promote Girls Education?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>a) Constitutional Provisions:</strong> Article 46 — promote educational interests of SC/ST; Article 45 — free and compulsory education; Article 15(4) — special provisions for backward classes; Article 338/338-A — National Commissions; Article 330 — reservation in Lok Sabha.</p>
+      <p><strong>b) Steps by Karnataka Government for Girls Education:</strong> Kittur Rani Chennamma Schools — residential schools exclusively for girls from rural/backward areas; Kasturba Gandhi Balika Vidyalaya (KGBV) — residential schools for girls from SC/ST/OBC/minorities; free education — no tuition fees for girl students in government schools; free uniforms, textbooks and bicycles (Vidhyasiri scheme) for girl students; scholarships — merit and means-based for SC/ST girls; separate toilet facilities for girls in all government schools; gender sensitization programs; Beti Bachao Beti Padhao implementation.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.4</span><span class="q-marks">2+8=10</span></div>
+      <div class="q-text">Explain the concept and principles of Educational Management.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Concept:</strong> Educational Management is the process of planning, organizing, directing, controlling and evaluating educational activities to achieve stated objectives. Involves effective utilization of human and material resources.</p>
+      <p><strong>Principles:</strong> (1) Democratic principle — all stakeholders participate in decision-making; (2) Accountability — every official is answerable; (3) Efficiency — maximum results with minimum resources; (4) Flexibility — adapt to changing needs; (5) Co-ordination — synchronize all activities; (6) Leadership — effective leadership is essential; (7) Continuity — management should be a continuous process; (8) Communication — open and clear at all levels.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.5</span><span class="q-marks">2+8=10</span></div>
+      <div class="q-text">a) What is Human Resource Management? b) Explain the Administrative functions of Head Master in a school.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>HRM:</strong> Management of an organisation's workforce. Responsible for attraction, selection, training, assessment and rewarding of employees. In school: effective use of teaching and non-teaching staff to achieve educational goals.</p>
+      <p><strong>Administrative Functions of Headmaster:</strong> Academic leadership — curriculum planning, supervision of teaching-learning; Administrative management — records, office, correspondence; Staff management — welfare, duty allocation, performance appraisal; Student welfare — discipline, admissions, scholarships, counselling; Financial management — budgeting, fee collection, grants; Physical facilities — maintenance of school plant and equipment; Community relations — liaison with parents, local authorities, PTA; Co-curricular activities — organising sports, cultural events; Evaluation — organising exams and reviewing results; School business management and school office management.</p>
+    </div></div>
+  </div>
+
+  <div class="year-section">PART B — Short Answers (8×5=40)</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.6</span><span class="q-marks">5</span></div>
+      <div class="q-text">How are the Morarji Desai Residential Schools helpful to rural community?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Morarji Desai Residential Schools are helpful to rural community because: (1) They bring quality education to rural and minority community students who lack access to good schools; (2) Free boarding, lodging, uniform, textbooks and food remove economic burden from poor rural families; (3) Help to reduce the rural-urban education gap; (4) Bring down school dropout rate in rural areas; (5) Provide quality education from Standard 6th to 10th and pre-university level; (6) Run by the Karnataka Government's Minority Department ensuring it reaches deserving students; (7) Students gain exposure to better learning environments; (8) Help uplift minority communities' educational and social status.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.8</span><span class="q-marks">5</span></div>
+      <div class="q-text">List out the innovative initiations in examination according to N.C.F. 2005.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>NCF 2005 examination innovations: (1) Shift from rote learning to understanding — examination should test conceptual understanding not memorization; (2) Continuous and Comprehensive Evaluation (CCE) — assessment throughout the year; (3) Multiple modes of assessment — projects, portfolios, oral exams, practical work; (4) Grades instead of marks — reduce unhealthy competition; (5) Formative and summative assessment both given importance; (6) Student self-evaluation and peer evaluation introduced; (7) Reduce examination stress — no external examinations up to Class 8; (8) Authentic tasks rather than only paper-pencil tests.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.10</span><span class="q-marks">2½+2½=5</span></div>
+      <div class="q-text">Write the objectives of S.S.A. and R.M.S.A.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>SSA (Sarva Shiksha Abhiyan):</strong> Universal access and enrolment for all children 6–14 years; universal retention — zero dropout rate; bridging gender and social category gaps in elementary education; enhancement of learning achievement levels.</p>
+      <p><strong>RMSA (Rastriya Madyamika Shiksha Abhiyana):</strong> Universal access to secondary education; improve quality of secondary education; remove gender, socio-economic and disability barriers; universal retention; improve infrastructure in secondary schools.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.11</span><span class="q-marks">5</span></div>
+      <div class="q-text">What is T.Q.M.? Why is the knowledge of T.Q.M. necessary for a teacher?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>TQM:</strong> A management approach seeking to improve quality and performance to meet or exceed student expectations. Involves continuous improvement of teaching-learning processes, staff development, and institutional performance.</p>
+      <p><strong>Why necessary for teachers:</strong> Helps focus on continuous improvement of teaching methods; encourages teachers to meet learning needs of every student; promotes teamwork; helps in setting and achieving quality standards; ensures student satisfaction and achievement of learning outcomes; encourages data-based decision making in classroom management.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.12</span><span class="q-marks">5</span></div>
+      <div class="q-text">What are the salient features of P.O.A. - 1992?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Programme of Action 1992 was formulated to implement NPE 1986. Features: Universal Elementary Education; Non-Formal Education (NFE) for dropouts and working children; adult literacy and continuing education; vocationalisation of secondary education; strengthening teacher training (DIETs, CTEs, IASEs); Minimum Levels of Learning (MLL) at primary stage; equal opportunity for girls, SC, ST and minorities; restructuring of higher education; open university system strengthened.</p>
+    </div></div>
+  </div>
+
+</div><!-- end apr 2019 -->
+
+<!-- 2017 + ANSWER KEY TAB -->
+<div class="year-panel" id="tab-2017">
+  <div class="paper-meta">
+    <div class="meta-item"><strong>Exam</strong> October 2017</div>
+    <div class="meta-item"><strong>Code</strong> SN-003</div>
+    <div class="meta-item"><strong>Max Marks</strong> 70</div>
+    <div class="meta-item" style="color:#c8a96e;font-weight:600">✓ Official Answer Key by Asha R.K., Associate Professor</div>
+  </div>
+  <div class="expand-all-bar"><button class="expand-all-btn" onclick="toggleAll('tab-2017')">Expand All</button></div>
+
+  <div class="year-section">PART A — Long Answers (3×10=30)</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.1</span><span class="q-marks">4+3+3=10</span></div>
+      <div class="q-text">a) Write flow chart of Educational Administration in Karnataka. b) Explain responsibilities of the D.D.P.I. and B.E.O.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>a) Flow Chart — Educational Administration in Karnataka (from answer key):</strong></p>
+      <p style="font-family:monospace;font-size:13px;line-height:2;background:rgba(255,255,255,0.04);padding:12px;border-radius:6px;border:1px solid #2e2c27">
+        Minister for Education (Primary and Secondary)<br>↓<br>
+        Secretary (Primary and Secondary Education)<br>↓<br>
+        Directors: Pri.Edn | Sec.Edn | Ministry Schools | Sec.Exams | Other Exams | Adult Edn | Voc.Edn | Edn Research &amp; Training Textbooks | PUC<br>↓<br>
+        Joint Directors: JD(Sec.Edn) | JD(Admn) | JD(Admn) | JD(Mid-day Meal)<br>↓<br>
+        Ex officio JD &amp; Sec KSEEB: Bangalore | Mysore | Belgaum | Gulbarga<br>↓<br>
+        DDPI for Each District<br>↓<br>
+        B.E.O (Taluk Level)
+      </p>
+      <p><strong>b) Responsibilities of DDPI (from answer key):</strong> Chief coordinator of all educational activities at school/district stage; power to impose penalties; power to permit changes in working hours and working days in a week without reducing the total periods; power to sanction pension; power to make temporary appointments and renew recognition to schools; surprise visits to exam centres; assisting and strengthening teachers; students welfare fund; recommending for national and state awards; power to permit opening of additional sections; power to permit change of medium of instruction; permit change of language to high school classes.</p>
+      <p><strong>BEO (from answer key):</strong> Review the inspection reports; conducting enquiries relating to HM's supervision of districts; surprise visits; implementation of plans and schemes; inspect taluk education officers; organize seminars, teacher conferences and educational films.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.2</span><span class="q-marks">6+4=10</span></div>
+      <div class="q-text">a) Constitutional provisions related to Education of Minorities, SC's and ST's? b) Steps taken by Government in promoting education of these groups?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>a) Constitutional Provisions (from answer key):</strong> Article 46 — social justice and all forms of exploitation; Article 45 — free and compulsory education; Article 338 — special officer for SC/ST appointed by the President to investigate all matters relating to safeguards; Article 330 — reservation of seats for SC/ST in the House of the People. Weaker sections: constitutional obligation to promote educational and economic interest; measures adopted by the state to fulfill this obligation; Article 29 — shall prevent the state from making any special provisions for the advancement of any socially and educationally citizens for the SC's.</p>
+      <p><strong>b) Steps Taken by Government (from answer key):</strong> Implementation of reservation will be monitored at state level; reservation in recruitments and admission in Navodaya Vidyalayas; schemes/facilities in private educational institutions; scholarships — pre metric, post metric, coaching, special coaching, entrance exams and remedial classes; DPEP, SSA, mid-day meals scheme; teacher's education program; Kasturba Gandhi Balika Vidyalaya are the special schemes.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.3</span><span class="q-marks">2+3+5=10</span></div>
+      <div class="q-text">What is discipline? Causes of indiscipline? As a teacher, steps to overcome those causes?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Discipline (from answer key):</strong> "Discipline has wide meaning." Traditional/narrow concept: subjection of authority, obedience to law framed by others, bringing others under control. Broader meaning: training of mind, manners &amp; attitudes, sublimation of instincts, formation of right habits &amp; development of character.</p>
+      <p><strong>Causes of indiscipline (from answer key):</strong> Loss of leadership by teachers; growth of economic difficulties; defects in the existing system of education; general loss of idealism; politics and indiscipline; upsurge of sexual feeling.</p>
+      <p><strong>Positive remedies (from answer key):</strong> Pupil self-government; restoration of lost leadership of the teachers; improvement in the economic lot of the students; parent teacher relationship; reforming the system of education; school environment, tradition, laws and regulations; material conditions of work; games and co-curricular activities; revival of the sense of values; rewards; control over external influences.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.4</span><span class="q-marks">5+2+3=10</span></div>
+      <div class="q-text">Explain the importance of co-curricular activities. Name different types. How would you organise any one co-curricular activity?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Importance (from answer key):</strong> Development of emotional health and sublimation of instincts; social activities; civic training; provide healthy and rich recreation; development of healthy traditions and group loyalty; provide training in leadership; improvement of corporate life of schools; physical development; development of discipline.</p>
+      <p><strong>Types (from answer key):</strong> Physical activities; literary and academic activities; cultural activities; hobbies; creative and collective; multipurpose activities.</p>
+      <p><strong>Organisation (from answer key):</strong> Co-curricular activities have to be planned, organized and coordinated; an activity should be organized in school time as far as possible; regular time should be given to an activity; every student should have equal opportunity; activities must be under strict guidance of the teacher; every organization must keep records; it should be less expensive; it must be recognized and considered as means of educative process; appreciation should be given for the organisers; whole community should be well informed; teacher should be appointed as overall incharge.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.5</span><span class="q-marks">3+7=10</span></div>
+      <div class="q-text">What is HRM in School? Explain the important qualities and functions of Headmaster.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>HRM (from answer key):</strong> Management of an organization work force or human resources. It is responsible for the attraction, selection, training, assessment and rewarding of employees, organizational leadership and culture.</p>
+      <p><strong>Qualities of Headmaster (from answer key):</strong> Leadership of the school and the society; efficient administrator and organizer; sympathetic and friendly attitude; scholarship and curiously acquire more knowledge; democratic outlook; efficient speaker; ideal character; impartiality and justice; self discipline; control and confidence; dutifulness &amp; efficiency; punctuality; influential personality.</p>
+      <p><strong>Functions (from answer key):</strong> Supervision; instruction; curriculum development and improvement; evaluation program; co-curricular program; teaching; management — school plant management; equipment and supply management; school business management; school office management.</p>
+    </div></div>
+  </div>
+
+  <div class="year-section">PART B — Short Answers (8×5=40)</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.6</span><span class="q-marks">2½+2½=5</span></div>
+      <div class="q-text">Features of Navodaya School and Morarji Desai Residential Schools.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Navodaya Schools (from answer key):</strong> Alternate schools for gifted, autonomous, run by Navodaya Vidyalaya Samithi (New Delhi), under HRD residential. Best residential school system, without regard to their families socio economic condition, equity and social justice, opportunities for talented children, largely rural to develop their full potential, awareness of the environment, adventure activity, physical education, education through sharing of experiences, Entrance on basis of merit, reservation for rural SC ST and girl students, co-educational residential schools with free education, adherence to 3 language formula, promotion of national integration.</p>
+      <p><strong>Morarji Desai Residential Schools (from answer key):</strong> Run by directorate of minorities department of the government of Karnataka, residential education from standard 6th to 10th, for minority communities, to promote educational levels, bringing down dropout rate, quality education. 64 Morarji Desai residential schools 9 pre-universities 5 Muslim running schools, Boarding facility, free accommodation, free uniform, free textbooks, free food &amp; other facilities.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.7</span><span class="q-marks">2+3=5</span></div>
+      <div class="q-text">What is Secondary Education? What are the objectives of Secondary Education?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Meaning (from answer key):</strong> Secondary Education serves as a link between the elementary and higher education, and place a very important role in this respect. A child's future can depend a lot on the type of education he/she receives at the secondary level.</p>
+      <p><strong>Objectives (from answer key):</strong> To development democratic citizenship of personality, knowledge, spiritual values and scientific attitude; to acquire necessary knowledge, skills and attitudes for the development of the self and the nation; to promote love for and loyalty to the nation; promote harmonious co-existence among the peoples; to develop mentally, socially, morally, physically and spiritually; to enhance understanding and respect for own and other people's cultures and their place in contemporary society; to enhance understanding and appreciation of interrelationships among nations; to promote positive environmental and health practices; to build a firm foundation for further education and training; to develop ability for enquiry, critical thinking and rational judgment; to develop into a responsible and socially well-adjusted person; to promote acceptance and respect for all persons and enhance enjoyment in learning; to identify individual talents and develop them; to build a foundation for technological and industrial development; to develop into a self-disciplined individual who appreciates work and manages time properly.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.8</span><span class="q-marks">5</span></div>
+      <div class="q-text">Suggestions for the examination reforms in High School.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>From answer key:</strong> CCE is the sole by and large tested examination system, judging a pupils personality on a segmentary sample. Examination both written and oral; introduce objective types instead of essay; introducing semester system; transparency in examination; grades instead of marks; new method of evaluation; establish separate examination board.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.9</span><span class="q-marks">5</span></div>
+      <div class="q-text">Mention the salient features of Indian Constitution.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>From answer key:</strong> Largest written constitution; blend of rigidity and flexibility; democratic republic; parliamentary system of government; a federation; fundamental rights; directive principals of state policy; fundamental duties; secular state; independent judiciary; single citizenship.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.10</span><span class="q-marks">5</span></div>
+      <div class="q-text">Major recommendations of Secondary Education Commission (1952-53).</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>From answer key:</strong> To develop Ethics and Human Values; to produce ideal citizen; to develop capacity for earning; quality leadership; to develop Scientific Outlook; to produce ideal citizen; to develop Capacity for earning; Social co-operation; True Patriotism.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.11</span><span class="q-marks">5</span></div>
+      <div class="q-text">Factors affecting teacher motivation.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>From answer key:</strong> Schools climate and existing norms, class size, resources, facilities, teachers personality, activity structure within the institution, collegial relations, definition of the teachers role by colleagues and authorities, general expectations regarding student potential, feedback system, leadership and decision making, working condition, job satisfaction, valuing and rewarding good work, reinforcements.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.12</span><span class="q-marks">5</span></div>
+      <div class="q-text">Explain the process of educational management.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>From answer key:</strong> Planning; Organization; Direction; Adjustment; Control; Recording (Co-ordinating); Reporting (Stopping); Evaluation; Decision making; Prediction; Budgeting.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.13</span><span class="q-marks">2+3=5</span></div>
+      <div class="q-text">Why should schools maintain records? Explain the procedure of maintaining records.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>From answer key:</strong> School records are evidence in support of the activities, results, honors received and all happening that took place there since its establishment. Necessary for total quality management, planning for resource acquisition and utilization, student and staff personal services, financial management, improvement of instructional program, maintenance of effective inter personal relationship with the community and different agencies.</p>
+      <p><strong>Maintenance procedure:</strong> Be simple, capture all the data &amp; information needed; present clearly and unambiguously; be easy to keep maintain and protect; be easy to fill-out &amp; update; have clearly defined data quality norms; include, complete and practical instructions; present the recorded data so they are easy to understand and use.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.14</span><span class="q-marks">5</span></div>
+      <div class="q-text">Explain the techniques of classroom management.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>From answer key:</strong> Focusing on behavior, modification technique, making aware of the students responsibility through instruction, open communication &amp; co-operative attempts to solve student problem, group activities, monitoring, skill in maintaining students consistent attention.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.15</span><span class="q-marks">1+4=5</span></div>
+      <div class="q-text">What is school plant? What are the features of a good school plant?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>From answer key:</strong> It is the social institution setup in the society to serve its ends which denotes school building, area, material inside the school, just like a nursery which provides for the growth and development of children.</p>
+      <p><strong>Features:</strong> Classrooms seating arrangement, appearance, equipment, lighting, ventilation, subject rooms, library and reading room, HM room, office, staff room, laboratories, hall, playground, hostel.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.16</span><span class="q-marks">5</span></div>
+      <div class="q-text">What is the importance of Parent-Teachers Association in School?</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>From answer key:</strong> PTA is for facilitating the school-community collaborative, school community relation should be close and cordial for ensuring quality in education. To bring home and school in close contact, to promote the welfare of the children in home and community, it helps in growth and development of child's progress, PTA also helps school to inform the community of what it is doing and the problem it is facing.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.17</span><span class="q-marks">2+3=5</span></div>
+      <div class="q-text">What is institutional planning? Explain briefly the stages of Institutional Planning.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>From answer key:</strong> Institution planning is a comprehensive program, it involves in every educational institution and all the human factors connected with its teachers, students and the local community. Both qualitative and quantitative improvement of education is aimed at through institutional planning.</p>
+      <p><strong>Stages (from answer key):</strong> Identifying the needs of the institution; pooling together the resources available; preparing plan of action; implementing the plan; evaluating and taking corrective action.</p>
+    </div></div>
+  </div>
+
+</div><!-- end 2017 -->
+
+<!-- 2016 TAB -->
+<div class="year-panel" id="tab-2016">
+  <div class="paper-meta">
+    <div class="meta-item"><strong>Exam</strong> August 2016</div>
+    <div class="meta-item"><strong>Code</strong> PG-1003</div>
+    <div class="meta-item"><strong>Max Marks</strong> 70</div>
+  </div>
+  <div class="expand-all-bar"><button class="expand-all-btn" onclick="toggleAll('tab-2016')">Expand All</button></div>
+
+  <div class="year-section">PART A — Long Answers (3×10=30)</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.1</span><span class="q-marks">4+4+2=10</span></div>
+      <div class="q-text">a) Objectives and features of Kittur Rani Chennamma and Kendriya Vidyalaya. b) Differences between Government and unaided schools.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Kittur Rani Chennamma Schools:</strong> Residential schools for girls established by Karnataka Government; provide free quality education to girls from rural and backward areas; free boarding, lodging, uniforms and educational materials; emphasis on women empowerment; named after the brave queen who fought British rule; focus on SC/ST/OBC and minority girl students.</p>
+      <p><strong>Kendriya Vidyalayas:</strong> Run by Kendriya Vidyalaya Sangathan (KVS) under Government of India; provide uniform CBSE education to children of central government employees; promote national integration; follow NCERT textbooks; co-educational, English medium; nominal fees; available across India and abroad.</p>
+      <p><strong>Government vs Unaided Schools:</strong> Government schools — funded by state/central government; free or heavily subsidised; strict rules on teacher recruitment; follow government syllabus; more accountable to government. Unaided schools — self-financed; charge fees; more flexible in hiring staff; may follow different boards; more autonomous in administration.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.2</span><span class="q-marks">5+5=10</span></div>
+      <div class="q-text">Explain the principles and process of Educational Management.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Principles:</strong> Democratic leadership; unity of command; division of work; span of control; flexibility; transparency; accountability; efficiency; co-ordination; continuity; communication; motivation.</p>
+      <p><strong>Process:</strong> Planning → Organization → Direction → Adjustment → Control → Co-ordination → Recording → Reporting → Evaluation → Decision Making → Prediction → Budgeting.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.3</span><span class="q-marks">6+2+2=10</span></div>
+      <div class="q-text">a) Objectives of Kothari Commission 1964-66. b) Recommendations for i) Duration of course, ii) Development of education.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Objectives:</strong> Examine all aspects of educational sector; evolve a general pattern of education; establish common school system to promote national integration; make education relevant to life and needs of nation; improve quality at all stages.</p>
+      <p><strong>i) Duration:</strong> Recommended 10+2+3 pattern — 10 years of school (5 primary + 3 upper primary + 2 secondary), 2 years higher secondary, 3 years undergraduate.</p>
+      <p><strong>ii) Development of Education:</strong> Education expenditure raised to 6% of national income; common school system with neighbourhood schools; work experience integrated in curriculum; science education given prominence; three-language formula; better teacher education and service conditions.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.4</span><span class="q-marks">5+5=10</span></div>
+      <div class="q-text">Discuss the Rastriya Madyamika Shiksha Abhiyana — objectives and schemes.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Objectives of RMSA:</strong> Universal access to secondary education by 2017; improve quality of secondary education; remove gender, socio-economic and disability barriers; universal retention by 2020; improve infrastructure in secondary schools.</p>
+      <p><strong>Schemes:</strong> Construction of new secondary schools and residential schools; additional classrooms, labs, libraries; ICT in schools scheme; model schools; girls hostel scheme; strengthening of existing secondary schools; incentives for girls and SC/ST students.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.5</span><span class="q-marks">2+3+5=10</span></div>
+      <div class="q-text">a) What is stress management? b) Causes of stress. c) Techniques of managing stress.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>a) Stress Management:</strong> A set of techniques and methods used to control a person's level of stress, especially chronic stress. In teaching profession, it involves strategies to handle work-related pressures effectively.</p>
+      <p><strong>b) Causes of Stress for Teachers:</strong> Heavy workload and excessive paperwork; large class size and student behavioral problems; lack of administrative support; inadequate resources and facilities; examination pressure; poor salary and service conditions; role ambiguity and role conflict; lack of professional recognition.</p>
+      <p><strong>c) Techniques of Managing Stress:</strong> Time management — prioritizing tasks; regular physical exercise and yoga; meditation and relaxation techniques; social support — talking to colleagues, friends and family; hobby engagement; positive thinking and cognitive reframing; proper diet and adequate sleep; professional development — building competence; seeking help when needed.</p>
+    </div></div>
+  </div>
+
+  <div class="year-section">PART B — Short Answers (8×5=40)</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.6</span><span class="q-marks">2½+2½=5</span></div>
+      <div class="q-text">Role of headmaster and teacher in time management.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Headmaster:</strong> Responsible for preparing master time table; ensures all periods properly allocated; monitors teachers' punctuality; allocates time for co-curricular and assembly activities.</p>
+      <p><strong>Teacher:</strong> Follow the time table strictly; plan lessons in advance; use instructional time effectively; help students manage time during examinations.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.7</span><span class="q-marks">5</span></div>
+      <div class="q-text">Discuss the features of National Policy of Education 1986.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>Education for All — universalisation of elementary education; common structure 10+2+3 pattern; Operation Blackboard — minimum facilities to all primary schools; promotion of open universities and distance education (IGNOU); vocationalization of secondary education; emphasis on education of women and weaker sections; reorientation of content and process of education; Navodaya Vidyalayas established in every district; teacher education strengthened through DIETs; special emphasis on science and maths education.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.9</span><span class="q-marks">2½+2½=5</span></div>
+      <div class="q-text">Method of instruction and courses offered in open schools.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Methods:</strong> Self-learning materials (printed modules); Personal Contact Programmes (PCP); radio and television broadcasts; online digital learning; assignment-based learning with tutor feedback.</p>
+      <p><strong>Courses:</strong> Secondary (Class 10 equivalent); Senior secondary (Class 12 equivalent); vocational courses (IT, agriculture, health care, beauty culture); certificate courses; life skills programs.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.10</span><span class="q-marks">2+3=5</span></div>
+      <div class="q-text">What is institutional planning? Briefly explain the scope of institutional planning.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Meaning:</strong> A comprehensive program involving every educational institution to bring qualitative and quantitative improvement in education.</p>
+      <p><strong>Scope:</strong> Academic development — curriculum, teaching methods, evaluation; physical development — buildings, labs, library, playgrounds; staff development — training, professional growth; student welfare — scholarships, counselling, health services; community relations — PTA, social outreach; financial planning — budgeting and resource mobilisation.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.13</span><span class="q-marks">5</span></div>
+      <div class="q-text">List out the role and responsibilities of the Deputy Director and Block Education Officer.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>DDPI:</strong> Chief coordinator of all educational activities at district stage; impose penalties; permit changes in working hours; sanction pension; make temporary appointments; surprise visits to exam centres; students welfare fund; recommend for awards; permit additional sections; change of medium; change of language.</p>
+      <p><strong>BEO:</strong> Review inspection reports; conduct enquiries relating to HMs; surprise visits; implement plans and schemes; inspect taluk education officers; organize seminars and teacher conferences; monitor attendance; handle teacher grievances; report to DDPI.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.14</span><span class="q-marks">2+3=5</span></div>
+      <div class="q-text">Mention the objectives of school complex. Briefly explain the formation of school complex.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Objectives of School Complex:</strong> Promote academic cooperation between schools in an area; share resources — labs, library, teachers; improve quality of education in rural areas; reduce isolation of small schools; facilitate professional development of teachers; promote uniform standards.</p>
+      <p><strong>Formation:</strong> A group of schools (usually one high school and feeder primary/middle schools) in an area form a complex; the headmaster of the high school acts as complex head; schools share resources, conduct joint activities, inter-school competitions; regular meetings of teachers from all schools in the complex.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.15</span><span class="q-marks">3+2=5</span></div>
+      <div class="q-text">Point out the features and implementations of RTE Act 2009.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p><strong>Features:</strong> Education a fundamental right for 6–14 year olds; free and compulsory; 25% reservation in private schools; no detention up to Class 8; prohibition of corporal punishment; norms for PTR and infrastructure; prohibition of capitation fees; inclusive education.</p>
+      <p><strong>Implementations:</strong> All states enacted state RTE rules; Sarva Shiksha Abhiyan extended to implement RTE; school development plans prepared; pupil-teacher ratio norms being met; out-of-school children identified and enrolled; training of untrained teachers mandated.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggleCard(this.parentElement)">
+      <div class="q-meta"><span class="q-num">Q.17</span><span class="q-marks">5</span></div>
+      <div class="q-text">Mention the functions of DSERT.</div>
+      <span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="q-answer-inner">
+      <p>DSERT (Directorate of State Educational Research and Training): Conducting research in education relevant to state's needs; organising in-service training for teachers and educational administrators; developing curriculum and textbooks for state schools; preparing training materials and educational resources; organising workshops and seminars; supervising DIETs; implementing educational policies; conducting studies on learning achievement levels; providing academic support to schools through field visits.</p>
+    </div></div>
+  </div>
+
+</div><!-- end 2016 -->
+
+</main>
+
+<footer style="text-align:center;padding:32px 16px;border-top:1px solid #2e2c27;color:#6b6861;font-size:12px;font-family:'JetBrains Mono',monospace">
+  HC-03 · Development &amp; Management in School Education · B.Ed. Companion
+  <br><span style="color:#4a4840">9 papers: 2016 · 2017+Key · Apr 2019 · Sep 2019 · 2020 · 2021 · 2022 · 2024 · 2025</span>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+function toggleCard(card) {
+  card.classList.toggle('open');
+}
+function toggleAll(panelId, btn) {
+  const panel = document.getElementById(panelId);
+  const cards = panel.querySelectorAll('.q-card');
+  const allOpen = [...cards].every(c => c.classList.contains('open'));
+  cards.forEach(c => allOpen ? c.classList.remove('open') : c.classList.add('open'));
+  if (btn) btn.textContent = allOpen ? 'Expand All' : 'Collapse All';
+}
+</script>
+</body>
+</html>
