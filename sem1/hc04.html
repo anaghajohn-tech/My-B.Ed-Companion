@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-04 | Gender, School and Society</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f0e0c;--surface:#1a1916;--surface2:#232119;--border:#2e2c27;--accent:#c8a96e;--accent2:#8fbc88;--accent3:#7eb8c9;--accent4:#e07b7b;--text:#e8e4dc;--muted:#8a8578;--tag-bg:#2a2720}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;font-size:15px;line-height:1.6}
+.header{background:linear-gradient(135deg,#0f0e0c 0%,#1c1a15 50%,#0f0e0c 100%);border-bottom:1px solid var(--border);padding:32px 24px 24px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:'';position:absolute;top:-60px;left:-60px;right:-60px;height:160px;background:radial-gradient(ellipse at 50% 0%,rgba(200,169,110,0.1) 0%,transparent 70%);pointer-events:none}
+.back-link{position:absolute;top:18px;left:20px;color:var(--muted);text-decoration:none;font-size:13px;font-family:'JetBrains Mono',monospace;transition:color .2s}
+.back-link:hover{color:var(--accent)}
+.subject-code{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;letter-spacing:3px;color:var(--accent);text-transform:uppercase;margin-bottom:8px}
+.subject-title{font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,32px);font-weight:900;color:var(--text);margin-bottom:6px;line-height:1.2}
+.subject-sub{font-size:13px;color:var(--muted);margin-bottom:16px;font-style:italic}
+.paper-tags{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.paper-tag{background:var(--tag-bg);border:1px solid var(--border);border-radius:20px;padding:3px 10px;font-size:12px;font-family:'JetBrains Mono',monospace;color:var(--muted)}
+.paper-tag.active{background:rgba(200,169,110,0.15);border-color:var(--accent);color:var(--accent)}
+.tabs-wrapper{background:var(--surface);border-bottom:1px solid var(--border);padding:0 16px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.tabs-wrapper::-webkit-scrollbar{display:none}
+.tabs{display:inline-flex;min-width:100%}
+.tab-btn{background:none;border:none;border-bottom:2px solid transparent;color:var(--muted);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.5px;padding:12px 14px;transition:all .2s;white-space:nowrap;text-transform:uppercase}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.content{max-width:860px;margin:0 auto;padding:24px 16px 60px}
+.year-panel{display:none}
+.year-panel.active{display:block}
+.paper-meta{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px 18px;margin-bottom:20px;display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.meta-item{font-size:12px;color:var(--muted);font-family:'JetBrains Mono',monospace}
+.meta-item strong{color:var(--text)}
+.meta-badge{background:rgba(200,169,110,0.15);border:1px solid rgba(200,169,110,0.3);border-radius:4px;padding:2px 8px;font-size:11px;color:var(--accent);font-family:'JetBrains Mono',monospace;font-weight:600}
+.meta-badge.key{background:rgba(143,188,136,0.15);border-color:rgba(143,188,136,0.3);color:var(--accent2)}
+.section-label{display:flex;align-items:center;gap:10px;margin:24px 0 12px}
+.section-label .line{flex:1;height:1px;background:var(--border)}
+.section-label span{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:2px;color:var(--muted);text-transform:uppercase;white-space:nowrap}
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;transition:border-color .2s}
+.q-card:hover{border-color:rgba(200,169,110,0.3)}
+.q-card.open{border-color:rgba(200,169,110,0.4)}
+.q-header{padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;user-select:none}
+.q-num{background:rgba(200,169,110,0.15);border:1px solid rgba(200,169,110,0.25);border-radius:6px;padding:2px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--accent);flex-shrink:0;margin-top:2px}
+.q-num.b{background:rgba(126,184,201,0.12);border-color:rgba(126,184,201,0.25);color:var(--accent3)}
+.q-text{flex:1;font-size:14px;font-weight:600;color:var(--text);line-height:1.5}
+.q-marks{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;flex-shrink:0;margin-top:4px;white-space:nowrap}
+.q-arrow{color:var(--muted);font-size:16px;flex-shrink:0;transition:transform .25s;margin-top:2px}
+.q-card.open .q-arrow{transform:rotate(180deg)}
+.q-answer{display:none;padding:0 16px 16px;border-top:1px solid var(--border)}
+.q-card.open .q-answer{display:block}
+.ans{padding-top:14px;font-family:'Source Serif 4',serif;font-size:16px;line-height:1.8;color:#ccc8be}
+.ans p{margin-bottom:10px}
+.ans ul,.ans ol{margin:8px 0 10px 20px}
+.ans li{margin-bottom:5px}
+.ans strong{color:var(--text);font-weight:600}
+.ans em{color:var(--accent);font-style:normal;font-size:13px;font-family:'JetBrains Mono',monospace}
+.ans h4{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:600;color:var(--accent3);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px}
+.ans table{width:100%;border-collapse:collapse;margin:10px 0;font-family:'Source Serif 4',serif;font-size:14px}
+.ans table th{background:var(--surface2);color:var(--accent);padding:8px 10px;text-align:left;border:1px solid var(--border);font-size:13px}
+.ans table td{padding:7px 10px;border:1px solid var(--border);vertical-align:top}
+.ans table tr:nth-child(even) td{background:rgba(255,255,255,0.02)}
+.imp-grid{display:grid;gap:10px}
+.imp-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+.imp-freq{background:rgba(200,169,110,0.15);border:1px solid rgba(200,169,110,0.3);border-radius:4px;padding:2px 8px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--accent);flex-shrink:0;white-space:nowrap}
+.imp-freq.h{background:rgba(224,123,123,0.15);border-color:rgba(224,123,123,0.3);color:var(--accent4)}
+.imp-freq.m{background:rgba(143,188,136,0.12);border-color:rgba(143,188,136,0.25);color:var(--accent2)}
+.imp-text{font-size:14px;color:var(--text);line-height:1.5}
+.expand-bar{display:flex;justify-content:flex-end;margin-bottom:12px}
+.expand-btn{background:var(--surface);border:1px solid var(--border);border-radius:6px;color:var(--muted);cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 12px;transition:all .2s}
+.expand-btn:hover{color:var(--accent);border-color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="header">
+  <a href="../index.html" class="back-link">← Home</a>
+  <div class="subject-code">HC-04 · Semester 1 · B.Ed. CBCS</div>
+  <div class="subject-title">Gender, School and Society</div>
+  <div class="subject-sub">I Semester B.Ed. (CBCS – 2 Years Course) · Max. Marks: 70</div>
+  <div class="paper-tags">
+    <span class="paper-tag">2016 + Key</span>
+    <span class="paper-tag">2017</span>
+    <span class="paper-tag">2018</span>
+    <span class="paper-tag">Apr 2019</span>
+    <span class="paper-tag">Sep 2019</span>
+    <span class="paper-tag">2021</span>
+    <span class="paper-tag">2022</span>
+    <span class="paper-tag">2023</span>
+    <span class="paper-tag active">2024 ✦</span>
+  </div>
+</div>
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('imp',this)">⭐ Important</button>
+    <button class="tab-btn" onclick="showTab('t2016',this)">Aug 2016</button>
+    <button class="tab-btn" onclick="showTab('t2017',this)">Oct 2017</button>
+    <button class="tab-btn" onclick="showTab('t2018',this)">Sep 2018</button>
+    <button class="tab-btn" onclick="showTab('t2019a',this)">Apr 2019</button>
+    <button class="tab-btn" onclick="showTab('t2019s',this)">Sep 2019</button>
+    <button class="tab-btn" onclick="showTab('t2021',this)">Sep 2021</button>
+    <button class="tab-btn" onclick="showTab('t2022',this)">Jul 2022</button>
+    <button class="tab-btn" onclick="showTab('t2023',this)">Jun 2023</button>
+    <button class="tab-btn" onclick="showTab('t2024',this)">Jun 2024</button>
+  </div>
+</div>
+<div class="content">
+
+<!-- IMPORTANT TAB -->
+<div class="year-panel active" id="tab-imp">
+  <div class="section-label"><div class="line"></div><span>Most Frequently Asked — across 9 papers</span><div class="line"></div></div>
+  <div class="imp-grid">
+    <div class="imp-item"><span class="imp-freq h">8/9 ★★★</span><div class="imp-text">Social Reformers contributions — Jyothiba Phule, Savithribai Phule, Rajaram Mohan Roy, Mahatma Gandhi, Raghunath Karve towards women education and empowerment</div></div>
+    <div class="imp-item"><span class="imp-freq h">8/9 ★★★</span><div class="imp-text">Women Empowerment — meaning, need, indicators, and Government initiatives to promote gender equality and empowerment</div></div>
+    <div class="imp-item"><span class="imp-freq h">8/9 ★★★</span><div class="imp-text">Gender Fair School Environment — concept + Role of school and teacher in creating gender fair school environment / promoting gender mainstreaming</div></div>
+    <div class="imp-item"><span class="imp-freq h">8/9 ★★★</span><div class="imp-text">Mahila Samakhya — role in tackling gender issues in school education and society</div></div>
+    <div class="imp-item"><span class="imp-freq h">8/9 ★★★</span><div class="imp-text">Women in Political Participation — status of women in politics + initiatives to enhance women's political participation</div></div>
+    <div class="imp-item"><span class="imp-freq m">7/9 ★★</span><div class="imp-text">NPE 1986 + POA 1992 + NCF 2005 — recommendations for gender equality and empowerment of girls</div></div>
+    <div class="imp-item"><span class="imp-freq m">7/9 ★★</span><div class="imp-text">Transgender — concept/meaning + legal provisions + strategies for empowerment</div></div>
+    <div class="imp-item"><span class="imp-freq m">7/9 ★★</span><div class="imp-text">Role of teacher in promoting gender equality and women empowerment through scholastic and co-scholastic activities</div></div>
+    <div class="imp-item"><span class="imp-freq m">7/9 ★★</span><div class="imp-text">Role of school in working with society for gender mainstreaming</div></div>
+    <div class="imp-item"><span class="imp-freq m">7/9 ★★</span><div class="imp-text">Gender Studies — nature and importance</div></div>
+    <div class="imp-item"><span class="imp-freq m">6/9 ★★</span><div class="imp-text">Gender Discrimination — aspects in education + causes + measures to overcome</div></div>
+    <div class="imp-item"><span class="imp-freq m">6/9 ★★</span><div class="imp-text">Sexual Harassment — meaning, types/faces + constitutional measures + role of school in redressal</div></div>
+    <div class="imp-item"><span class="imp-freq m">6/9 ★★</span><div class="imp-text">Constitutional provisions to promote gender equality (Articles 14, 15, 16, 21, 39d, 42, 51a, 73/74th Amendment)</div></div>
+    <div class="imp-item"><span class="imp-freq m">6/9 ★★</span><div class="imp-text">Women empowerment importance and indicators of measurement</div></div>
+    <div class="imp-item"><span class="imp-freq">5/9</span><div class="imp-text">Gender Stereotype — meaning, characteristics in context of patriarchy + impact of family, society and culture</div></div>
+    <div class="imp-item"><span class="imp-freq">5/9</span><div class="imp-text">Contributions of Jyothiba Phule and Savithribai Phule towards women education in India</div></div>
+    <div class="imp-item"><span class="imp-freq">4/9</span><div class="imp-text">Gender equity vs gender equality — differences + teacher measures to eliminate gender inequality</div></div>
+    <div class="imp-item"><span class="imp-freq">4/9</span><div class="imp-text">Role of media on increasing gender discrimination + measures to eliminate it</div></div>
+    <div class="imp-item"><span class="imp-freq">4/9</span><div class="imp-text">Gender discrimination — gender bias vs discrimination + discrimination in relation to family and society</div></div>
+    <div class="imp-item"><span class="imp-freq">3/9</span><div class="imp-text">Concepts of Sex, Gender and Patriarchy — meanings and differences</div></div>
+    <div class="imp-item"><span class="imp-freq">3/9</span><div class="imp-text">"Education is the powerful means of gender equality and women empowerment" — Discuss</div></div>
+    <div class="imp-item"><span class="imp-freq">3/9</span><div class="imp-text">Women empowerment controls population growth — Justify</div></div>
+    <div class="imp-item"><span class="imp-freq">2/9</span><div class="imp-text">Gender discrimination based on teachers' attitudes / hidden curriculum</div></div>
+    <div class="imp-item"><span class="imp-freq">2/9</span><div class="imp-text">Concepts of Patriarchy, Masculinity and Feminism</div></div>
+    <div class="imp-item"><span class="imp-freq">2/9</span><div class="imp-text">Role of society in handling gender roles</div></div>
+  </div>
+</div>
+
+<!-- 2016 + ANSWER KEY TAB -->
+<div class="year-panel" id="tab-t2016">
+  <div class="paper-meta">
+    <span class="meta-badge">PG-1004</span>
+    <span class="meta-badge key">✓ Answer Key — Ravi K, Asst. Professor, Sanjay Gandhi College of Education</span>
+    <div class="meta-item">📅 <strong>August 2016</strong></div>
+    <div class="meta-item">📊 <strong>70 Marks</strong></div>
+  </div>
+  <div class="expand-bar"><button class="expand-btn" onclick="expandAll('tab-t2016',this)">Expand All ▾</button></div>
+
+  <div class="section-label"><div class="line"></div><span>Part A — Long Answers (3×10=30)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c16_1">
+    <div class="q-header" onclick="toggleCard('c16_1')">
+      <span class="q-num">Q.1</span>
+      <div class="q-text">a) Explain the meaning and characteristics of gender stereotypes in the context of patriarchy. b) Explain the impact of family, society and culture in the development of gender stereotype roles.</div>
+      <span class="q-marks">4+6</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>a) Gender Stereotypes in the Context of Patriarchy</h4>
+      <p><strong>Gender stereotype</strong> is a generalised view or preconception about the attributes, characteristics or roles that men and women should possess. These are oversimplified and fixed ideas about how men and women are and ought to be.</p>
+      <p><strong>Patriarchy</strong> is a social system in which men hold primary power and predominate in roles of political leadership, moral authority, social privilege, and control of property.</p>
+      <p><strong>Characteristics of gender stereotypes:</strong></p>
+      <ul>
+        <li>Women are expected to be emotional, nurturing and domestically oriented</li>
+        <li>Men are expected to be rational, strong, breadwinners</li>
+        <li>Women are considered weak and dependent; men considered dominant and independent</li>
+        <li>Occupational stereotypes — nursing/teaching for women; engineering/politics for men</li>
+        <li>Stereotypes are socially constructed, not biologically determined</li>
+        <li>They limit individual potential and reinforce inequality</li>
+      </ul>
+      <h4>b) Impact of Family, Society and Culture on Gender Stereotype Roles</h4>
+      <p><strong>Family:</strong> First agent of socialisation. Children observe gender roles modelled by parents. Division of household duties teaches boys and girls their "expected roles." Sons given more freedom; daughters restricted.</p>
+      <p><strong>Society:</strong> Society frames its own roles for different genders; insists members follow these roles; uses direct and indirect measures to control those who fail their role functions; helps in forming new trend-setting related to gender roles; motivates members following roles correctly.</p>
+      <p><strong>Culture:</strong> Cultural norms, festivals, rituals and practices reinforce gender roles. Religious texts and traditions often prescribe different roles. Language and media carry cultural gender stereotypes. Dress codes, behaviour expectations — all culturally enforced.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_2">
+    <div class="q-header" onclick="toggleCard('c16_2')">
+      <span class="q-num">Q.2</span>
+      <div class="q-text">a) Mention the gender discriminations prevailing in different aspects of education. b) Mention the causes and measures to these gender discriminations.</div>
+      <span class="q-marks">6+4</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>a) Gender Discrimination in Different Aspects of Education</h4>
+      <ul>
+        <li><strong>Enrolment:</strong> Lower enrolment of girls especially in rural/tribal areas; early marriage pulls girls out</li>
+        <li><strong>Curriculum:</strong> Textbooks portray women in domestic roles; science/maths seen as "boys' subjects"</li>
+        <li><strong>Teacher attitude:</strong> Teachers may unconsciously give more attention and encouragement to boys</li>
+        <li><strong>Hidden curriculum:</strong> Unwritten rules and expectations that reinforce gender stereotypes in school</li>
+        <li><strong>Facilities:</strong> Lack of separate toilets for girls; unsafe environment; no sanitary facilities</li>
+        <li><strong>Vocational training:</strong> Girls steered towards domestic science; boys towards technical/mechanical</li>
+        <li><strong>Higher education:</strong> Girls less likely to pursue science, technology, engineering and mathematics (STEM)</li>
+      </ul>
+      <h4>b) Causes and Measures</h4>
+      <p><strong>Causes:</strong> Patriarchal mindset; poverty and economic necessity; religious beliefs and customs; safety concerns for girls; parental attitude preferring son's education; lack of role models; gender-biased curriculum.</p>
+      <p><strong>Measures:</strong> Introducing gender-based choice of streams; sexual harassment/abuse-free environment; proper sanitation for both genders; safety measures; gender neutral language; emphasis on life skill education; increasing awareness about universalisation of education; decreasing distance between school and home; free from partiality, scoldings and punishments.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_3">
+    <div class="q-header" onclick="toggleCard('c16_3')">
+      <span class="q-num">Q.3</span>
+      <div class="q-text">a) Contributions of Jyothiba Phule and Savithribai Phule in promotion of women education in India. b) Recommendations of NPE 1986, POA 1992 and NCF 2005 towards gender equality and empowerment of girls.</div>
+      <span class="q-marks">4+6</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>a) Contributions of Jyothiba Phule &amp; Savithribai Phule</h4>
+      <p><strong>Jyothiba Phule:</strong> Founded India's first school for girls (1848, Pune); fought against caste and gender discrimination; established Satyashodhak Samaj to promote equal rights; influenced many women and responsible for their crusade against injustice and inequality; strongly opposed child marriage; fought against dowry system; encouraged simple marriage rituals; opened women's entry into national politics through non-violent methods; made women protest against injustice.</p>
+      <p><strong>Savithribai Phule:</strong> First woman teacher in India; taught girls despite severe social opposition; worked tirelessly for girl child education; wrote poetry encouraging women to educate themselves; established shelters for widows and socially ostracised women; worked for abolition of child marriage; fought for the rights of Dalit women.</p>
+      <h4>b) NPE 1986 Recommendations</h4>
+      <p>Women instructors in non-formal education programmes have to receive special orientation to play an active role towards gender equality; emphasis on women's participation in vocational, technical and professional education; special programmes developed by research institutions and voluntary organisations to promote self-image and general awareness of women; active programmes to tackle women's problems by education institutes.</p>
+      <h4>POA 1992</h4>
+      <p>Preference in recruitment of teachers up to school level for women; cell to accelerate elimination of sexist bias and sex stereotypes from textbooks; women's cell of NCERT should take active help of all persons; teachers, trainers, planners and administrators sensitized to women's issues; women's cell in NCERT given responsibility for preparing the co-curriculum relating to women's equality.</p>
+      <h4>NCF 2005</h4>
+      <p>Support research to build perspective on relationship between gender and education; create banks of gender sensitive material; access to education for all girls; retention and quality of girls' education; establish gender as a critical marker of transformation and as an organizing principle; establish that gender is not a women's issue — it is peoples' issue; critical and proactive approach to equality and empowerment of girls.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_4">
+    <div class="q-header" onclick="toggleCard('c16_4')">
+      <span class="q-num">Q.4</span>
+      <div class="q-text">a) Bring out the meaning and indicators of women empowerment. b) Briefly explain the initiatives implemented by the Govt. to promote gender equality, equity and empowerment of women.</div>
+      <span class="q-marks">4+6</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>a) Women Empowerment — Meaning and Indicators</h4>
+      <p><strong>Meaning:</strong> Women empowerment refers to the process of enabling women to have power and control over their own lives — social, political, economic and educational. It means giving women equal rights, opportunities and freedom to make their own choices.</p>
+      <p><strong>Importance:</strong> To bring women to mainstream in par with men; to enhance national development by including neglected large population of women; to bring back the same good old status and positions women enjoyed during Vedic period; to put a full stop for all the sorrows suffered by women.</p>
+      <p><strong>Indicators of Women Empowerment:</strong></p>
+      <ul>
+        <li>Disaggregated statistical data providing separate measures for men and women</li>
+        <li>Measurable gender issues — percentages of women in parliament</li>
+        <li>Data showing changes in gender equality over time</li>
+        <li>Qualitative indicators — women's levels of stabilization, attitudinal changes</li>
+        <li>Education and status of women</li>
+        <li>Employment — equal wages, treatment and facilities</li>
+        <li>Health and reproductive health, nutrition, age at marriage</li>
+        <li>Opportunity to decision making, economic self-sufficiency</li>
+        <li>Social mobility and political participation</li>
+        <li>Knowledge, legal rights, property rights, reproductive rights</li>
+        <li>Self-confidence, self-esteem, communication and leadership</li>
+      </ul>
+      <h4>b) Government Initiatives</h4>
+      <ul>
+        <li><strong>Legal sphere:</strong> Dowry Prohibition Act 1961; SITA Act 1956; Protection of Women from Domestic Violence Act 2005; Family Courts Act 1954; Maternity Benefit Act 1961; MTP Act; Equal Remuneration Act 1976</li>
+        <li><strong>Employment sphere:</strong> Equal Remuneration Act 1973; Unorganized Workers Social Security Act 2008; Maternity Benefit Act 1961; Sexual Harassment of Women at Workplace Act 2013; Right to equality under Article 14</li>
+        <li>Beti Bachao Beti Padhao; National Mission for Empowerment of Women; Mahila Samakhya; Women Helpline; One Stop Centres (Sakhi)</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_5">
+    <div class="q-header" onclick="toggleCard('c16_5')">
+      <span class="q-num">Q.5</span>
+      <div class="q-text">a) Explain the concept of gender fair school environment. b) Discuss the role of teachers in promoting gender equality and empowerment of girls.</div>
+      <span class="q-marks">5+5</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>a) Gender Fair School Environment</h4>
+      <p>A setting created by teachers, administrators and all stakeholders in which both male and female genders of students and staff feel the existence or get gender equality or equity in all the aspects of school systems.</p>
+      <p><strong>vs Gender Mainstreaming:</strong> Gender mainstreaming is the public policy concept of assessing the different implications for men and women of any planned policy action including legislation and programmes in all areas and levels. It essentially offers a pluralistic approach that values the diversity among both men and women.</p>
+      <p><strong>Features of gender fair school:</strong> Equal treatment of all students; gender-neutral language; curriculum free of stereotypes; equal participation in all activities; safe environment for all genders; policies against harassment; representation of women in school leadership.</p>
+      <h4>b) Role of Teachers (from answer key)</h4>
+      <ul>
+        <li>Brainstorming, role play, games and debates through working in small mixed gender groups</li>
+        <li>Using gender neutral language</li>
+        <li>Using multiple strategies and interventions to ensure students have equal opportunities</li>
+        <li>Actively involving all girls and boys in dynamic teaching-learning process</li>
+        <li>Training students in co-scholastic activities with choices open</li>
+        <li>Establishing house system ensures healthy competitions and ample opportunities for students to work collaboratively</li>
+        <li>Motivating students to various programmes like cultural events, dance etc.</li>
+        <li>Students should be prepared for different Olympiads irrespective of their genders</li>
+        <li>Providing gender friendly guidance and counselling</li>
+        <li>Organizing exhibitions, debate competitions frequently on different topics for both genders</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="section-label"><div class="line"></div><span>Part B — Short Answers (8×5=40)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c16_6">
+    <div class="q-header" onclick="toggleCard('c16_6')">
+      <span class="q-num b">Q.6</span>
+      <div class="q-text">What is the role of society in handling gender roles?</div>
+      <span class="q-marks">5</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <p>From answer key: Society frames its own roles to different genders which are dynamic in nature; it insists the members to follow the roles defined; it follows direct and indirect measures to control those who fail their role functions; it helps in forming new trend-setting related to gender roles according to the need of the hour; it motivates the members of the society following the roles of society correctly.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_7">
+    <div class="q-header" onclick="toggleCard('c16_7')">
+      <span class="q-num b">Q.7</span>
+      <div class="q-text">What is the place of transgenders in our society? What are the strategies required for empowering them?</div>
+      <span class="q-marks">1+4</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>Place of Transgenders</h4>
+      <p>Transgenders are individuals who do not conform to the gender role expected of their biological sex. They are individuals with the biological characteristics of one sex who identify themselves as the opposite gender. They are marginalized, bullied, raped, beaten up, murdered and driven to suicide. They face severe discrimination in employment, housing and social settings.</p>
+      <h4>Strategies for Empowering Transgenders</h4>
+      <ul>
+        <li>Rehabilitation and social development centres</li>
+        <li>Conducting community learning centres</li>
+        <li>Providing suitable platforms to share their grievances</li>
+        <li>Undertaking need-based action researches on social integration</li>
+        <li>Identified as equal to other individuals; recognized as third gender</li>
+        <li>Their issues treated not as medical but as human rights issues</li>
+        <li>Cannot be discriminated; provision for fullest development</li>
+        <li>Provision of ID card, passport, employment, contesting in elections</li>
+        <li>Right to life, liberty, equality, dignity and freedom of thought and expression</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_8">
+    <div class="q-header" onclick="toggleCard('c16_8')">
+      <span class="q-num b">Q.8</span>
+      <div class="q-text">How does gender equity differ from gender equality? As a teacher, what measures do you take to eliminate gender inequality?</div>
+      <span class="q-marks">2+3</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>Gender Equity vs Gender Equality</h4>
+      <p><strong>Gender equity</strong> means fairness of treatment for women and men according to their respective needs. This may include equal treatment or treatment that is different but considered equivalent in terms of rights, benefits, obligations and opportunities.</p>
+      <p><strong>Gender equality</strong> entails the concept that all human beings, both men and women, are free to develop their personal abilities without limitations set by stereotypes, rigid gender roles and prejudices. Gender equality means that the different behaviour, aspirations and needs of women and men are considered, valued and favoured equally.</p>
+      <h4>Teacher's Measures to Eliminate Gender Inequality</h4>
+      <ul>
+        <li>Providing examples of both genders achieving great heights in different fields</li>
+        <li>Encouraging and guiding both boys and girls in setting their life goals</li>
+        <li>Discovering activities where both boys and girls participate and understand each other's merits</li>
+        <li>Judicious use of criticisms and appreciations while handling different genders</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_9">
+    <div class="q-header" onclick="toggleCard('c16_9')">
+      <span class="q-num b">Q.9</span>
+      <div class="q-text">Any four roles of media on increasing gender discrimination? Any six measures to eliminate gender discrimination.</div>
+      <span class="q-marks">2+3</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>Role of Media on Increasing Gender Discrimination (from answer key)</h4>
+      <ul>
+        <li>Giving undue weightage to a particular gender — specially male</li>
+        <li>Remunerations vary as per their genders rather than their talents (male actors vs female actors)</li>
+        <li>Undue or less emphasis to particular gender-oriented programmes/movies</li>
+        <li>Exaggerations of certain value systems that lead to discrimination</li>
+        <li>Attention to general aspects rather than gender sensitive issues</li>
+      </ul>
+      <h4>Measures to Eliminate Gender Discrimination</h4>
+      <ul>
+        <li>Wage gap — the wage gap, forbidden to drive vehicles, not allowed to travel alone must be eliminated</li>
+        <li>Eliminating honour killing, female genital mutilation, female infanticide</li>
+        <li>Providing legal rights; eliminating sex-selective abortion</li>
+        <li>Removing restrictions on dressing and clothing; purdah system</li>
+        <li>Ensuring equal access to religious places</li>
+        <li>Eliminating discrimination in education and employment</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_11">
+    <div class="q-header" onclick="toggleCard('c16_11')">
+      <span class="q-num b">Q.11</span>
+      <div class="q-text">Importance of women empowerment. Explanation on the indicators of its measurement.</div>
+      <span class="q-marks">2+3</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <p><strong>Importance:</strong> To bring women to mainstream in par with men; to enhance national development; to bring back the good status women enjoyed during Vedic period; to put a full stop for all the sorrows enjoyed by women.</p>
+      <p><strong>Indicators:</strong> See Q.4(a) above — disaggregated data, measurable gender issues, education and status, employment, health, decision making opportunity, social mobility, political participation, legal rights, self-confidence.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_12">
+    <div class="q-header" onclick="toggleCard('c16_12')">
+      <span class="q-num b">Q.12</span>
+      <div class="q-text">Nature of gender studies. Explanation on the importance of gender studies.</div>
+      <span class="q-marks">1+4</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>Gender Studies</h4>
+      <p><strong>Nature (from answer key):</strong> An interdisciplinary academic study that examines gender as social and cultural construct, the social states and contributions of women, relationship between power and gender, includes women studies and feminism.</p>
+      <h4>Importance of Gender Studies</h4>
+      <p>Gender studies in education studies the various dimensions and aspects of gender issues in education; helps to analyse gender issues and problems in schools; guides international programmes to incorporate proper strategies to bring gender mainstreaming in school education; helps understand how gender shapes human experience and social institutions; enables development of policies for gender equality.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_13">
+    <div class="q-header" onclick="toggleCard('c16_13')">
+      <span class="q-num b">Q.13</span>
+      <div class="q-text">Any four differences between sexual harassment and sexual abuse. Any six measures to control sexual harassment and sexual abuse.</div>
+      <span class="q-marks">2+3</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>Sexual Harassment vs Sexual Abuse</h4>
+      <p><strong>Sexual Harassment (from answer key):</strong> Bullying or coercion of sexual nature; unwelcome or inappropriate promise of rewards for sexual favours; illegal and unethical; includes unwelcome sexual advances, request for sexual favours, verbal or physical harassment. Forms: unwelcome verbal/non-verbal messages, domestic violence, sexual bribery, assault, emotional threat, child sex abuse, pornography, rape, molestation, sexual determined behavior/body language.</p>
+      <p><strong>Sexual Abuse:</strong> When someone in a position of power or authority takes advantage of a person's trust and respect to involve them in sexual activity. Can occur between child and adult, patient and doctor, student and teacher. Shock, fear, disbelief are immediate reactions; anxiety and PTSD are long-term symptoms.</p>
+      <h4>Measures (Redressal from answer key)</h4>
+      <p>Established redressal cell; gender sensitivity training; legal awareness; suggestion box; help desk; guidance and counselling; medical facilities; assertive behavior training; self-protection training; CCTV etc.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_14">
+    <div class="q-header" onclick="toggleCard('c16_14')">
+      <span class="q-num b">Q.14</span>
+      <div class="q-text">Status of women in political participation. Initiatives to enhance women's political participation.</div>
+      <span class="q-marks">2+3</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>Status of Women in Politics (from answer key)</h4>
+      <ul>
+        <li>India ranks 20th from the bottom in parliament in women's representation</li>
+        <li>Proposed legislation: 1/3rd seats in parliament and state legislature</li>
+        <li>Women have held highest posts — President, Prime Minister, Governor, Ministers, Speaker</li>
+        <li>33% reservation quota proposed at all levels from education to employment and political parties</li>
+      </ul>
+      <h4>Initiatives to Enhance Women's Political Participation</h4>
+      <ul>
+        <li>Political parties shall have agenda for women to fully represent in party leadership and policy committees</li>
+        <li>Political parties should provide full support and resources to ensure election of women candidates</li>
+        <li>Government should consider legislatives requiring political parties to adopt democratic procedures</li>
+        <li>International community should provide support and training to women to function effectively in their new roles</li>
+        <li>Training to political parties, journalists, security forces about women's political participation and gender sensitivity</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_15">
+    <div class="q-header" onclick="toggleCard('c16_15')">
+      <span class="q-num b">Q.15</span>
+      <div class="q-text">Explaining any five influences of education on gender equality.</div>
+      <span class="q-marks">5</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <p>From answer key — the education system influences gender equality through: opportunities to gain admissions to formal/non-formal/alternative approaches; actual attendance rather than enrollment; equal opportunities to learn; degree of gender discrimination free educational environment; equitable treatment and attention to both genders; exposure to teaching methods free of stereotypes and gender bias; usage of gender neutral language; security/control on ragging, sexual abuse and harassment; availability of guidance and counselling wings; economic burden on parents; basic amenities like toilets and women redressal cell; incentives and scholarships.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_16">
+    <div class="q-header" onclick="toggleCard('c16_16')">
+      <span class="q-num b">Q.16</span>
+      <div class="q-text">List any ten Constitutional provisions to promote gender equality.</div>
+      <span class="q-marks">5</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <p>The principle of gender equality is enshrined in the Indian Constitution in its preamble, fundamental rights, duties and directive principles. Key articles:</p>
+      <ul>
+        <li><strong>Article 14</strong> — Equality before law for women</li>
+        <li><strong>Article 15(1)</strong> — State not to discriminate on grounds of religion, race, caste, sex or place of birth</li>
+        <li><strong>Article 15(3)</strong> — Special provisions in favour of women and children</li>
+        <li><strong>Article 16</strong> — Equality of opportunity for all citizens in employment</li>
+        <li><strong>Article 21</strong> — Right to Education (RTE)</li>
+        <li><strong>Article 39(A)</strong> — Promote justice on basis of equal opportunity; free legal aid</li>
+        <li><strong>Article 39(d)</strong> — Equal pay for equal work for men and women</li>
+        <li><strong>Article 42</strong> — Provisions for securing just and humane conditions of work and maternity relief</li>
+        <li><strong>Article 47</strong> — State to raise the level of nutrition and standard of living</li>
+        <li><strong>Article 51(A)</strong> — Renounce practices derogatory to the dignity of women</li>
+        <li><strong>73rd &amp; 74th Amendment</strong> — One-third of seats in Panchayat and municipality reserved for women</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c16_17">
+    <div class="q-header" onclick="toggleCard('c16_17')">
+      <span class="q-num b">Q.17</span>
+      <div class="q-text">Listing any ten roles of teacher in promoting gender equality and women empowerment.</div>
+      <span class="q-marks">5</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <p>From answer key: Brainstorming, role play, games and debates through working in small mixed gender groups; using gender neutral language; using multiple strategies and interventions to ensure equal opportunities; actively involving all girls and boys in dynamic teaching-learning process; training students in co-scholastic activities with choices open; establishing house system for healthy competitions; motivating students to cultural events, dance etc.; students prepared for Olympiads irrespective of genders; providing gender friendly guidance and counselling; organizing exhibitions, debate competitions frequently on different topics for both genders.</p>
+    </div></div>
+  </div>
+</div><!-- end 2016 -->
+
+<!-- 2017 TAB -->
+<div class="year-panel" id="tab-t2017">
+  <div class="paper-meta"><span class="meta-badge">SN-004</span><div class="meta-item">📅 <strong>October 2017</strong></div><div class="meta-item">📊 <strong>70 Marks</strong></div></div>
+  <div class="expand-bar"><button class="expand-btn" onclick="expandAll('tab-t2017',this)">Expand All ▾</button></div>
+  <div class="section-label"><div class="line"></div><span>Part A — Long Answers (3×10=30)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c17_1">
+    <div class="q-header" onclick="toggleCard('c17_1')">
+      <span class="q-num">Q.1</span>
+      <div class="q-text">a) What is gender inequality? b) List any eight causes for gender inequalities. c) Initiatives taken by government to promote women empowerment in legal and employment spheres.</div>
+      <span class="q-marks">2+4+4</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>a) Gender Inequality</h4>
+      <p>Gender inequality is nothing but the absence of gender equality. It is an unequal treatment or perceptions of individuals wholly or partly due to their gender, arising from differences in socially constructed gender roles. It is a state of lacking equal ease of access to resources and opportunities including economic participation and decision making regardless of gender, and valuing different behaviours, aspirations and needs unequally regarding their gender. It is the idea and situation that men and women are not equal.</p>
+      <h4>b) Eight Causes of Gender Inequality</h4>
+      <ul>
+        <li>Centuries of oppression of women in society</li>
+        <li>Existence of patriarchal society and patrilineal customs</li>
+        <li>Negative attitude of male gender towards female gender</li>
+        <li>Superiority complex and ego satisfaction of male gender embedded with selfishness</li>
+        <li>Emphasis on Androcentrism by culturally marginalizing Gynocentrism</li>
+        <li>Religious beliefs, bias, prejudice, superstitions</li>
+        <li>Double standards regarding attitude towards women</li>
+        <li>Manu Dharma Sastra's boundaries for women; preference for son; dowry system; male chauvinism; impact of media</li>
+      </ul>
+      <h4>c) Government Initiatives — Legal Sphere</h4>
+      <p>Indian Penal Code: Rape (Sec 376 IPC); Molestation (Sec 354 IPC); Sexual harassment (Sec 509 IPC). Special laws: Dowry Prohibition Act 1961; SITA 1956; Domestic Violence Act 2005; Family Courts Act 1954; Maternity Benefit Act 1961; MTP Act; Equal Remuneration Act 1976.</p>
+      <p><strong>Employment Domain:</strong> Equal Remuneration Act 1973; Unorganized Workers Social Security Act 2008; Maternity Benefit Act 1961; Sexual Harassment of Women at Workplace Act 2013; Right to equality under Article 14.</p>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c17_2">
+    <div class="q-header" onclick="toggleCard('c17_2')">
+      <span class="q-num">Q.2</span>
+      <div class="q-text">a) Differentiate between gender bias and gender discrimination. b) Explain gender discrimination of women in relation to family and society.</div>
+      <span class="q-marks">2+8</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>a) Gender Bias vs Gender Discrimination</h4>
+      <table>
+        <tr><th>Gender Bias</th><th>Gender Discrimination</th></tr>
+        <tr><td>Having a preference towards a particular sex in social/work settings</td><td>Action for or against a sex or gender</td></tr>
+        <tr><td>Mental state — need not express itself overtly</td><td>Must be overt/action-based, though need not be illegal</td></tr>
+        <tr><td>Can be towards or against a particular gender</td><td>Usually against a particular gender (mostly women)</td></tr>
+        <tr><td>Prerequisite for gender discrimination</td><td>Often results from conscious/unconscious gender bias</td></tr>
+        <tr><td>Preference, rational or otherwise for one sex over other</td><td>Unequal treatment based on gender</td></tr>
+      </table>
+      <h4>b) Gender Discrimination in Relation to Family and Society</h4>
+      <ul>
+        <li>Women's education added with dowry with respect to economical returns</li>
+        <li>Men expected to earn; women expected to perform household duties (but not vice versa)</li>
+        <li>Undue status in literacy, at higher educational level and employment</li>
+        <li>Purdah system; restrictions on dressing and clothing</li>
+        <li>No entry to certain religious places</li>
+        <li>After marriage, change of identity of women but not men</li>
+        <li>After giving birth to child, lending the surname</li>
+        <li>Sex-selective abortion; preference of boy child; dowry demands; violence against women</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c17_3">
+    <div class="q-header" onclick="toggleCard('c17_3')">
+      <span class="q-num">Q.3</span>
+      <div class="q-text">a) "Women of today owes a lot to Mahatma Gandhi and Raghunath Karve." Substantiate. b) What measures should be taken to minimize gender discrimination in education (school environment, facilities, enrolment, retention, achievement)?</div>
+      <span class="q-marks">5+5</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>a) Contributions of Mahatma Gandhi and Raghunath Karve</h4>
+      <p><strong>Mahatma Gandhi:</strong> Influenced many women and is responsible for their crusade against injustice and inequality; strongly considered the pernicious system of child marriage as void; fought against dowry system and encouraged simple inexpensive marriage rituals; opened women's entry into national politics through non-violent methods; made women even if seemingly weak to protest against injustice; made women question the norms of male dominated politics.</p>
+      <p><strong>Raghunath Karve:</strong> Pioneer in initiating family planning and birth control for masses; worked on problems associated with childbirth, women's sexuality and sexually transmitted diseases; advocated that women had every right to control and regulate their reproductive lives; set up the first women's university in India — SNDT Indian Women's University; founded Mahilashram and Mahavidyalaya; responsible for setting up schools in villages.</p>
+      <h4>b) Measures for Gender Discrimination in Education</h4>
+      <ul>
+        <li><strong>School environment:</strong> Gender-neutral, safe, harassment-free; gender-sensitive policies</li>
+        <li><strong>School facilities:</strong> Separate toilets for girls; sanitary facilities; safe transportation</li>
+        <li><strong>Enrolment:</strong> Incentives for girl child education; awareness campaigns; free education</li>
+        <li><strong>Retention:</strong> Scholarships; mid-day meals; flexible timing; hostels for girl students</li>
+        <li><strong>Achievement:</strong> Gender-neutral curriculum; equal expectations from both genders; diverse role models</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c17_4">
+    <div class="q-header" onclick="toggleCard('c17_4')">
+      <span class="q-num">Q.4</span>
+      <div class="q-text">a) What is the difference between gender fair school environment and gender mainstreaming? b) Explain the role of school in working with society to promote gender mainstreaming.</div>
+      <span class="q-marks">4+6</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>a) Gender Fair School vs Gender Mainstreaming</h4>
+      <p><strong>Gender Mainstreaming:</strong> Public policy concept of assessing different implications for men and women of any planned policy action including legislation and programmes in all areas and levels. It essentially offers a pluralistic approach that values the diversity among both men and women.</p>
+      <p><strong>Gender Fair School Environment:</strong> A setting created by teachers, administrators and all stakeholders in which both male and female genders of students and staff feel the existence or get gender equality or equity in all aspects of school systems.</p>
+      <h4>b) Role of School in Working with Society (from answer key)</h4>
+      <ul>
+        <li>Organizing relevant programmes in the school as well as public places of society</li>
+        <li>Involving society in general, parents of existing students and alumni in particular</li>
+        <li>Increasing the awareness of the active role of women in development</li>
+        <li>Increasing the participation of women in decision making in the management and implementation of education</li>
+        <li>Organising activities of Government, NGOs, private sectors as well as its own in all areas and levels</li>
+        <li>Conducting evaluation, remediation and follow-up programmes</li>
+        <li>Involving celebrities of different fields to get positive effect in bringing gender mainstreaming</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <div class="q-card" id="c17_5">
+    <div class="q-header" onclick="toggleCard('c17_5')">
+      <span class="q-num">Q.5</span>
+      <div class="q-text">a) Mention the recommendations of NPE 1986, POA 1992 and NCF 2006 towards gender equality and empowerment of girls. b) Explanation on the role of Mahila Samakhya.</div>
+      <span class="q-marks">6+4</span><span class="q-arrow">▾</span>
+    </div>
+    <div class="q-answer"><div class="ans">
+      <h4>a) NPE 1986, POA 1992, NCF 2005 — See 2016 Q.3(b) above</h4>
+      <h4>b) Mahila Samakhya</h4>
+      <p>Mahila Samakhya 1989 — Social and educational organization launched in 1989 as one of the programme agencies of NPE 1986. MS is working as an extension means of women education and gender issues by getting financial and technical support from central and state governments; enhances self-esteem and self-confidence among women; builds a positive image of women by recognizing their contribution to family, society and country; creates an environment where women can seek knowledge, information and empower themselves to play a positive role in their development and societal development; actively assists and monitors school education activities level in gender perspective; provides necessary support to education, health and empowerment of adolescent girls and women; motivates large participation of women and girls in formal and non-formal education programmes.</p>
+    </div></div>
+  </div>
+
+  <div class="section-label"><div class="line"></div><span>Part B — Short Answers (8×5=40)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c17_6"><div class="q-header" onclick="toggleCard('c17_6')"><span class="q-num b">Q.6</span><div class="q-text">Role of society in handling gender roles.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.6 — identical answer applies.</p></div></div></div>
+
+  <div class="q-card" id="c17_7"><div class="q-header" onclick="toggleCard('c17_7')"><span class="q-num b">Q.7</span><div class="q-text">Place of transgenders in our society. Strategies for their empowerment.</div><span class="q-marks">1+4</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.7 for full answer on transgender place and empowerment strategies.</p></div></div></div>
+
+  <div class="q-card" id="c17_8"><div class="q-header" onclick="toggleCard('c17_8')"><span class="q-num b">Q.8</span><div class="q-text">How does gender equity differ from gender equality? As a teacher, measures to eliminate gender inequality.</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.8 for full answer — gender equity vs equality + teacher measures.</p></div></div></div>
+
+  <div class="q-card" id="c17_9"><div class="q-header" onclick="toggleCard('c17_9')"><span class="q-num b">Q.9</span><div class="q-text">Role of media on increasing gender discrimination. What should be the role of media in eliminating it?</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.9 for the role of media in discrimination. To eliminate: media should give equal weightage to all genders; remuneration should be based on talent not gender; address gender-sensitive social issues; avoid exaggeration of value systems that lead to discrimination; focus on analysis-oriented, open-ended issues; give more attention to gender-sensitive issues that lead to social sensitivity and social health.</p></div></div></div>
+
+  <div class="q-card" id="c17_10"><div class="q-header" onclick="toggleCard('c17_10')"><span class="q-num b">Q.10</span><div class="q-text">Gender discrimination based on teachers' attitude in a hidden curriculum.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>Hidden curriculum refers to unwritten, unspoken lessons, values and perspectives transmitted through the school culture. Teacher's attitudes in hidden curriculum: about the abilities of boys and girls (boys better at maths, girls at arts); to do justice by favouring his/her own gender; of getting satisfaction by favouring opposite gender; that their own gender is inferior; due to religious and spiritual beliefs; who are against social change. These attitudes subtly reinforce gender discrimination without explicit teaching.</p></div></div></div>
+
+  <div class="q-card" id="c17_11"><div class="q-header" onclick="toggleCard('c17_11')"><span class="q-num b">Q.11</span><div class="q-text">Importance of women empowerment. Indicators of its measurement.</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.11 — identical content applies.</p></div></div></div>
+
+  <div class="q-card" id="c17_14"><div class="q-header" onclick="toggleCard('c17_14')"><span class="q-num b">Q.14</span><div class="q-text">Status of women in political participation. Initiatives to enhance women participation in politics.</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.14 — status of women in politics + initiatives to enhance participation.</p></div></div></div>
+
+  <div class="q-card" id="c17_16"><div class="q-header" onclick="toggleCard('c17_16')"><span class="q-num b">Q.16</span><div class="q-text">List the constitutional provisions to promote gender equality.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.16 — Articles 14, 15(1), 15(3), 16, 21, 39(A), 39(d), 42, 47, 51(A), 73rd/74th Amendments.</p></div></div></div>
+
+  <div class="q-card" id="c17_17"><div class="q-header" onclick="toggleCard('c17_17')"><span class="q-num b">Q.17</span><div class="q-text">Role of teacher in promoting gender equality and women empowerment through scholastic and co-scholastic programmes.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.17 — ten roles of teacher listed from official answer key.</p></div></div></div>
+</div><!-- end 2017 -->
+
+<!-- 2018 TAB -->
+<div class="year-panel" id="tab-t2018">
+  <div class="paper-meta"><span class="meta-badge">SS-005</span><div class="meta-item">📅 <strong>September/October 2018</strong></div><div class="meta-item">📊 <strong>70 Marks</strong></div></div>
+  <div class="expand-bar"><button class="expand-btn" onclick="expandAll('tab-t2018',this)">Expand All ▾</button></div>
+  <div class="section-label"><div class="line"></div><span>Part A — Long Answers (3×10=30)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c18_1"><div class="q-header" onclick="toggleCard('c18_1')"><span class="q-num">Q.1</span><div class="q-text">a) Explain briefly the concept of sex and gender. b) What is gender discrimination? c) Explain gender discrimination in different spheres of Indian women's life.</div><span class="q-marks">3+2+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Sex and Gender</h4>
+    <p><strong>Sex</strong> refers to the biological and physiological characteristics that define men and women — chromosomes, hormonal profiles, internal and external sex organs. It is determined at birth and is binary (male/female).</p>
+    <p><strong>Gender</strong> refers to the socially constructed roles, behaviours, activities and attributes that a given society considers appropriate for men and women. Gender is learned and can vary across cultures and over time.</p>
+    <h4>b) Gender Discrimination</h4>
+    <p>Gender discrimination is the unequal or unfavourable treatment of individuals based on their gender. It involves treating people differently — usually women — in a way that is unjust or prejudicial, based on stereotyped gender roles rather than individual merit.</p>
+    <h4>c) Spheres of Gender Discrimination in Indian Women's Life</h4>
+    <ul>
+      <li><strong>Education:</strong> Lower enrolment, early dropout, gender-biased curriculum, less encouragement for girls in STEM</li>
+      <li><strong>Employment:</strong> Wage gap, glass ceiling, sexual harassment at workplace, fewer leadership roles</li>
+      <li><strong>Health:</strong> Sex-selective abortion, female foeticide, neglect of girl child's health</li>
+      <li><strong>Political:</strong> Low representation, barriers to political participation</li>
+      <li><strong>Family:</strong> Dowry, domestic violence, unequal household responsibilities, restriction of movement</li>
+      <li><strong>Religion:</strong> No entry to certain religious places; restrictions on religious participation</li>
+    </ul>
+  </div></div></div>
+
+  <div class="q-card" id="c18_2"><div class="q-header" onclick="toggleCard('c18_2')"><span class="q-num">Q.2</span><div class="q-text">a) What do you mean by transgender? b) Explain the concept of transgender. c) Explain the strategies for empowerment of transgender.</div><span class="q-marks">2+3+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a & b) Transgender — Meaning and Concept</h4>
+    <p>Transgenders are individuals who do not conform to the gender role expected of their biological sex. Transgender people are individuals with the biological characteristics of one sex, who identify themselves as the opposite gender and some types of surgical alterations or hormonal treatments that change their physical appearance. They express clothes, facial and body expression, language, voice and behaviour as the opposite sex. They are getting bullied, raped, beaten up, murdered and are committing suicide. The numbers are staggering — these are the reality of what it is like to be trans today.</p>
+    <h4>c) Strategies for Empowering Transgenders</h4>
+    <p>See 2016 Q.7 — Rehabilitation centres; community learning centres; platforms for grievances; need-based research; recognized as equal individuals; recognized as third gender; issues treated as human rights issues; provision of ID card, passport, employment, contesting in elections; right to life, liberty, equality, dignity and freedom of thought and expression.</p>
+  </div></div></div>
+
+  <div class="q-card" id="c18_3"><div class="q-header" onclick="toggleCard('c18_3')"><span class="q-num">Q.3</span><div class="q-text">Explain the contributions of Savithribai Pule and Rajaram Mohan Roy towards empowerment of girls and women.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>Savithribai Phule (1831–1897)</h4>
+    <ul>
+      <li>First woman teacher in India; taught girls despite severe social opposition</li>
+      <li>Worked tirelessly for girl child education along with husband Jyothiba Phule</li>
+      <li>Wrote poetry encouraging women to educate themselves</li>
+      <li>Established shelters for widows and socially ostracised women</li>
+      <li>Worked for abolition of child marriage and fought for Dalit women's rights</li>
+    </ul>
+    <h4>Rajaram Mohan Roy (1772–1833)</h4>
+    <ul>
+      <li>Campaigned vigorously against the practice of Sati (widow immolation)</li>
+      <li>Worked for the abolition of Sati — succeeded with Bengal Sati Regulation Act 1829</li>
+      <li>Campaigned for widow remarriage</li>
+      <li>Opposed child marriage and polygamy</li>
+      <li>Promoted women's education and rights</li>
+      <li>Founded Brahmo Samaj which worked for social reform and women's equality</li>
+      <li>Advocated for women's property rights and right to inheritance</li>
+    </ul>
+  </div></div></div>
+
+  <div class="q-card" id="c18_4"><div class="q-header" onclick="toggleCard('c18_4')"><span class="q-num">Q.4</span><div class="q-text">a) What is women empowerment? b) Explain briefly the need of women empowerment. c) Explain the measures undertaken by Govt. of India towards women empowerment.</div><span class="q-marks">2+3+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Women Empowerment</h4>
+    <p>The process of enabling women to have power and control over their own lives — social, political, economic and educational. It means giving women equal rights, opportunities and freedom to make their own choices.</p>
+    <h4>b) Need for Women Empowerment</h4>
+    <ul>
+      <li>To bring women to mainstream in par with men who are deprived of human rights for a very long time</li>
+      <li>To enhance national development by including the neglected large population of talented, capable and resourceful women</li>
+      <li>To bring back the same good old status and positions women enjoyed during Vedic period</li>
+      <li>To put a full stop for all the sorrows suffered by women</li>
+    </ul>
+    <h4>c) Government of India Measures</h4>
+    <ul>
+      <li><strong>Legal:</strong> Dowry Prohibition Act; Domestic Violence Act; Equal Remuneration Act; Sexual Harassment at Workplace Act 2013</li>
+      <li><strong>Education:</strong> Mahila Samakhya; Kasturba Gandhi Balika Vidyalaya; Beti Bachao Beti Padhao; scholarships for girls</li>
+      <li><strong>Employment:</strong> Maternity Benefit Act; MGNREGS ensuring women's employment; equal pay legislation</li>
+      <li><strong>Health:</strong> Janani Suraksha Yojana; free healthcare for women; Pradhan Mantri Matru Vandana Yojana</li>
+      <li><strong>Political:</strong> 33% reservation in Panchayat; 73rd and 74th Amendment</li>
+      <li><strong>Economic:</strong> Women Self-Help Groups; Mudra loans for women entrepreneurs</li>
+    </ul>
+  </div></div></div>
+
+  <div class="q-card" id="c18_5"><div class="q-header" onclick="toggleCard('c18_5')"><span class="q-num">Q.5</span><div class="q-text">a) What is sexual harassment? b) Explain the constitutional measures to address sexual harassment. c) Explain briefly the school in tackling sexual harassment.</div><span class="q-marks">2+3+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Sexual Harassment</h4>
+    <p>Bullying or coercion of sexual nature; unwelcome or inappropriate promise of rewards for sexual favours. Sexual harassment is illegal; unethical; unlawful to harass a person because of their sex. Includes unwelcome sexual advances, requests for sexual favours and other verbal or physical harassment of a sexual nature.</p>
+    <h4>b) Constitutional/Legal Measures</h4>
+    <ul>
+      <li>Article 14 — Right to equality; Article 15 — no discrimination on basis of sex</li>
+      <li>Article 21 — Right to life with dignity</li>
+      <li>Sexual Harassment of Women at Workplace (Prevention, Prohibition and Redressal) Act 2013</li>
+      <li>IPC Sections 354, 376, 509 deal with molestation, rape and sexual harassment</li>
+      <li>POCSO Act 2012 — Protection of Children from Sexual Offences</li>
+      <li>Vishaka Guidelines 1997 — landmark Supreme Court guidelines on workplace sexual harassment</li>
+    </ul>
+    <h4>c) School's Role in Tackling Sexual Harassment</h4>
+    <ul>
+      <li>Establish a redressal cell / Internal Complaints Committee</li>
+      <li>Gender sensitivity training for all staff and students</li>
+      <li>Clear policies against harassment with defined consequences</li>
+      <li>Safe and secure physical environment — proper lighting, CCTV</li>
+      <li>Guidance and counselling support for victims</li>
+      <li>Awareness programs about what constitutes harassment</li>
+      <li>Teach assertive behaviour and self-protection skills</li>
+    </ul>
+  </div></div></div>
+
+  <div class="section-label"><div class="line"></div><span>Part B — Short Answers (8×5=40)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c18_6"><div class="q-header" onclick="toggleCard('c18_6')"><span class="q-num b">Q.6</span><div class="q-text">Explain the constitutional provisions for gender equality in India.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.16 — all constitutional articles (14, 15, 16, 21, 39, 42, 51A, 73rd/74th Amendment).</p></div></div></div>
+
+  <div class="q-card" id="c18_7"><div class="q-header" onclick="toggleCard('c18_7')"><span class="q-num b">Q.7</span><div class="q-text">Explain the role of school in working with society towards gender equality and equity to mainstreaming.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2017 Q.4(b) — role of school in working with society for gender mainstreaming: organizing relevant programmes, involving society, increasing women's awareness, organising government/NGO/private sector activities, conducting evaluation and remediation programmes, involving celebrities.</p></div></div></div>
+
+  <div class="q-card" id="c18_11"><div class="q-header" onclick="toggleCard('c18_11')"><span class="q-num b">Q.11</span><div class="q-text">What is the importance of women empowerment? Explain the indicators of measuring it.</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.11 — importance and all indicators of women empowerment.</p></div></div></div>
+
+  <div class="q-card" id="c18_13"><div class="q-header" onclick="toggleCard('c18_13')"><span class="q-num b">Q.13</span><div class="q-text">Elucidate the contributions of Jyothibha Pule towards women's education.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>Jyothiba Phule (1827–1890): Founded India's first school for girls in 1848 in Pune along with Savithribai; fought against caste and gender discrimination; established Satyashodhak Samaj to promote equal rights; influenced many women to crusade against injustice and inequality; strongly opposed child marriage; fought against dowry system; encouraged simple marriage rituals; opened women's entry into national politics; made women protest against injustice and question norms of male-dominated politics; fought for Dalit women's rights.</p></div></div></div>
+
+  <div class="q-card" id="c18_15"><div class="q-header" onclick="toggleCard('c18_15')"><span class="q-num b">Q.15</span><div class="q-text">Explain the role of Mahila Samakhya in tackling gender issues in school education and society.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2017 Q.5(b) — Mahila Samakhya full explanation.</p></div></div></div>
+
+  <div class="q-card" id="c18_17"><div class="q-header" onclick="toggleCard('c18_17')"><span class="q-num b">Q.17</span><div class="q-text">Explain the role of teacher as an agent of promoting gender equality in scholastic and co-scholastic activities.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.17 — all ten roles of teacher from the official answer key.</p></div></div></div>
+</div><!-- end 2018 -->
+
+<!-- APR 2019 TAB -->
+<div class="year-panel" id="tab-t2019a">
+  <div class="paper-meta"><span class="meta-badge">81504</span><div class="meta-item">📅 <strong>April/May 2019</strong></div><div class="meta-item">📊 <strong>70 Marks</strong></div></div>
+  <div class="expand-bar"><button class="expand-btn" onclick="expandAll('tab-t2019a',this)">Expand All ▾</button></div>
+  <div class="section-label"><div class="line"></div><span>Part A — Long Answers (3×10=30)</span><div class="line"></div></div>
+
+  <div class="q-card" id="ca19_1"><div class="q-header" onclick="toggleCard('ca19_1')"><span class="q-num">Q.1</span><div class="q-text">a) Explain the meaning and characteristics of gender stereotypes in the context of patriarchy. b) Explain the impact of family, religion and society in the development of gender stereotype role.</div><span class="q-marks">4+6</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.1 — same topic. Additional note on <strong>Religion's impact:</strong> Religious texts often prescribe different roles for men and women; religious institutions may restrict women from leadership positions; religious practices may reinforce gender hierarchy; festivals and rituals often assign different roles to men and women based on gender.</p></div></div></div>
+
+  <div class="q-card" id="ca19_2"><div class="q-header" onclick="toggleCard('ca19_2')"><span class="q-num">Q.2</span><div class="q-text">a) "Women of today owes a lot to Rajaram Mohan Roy and Jyothiba Phule". Substantiate. b) Recommendations of NPE 1986 and NCF 2005 towards gender equality and empowerment of girls.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Contributions of Rajaram Mohan Roy</h4>
+    <p>See 2018 Q.3 — Abolition of Sati; widow remarriage; women's education; Brahmo Samaj.</p>
+    <h4>Contributions of Jyothiba Phule</h4>
+    <p>See 2016 Q.3(a) — first girl school; Satyashodhak Samaj; fought caste/gender discrimination; opposed child marriage; opened women's entry to politics.</p>
+    <h4>b) NPE 1986 and NCF 2005</h4>
+    <p>See 2016 Q.3(b) for detailed recommendations of both NPE 1986 and NCF 2005 towards gender equality.</p>
+  </div></div></div>
+
+  <div class="q-card" id="ca19_3"><div class="q-header" onclick="toggleCard('ca19_3')"><span class="q-num">Q.3</span><div class="q-text">a) Explain the role of "Mahila Samakhya" in tackling gender issues in School Education and society. b) Explain the strategies for empowerment of transgender.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Mahila Samakhya</h4>
+    <p>See 2017 Q.5(b) — full explanation of Mahila Samakhya 1989.</p>
+    <h4>b) Strategies for Empowerment of Transgenders</h4>
+    <p>See 2016 Q.7 — full strategies for transgender empowerment.</p>
+  </div></div></div>
+
+  <div class="q-card" id="ca19_4"><div class="q-header" onclick="toggleCard('ca19_4')"><span class="q-num">Q.4</span><div class="q-text">a) What is the status of women in political participation? What initiatives to enhance women participation in politics? b) Mention the provisions made in Indian Constitution to achieve gender equality and equity.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Women in Political Participation</h4>
+    <p>See 2016 Q.14 — status + initiatives for women's political participation.</p>
+    <h4>b) Constitutional Provisions</h4>
+    <p>See 2016 Q.16 — all constitutional articles.</p>
+  </div></div></div>
+
+  <div class="q-card" id="ca19_5"><div class="q-header" onclick="toggleCard('ca19_5')"><span class="q-num">Q.5</span><div class="q-text">a) Explain the concept of gender fair school environment. b) Discuss the role of teacher in promoting gender equality and empowerment of girls.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.5 — gender fair school environment concept + role of teacher (from official answer key).</p></div></div></div>
+
+  <div class="section-label"><div class="line"></div><span>Part B — Short Answers (8×5=40)</span><div class="line"></div></div>
+
+  <div class="q-card" id="ca19_8"><div class="q-header" onclick="toggleCard('ca19_8')"><span class="q-num b">Q.8</span><div class="q-text">Mention the causes for gender discriminations and suggest the measures to overcome them.</div><span class="q-marks">2½+2½</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <p><strong>Causes:</strong> Patriarchal mindset and society; economic poverty; religious beliefs and customs; lack of education among girls' parents; safety concerns; gender-biased curriculum and teacher attitudes; preference for male child.</p>
+    <p><strong>Measures:</strong> Free and compulsory education for girls; awareness campaigns; strict enforcement of anti-discrimination laws; gender-sensitive curriculum; training teachers for gender equality; incentives for girl child education; safe school environment.</p>
+  </div></div></div>
+
+  <div class="q-card" id="ca19_9"><div class="q-header" onclick="toggleCard('ca19_9')"><span class="q-num b">Q.9</span><div class="q-text">Explain the contributions of Raghunath Karve and Mahatma Gandhi towards women's education.</div><span class="q-marks">2½+2½</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2017 Q.3(a) — contributions of Mahatma Gandhi and Raghunath Karve.</p></div></div></div>
+
+  <div class="q-card" id="ca19_10"><div class="q-header" onclick="toggleCard('ca19_10')"><span class="q-num b">Q.10</span><div class="q-text">Explain the nature and importance of gender studies.</div><span class="q-marks">2½+2½</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.12 — nature and importance of gender studies.</p></div></div></div>
+
+  <div class="q-card" id="ca19_15"><div class="q-header" onclick="toggleCard('ca19_15')"><span class="q-num b">Q.15</span><div class="q-text">How does gender equity differ from gender equality? As a teacher, measures to eliminate gender inequality.</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.8 — gender equity vs equality differences + teacher measures.</p></div></div></div>
+
+  <div class="q-card" id="ca19_16"><div class="q-header" onclick="toggleCard('ca19_16')"><span class="q-num b">Q.16</span><div class="q-text">How will the empowerment of women influence the stabilization of population growth?</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <p>Educated and empowered women tend to marry later; have fewer children by choice; have better knowledge of family planning methods; have better health outcomes for themselves and their children. When women participate in decision-making about family size, fertility rates decrease. Empowered women invest more in each child's education and health. Thus gender equality and empowerment of women are called the "better contraceptives to stabilize population growth."</p>
+  </div></div></div>
+</div><!-- end apr2019 -->
+
+<!-- SEP 2019 TAB -->
+<div class="year-panel" id="tab-t2019s">
+  <div class="paper-meta"><span class="meta-badge">GN-006</span><div class="meta-item">📅 <strong>September 2019</strong></div><div class="meta-item">📊 <strong>70 Marks</strong></div></div>
+  <div class="expand-bar"><button class="expand-btn" onclick="expandAll('tab-t2019s',this)">Expand All ▾</button></div>
+  <div class="section-label"><div class="line"></div><span>Part A — Long Answers (3×10=30)</span><div class="line"></div></div>
+
+  <div class="q-card" id="cs19_1"><div class="q-header" onclick="toggleCard('cs19_1')"><span class="q-num">Q.1</span><div class="q-text">a) How is sex different from gender? b) Differentiate between gender bias and gender discrimination. c) Briefly explain the concepts of patriarchy, masculinity and feminism.</div><span class="q-marks">2+3+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Sex vs Gender</h4>
+    <p>See 2018 Q.1(a) — sex is biological; gender is socially constructed.</p>
+    <h4>b) Gender Bias vs Gender Discrimination</h4>
+    <p>See 2017 Q.2(a) — difference table applies.</p>
+    <h4>c) Patriarchy, Masculinity and Feminism</h4>
+    <p><strong>Patriarchy:</strong> A social system in which men hold primary power and predominate in roles of political leadership, moral authority, social privilege and control of property. Men are dominant over women and children in family and society.</p>
+    <p><strong>Masculinity:</strong> Qualities or attributes regarded as characteristic of men. Socially constructed attributes including strength, dominance, independence, emotional stoicism. Hegemonic masculinity is the dominant form that legitimizes men's dominant position in society.</p>
+    <p><strong>Feminism:</strong> A range of social, political and economic movements and ideologies that share a common goal — to define, establish and achieve political, economic, personal and social equality for women. Challenges patriarchy and advocates for women's rights and equal opportunities.</p>
+  </div></div></div>
+
+  <div class="q-card" id="cs19_2"><div class="q-header" onclick="toggleCard('cs19_2')"><span class="q-num">Q.2</span><div class="q-text">a) What is sexual harassment? b) Briefly explain the constitutional measures to control sexual harassment. c) Explain briefly the role of school in tackling sexual harassment.</div><span class="q-marks">2+4+4</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2018 Q.5 for complete answer on sexual harassment — meaning, constitutional measures, and school's role.</p></div></div></div>
+
+  <div class="q-card" id="cs19_3"><div class="q-header" onclick="toggleCard('cs19_3')"><span class="q-num">Q.3</span><div class="q-text">a) Explain the concept of transgender. b) Listout the legal provisions available for transgender. c) What are the strategies required for empowering transgender?</div><span class="q-marks">2+4+4</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.7 and 2018 Q.2 for complete answers on transgender concept, legal provisions and empowerment strategies.</p></div></div></div>
+
+  <div class="q-card" id="cs19_4"><div class="q-header" onclick="toggleCard('cs19_4')"><span class="q-num">Q.4</span><div class="q-text">a) Explain the concept of gender inequality. b) Explain any four factors responsible for gender inequality. c) State the difference between gender inequality and gender equality.</div><span class="q-marks">2+6+2</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Gender Inequality</h4>
+    <p>See 2017 Q.1(a) — definition from answer key.</p>
+    <h4>b) Four Factors Responsible</h4>
+    <p>Patriarchal society and patrilineal customs; negative attitude of male gender towards female gender; superiority complex and ego satisfaction embedded with selfishness; religious beliefs, bias, prejudice and superstitions; preference for son; dowry system.</p>
+    <h4>c) Gender Inequality vs Gender Equality</h4>
+    <p><strong>Gender inequality</strong> refers to unequal treatment or perceptions of individuals based on gender — it is the problem. <strong>Gender equality</strong> means equal rights, responsibilities and opportunities regardless of gender — it is the goal. Equality does not mean women and men must be the same, but that their rights and opportunities are not determined by whether they are born male or female.</p>
+  </div></div></div>
+
+  <div class="q-card" id="cs19_5"><div class="q-header" onclick="toggleCard('cs19_5')"><span class="q-num">Q.5</span><div class="q-text">a) Briefly explain the influence of education on gender equality. b) How can teachers promote gender equality through scholastic and co-scholastic programs.</div><span class="q-marks">4+3+3</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Influence of Education on Gender Equality</h4>
+    <p>See 2016 Q.15 — education system influences through: access, attendance, equal opportunities, discrimination-free environment, teaching methods, gender neutral language, safety measures, guidance, incentives.</p>
+    <h4>b) Teacher promoting gender equality</h4>
+    <p>See 2016 Q.17 — ten roles from the official answer key.</p>
+  </div></div></div>
+
+  <div class="section-label"><div class="line"></div><span>Part B — Short Answers (8×5=40)</span><div class="line"></div></div>
+
+  <div class="q-card" id="cs19_6"><div class="q-header" onclick="toggleCard('cs19_6')"><span class="q-num b">Q.6</span><div class="q-text">Explain the contributions of Jyothiba Phule and Savithribai Phule in promotion of women education in India.</div><span class="q-marks">2½+2½</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.3(a) for full contributions of both Jyothiba Phule and Savithribai Phule.</p></div></div></div>
+
+  <div class="q-card" id="cs19_8"><div class="q-header" onclick="toggleCard('cs19_8')"><span class="q-num b">Q.8</span><div class="q-text">Explain the role of Mahila Samakhya in tackling the gender issues in society.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2017 Q.5(b) — full Mahila Samakhya explanation.</p></div></div></div>
+
+  <div class="q-card" id="cs19_9"><div class="q-header" onclick="toggleCard('cs19_9')"><span class="q-num b">Q.9</span><div class="q-text">Explain briefly the constitutional provisions for gender equality.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.16 — all constitutional articles.</p></div></div></div>
+
+  <div class="q-card" id="cs19_16"><div class="q-header" onclick="toggleCard('cs19_16')"><span class="q-num b">Q.16</span><div class="q-text">Explain the nature and importance of gender studies.</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.12 — nature and importance of gender studies.</p></div></div></div>
+
+  <div class="q-card" id="cs19_17"><div class="q-header" onclick="toggleCard('cs19_17')"><span class="q-num b">Q.17</span><div class="q-text">Mention the recommendations of NPE 1986, POA 1992 and NCF 2005 towards gender equality and empowerment of girls.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.3(b) — NPE 1986, POA 1992 and NCF 2005 recommendations in full.</p></div></div></div>
+</div><!-- end sep 2019 -->
+
+<!-- 2021 TAB -->
+<div class="year-panel" id="tab-t2021">
+  <div class="paper-meta"><span class="meta-badge">81504</span><div class="meta-item">📅 <strong>September 2021</strong></div><div class="meta-item">📊 <strong>70 Marks</strong></div></div>
+  <div class="expand-bar"><button class="expand-btn" onclick="expandAll('tab-t2021',this)">Expand All ▾</button></div>
+  <div class="section-label"><div class="line"></div><span>Part A — Long Answers (3×10=30)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c21_1"><div class="q-header" onclick="toggleCard('c21_1')"><span class="q-num">Q.1</span><div class="q-text">What is gender stereotype? What are its characteristics? Explain the impact of family, society and culture in the development of gender stereotype.</div><span class="q-marks">2+2+6</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.1 for complete answer on gender stereotypes, characteristics and impact of family, society and culture.</p></div></div></div>
+
+  <div class="q-card" id="c21_2"><div class="q-header" onclick="toggleCard('c21_2')"><span class="q-num">Q.2</span><div class="q-text">a) Mention the gender discrimination prevailing in different aspects of Education. b) What are the causes for gender discrimination? What measures do you suggest to remove these gender discriminations?</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.2 — gender discrimination in education (enrolment, curriculum, teacher attitude, facilities, hidden curriculum) + causes and measures.</p></div></div></div>
+
+  <div class="q-card" id="c21_3"><div class="q-header" onclick="toggleCard('c21_3')"><span class="q-num">Q.3</span><div class="q-text">a) What are the contributions of Savithri Ba Pule and Jyothiba Pule in promoting Women Education? b) Mention the constitutional provisions and strategies to make the empowerment of transgender.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Contributions</h4>
+    <p>See 2016 Q.3(a) for Jyothiba and Savithribai Phule contributions.</p>
+    <h4>b) Constitutional Provisions for Transgender Empowerment</h4>
+    <ul>
+      <li>Transgender Persons (Protection of Rights) Act 2019 — legal recognition</li>
+      <li>Right to self-perceived gender identity</li>
+      <li>No discrimination in education, employment, healthcare</li>
+      <li>Right to reside and be included in household</li>
+      <li>Right to vote as their preferred gender</li>
+      <li>National Council for Transgender Persons established</li>
+    </ul>
+    <p>Strategies: See 2016 Q.7 — rehabilitation centres, community learning, legal rights, recognition as third gender.</p>
+  </div></div></div>
+
+  <div class="q-card" id="c21_4"><div class="q-header" onclick="toggleCard('c21_4')"><span class="q-num">Q.4</span><div class="q-text">a) What is women empowerment? What are the indicators of women empowerment? b) Explain briefly the initiatives implemented by the government to promote Gender equality and women empowerment.</div><span class="q-marks">2+3+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.4 — meaning, indicators of women empowerment and government initiatives.</p></div></div></div>
+
+  <div class="q-card" id="c21_5"><div class="q-header" onclick="toggleCard('c21_5')"><span class="q-num">Q.5</span><div class="q-text">a) Explain the concept of 'gender fair school environment'. b) Discuss the role of teachers in promoting women empowerment and gender equality.</div><span class="q-marks">3+7</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.5 — gender fair school environment concept and teacher's role (from official answer key).</p></div></div></div>
+
+  <div class="section-label"><div class="line"></div><span>Part B — Short Answers (8×5=40)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c21_8"><div class="q-header" onclick="toggleCard('c21_8')"><span class="q-num b">Q.8</span><div class="q-text">Mention the recommendations of NCF-2005 for gender equality.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.3(b) — NCF 2005 recommendations: research on gender-education relationship; gender sensitive material banks; access for all girls; retention and quality; gender as critical marker; gender is peoples' issue not just women's; proactive approach to equality and empowerment of girls.</p></div></div></div>
+
+  <div class="q-card" id="c21_10"><div class="q-header" onclick="toggleCard('c21_10')"><span class="q-num b">Q.10</span><div class="q-text">Explain the nature and importance of gender studies.</div><span class="q-marks">2½+2½</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.12 — nature and importance of gender studies.</p></div></div></div>
+
+  <div class="q-card" id="c21_11"><div class="q-header" onclick="toggleCard('c21_11')"><span class="q-num b">Q.11</span><div class="q-text">Explain the role of 'Mahila Samakhya' in tackling issues in social education and society.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2017 Q.5(b) — full Mahila Samakhya explanation.</p></div></div></div>
+
+  <div class="q-card" id="c21_12"><div class="q-header" onclick="toggleCard('c21_12')"><span class="q-num b">Q.12</span><div class="q-text">Explain the role of society and school in the way of 'gender mainstreaming'.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2017 Q.4(b) — role of school and society for gender mainstreaming.</p></div></div></div>
+</div><!-- end 2021 -->
+
+<!-- 2022 TAB -->
+<div class="year-panel" id="tab-t2022">
+  <div class="paper-meta"><span class="meta-badge">81504</span><div class="meta-item">📅 <strong>July 2022</strong></div><div class="meta-item">📊 <strong>70 Marks</strong></div></div>
+  <div class="expand-bar"><button class="expand-btn" onclick="expandAll('tab-t2022',this)">Expand All ▾</button></div>
+  <div class="section-label"><div class="line"></div><span>Part A — Long Answers (3×10=30)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c22_1"><div class="q-header" onclick="toggleCard('c22_1')"><span class="q-num">Q.1</span><div class="q-text">a) Explain briefly the meaning and characteristics of gender stereotype roles in the context of patriarchy. b) Explain the influence of society and culture on gender stereotype roles.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.1 for complete answer — meaning, characteristics of stereotypes in patriarchal context + impact of society and culture.</p></div></div></div>
+
+  <div class="q-card" id="c22_2"><div class="q-header" onclick="toggleCard('c22_2')"><span class="q-num">Q.2</span><div class="q-text">a) What is gender inequality? b) What are the causes for gender inequality? c) What are the recommendations of NCF-2005 to achieve gender equality and equity?</div><span class="q-marks">2+4+4</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a & b) Gender Inequality — Meaning and Causes</h4>
+    <p>See 2017 Q.1(a&b) — meaning and 8 causes of gender inequality.</p>
+    <h4>c) NCF 2005 Recommendations</h4>
+    <p>See 2016 Q.3(b) — NCF 2005 section.</p>
+  </div></div></div>
+
+  <div class="q-card" id="c22_4"><div class="q-header" onclick="toggleCard('c22_4')"><span class="q-num">Q.4</span><div class="q-text">a) What is gender discrimination? Write the causes for gender discrimination. b) What are the measures do you suggest to eradicate gender discrimination?</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.2 — gender discrimination in education, causes and measures.</p></div></div></div>
+
+  <div class="q-card" id="c22_5"><div class="q-header" onclick="toggleCard('c22_5')"><span class="q-num">Q.5</span><div class="q-text">a) What is gender fair school environment? b) Explain the role of school and teacher in creating gender fair school environment.</div><span class="q-marks">3+7</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.5 — gender fair school environment concept and role of teacher from official answer key.</p></div></div></div>
+
+  <div class="section-label"><div class="line"></div><span>Part B — Short Answers (8×5=40)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c22_6"><div class="q-header" onclick="toggleCard('c22_6')"><span class="q-num b">Q.6</span><div class="q-text">What measures do you suggest towards redressal of sexual harassment?</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.13 — measures for redressal: redressal cell, gender sensitivity, legal awareness, suggestion box, help desk, counselling, CCTV, medical facilities, assertive behaviour training.</p></div></div></div>
+
+  <div class="q-card" id="c22_7"><div class="q-header" onclick="toggleCard('c22_7')"><span class="q-num b">Q.7</span><div class="q-text">Explain the role of "Mahila Samakya" in solving gender problems.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2017 Q.5(b) — full Mahila Samakhya explanation.</p></div></div></div>
+
+  <div class="q-card" id="c22_12"><div class="q-header" onclick="toggleCard('c22_12')"><span class="q-num b">Q.12</span><div class="q-text">Explain the role of teacher in promoting gender equality and women empowerment through scholastic and co-scholastic programmes.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.17 — ten roles of teacher from official answer key.</p></div></div></div>
+
+  <div class="q-card" id="c22_14"><div class="q-header" onclick="toggleCard('c22_14')"><span class="q-num b">Q.14</span><div class="q-text">Explain briefly the contributions of Savitribai Pule towards women education and empowerment.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.3(a) — Savithribai Phule contributions: first woman teacher, girl schools, poetry for women's education, shelters for widows, abolition of child marriage.</p></div></div></div>
+
+  <div class="q-card" id="c22_15"><div class="q-header" onclick="toggleCard('c22_15')"><span class="q-num b">Q.15</span><div class="q-text">Explain the nature and importance of gender studies.</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.12 — gender studies nature and importance.</p></div></div></div>
+
+  <div class="q-card" id="c22_17"><div class="q-header" onclick="toggleCard('c22_17')"><span class="q-num b">Q.17</span><div class="q-text">Explain the role of school in gender mainstreaming.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2017 Q.4(b) — role of school in working with society for gender mainstreaming.</p></div></div></div>
+</div><!-- end 2022 -->
+
+<!-- 2023 TAB -->
+<div class="year-panel" id="tab-t2023">
+  <div class="paper-meta"><span class="meta-badge">81504</span><div class="meta-item">📅 <strong>June 2023</strong></div><div class="meta-item">📊 <strong>70 Marks</strong></div></div>
+  <div class="expand-bar"><button class="expand-btn" onclick="expandAll('tab-t2023',this)">Expand All ▾</button></div>
+  <div class="section-label"><div class="line"></div><span>Part A — Long Answers (3×10=30)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c23_1"><div class="q-header" onclick="toggleCard('c23_1')"><span class="q-num">Q.1 (a+b+c)</span><div class="q-text">a) What is meant by sexual harassment? b) Differences between sexual harassment and sexual abuse? c) Explain briefly the role of school in tackling sexual harassment.</div><span class="q-marks">2+4+4</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2018 Q.5 and 2016 Q.13 — meaning, differences and school's role in tackling sexual harassment.</p></div></div></div>
+
+  <div class="q-card" id="c23_2"><div class="q-header" onclick="toggleCard('c23_2')"><span class="q-num">Q.2</span><div class="q-text">Discuss the role played by any two social reformers in uplifting women status in India.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <p>Choose any two from: Jyothiba Phule (see 2016 Q.3a), Savithribai Phule (see 2016 Q.3a), Rajaram Mohan Roy (see 2018 Q.3), Mahatma Gandhi (see 2017 Q.3a), or Raghunath Karve (see 2017 Q.3a). Each reformer's full contribution is detailed in the corresponding sections above.</p>
+  </div></div></div>
+
+  <div class="q-card" id="c23_3"><div class="q-header" onclick="toggleCard('c23_3')"><span class="q-num">Q.3</span><div class="q-text">Status of women in political participation? Initiatives to enhance women participation. Constitutional provisions for gender equality and equity.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.14 (status + initiatives) and 2016 Q.16 (constitutional provisions).</p></div></div></div>
+
+  <div class="q-card" id="c23_5"><div class="q-header" onclick="toggleCard('c23_5')"><span class="q-num">Q.5</span><div class="q-text">a) What is the difference between gender fair school environment and gender mainstreaming? b) Explain the role of school in working with society to promote gender mainstreaming.</div><span class="q-marks">4+6</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2017 Q.4 — difference between gender fair school environment and gender mainstreaming + role of school in society.</p></div></div></div>
+
+  <div class="section-label"><div class="line"></div><span>Part B — Short Answers (8×5=40)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c23_7"><div class="q-header" onclick="toggleCard('c23_7')"><span class="q-num b">Q.7</span><div class="q-text">What is the place of transgender in our society? What are the strategies required for empowering them?</div><span class="q-marks">1+4</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.7 — transgender place in society and empowerment strategies.</p></div></div></div>
+
+  <div class="q-card" id="c23_9"><div class="q-header" onclick="toggleCard('c23_9')"><span class="q-num b">Q.9</span><div class="q-text">Explain the nature and importance of gender studies.</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.12 — nature and importance of gender studies.</p></div></div></div>
+
+  <div class="q-card" id="c23_10"><div class="q-header" onclick="toggleCard('c23_10')"><span class="q-num b">Q.10</span><div class="q-text">Mention the recommendation given by National Policy on Education 1986, POA 1992 and National Curriculum Framework 2005 towards gender equality and empowerment of girls.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.3(b) — NPE 1986, POA 1992 and NCF 2005 in full.</p></div></div></div>
+
+  <div class="q-card" id="c23_11"><div class="q-header" onclick="toggleCard('c23_11')"><span class="q-num b">Q.11</span><div class="q-text">Explain the role of Mahila Samakhya in tackling the gender issues in society.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2017 Q.5(b) — full Mahila Samakhya explanation.</p></div></div></div>
+
+  <div class="q-card" id="c23_12"><div class="q-header" onclick="toggleCard('c23_12')"><span class="q-num b">Q.12</span><div class="q-text">Explain the role of teacher as an agent of promoting gender equality in scholastic and co-scholastic activities.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.17 — ten roles of teacher from official answer key.</p></div></div></div>
+</div><!-- end 2023 -->
+
+<!-- 2024 TAB -->
+<div class="year-panel" id="tab-t2024">
+  <div class="paper-meta"><span class="meta-badge">81504</span><div class="meta-item">📅 <strong>June/July 2024</strong></div><div class="meta-item">📊 <strong>70 Marks</strong></div><div class="meta-item">🆕 Latest Paper</div></div>
+  <div class="expand-bar"><button class="expand-btn" onclick="expandAll('tab-t2024',this)">Expand All ▾</button></div>
+  <div class="section-label"><div class="line"></div><span>Part A — Long Answers (3×10=30)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c24_1"><div class="q-header" onclick="toggleCard('c24_1')"><span class="q-num">Q.1</span><div class="q-text">a) What is gender stereotype? What are the characteristics of gender stereotyping? b) Write the differences between gender equality and equity.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>a) Gender Stereotype</h4>
+    <p>See 2016 Q.1(a) — meaning and characteristics of gender stereotypes.</p>
+    <h4>b) Gender Equality vs Gender Equity</h4>
+    <p>See 2016 Q.8 — differences between gender equality and gender equity.</p>
+  </div></div></div>
+
+  <div class="q-card" id="c24_2"><div class="q-header" onclick="toggleCard('c24_2')"><span class="q-num">Q.2</span><div class="q-text">Write the contributions of Raja Ram Mohan Roy and Gandhiji towards gender equality.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans">
+    <h4>Rajaram Mohan Roy</h4>
+    <p>See 2018 Q.3 — abolition of Sati, widow remarriage, women's education, Brahmo Samaj, women's property rights.</p>
+    <h4>Mahatma Gandhi</h4>
+    <p>See 2017 Q.3(a) — influenced women's crusade against injustice, opposed child marriage and dowry, opened women's entry to politics, made women protest against injustice.</p>
+  </div></div></div>
+
+  <div class="q-card" id="c24_3"><div class="q-header" onclick="toggleCard('c24_3')"><span class="q-num">Q.3</span><div class="q-text">a) What is women empowerment? What is the need for women empowerment? b) Briefly explain the indicators of women empowerment.</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.4(a) — meaning, need and indicators of women empowerment. Also see 2018 Q.4(b) — need for women empowerment.</p></div></div></div>
+
+  <div class="q-card" id="c24_4"><div class="q-header" onclick="toggleCard('c24_4')"><span class="q-num">Q.4</span><div class="q-text">a) What is gender discrimination? Write the causes for gender discrimination. b) What are the measures do you suggest to eradicate gender discrimination?</div><span class="q-marks">5+5</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.2 — gender discrimination in education, causes and measures.</p></div></div></div>
+
+  <div class="q-card" id="c24_5"><div class="q-header" onclick="toggleCard('c24_5')"><span class="q-num">Q.5</span><div class="q-text">a) What is gender fair school environment? b) Explain the role of school and teacher in creating gender fair school environment.</div><span class="q-marks">3+7</span><span class="q-arrow">▾</span></div>
+  <div class="q-answer"><div class="ans"><p>See 2016 Q.5 — gender fair school concept and role of teacher from official answer key.</p></div></div></div>
+
+  <div class="section-label"><div class="line"></div><span>Part B — Short Answers (8×5=40)</span><div class="line"></div></div>
+
+  <div class="q-card" id="c24_6"><div class="q-header" onclick="toggleCard('c24_6')"><span class="q-num b">Q.6</span><div class="q-text">What is sexual harassment? Explain the role of school in redressal of sexual harassment.</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2018 Q.5 — meaning of sexual harassment and school's role in tackling it.</p></div></div></div>
+
+  <div class="q-card" id="c24_10"><div class="q-header" onclick="toggleCard('c24_10')"><span class="q-num b">Q.10</span><div class="q-text">Explain the role of school in gender mainstreaming.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2017 Q.4(b) — role of school in working with society for gender mainstreaming.</p></div></div></div>
+
+  <div class="q-card" id="c24_11"><div class="q-header" onclick="toggleCard('c24_11')"><span class="q-num b">Q.11</span><div class="q-text">"Women empowerment helps in stabilizing population growth" — Justify.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See Apr 2019 Q.16 — empowered women marry later, have fewer children by choice, better knowledge of family planning, better health outcomes; fertility rates decrease when women participate in family planning decisions; thus gender equality and women empowerment are the "better contraceptives to stabilize population growth."</p></div></div></div>
+
+  <div class="q-card" id="c24_12"><div class="q-header" onclick="toggleCard('c24_12')"><span class="q-num b">Q.12</span><div class="q-text">What are the initiation can be taken to enhance the political participation of women?</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.14(b) — all initiatives: political party agenda for women, full support and resources, democratic party procedures, international community support, training for political parties and journalists about women's participation and gender sensitivity.</p></div></div></div>
+
+  <div class="q-card" id="c24_13"><div class="q-header" onclick="toggleCard('c24_13')"><span class="q-num b">Q.13</span><div class="q-text">Who are transgenders? What are the strategies required to empower them?</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.7 — transgender meaning and empowerment strategies.</p></div></div></div>
+
+  <div class="q-card" id="c24_15"><div class="q-header" onclick="toggleCard('c24_15')"><span class="q-num b">Q.15</span><div class="q-text">What is gender studies? Write the importance of gender studies.</div><span class="q-marks">2+3</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.12 — nature and importance of gender studies.</p></div></div></div>
+
+  <div class="q-card" id="c24_16"><div class="q-header" onclick="toggleCard('c24_16')"><span class="q-num b">Q.16</span><div class="q-text">Write the recommendations of NEP 1986 towards empowerment of Girls.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2016 Q.3(b) — NPE 1986 section: women instructors' orientation; emphasis on women's participation in vocational/technical education; special programmes for self-image and general awareness of women; active programmes to tackle women's problems.</p></div></div></div>
+
+  <div class="q-card" id="c24_17"><div class="q-header" onclick="toggleCard('c24_17')"><span class="q-num b">Q.17</span><div class="q-text">Explain the role of Mahila Samakya in taking gender issues in India.</div><span class="q-marks">5</span><span class="q-arrow">▾</span></div><div class="q-answer"><div class="ans"><p>See 2017 Q.5(b) — full Mahila Samakhya explanation.</p></div></div></div>
+</div><!-- end 2024 -->
+
+</div><!-- end .content -->
+
+<footer style="text-align:center;padding:32px 16px;border-top:1px solid #2e2c27;color:#6b6861;font-size:12px;font-family:'JetBrains Mono',monospace">
+  HC-04 · Gender, School and Society · B.Ed. Companion
+  <br><span style="color:#4a4840">9 papers: 2016+Key · 2017 · 2018 · Apr 2019 · Sep 2019 · 2021 · 2022 · 2023 · 2024</span>
+</footer>
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+function toggleCard(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+function expandAll(panelId, btn) {
+  const panel = document.getElementById(panelId);
+  const cards = panel.querySelectorAll('.q-card');
+  const allOpen = [...cards].every(c => c.classList.contains('open'));
+  cards.forEach(c => allOpen ? c.classList.remove('open') : c.classList.add('open'));
+  if (btn) btn.textContent = allOpen ? 'Expand All ▾' : 'Collapse All ▴';
+}
+</script>
+</body>
+</html>
