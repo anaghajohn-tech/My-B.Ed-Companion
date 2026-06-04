@@ -1,0 +1,3108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SC-MATHS · Content & Pedagogy of Mathematics</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2330;
+    --border: #30363d;
+    --accent: #58a6ff;
+    --accent2: #f78166;
+    --accent3: #3fb950;
+    --amber: #d29922;
+    --purple: #bc8cff;
+    --text: #e6edf3;
+    --muted: #7d8590;
+    --highlight: rgba(88,166,255,0.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Literata', Georgia, serif;
+    min-height: 100vh;
+    line-height: 1.7;
+  }
+  /* HEADER */
+  .header {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1a1f2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(88,166,255,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; }
+  .breadcrumb {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .subject-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(88,166,255,0.12);
+    border: 1px solid rgba(88,166,255,0.3);
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .subject-badge::before { content: '◆'; font-size: 8px; }
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  h1 span { color: var(--accent); }
+  .subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .meta-row {
+    display: flex; flex-wrap: wrap; gap: 0.6rem;
+    align-items: center;
+  }
+  .meta-chip {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+  }
+  .chip-sem { background: rgba(63,185,80,0.15); color: var(--accent3); border: 1px solid rgba(63,185,80,0.3); }
+  .chip-papers { background: rgba(247,129,102,0.15); color: var(--accent2); border: 1px solid rgba(247,129,102,0.3); }
+  .chip-key { background: rgba(188,140,255,0.15); color: var(--purple); border: 1px solid rgba(188,140,255,0.3); }
+
+  /* TABS */
+  .tabs-section { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 0; }
+  .tabs-scroll { display: flex; gap: 0.4rem; overflow-x: auto; padding-bottom: 0; scrollbar-width: none; }
+  .tabs-scroll::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    padding: 0.5rem 1rem;
+    border-radius: 6px 6px 0 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-bottom: none;
+    letter-spacing: 0.03em;
+    position: relative;
+    bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--text); background: var(--surface2); }
+  .tab-btn.active {
+    color: var(--accent);
+    background: var(--surface2);
+    border-color: var(--border);
+    border-bottom: 2px solid var(--accent);
+  }
+  .tab-btn.important-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+  /* CONTENT */
+  .content-area {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    padding: 1.5rem 1rem;
+    margin-bottom: 3rem;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* PAPER HEADER */
+  .paper-header {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+    display: flex; flex-wrap: wrap; gap: 0.8rem;
+    align-items: center; justify-content: space-between;
+  }
+  .paper-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  .paper-code {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .paper-marks {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--accent3);
+    background: rgba(63,185,80,0.1);
+    border: 1px solid rgba(63,185,80,0.25);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+  }
+
+  /* PART LABEL */
+  .part-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    margin: 1.5rem 0 0.8rem;
+    display: inline-block;
+  }
+  .part-a { background: rgba(88,166,255,0.12); color: var(--accent); border: 1px solid rgba(88,166,255,0.25); }
+  .part-b { background: rgba(247,129,102,0.12); color: var(--accent2); border: 1px solid rgba(247,129,102,0.25); }
+  .part-c { background: rgba(63,185,80,0.12); color: var(--accent3); border: 1px solid rgba(63,185,80,0.25); }
+  .part-desc {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+
+  /* QUESTION CARD */
+  .q-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 0.8rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .q-card:hover { border-color: rgba(88,166,255,0.4); }
+  .q-header {
+    display: flex; align-items: flex-start; gap: 0.8rem;
+    padding: 0.9rem 1rem;
+    cursor: pointer;
+    background: var(--surface);
+    user-select: none;
+  }
+  .q-header:hover { background: rgba(255,255,255,0.03); }
+  .q-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--accent);
+    background: rgba(88,166,255,0.12);
+    border: 1px solid rgba(88,166,255,0.25);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-num.b { color: var(--accent2); background: rgba(247,129,102,0.12); border-color: rgba(247,129,102,0.25); }
+  .q-num.c { color: var(--accent3); background: rgba(63,185,80,0.12); border-color: rgba(63,185,80,0.25); }
+  .q-text { flex: 1; font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+  .q-marks {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .q-toggle {
+    font-size: 14px;
+    color: var(--muted);
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: transform 0.2s;
+  }
+  .q-card.open .q-toggle { transform: rotate(180deg); }
+
+  /* ANSWER BODY */
+  .q-body {
+    display: none;
+    padding: 1rem 1.2rem;
+    background: rgba(0,0,0,0.2);
+    border-top: 1px solid var(--border);
+  }
+  .q-card.open .q-body { display: block; }
+  .ans-intro {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 0.8rem;
+  }
+  .ans-section { margin-bottom: 1rem; }
+  .ans-section:last-child { margin-bottom: 0; }
+  .ans-head {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 0.4rem;
+  }
+  .ans-head.b { color: var(--accent2); }
+  .ans-head.c { color: var(--accent3); }
+  .ans-head.amber { color: var(--amber); }
+  .point-list {
+    list-style: none;
+    padding: 0;
+  }
+  .point-list li {
+    font-size: 13.5px;
+    color: #c8d5e8;
+    padding: 0.4rem 0 0.4rem 1.3rem;
+    line-height: 1.8;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    position: relative;
+  }
+  .point-list li:last-child { border-bottom: none; }
+  .point-list li::before {
+    content: '›';
+    color: var(--accent);
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+    top: 0.42rem;
+  }
+  .point-list.b li::before { color: var(--accent2); }
+  .point-list.c li::before { color: var(--accent3); }
+  .point-list li strong { color: #fff; font-weight: 600; }
+  .ans-prose {
+    font-size: 13.5px;
+    color: #c8d5e8;
+    line-height: 1.85;
+  }
+  .ans-prose strong { color: #fff; font-weight: 600; }
+
+  /* KEY answer highlight */
+  .key-note {
+    background: rgba(188,140,255,0.08);
+    border-left: 3px solid var(--purple);
+    padding: 0.6rem 0.8rem;
+    margin: 0.6rem 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 12px;
+    color: #c8b8ff;
+    font-style: italic;
+  }
+
+  /* IMPORTANT QUESTIONS TAB */
+  .iq-intro {
+    background: linear-gradient(135deg, rgba(210,153,34,0.1), rgba(210,153,34,0.05));
+    border: 1px solid rgba(210,153,34,0.3);
+    border-radius: 8px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+  }
+  .iq-intro p { font-size: 13px; color: #d4bc7a; line-height: 1.7; }
+  .iq-group { margin-bottom: 2rem; }
+  .iq-group-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--amber);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(210,153,34,0.2);
+    margin-bottom: 1rem;
+  }
+  .iq-item {
+    display: flex; gap: 0.8rem; align-items: flex-start;
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--surface);
+    margin-bottom: 0.5rem;
+    transition: border-color 0.2s;
+  }
+  .iq-item:hover { border-color: rgba(210,153,34,0.4); }
+  .iq-freq {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    flex-shrink: 0;
+    white-space: nowrap;
+    margin-top: 2px;
+  }
+  .freq-high { background: rgba(247,129,102,0.2); color: var(--accent2); border: 1px solid rgba(247,129,102,0.3); }
+  .freq-mid { background: rgba(210,153,34,0.15); color: var(--amber); border: 1px solid rgba(210,153,34,0.3); }
+  .freq-low { background: rgba(125,133,144,0.15); color: var(--muted); border: 1px solid rgba(125,133,144,0.3); }
+  .iq-text { font-size: 13.5px; color: var(--text); line-height: 1.5; flex: 1; }
+  .iq-years {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    flex-shrink: 0;
+    line-height: 1.8;
+    text-align: right;
+  }
+
+  /* MATH PROBLEMS */
+  .math-block {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.8rem 1rem;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: #b3c4da;
+    line-height: 2;
+    margin: 0.5rem 0;
+    white-space: pre-wrap;
+  }
+  .math-step { color: #7ce38b; }
+  .math-result { color: var(--accent); font-weight: 600; }
+
+  /* SCHEME NOTE */
+  .scheme-note {
+    background: rgba(188,140,255,0.08);
+    border: 1px solid rgba(188,140,255,0.25);
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+    font-size: 12px;
+    color: #c8b8ff;
+    margin-bottom: 1.2rem;
+  }
+
+  @media (max-width: 600px) {
+    .header { padding: 1.5rem 1rem 1.2rem; }
+    .content-area { margin: 0 0.5rem 2rem; }
+    .iq-years { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="breadcrumb">
+      <a href="../index.html">B.Ed Companion</a> › Semester 3 › Mathematics
+    </div>
+    <div class="subject-badge">SC-MATHS · Q.P. Code 30534</div>
+    <h1>Content &amp; Pedagogy of <span>Mathematics</span></h1>
+    <div class="subtitle">III Semester · CBCS 2-Year Course · Bangalore University</div>
+    <div class="meta-row">
+      <span class="meta-chip chip-sem">3rd Semester</span>
+      <span class="meta-chip chip-papers">6 Papers: 2018–2023</span>
+      <span class="meta-chip chip-key">2018 Official Scheme of Valuation</span>
+    </div>
+  </div>
+</div>
+
+<div class="tabs-section">
+  <div class="tabs-scroll">
+    <button class="tab-btn active" onclick="showTab('tab2023')">June/July 2023</button>
+    <button class="tab-btn" onclick="showTab('tab2022')">Sept/Oct 2022</button>
+    <button class="tab-btn" onclick="showTab('tab2021')">Aug 2021</button>
+    <button class="tab-btn" onclick="showTab('tab2020')">Feb/Mar 2020</button>
+    <button class="tab-btn" onclick="showTab('tab2019')">Sept 2019</button>
+    <button class="tab-btn" onclick="showTab('tab2018')">Sept/Oct 2018 ★</button>
+    <button class="tab-btn important-tab" onclick="showTab('tabIQ')">⭐ Important Questions</button>
+  </div>
+</div>
+
+<div class="content-area">
+
+<!-- ==================== 2023 ==================== -->
+<div id="tab2023" class="tab-content active">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">III Semester B.Ed. Examination — June/July 2023</div>
+      <div class="paper-code">Q.P. Code: 30534 · Content and Pedagogy of Mathematics (CBCS Scheme)</div>
+    </div>
+    <div class="paper-marks">70 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A — Long Questions</div>
+  <div class="part-desc">Answer any THREE. Each answer ≤ 3 pages. 10 marks each (3×10=30)</div>
+
+  <!-- Q1 -->
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) How does teaching-learning materials in Mathematics help in bringing effective learning? b) What should be the criteria on which teaching-learning materials in mathematics shall be selected? c) List any six advantages of smart boards in the teaching of mathematics.</span>
+      <span class="q-marks">(3+4+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) How TLM Helps in Effective Learning (3 marks)</div>
+        <ul class="point-list">
+          <li><strong>Bridges Abstract to Concrete:</strong> Mathematics involves many abstract concepts. TLM makes them tangible and visible, aiding comprehension.</li>
+          <li><strong>Motivates Learners:</strong> Visual and hands-on materials create interest and enthusiasm among students.</li>
+          <li><strong>Reinforces Learning:</strong> Multi-sensory experience helps students remember and retain concepts longer.</li>
+          <li><strong>Caters to Individual Differences:</strong> Different types of TLM suit different learning styles — visual, auditory, kinesthetic.</li>
+          <li><strong>Enables Discovery Learning:</strong> Students can explore, experiment and discover mathematical relationships themselves.</li>
+          <li><strong>Reduces Fear of Mathematics:</strong> Practical materials make maths approachable and enjoyable, reducing math anxiety.</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Criteria for Selection of TLM (4 marks)</div>
+        <ul class="point-list b">
+          <li>Consider the <strong>age, intellectual level and previous experience</strong> of learners</li>
+          <li>Should <strong>serve the desired purpose</strong> and help achieve stated objectives</li>
+          <li>Provide required <strong>multi-sensory experience</strong> to learners</li>
+          <li><strong>Appropriateness to the content</strong> being taught</li>
+          <li><strong>Accuracy in measurement</strong> and clarity of concepts</li>
+          <li>Appropriate in <strong>size and clearly visible</strong> (for visual materials)</li>
+          <li>Clearly <strong>audible</strong> (in case of audio materials)</li>
+          <li>Should be prepared from <strong>available and inexpensive materials</strong></li>
+          <li><strong>Cost should be reasonable</strong> and easily available</li>
+        </ul>
+        <div class="key-note">★ From 2018 Official Scheme of Valuation by Dr. G. Vijayakumari, Vijaya Teachers College</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Six Advantages of Smart Boards (3 marks)</div>
+        <ul class="point-list c">
+          <li>Enables <strong>multimedia presentation</strong> using sound, animation, images, text and linking of related instructional content</li>
+          <li>Allows <strong>simulations of mathematical concepts</strong> and dynamic visual demonstrations</li>
+          <li>Makes lessons more <strong>engaging and interactive</strong> for students</li>
+          <li>Develops <strong>critical thinking and problem-solving skills</strong> through interactive activities</li>
+          <li>Enables <strong>saving and replaying</strong> lessons for revision and absent students</li>
+          <li>Provides <strong>access to internet resources</strong> directly during class, enriching mathematical content</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) What are the objectives of mathematics club at secondary school level? b) Explain how you would organize a mathematics club. c) What activities can be organised through the club?</span>
+      <span class="q-marks">(3+4+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Objectives of Mathematics Club (3 marks)</div>
+        <ul class="point-list">
+          <li>To <strong>develop interest and love</strong> for mathematics among students</li>
+          <li>To provide a <strong>platform for mathematically talented students</strong> to showcase their abilities</li>
+          <li>To <strong>extend mathematical knowledge</strong> beyond the regular curriculum</li>
+          <li>To encourage <strong>creative and independent thinking</strong> in mathematics</li>
+          <li>To develop the habit of <strong>collecting mathematical information</strong> from various sources</li>
+          <li>To foster <strong>cooperative learning</strong> and teamwork through mathematical activities</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) How to Organise a Mathematics Club (4 marks)</div>
+        <ul class="point-list b">
+          <li><strong>Formation:</strong> Elect office-bearers — president, secretary, treasurer — from interested students under guidance of a mathematics teacher</li>
+          <li><strong>Membership:</strong> Open to all students interested in mathematics; voluntary participation encouraged</li>
+          <li><strong>Meeting schedule:</strong> Regular meetings once or twice a month with a planned agenda</li>
+          <li><strong>Planning activities:</strong> Plan quiz competitions, puzzle sessions, project work, mathematics fairs etc.</li>
+          <li><strong>Resource management:</strong> Maintain a small library of mathematical books, magazines, puzzles and models</li>
+          <li><strong>Guest lectures:</strong> Invite mathematicians, scientists or senior students to address the club</li>
+          <li><strong>Documentation:</strong> Maintain records of activities and achievements</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Activities Through the Club (3 marks)</div>
+        <ul class="point-list c">
+          <li>Organising <strong>mathematics quiz competitions</strong> and olympiad preparation</li>
+          <li>Collecting and solving <strong>mathematical puzzles and problems</strong></li>
+          <li>Conducting <strong>mathematics exhibitions</strong> — displaying charts, models, manipulatives</li>
+          <li>Publishing a <strong>mathematics magazine or wall magazine</strong></li>
+          <li>Celebrating <strong>Mathematics Day</strong> (December 22 — Ramanujan's birthday)</li>
+          <li>Organising <strong>field visits</strong> to connect mathematics with real-world applications</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) Who are gifted children in Mathematics? b) How do you identify gifted children in the mathematics classroom? c) What measures do you take while handling gifted children?</span>
+      <span class="q-marks">(1+4+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Who are Gifted Children in Mathematics? (1 mark)</div>
+        <div class="ans-prose">Gifted children in mathematics are those who demonstrate exceptional ability to think and reason logically, solve complex problems with ease, show deep understanding of mathematical concepts, and learn mathematics much faster than their peers. They typically score high on mathematical aptitude tests and display advanced mathematical thinking beyond their age level.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Identifying Gifted Children (4 marks)</div>
+        <ul class="point-list b">
+          <li><strong>Observation:</strong> Observing unique characteristics such as speed of understanding, ability to solve novel problems, asking probing questions</li>
+          <li><strong>Intelligence Tests:</strong> Assessing and taking scores on intelligence, especially reasoning ability</li>
+          <li><strong>Mathematical Aptitude Tests:</strong> Scores on special aptitude tests for mathematics</li>
+          <li><strong>Interest and Attitude:</strong> Score on interest in maths and attitude towards mathematics</li>
+          <li><strong>Teacher's Assessment:</strong> Teacher observation of classroom behavior, participation, and performance in challenging problems</li>
+        </ul>
+        <div class="key-note">★ Key characteristics: ability to think at higher abstraction, draw inferences, recognize patterns, deductive logic, high speed and accuracy in calculations, high problem-solving skills (from 2018 Scheme)</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Measures for Handling Gifted Children (5 marks)</div>
+        <ul class="point-list c">
+          <li><strong>Enriched Curriculum:</strong> Provide curriculum beyond textbook, deeper and broader than regular syllabus</li>
+          <li><strong>Differential Assignments:</strong> Give challenging, open-ended and complex assignments beyond regular homework</li>
+          <li><strong>Graded Exercises:</strong> Provide optional challenging problems in addition to regular exercises</li>
+          <li><strong>Independent Work:</strong> Encourage original and independent mathematical investigations and projects</li>
+          <li><strong>Seminars and Projects:</strong> Involve them in presenting papers, conducting research projects</li>
+          <li><strong>Mathematics Club Activities:</strong> Engage them as leaders in mathematics exhibition, club activities</li>
+          <li><strong>Mathematics Quiz and Olympiads:</strong> Prepare them for competitions at state and national level</li>
+          <li><strong>Mentoring:</strong> Connect them with mathematics professors or senior students for advanced guidance</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <span class="q-text">a) Define Action Research. b) Explain the steps of conducting Action Research in the teaching of mathematics.</span>
+      <span class="q-marks">(2+8)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Definition of Action Research (2 marks)</div>
+        <div class="ans-prose"><strong>Action Research</strong> is a form of investigation designed for use by teachers to attempt to solve problems and improve professional practices in their own classrooms. It involves systematic observations and data collection used in reflection, decision-making and developing effective classroom strategies. — <em>Parsons and Brown, 2002</em><br><br>It is classroom-based research conducted by teachers to solve specific teaching-learning problems in their immediate educational setting.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Steps of Action Research in Mathematics Teaching (8 marks)</div>
+        <ul class="point-list b">
+          <li><strong>Step 1 — Identification of Problem:</strong> The teacher identifies a problem in mathematics teaching through observation, tests, or student feedback. E.g., students unable to solve word problems.</li>
+          <li><strong>Step 2 — Pinpointing the Problem:</strong> The general problem is narrowed down to a specific, clearly stated problem. E.g., difficulty in converting word problems to equations.</li>
+          <li><strong>Step 3 — Analyzing Probable Causes:</strong> Diagnose why the problem exists — lack of reading comprehension, insufficient practice, poor prior knowledge, poor teaching method, etc.</li>
+          <li><strong>Step 4 — Listing Objectives:</strong> Fix clear objectives for what the teacher wants to achieve through the action research.</li>
+          <li><strong>Step 5 — Formulating Hypotheses:</strong> State tentative solutions (hypotheses) to address the identified problem. E.g., "Using more worked examples will improve problem-solving."</li>
+          <li><strong>Step 6 — Selection of Tools and Techniques:</strong> Choose appropriate tools — tests, observation schedules, worksheets, interviews — to collect data.</li>
+          <li><strong>Step 7 — Collection of Data:</strong> Implement the planned action (teaching strategy) and systematically collect data through pre-test and post-test.</li>
+          <li><strong>Step 8 — Analysis and Interpretation:</strong> Analyze the collected data using appropriate statistical methods; interpret results.</li>
+          <li><strong>Step 9 — Conclusions and Generalizations:</strong> Draw conclusions about the effectiveness of the action taken; check if the hypothesis was supported.</li>
+          <li><strong>Step 10 — Report Writing:</strong> Document the process, findings and recommendations so that other teachers can benefit from the experience.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <span class="q-text">a) How will be the status of mathematics teacher without professionalism? b) Mention any six qualities that bring professionalism to a mathematics teacher. c) What is the role of seminar and workshop in improving the professional qualities of a mathematics teacher?</span>
+      <span class="q-marks">(2+3+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Status Without Professionalism (2 marks)</div>
+        <div class="ans-prose">A mathematics teacher without professionalism would be ineffective and unprepared. Such a teacher would: lack updated knowledge of mathematics and teaching methods; fail to inspire students; be unable to cater to individual differences; have poor classroom management; and fail to achieve learning objectives. The teacher's personal and social image would decline, and students would lose interest and confidence in mathematics.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Six Qualities that Bring Professionalism (3 marks)</div>
+        <ul class="point-list b">
+          <li><strong>Content Knowledge:</strong> Deep and updated knowledge of mathematics and its applications</li>
+          <li><strong>Pedagogical Skills:</strong> Ability to use varied and effective teaching methods and strategies</li>
+          <li><strong>Communication Skills:</strong> Clear, accurate and enthusiastic communication of mathematical ideas</li>
+          <li><strong>Continuous Learning:</strong> Regular participation in training, workshops and reading latest research</li>
+          <li><strong>Reflective Practice:</strong> Ability to analyse one's own teaching and improve continuously</li>
+          <li><strong>Research Skills:</strong> Conducting action research to solve classroom problems</li>
+          <li><strong>Use of Technology:</strong> Competence in using smart boards, computers and e-resources in teaching</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Role of Seminar and Workshop (5 marks)</div>
+        <div class="ans-head amber" style="margin-top:0.6rem;">Seminar:</div>
+        <ul class="point-list c">
+          <li>Updates teachers on latest knowledge in mathematics education</li>
+          <li>Teachers collect and organise information on specific mathematical topics</li>
+          <li>Enhances presentation skills and public speaking ability</li>
+          <li>Encourages sharing of ideas and constructive discussions</li>
+          <li>Increases resourcefulness and awareness of current research</li>
+        </ul>
+        <div class="ans-head amber" style="margin-top:0.6rem;">Workshop:</div>
+        <ul class="point-list c">
+          <li>Develops practical skills through hands-on activities</li>
+          <li>Helps teachers produce lesson plans, learning materials and test items</li>
+          <li>Develops technological skills for modern mathematics teaching</li>
+          <li>Enables mastering of new teaching techniques and assessment strategies</li>
+        </ul>
+        <div class="key-note">★ From 2018 Official Scheme: Seminar — 2½ marks; Workshop — 2½ marks</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B — Short Questions</div>
+  <div class="part-desc">Answer any FIVE. Each answer ≤ 1½ pages. 5 marks each (5×5=25)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">Explain briefly the characteristics of a good mathematics Text book.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <ul class="point-list">
+        <li><strong>Accuracy:</strong> Mathematical content must be factually correct, free from errors</li>
+        <li><strong>Clarity:</strong> Concepts explained in simple, clear and understandable language appropriate to level</li>
+        <li><strong>Logical Sequence:</strong> Topics arranged in a systematic, graded manner from simple to complex</li>
+        <li><strong>Adequate Exercises:</strong> Sufficient practice problems at varying difficulty levels including optional challenging problems</li>
+        <li><strong>Good Illustrations:</strong> Diagrams, figures and graphs that are accurate and helpful in understanding</li>
+        <li><strong>Attractive Layout:</strong> Good quality paper, clear print, appropriate font size and appealing format</li>
+        <li><strong>Appropriate Level:</strong> Content suited to the mental and academic maturity of learners</li>
+        <li><strong>Links to Life:</strong> Connects mathematical concepts to real-world applications and problems</li>
+        <li><strong>Facilitates Self-Study:</strong> Clear enough for students to understand without a teacher</li>
+        <li><strong>Reasonable Price:</strong> Should be affordable and accessible to all students</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">a) How do you organise the mathematics laboratory in a secondary school? b) List relevant equipment that can be used in mathematics laboratory at secondary school level.</span>
+      <span class="q-marks">(3+2)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Organising the Mathematics Laboratory</div>
+        <ul class="point-list">
+          <li><strong>Space:</strong> Allocate a separate room with adequate space for group activities and display</li>
+          <li><strong>Furniture:</strong> Sturdy tables and chairs arranged to allow group work and movement</li>
+          <li><strong>Storage:</strong> Cupboards and shelves for instruments, models and materials</li>
+          <li><strong>Display area:</strong> Walls or boards for displaying charts, posters, students' work</li>
+          <li><strong>Supervision:</strong> A mathematics teacher in charge to manage activities and safety</li>
+          <li><strong>Maintenance:</strong> Regular cleaning, inventory and replacement of broken equipment</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Equipment for Mathematics Laboratory</div>
+        <ul class="point-list b">
+          <li>Geometric instruments set (compass, protractor, ruler, set squares)</li>
+          <li>Models of 3D shapes (cube, cuboid, cone, cylinder, sphere, pyramid)</li>
+          <li>Number line charts and abacus</li>
+          <li>Geo-boards and dot boards</li>
+          <li>Measuring instruments (weighing scales, measuring tape, thermometer)</li>
+          <li>Mathematical puzzles and tangrams</li>
+          <li>Graph boards and graph sheets</li>
+          <li>Computer with mathematical software (GeoGebra, etc.)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">Explain any two Community resources used in the teaching of mathematics.</span>
+      <span class="q-marks">(2½+2½)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <ul class="point-list">
+        <li><strong>Market/Shops:</strong> Buying and selling activities demonstrate real-world applications of arithmetic — profit, loss, discount, interest, unit pricing. Students visit shops to understand practical mathematics.</li>
+        <li><strong>Bank:</strong> Teaches simple and compound interest, loan calculations, percentage. Students can observe transactions and relate them to classroom learning.</li>
+        <li><strong>Construction Sites:</strong> Geometry and measurement are applied practically — angles, area, volume, scale drawing. Field visits connect mensuration to real projects.</li>
+        <li><strong>Agriculture Fields:</strong> Area and perimeter calculations, ratio and proportion, averages and statistics can be demonstrated through farming activities.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.9</span>
+      <span class="q-text">Explain the importance of Mathematics library in a secondary school.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ From 2018 Scheme: Mathematics library = subject-based library containing books, periodicals, journals related to mathematics</div>
+      <ul class="point-list">
+        <li>Provides <strong>source for mathematical information</strong> beyond the textbook</li>
+        <li>Inculcates <strong>good reading and study habits</strong> in students</li>
+        <li>Promotes <strong>self-study and independent work</strong></li>
+        <li>Provides <strong>intensive and extensive study</strong> in mathematics</li>
+        <li>Enables <strong>extended reading beyond syllabus</strong> — enrichment for gifted students</li>
+        <li>Helps <strong>plug learning gaps</strong> and clarify ideas not understood in class</li>
+        <li>Provides <strong>elaborated drill work</strong> through reference books and practice materials</li>
+        <li>Caters to the <strong>needs of gifted children</strong> through advanced reference materials</li>
+        <li>Exposes students to <strong>history of mathematics</strong> and famous mathematicians</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.10</span>
+      <span class="q-text">How do you organize Mathematics quiz in a school to realize its advantages at maximum level?</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <ul class="point-list">
+        <li><strong>Planning:</strong> Fix date, venue, time; decide format — oral, written, buzzer; determine participants — class-wise or school-wide</li>
+        <li><strong>Question preparation:</strong> Prepare questions at varying difficulty levels covering all topics; include reasoning, puzzles and applied questions</li>
+        <li><strong>Teams:</strong> Form balanced teams of 3-4 students; ensure mix of ability levels</li>
+        <li><strong>Rounds:</strong> Organise multiple rounds — General, Rapid Fire, Visual Round, Bonus Round — to test different skills</li>
+        <li><strong>Jury:</strong> Appoint a neutral panel of judges and a quizmaster</li>
+        <li><strong>Scoring system:</strong> Announce rules and scoring clearly before the event begins</li>
+        <li><strong>Prizes and recognition:</strong> Award certificates and prizes to motivate participation</li>
+        <li><strong>Audience participation:</strong> Include audience questions to maximise involvement and learning</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.11</span>
+      <span class="q-text">Enumerate the remedial programmes for slow learners in mathematics.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <ul class="point-list">
+        <li><strong>Diagnostic Testing:</strong> First identify specific weaknesses through diagnostic tests; remediation should target identified gaps</li>
+        <li><strong>Simplified Content:</strong> Break complex topics into smaller, easier manageable steps</li>
+        <li><strong>Concrete Materials:</strong> Use manipulatives and TLM to make abstract concepts visible and tangible</li>
+        <li><strong>Extra Practice:</strong> Provide additional practice sheets with graded difficulty</li>
+        <li><strong>Peer Tutoring:</strong> Pair slow learners with academically stronger students for peer learning</li>
+        <li><strong>Special Coaching Classes:</strong> Arrange extra classes after school hours focusing on problem areas</li>
+        <li><strong>Individualised Instruction:</strong> Give personalised attention and adapt teaching pace to the learner's speed</li>
+        <li><strong>Positive Reinforcement:</strong> Acknowledge small achievements to build confidence and reduce fear</li>
+        <li><strong>Workbooks and Worksheets:</strong> Structured worksheets that guide students step-by-step</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.12</span>
+      <span class="q-text">Explain the need and importance of workbook and worksheets in the teaching of Mathematics.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">Workbooks:</div>
+        <ul class="point-list">
+          <li>Provide <strong>structured independent practice</strong> for students</li>
+          <li>Enable <strong>self-paced learning</strong> — students work at their own speed</li>
+          <li>Cover a range of exercises from <strong>simple to complex</strong></li>
+          <li>Allow <strong>systematic revision</strong> of all topics</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Worksheets:</div>
+        <ul class="point-list b">
+          <li>Focused on <strong>specific concepts or skills</strong> — targeted practice</li>
+          <li>Can be <strong>differentiated</strong> for different ability levels</li>
+          <li>Provide <strong>immediate feedback</strong> when self-checking answer keys are provided</li>
+          <li>Useful for <strong>diagnostic and remedial purposes</strong></li>
+          <li>Reduce dependence on teacher and build <strong>independent learning habits</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.13</span>
+      <span class="q-text">Explain briefly why Mathematics teacher should be a reflective practitioner.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">A <strong>reflective practitioner</strong> is a teacher who regularly examines, analyses and evaluates their own teaching practices in order to improve them continuously.</div>
+      <ul class="point-list" style="margin-top:0.6rem;">
+        <li>Helps identify <strong>strengths and weaknesses</strong> in their own teaching</li>
+        <li>Enables adaptation of <strong>teaching methods</strong> based on student response</li>
+        <li>Promotes <strong>action research</strong> to solve classroom problems systematically</li>
+        <li>Keeps the teacher <strong>updated with current practices</strong> in mathematics education</li>
+        <li>Leads to <strong>professional growth</strong> — moving from routine to purposeful teaching</li>
+        <li>Builds <strong>self-awareness</strong> — understanding of one's assumptions, biases and teaching beliefs</li>
+        <li>Improves <strong>student learning outcomes</strong> through better informed instructional decisions</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="part-label part-c">Part C — Mathematics Problems</div>
+  <div class="part-desc">Answer any THREE. Each answer ≤ 1½ pages. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.14a</span>
+      <span class="q-text">Find the 31st term of the A.P. whose 11th term is 38 and the 16th term is 73.</span>
+      <span class="q-marks">(2½)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">Given: t₁₁ = 38, t₁₆ = 73
+Formula: tₙ = a + (n-1)d
+
+t₁₁ = a + 10d = 38  ...(i)
+t₁₆ = a + 15d = 73  ...(ii)
+
+Subtract (i) from (ii):
+5d = 35  →  d = 7
+
+From (i): a + 70 = 38  →  a = -32
+
+<span class="math-step">t₃₁ = a + 30d = -32 + 30(7) = -32 + 210</span>
+<span class="math-result">∴ t₃₁ = 178</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.14b</span>
+      <span class="q-text">Find the sum of the first 40 positive integers divisible by 6.</span>
+      <span class="q-marks">(2½)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">First 40 positive integers divisible by 6:
+6, 12, 18, ..., 240  (A.P. with a=6, d=6, n=40)
+
+Sₙ = n/2 [2a + (n-1)d]
+S₄₀ = 40/2 [2(6) + 39(6)]
+     = 20 [12 + 234]
+     = 20 × 246
+<span class="math-result">∴ S₄₀ = 4920</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.15</span>
+      <span class="q-text">Prove that "In a right triangle the square of the hypotenuse is equal to the sum of the squares of the other two sides." (Pythagoras Theorem)</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">Given: △ABC, right-angled at B
+To prove: AC² = AB² + BC²
+
+Construction: Draw BD ⊥ AC
+
+Proof:
+In △ABD and △ABC:
+  ∠ADB = ∠ABC = 90°
+  ∠A is common
+∴ △ABD ~ △ABC  (AA similarity)
+∴ AD/AB = AB/AC
+<span class="math-step">→ AB² = AD × AC  ...(i)</span>
+
+In △BDC and △ABC:
+  ∠BDC = ∠ABC = 90°
+  ∠C is common
+∴ △BDC ~ △ABC  (AA similarity)
+∴ DC/BC = BC/AC
+<span class="math-step">→ BC² = DC × AC  ...(ii)</span>
+
+Adding (i) and (ii):
+AB² + BC² = AD × AC + DC × AC
+           = AC(AD + DC)
+           = AC × AC
+<span class="math-result">∴ AC² = AB² + BC²  (Proved)</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.16</span>
+      <span class="q-text">Solve by substitution method and verify: 3x - y = 3 and 9x - 3y = 9</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">3x - y = 3   ...(i)
+9x - 3y = 9  ...(ii)
+
+From (i): y = 3x - 3
+
+Substitute in (ii):
+9x - 3(3x - 3) = 9
+9x - 9x + 9 = 9
+9 = 9  ✓
+
+<span class="math-step">This is true for all values of x!</span>
+<span class="math-result">The two equations are dependent (same line). Infinitely many solutions.</span>
+
+Verification: Equation (ii) = 3 × Equation (i)
+→ 9x - 3y = 9 is same as 3(3x - y) = 9 ✓</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.17a</span>
+      <span class="q-text">Find the area of the triangle with vertices (2,3), (-1,0), (2,-4).</span>
+      <span class="q-marks">(2½)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">Area = ½ |x₁(y₂ - y₃) + x₂(y₃ - y₁) + x₃(y₁ - y₂)|
+
+(x₁,y₁)=(2,3), (x₂,y₂)=(-1,0), (x₃,y₃)=(2,-4)
+
+= ½ |2(0-(-4)) + (-1)((-4)-3) + 2(3-0)|
+= ½ |2(4) + (-1)(-7) + 2(3)|
+= ½ |8 + 7 + 6|
+= ½ × 21
+<span class="math-result">Area = 10.5 sq. units</span></div>
+    </div>
+  </div>
+
+</div><!-- end tab2023 -->
+
+<!-- ==================== 2022 ==================== -->
+<div id="tab2022" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">III Semester B.Ed. Examination — September/October 2022</div>
+      <div class="paper-code">Q.P. Code: 30534 · Content and Pedagogy of Mathematics (CBCS Scheme)</div>
+    </div>
+    <div class="paper-marks">70 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A — Long Questions</div>
+  <div class="part-desc">Answer any THREE. 10 marks each (3×10=30)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) Explain briefly the characteristics of a good mathematics text book. b) Critically analyse the present day IX standard mathematics text book.</span>
+      <span class="q-marks">(5+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Characteristics of a Good Mathematics Textbook (5 marks)</div>
+        <ul class="point-list">
+          <li><strong>Accuracy:</strong> Content free of mathematical errors and factual mistakes</li>
+          <li><strong>Clarity of Language:</strong> Simple, precise language appropriate to learner's level</li>
+          <li><strong>Logical Sequence:</strong> Topics arranged systematically — from simple to complex, known to unknown</li>
+          <li><strong>Adequate Illustrations:</strong> Well-drawn diagrams, figures and graphs that aid understanding</li>
+          <li><strong>Variety of Exercises:</strong> Questions ranging from routine practice to challenging higher-order problems</li>
+          <li><strong>Curriculum Alignment:</strong> Covers all prescribed syllabus topics thoroughly</li>
+          <li><strong>Application Focus:</strong> Includes real-life applications and word problems</li>
+          <li><strong>Attractive Format:</strong> Good paper quality, clear font, readable layout</li>
+          <li><strong>Affordability:</strong> Reasonably priced so all students can access it</li>
+          <li><strong>Self-explanatory:</strong> Clear enough for self-study without depending entirely on the teacher</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Critical Analysis of Present IX Std. Mathematics Textbook (5 marks)</div>
+        <div class="key-note">★ From 2018 Scheme: List good points, weak points/errors, and provide suggestions — 2+2+1 marks</div>
+        <div class="ans-head" style="margin-top:0.5rem;">Good Points:</div>
+        <ul class="point-list">
+          <li>Follows NCERT/State curriculum systematically with proper sequencing of chapters</li>
+          <li>Contains adequate exercises with solved examples before each exercise</li>
+          <li>Good use of diagrams in geometry and mensuration chapters</li>
+          <li>Connects concepts to real-life through word problems</li>
+        </ul>
+        <div class="ans-head b" style="margin-top:0.5rem;">Weak Points/Errors:</div>
+        <ul class="point-list b">
+          <li>Some explanations are too brief and may be difficult for average students to follow independently</li>
+          <li>Limited activities for discovery learning or investigation</li>
+          <li>Higher-order thinking questions are insufficient</li>
+          <li>Some diagrams could be larger and clearer</li>
+        </ul>
+        <div class="ans-head c" style="margin-top:0.5rem;">Suggestions:</div>
+        <ul class="point-list c">
+          <li>Include more application-based and real-world problems</li>
+          <li>Add more activities for hands-on mathematical exploration</li>
+          <li>Include QR codes linking to digital learning resources</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) Mention the professional qualities of a mathematics Teacher. b) What is the role of inservice programmes and orientation programmes in improving the professional growth of mathematics teacher?</span>
+      <span class="q-marks">(4+6)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Professional Qualities of a Mathematics Teacher (4 marks)</div>
+        <ul class="point-list">
+          <li><strong>Information processing skills</strong> — acquiring and updating latest knowledge in mathematics</li>
+          <li>Skill in effectively <strong>communicating mathematical ideas</strong></li>
+          <li>Skill in <strong>preparing and presenting seminar papers</strong> in mathematics</li>
+          <li>Skill in <strong>preparing and using teaching-learning materials</strong></li>
+          <li><strong>Collaborative skills</strong> — working effectively with colleagues</li>
+          <li>Skill in <strong>adapting new methods and techniques</strong> of teaching mathematics</li>
+          <li>Skills in <strong>assessment and evaluation strategies</strong></li>
+          <li><strong>Research skills</strong> — ability to conduct action research</li>
+        </ul>
+        <div class="key-note">★ From 2018 Official Scheme of Valuation</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Role of Inservice and Orientation Programmes (6 marks)</div>
+        <div class="ans-head" style="margin-top:0.4rem;">Inservice Programmes:</div>
+        <ul class="point-list b">
+          <li>Develops and enriches teachers' knowledge in mathematics</li>
+          <li>Develops required skills for mathematics teachers</li>
+          <li>Updates knowledge about new methods and techniques of teaching mathematics</li>
+          <li>Orients them on new education policy regarding mathematics</li>
+          <li>Develops skills in preparation and use of TLM in mathematics</li>
+          <li>Enhances knowledge in latest assessment and evaluation strategies</li>
+          <li>Develops collaborative and cooperative skills</li>
+          <li>Develops research skills — ability to conduct action research</li>
+        </ul>
+        <div class="ans-head" style="margin-top:0.4rem;">Orientation Programmes:</div>
+        <ul class="point-list b">
+          <li>Orients newly appointed teachers to the school system and curriculum</li>
+          <li>Familiarises them with institutional expectations and professional norms</li>
+          <li>Helps develop positive attitude towards the profession</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) Explain the criteria for selection of teaching-learning materials in mathematics. b) Select any two teaching-learning materials and explain how do you use while teaching a topic in mathematics.</span>
+      <span class="q-marks">(5+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Criteria for Selection (5 marks)</div>
+        <ul class="point-list">
+          <li>Consider the <strong>age, intellectual level and previous experience</strong> of the learners</li>
+          <li>Should <strong>serve the desired purpose</strong> and help achieve stated objectives</li>
+          <li>Provide required <strong>multi-sensory experience</strong> to learners</li>
+          <li>Appropriateness to the <strong>content being taught</strong></li>
+          <li><strong>Accuracy in measurement</strong> and clarity of concepts</li>
+          <li>Appropriate in <strong>size and clearly visible</strong> in case of visual materials</li>
+          <li>Clearly <strong>audible</strong> in case of audio materials</li>
+          <li>Should be prepared from <strong>available and inexpensive materials</strong></li>
+          <li><strong>Cost should be reasonable</strong> and easily available</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Two TLMs and Their Use (5 marks)</div>
+        <div class="ans-head" style="margin-top:0.4rem;">1. Geo-board (for teaching geometry):</div>
+        <ul class="point-list b">
+          <li>Used to teach properties of polygons, area, perimeter</li>
+          <li>Students stretch rubber bands on nails to form shapes</li>
+          <li>Enables hands-on exploration of geometric concepts</li>
+        </ul>
+        <div class="ans-head" style="margin-top:0.4rem;">2. Number Line (for teaching integers and fractions):</div>
+        <ul class="point-list b">
+          <li>Physical number line displayed on classroom wall</li>
+          <li>Used to teach addition, subtraction of integers, comparing fractions</li>
+          <li>Converts abstract number operations to visual, concrete movements</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <span class="q-text">a) As a mathematics teacher, how would you organise mathematics quiz programme at your school? b) Explain the steps of action Research in the teaching of mathematics.</span>
+      <span class="q-marks">(5+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Organising Mathematics Quiz — see Q.10 in 2023 tab for detailed answer</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Steps of Action Research — see Q.4 in 2023 tab for detailed answer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <span class="q-text">a) What is mathematics exhibition? b) What are the objectives of mathematics exhibition? c) As a teacher of mathematics, how do you organise the mathematics laboratory in a secondary school?</span>
+      <span class="q-marks">(1+4+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Mathematics Exhibition? (1 mark)</div>
+        <div class="ans-prose">Mathematics exhibition is an event that provides a platform for talented students in mathematics to display charts, models, boards, manipulatives and other items related to mathematical ideas. It showcases mathematical creativity and applications.</div>
+        <div class="key-note">★ From 2018 Scheme: "organizing and providing a platform for talented students in mathematics to display charts, models, boards, manipulatives etc. related to mathematical ideas."</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Objectives of Mathematics Exhibition (4 marks)</div>
+        <ul class="point-list b">
+          <li>To provide a platform for <strong>talented students to exhibit their talents</strong></li>
+          <li>To <strong>create interest and appreciate</strong> talented students in mathematics</li>
+          <li>To <strong>concretise abstract mathematical ideas</strong> through models and exhibits</li>
+          <li>To represent mathematical ideas in <strong>figures, pictures and symbolic form</strong></li>
+          <li>To bring awareness about the <strong>nature of mathematics and enriched information</strong></li>
+          <li>To provide exposure about <strong>interesting mathematical ideas</strong> to all students</li>
+          <li>To <strong>identify talented students</strong> in mathematics and award them</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Organising Mathematics Laboratory — see Q.7 in 2023 tab</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B — Short Questions</div>
+  <div class="part-desc">Answer any FIVE. 5 marks each (5×5=25)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">What is mathematics olympiad? Mention its objectives and importance in teaching mathematics.</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">What is Mathematics Olympiad?</div>
+        <div class="ans-prose">Mathematics Olympiad is a competitive activity in mathematics to provide an opportunity to and identify talented or gifted children in mathematics. It tests higher-order mathematical thinking and problem-solving skills.</div>
+        <div class="key-note">★ From 2018 Official Scheme of Valuation, Dr. G. Vijayakumari</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Objectives and Importance:</div>
+        <ul class="point-list b">
+          <li>To provide opportunity for <strong>gifted children</strong> to excel</li>
+          <li>To develop <strong>competitive spirit</strong> among mathematics students</li>
+          <li>To <strong>identify and encourage gifted children</strong>; award and recognise them</li>
+          <li>To expose children to <strong>regional, national and international levels</strong> of competition</li>
+          <li>To help children <strong>know their capabilities</strong> and limitations</li>
+          <li>To nurture their talents and <strong>enhance critical and problem-solving skills</strong></li>
+          <li>To improve or expand one's <strong>knowledge in mathematics</strong></li>
+          <li>To enable students to <strong>think out of the box</strong> and develop creative mathematical thinking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">Explain briefly mathematics teacher as a reflective practitioner.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.13 in 2023 tab for the full answer on reflective practitioner.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">a) Who are slow learners in mathematics? b) How would you identify slow learners in mathematics classroom?</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Who are Slow Learners?</div>
+        <div class="ans-prose">Slow learners in mathematics are students who learn at a below-average pace, have difficulty understanding and retaining mathematical concepts, and consistently perform below their age-level peers despite normal intelligence. They are not intellectually disabled but need more time and support.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Identifying Slow Learners in Classroom:</div>
+        <ul class="point-list b">
+          <li><strong>Test Performance:</strong> Consistently scoring below average in tests and examinations</li>
+          <li><strong>Slow Pace:</strong> Taking significantly longer than peers to complete tasks</li>
+          <li><strong>Frequent Errors:</strong> Making repeated basic computational errors</li>
+          <li><strong>Difficulty Remembering:</strong> Forgetting previously learned concepts quickly</li>
+          <li><strong>Limited Vocabulary:</strong> Struggling with mathematical terms and symbols</li>
+          <li><strong>Avoidance Behaviour:</strong> Reluctance to participate, avoiding answering questions</li>
+          <li><strong>Poor Transfer:</strong> Unable to apply known concepts to new situations</li>
+          <li><strong>Teacher Observation:</strong> Regular classroom observation and diagnostic tests</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.9</span>
+      <span class="q-text">How does television and newspapers help in teaching mathematics at secondary school level?</span>
+      <span class="q-marks">(2.5+2.5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">Television:</div>
+        <ul class="point-list">
+          <li>Helps in providing <strong>visual presentation</strong> of content through pictures, figures and symbols</li>
+          <li>Helps in viewing <strong>videos on mathematics lessons</strong> and virtual classrooms</li>
+          <li>Provides <strong>concrete presentation of abstract mathematical ideas</strong></li>
+          <li>Enriches knowledge of mathematical ideas through <strong>expert talks and discussions</strong></li>
+          <li>Organises <strong>interactive sessions</strong> with peer group and experts</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Newspapers:</div>
+        <ul class="point-list b">
+          <li>Contains <strong>statistical data and graphs</strong> that can be used for data interpretation exercises</li>
+          <li>Financial news provides <strong>real-world application</strong> of percentage, profit/loss, interest</li>
+          <li>Sports statistics teach <strong>averages, ratios and comparison</strong></li>
+          <li>Puzzles and number games in newspapers <strong>develop mathematical reasoning</strong></li>
+          <li>Develops habit of <strong>reading and interpreting quantitative data</strong> in context</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.12</span>
+      <span class="q-text">a) What are BLOGS? b) Mention the advantages of BLOGS.</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What are Blogs?</div>
+        <div class="ans-prose">A <strong>Blog</strong> (short for weblog) is a regularly updated website or online journal where individuals or groups post content — articles, images, videos, links — on a topic. Mathematics blogs can share solutions, problems, teaching ideas and resources.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Advantages of Blogs:</div>
+        <ul class="point-list b">
+          <li>Easy and <strong>free platform</strong> for sharing mathematical knowledge and resources</li>
+          <li>Enables <strong>collaborative learning</strong> — students and teachers can comment and discuss</li>
+          <li>Develops students' ability to <strong>write and communicate mathematical ideas</strong> clearly</li>
+          <li>Provides access to <strong>diverse resources and problem sets</strong> from around the world</li>
+          <li>Builds a <strong>community of learners</strong> interested in mathematics</li>
+          <li>Available <strong>anytime and anywhere</strong> — supports self-paced learning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.13</span>
+      <span class="q-text">a) What is mathematics club? b) How would you organise mathematics club in a secondary school?</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Mathematics Club?</div>
+        <div class="ans-prose">A mathematics club is a voluntary organisation of students and teachers who are interested in mathematics, formed to develop interest, explore mathematical ideas beyond the textbook, and organise enriching mathematical activities in a school.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Organising Mathematics Club — see Q.2 in 2023 tab for detailed answer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-c">Part C — Mathematics Problems</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.14</span>
+      <span class="q-text">Show that the diagonals of a Rhombus are perpendicular to each other.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">Let ABCD be a rhombus with diagonals AC and BD intersecting at O.
+
+Given: AB = BC = CD = DA (all sides equal in rhombus)
+To prove: AC ⊥ BD
+
+In △AOB and △COB:
+  AO = CO   (diagonals of parallelogram bisect each other)
+  BO = BO   (common)
+  AB = CB   (sides of rhombus are equal)
+
+∴ △AOB ≅ △COB  (SSS congruence)
+
+∴ ∠AOB = ∠COB
+
+But ∠AOB + ∠COB = 180°  (linear pair)
+∴ 2∠AOB = 180°
+<span class="math-result">∴ ∠AOB = 90°  →  AC ⊥ BD  (Proved)</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.15</span>
+      <span class="q-text">Solve quadratic equations: i) x² - 4x + 2 = 0  ii) √(2x+9) = 13 - x</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">i) x² - 4x + 2 = 0
+Using quadratic formula: x = [-b ± √(b²-4ac)] / 2a
+a=1, b=-4, c=2
+
+x = [4 ± √(16-8)] / 2 = [4 ± √8] / 2 = [4 ± 2√2] / 2
+<span class="math-result">x = 2 + √2  or  x = 2 - √2</span>
+
+ii) √(2x+9) = 13 - x
+Squaring both sides:
+2x + 9 = (13-x)² = 169 - 26x + x²
+x² - 28x + 160 = 0
+(x - 20)(x - 8) = 0
+x = 20 or x = 8
+
+Check x=20: √(40+9) = √49 = 7; 13-20 = -7 ✗ (reject)
+Check x=8: √(16+9) = √25 = 5; 13-8 = 5 ✓
+<span class="math-result">∴ x = 8</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.16</span>
+      <span class="q-text">The 8th term of an AP is 17 and the 19th term is 39. Find the 25th term.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">t₈ = a + 7d = 17  ...(i)
+t₁₉ = a + 18d = 39  ...(ii)
+
+Subtract (i) from (ii):
+11d = 22  →  d = 2
+
+From (i): a + 14 = 17  →  a = 3
+
+t₂₅ = a + 24d = 3 + 48
+<span class="math-result">∴ t₂₅ = 51</span></div>
+    </div>
+  </div>
+
+</div><!-- end tab2022 -->
+
+<!-- ==================== 2021 ==================== -->
+<div id="tab2021" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">III Semester B.Ed. Examination — August 2021</div>
+      <div class="paper-code">Q.P. Code: 30534 (0361041) · Content and Pedagogy of Mathematics (CBCS)</div>
+    </div>
+    <div class="paper-marks">70 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A — Long Questions</div>
+  <div class="part-desc">Answer any THREE. 10 marks each (3×10=30)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) What is action research? b) Explain the steps of conducting action research in teaching of mathematics.</span>
+      <span class="q-marks">(2+8)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.4 in the 2023 tab for the complete definition and 10 steps of Action Research in Mathematics Teaching.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) What are the objectives of mathematics club at secondary school level? b) Explain how you would organize a mathematics club with suitable examples. c) What activities can be organised through the club?</span>
+      <span class="q-marks">(3+5+2)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.2 in the 2023 tab for complete answers on Mathematics Club — objectives, organisation and activities.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) How will be the status of mathematics teacher without professionalism? b) Mention any Six qualities that brings professionalism to a mathematics teacher? c) What is the role of seminars and workshops in improving the professional qualities of a mathematics teacher?</span>
+      <span class="q-marks">(2+3+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.5 in the 2023 tab for complete answers on Mathematics Teacher Professionalism, qualities, and role of seminar/workshop.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <span class="q-text">a) Who are slow learners in mathematics? b) How do you identify slow learners in mathematics class room? c) What measures do you take for slow learners?</span>
+      <span class="q-marks">(1+4+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Who are Slow Learners? (1 mark)</div>
+        <div class="ans-prose">Slow learners in mathematics are students who consistently learn at a below-average pace, have difficulty in understanding and retaining mathematical concepts, and require more time, attention and support than their peers to achieve grade-level competencies.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Identifying Slow Learners (4 marks) — See Q.8 in 2022 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Measures for Slow Learners (5 marks)</div>
+        <ul class="point-list c">
+          <li><strong>Diagnostic Testing:</strong> Identify specific weaknesses and plan targeted remediation</li>
+          <li><strong>Simplified Instructions:</strong> Break lessons into smaller steps; use simpler language</li>
+          <li><strong>Concrete Materials:</strong> Use manipulatives and hands-on TLM</li>
+          <li><strong>Extra Practice:</strong> Provide graded worksheets with additional practice</li>
+          <li><strong>Peer Tutoring:</strong> Pair with stronger students for cooperative learning</li>
+          <li><strong>Special Coaching:</strong> After-school or extra classes targeting weak areas</li>
+          <li><strong>Positive Reinforcement:</strong> Acknowledge every small achievement to build confidence</li>
+          <li><strong>Individualised Attention:</strong> Give personal guidance during class time</li>
+          <li><strong>Modified Evaluation:</strong> Allow more time, oral tests, alternative assessments</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <span class="q-text">a) List ten important characteristics of a good mathematics text book. b) List out the uses of mathematics textbook for teachers and students.</span>
+      <span class="q-marks">(5+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Ten Characteristics of a Good Maths Textbook (5 marks)</div>
+        <ul class="point-list">
+          <li>Accuracy — free of mathematical errors</li>
+          <li>Clarity of language — appropriate for learner level</li>
+          <li>Logical sequence — simple to complex, known to unknown</li>
+          <li>Adequate exercises — routine and challenging</li>
+          <li>Good illustrations — accurate diagrams and graphs</li>
+          <li>Curriculum alignment — covers all prescribed topics</li>
+          <li>Real-life connections — practical applications</li>
+          <li>Attractive format — good layout, clear print</li>
+          <li>Affordability — reasonable price</li>
+          <li>Self-explanatory — suitable for independent study</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Uses for Teachers and Students (5 marks)</div>
+        <div class="ans-head" style="margin-top:0.4rem;">For Teachers:</div>
+        <ul class="point-list b">
+          <li>Provides a structured plan for teaching — sequence and content</li>
+          <li>Acts as a guide for lesson planning and preparation</li>
+          <li>Source of exercises for class work, homework and assessment</li>
+          <li>Helps in maintaining uniform standards across all sections</li>
+        </ul>
+        <div class="ans-head" style="margin-top:0.4rem;">For Students:</div>
+        <ul class="point-list b">
+          <li>Primary reference for learning mathematical concepts</li>
+          <li>Provides exercises for practice and mastery</li>
+          <li>Enables self-study and revision at home</li>
+          <li>Reference for examination preparation</li>
+          <li>Helps in developing systematic study habits</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B — Short Questions</div>
+  <div class="part-desc">Answer any FIVE. 5 marks each (5×5=25)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">Mention the advantages of using Black board and smart board in teaching of mathematics.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">Blackboard:</div>
+        <ul class="point-list">
+          <li>Allows <strong>step-by-step presentation</strong> of mathematical solutions</li>
+          <li><strong>Inexpensive and always available</strong> — no power required</li>
+          <li>Enables <strong>immediate correction</strong> and modification of content</li>
+          <li>Suitable for <strong>drawing geometric figures</strong> and diagrams</li>
+          <li>Focuses <strong>attention of the whole class</strong> on the same content</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Smart Board:</div>
+        <ul class="point-list b">
+          <li>Enables <strong>multimedia presentations</strong> with animations, videos and simulations</li>
+          <li>Content can be <strong>saved and replayed</strong> for revision</li>
+          <li>Supports <strong>interactive activities</strong> — students can touch and manipulate on screen</li>
+          <li>Allows <strong>access to internet resources</strong> instantly during class</li>
+          <li>Helps visualise <strong>dynamic mathematical concepts</strong> (graphs changing in real time)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">What is Internet? What are the advantages of Internet in teaching of Mathematics?</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">What is Internet?</div>
+        <div class="ans-prose">The Internet is a global network of computers connected together to share and exchange information. It provides access to websites, online resources, video lectures, interactive tools and communication platforms.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Advantages of Internet in Teaching Mathematics:</div>
+        <ul class="point-list b">
+          <li>Access to <strong>online mathematical tools</strong> like GeoGebra, Desmos, Khan Academy</li>
+          <li>Provides <strong>vast repository of problems</strong> at all difficulty levels</li>
+          <li>Enables <strong>video tutorials</strong> explaining complex concepts step-by-step</li>
+          <li>Supports <strong>differentiated learning</strong> — students can access content at their own pace and level</li>
+          <li>Connects students to <strong>global mathematics communities</strong> for collaborative problem solving</li>
+          <li>Teachers can access <strong>lesson plans, activities and research</strong> in mathematics education</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-c">Part C — Mathematics Problems</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.14</span>
+      <span class="q-text">Prove that the angle between the two tangents drawn from an external point to a circle is supplementary to the angle subtended by the line segment joining the points of contact at the centre.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">Let P be external point; tangents PA and PB touch circle at A and B (centre O).
+To prove: ∠APB + ∠AOB = 180°
+
+OA ⊥ PA  (radius ⊥ tangent)  →  ∠OAP = 90°
+OB ⊥ PB  (radius ⊥ tangent)  →  ∠OBP = 90°
+
+In quadrilateral OAPB:
+∠OAP + ∠APB + ∠OBP + ∠AOB = 360°
+90° + ∠APB + 90° + ∠AOB = 360°
+∠APB + ∠AOB = 360° - 180°
+<span class="math-result">∴ ∠APB + ∠AOB = 180°  (Proved)</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.15</span>
+      <span class="q-text">32 defective masks are accidentally mixed with 264 good ones. One mask is taken at random. Determine the probability that it is (a) good and (b) defective.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">Total masks = 32 + 264 = 296
+Good masks = 264
+Defective masks = 32
+
+P(good) = 264/296 = 33/37
+<span class="math-result">P(good mask) = 33/37</span>
+
+P(defective) = 32/296 = 4/37
+<span class="math-result">P(defective mask) = 4/37</span>
+
+Verification: 33/37 + 4/37 = 37/37 = 1 ✓</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.16</span>
+      <span class="q-text">A manufacturer produced 6000 and 7000 Covid vaccines in the 3rd and 7th weeks respectively. Production increases uniformly. Find: i) Production in first week ii) Production in 10th week iii) Total production in first 7 weeks.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">AP with t₃ = 6000 and t₇ = 7000
+t₃ = a + 2d = 6000  ...(i)
+t₇ = a + 6d = 7000  ...(ii)
+
+Subtract (i) from (ii): 4d = 1000  →  d = 250
+From (i): a = 6000 - 500 = 5500
+
+i) First week (t₁ = a):
+<span class="math-result">Production in Week 1 = 5500 vaccines</span>
+
+ii) 10th week (t₁₀ = a + 9d):
+t₁₀ = 5500 + 9(250) = 5500 + 2250
+<span class="math-result">Production in Week 10 = 7750 vaccines</span>
+
+iii) Sum of first 7 weeks (S₇):
+S₇ = 7/2 [2(5500) + 6(250)]
+   = 7/2 [11000 + 1500]
+   = 7/2 × 12500
+<span class="math-result">Total production in 7 weeks = 43,750 vaccines</span></div>
+    </div>
+  </div>
+
+</div><!-- end tab2021 -->
+
+<!-- ==================== 2020 ==================== -->
+<div id="tab2020" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">III Semester B.Ed. Examination — February/March 2020</div>
+      <div class="paper-code">Q.P. Code: 30534 · Paper SC — Content and Pedagogy of Mathematics (CBCS 2 Years)</div>
+    </div>
+    <div class="paper-marks">70 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A — Long Questions</div>
+  <div class="part-desc">Answer any THREE. 10 marks each (3×10=30)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) What is the need of professionalism for a mathematics teacher? b) List any six professional skills of a mathematics teacher. c) What is the role of refresher courses and projects in improving the professional qualities of a mathematics teacher?</span>
+      <span class="q-marks">(2+3+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Need for Professionalism (2 marks)</div>
+        <ul class="point-list">
+          <li>To keep up with <strong>rapid changes</strong> in mathematics curriculum and teaching methods</li>
+          <li>To effectively <strong>use modern teaching tools</strong> like smart boards, computers and e-resources</li>
+          <li>To meet the <strong>diverse needs of all learners</strong> — gifted, slow, and average</li>
+          <li>To maintain <strong>respect and credibility</strong> as an educator in the community</li>
+          <li>To conduct <strong>action research</strong> and improve classroom practices</li>
+          <li>To contribute to <strong>improvement of mathematics education</strong> at institutional level</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Six Professional Skills (3 marks)</div>
+        <ul class="point-list b">
+          <li><strong>Content Knowledge:</strong> Deep understanding of mathematics</li>
+          <li><strong>Pedagogical Skills:</strong> Varied and effective teaching methods</li>
+          <li><strong>Communication Skills:</strong> Clear mathematical communication</li>
+          <li><strong>Assessment Skills:</strong> Designing tests and evaluating learning</li>
+          <li><strong>Research Skills:</strong> Conducting action research</li>
+          <li><strong>Technology Skills:</strong> Using ICT effectively in teaching</li>
+          <li><strong>Collaborative Skills:</strong> Working with colleagues and parents</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Role of Refresher Courses and Projects (5 marks)</div>
+        <div class="key-note">★ From 2018 Official Scheme: Projects — 2½ marks; Refresher Courses — 2½ marks</div>
+        <div class="ans-head" style="margin-top:0.5rem;">Projects:</div>
+        <ul class="point-list c">
+          <li>Helps in <strong>exploring new knowledge</strong> in mathematics, provides hands-on experience</li>
+          <li>Develops <strong>investigative skills and research skills</strong></li>
+          <li>Enables <strong>in-depth study</strong> on a mathematical idea</li>
+          <li>Teachers do <strong>field work</strong> and gain practical experience</li>
+          <li>Produces products such as <strong>lesson plans, TLM, test materials</strong></li>
+        </ul>
+        <div class="ans-head" style="margin-top:0.5rem;">Refresher Courses:</div>
+        <ul class="point-list c">
+          <li>Provides a <strong>wake-up call</strong> to remind teachers of their teaching roles</li>
+          <li>Enhances <strong>professional ethics</strong> which improves performance and quality education</li>
+          <li>Improves <strong>service delivery</strong> in terms of self-expression and communication</li>
+          <li>Helps respond to <strong>changing requirements of learners</strong> — background, aspirations, learning styles</li>
+          <li>Builds <strong>skill and confidence</strong> to present content better</li>
+          <li>Improves <strong>competences of teachers</strong> and enhances the learning process</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) Who are gifted children in mathematics? b) How do you identify gifted children in the mathematics class room? c) What measures do you take while handling gifted children?</span>
+      <span class="q-marks">(1+4+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.3 in the 2023 tab for complete answers on Gifted Children in Mathematics — definition, identification and measures.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) What is the meaning of e-resources in mathematics? b) How does e-resources help in learning mathematics? c) List any four advantages of websites in teaching mathematics.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Meaning of E-resources in Mathematics (2 marks)</div>
+        <div class="ans-prose"><strong>E-resources</strong> (electronic resources) in mathematics refer to all digital tools, materials and platforms that can be used in learning mathematics — including websites, software, apps, video lectures, simulations, e-textbooks, online assessments and virtual laboratories.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) How E-resources Help in Learning Mathematics (4 marks)</div>
+        <ul class="point-list b">
+          <li>Provide <strong>visual and animated representations</strong> of abstract mathematical concepts</li>
+          <li>Enable <strong>self-paced and personalised learning</strong> — students proceed at their own speed</li>
+          <li>Offer <strong>immediate feedback</strong> through online assessments and quizzes</li>
+          <li>Allow <strong>simulation of mathematical experiments</strong> (e.g., GeoGebra for geometry)</li>
+          <li>Provide access to <strong>expert teaching from anywhere</strong> via video lectures</li>
+          <li>Support <strong>collaborative problem-solving</strong> through online discussion forums</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Four Advantages of Websites in Teaching Mathematics (4 marks)</div>
+        <ul class="point-list c">
+          <li>Access to <strong>vast collections of problems and solutions</strong> at all levels</li>
+          <li>Availability of <strong>free high-quality resources</strong> — Khan Academy, NCERT, Desmos</li>
+          <li>Enables teachers to <strong>share lessons and resources globally</strong></li>
+          <li>Students can learn through <strong>interactive simulations and virtual manipulatives</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <span class="q-text">a) How does mathematics laboratory can be considered as school-based resources? b) What is the need of mathematics laboratory in realising the utilitarian value of mathematics? c) List any eight relevant equipment that can be used in mathematics laboratory of secondary school level.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Mathematics Laboratory as School-based Resource (2 marks)</div>
+        <div class="ans-prose">The mathematics laboratory is a school-based resource as it is located within the school premises, uses locally available and inexpensive materials, is accessible to all students at any time, is managed by the school's mathematics teacher, and connects learning directly to the school curriculum and local context.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Need of Mathematics Laboratory for Utilitarian Value (4 marks)</div>
+        <ul class="point-list b">
+          <li>Helps students see the <strong>practical applications</strong> of mathematical concepts in real life</li>
+          <li>Enables <strong>learning by doing</strong> — experiential learning of measurement, geometry</li>
+          <li>Demonstrates that mathematics is <strong>useful in everyday activities</strong></li>
+          <li>Develops <strong>practical skills</strong> — measurement, construction, estimation</li>
+          <li>Connects abstract concepts to <strong>concrete, tangible experiences</strong></li>
+          <li>Motivates students by showing the <strong>relevance and value</strong> of what they learn</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Eight Equipment for Mathematics Laboratory (4 marks)</div>
+        <ul class="point-list c">
+          <li>Geometric instrument sets (compass, protractor, ruler, set squares)</li>
+          <li>3D models of solids (cube, cuboid, cone, cylinder, sphere, pyramid)</li>
+          <li>Number lines and abacus</li>
+          <li>Geo-boards and dot boards</li>
+          <li>Weighing scales and measuring tapes</li>
+          <li>Mathematical puzzles and tangrams</li>
+          <li>Graph boards and graph sheets</li>
+          <li>Computer with GeoGebra / Desmos software installed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <span class="q-text">a) How does teaching-learning materials in mathematics helps in bringing effective learning? b) What should be the criteria on which teaching learning materials in mathematics shall be selected? c) List any six advantages of smart boards in mathematics.</span>
+      <span class="q-marks">(3+4+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.1 in the 2023 tab for complete answers on TLM effectiveness, selection criteria and smart board advantages.</div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B — Short Questions</div>
+  <div class="part-desc">Answer any FIVE. 5 marks each (5×5=25)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">a) What is mathematics olympiad? b) How do you organise it at school level?</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">What is Maths Olympiad? — See Q.6 in 2022 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Organising at School Level:</div>
+        <ul class="point-list b">
+          <li><strong>Preparation phase:</strong> Form a selection committee; identify potential participants through pre-tests</li>
+          <li><strong>Coaching:</strong> Conduct regular coaching sessions on problem-solving strategies beyond syllabus</li>
+          <li><strong>Internal competition:</strong> Conduct school-level olympiad to select top performers</li>
+          <li><strong>Registration:</strong> Register selected students for external olympiad (RMO, IOQM etc.)</li>
+          <li><strong>Support:</strong> Provide resource books, previous year papers and mentoring</li>
+          <li><strong>Recognition:</strong> Award and recognise participants and winners to motivate others</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">a) List the characteristics of slow learners in mathematics. b) Suggest any two remedial programmes for handling such slow learners in mathematics.</span>
+      <span class="q-marks">(3+2)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Characteristics of Slow Learners:</div>
+        <ul class="point-list">
+          <li>Short attention span and easily distracted</li>
+          <li>Poor memory for mathematical procedures and formulas</li>
+          <li>Difficulty with abstract reasoning and concepts</li>
+          <li>Slow rate of learning and processing</li>
+          <li>Low self-confidence and fear of mathematics</li>
+          <li>Poor reading comprehension affecting word problems</li>
+          <li>Unable to transfer knowledge to new situations</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Two Remedial Programmes:</div>
+        <ul class="point-list b">
+          <li><strong>Diagnostic-Prescriptive Teaching:</strong> Administer diagnostic tests to identify specific gaps; then prescribe targeted remedial instruction and practice for exactly those weaknesses</li>
+          <li><strong>Peer Tutoring Programme:</strong> Pair slow learners with academically stronger peers for cooperative learning sessions; structured peer tutoring has shown strong positive results in mathematics achievement</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">Give any ten suggestions to be followed by the mathematics teachers to become reflective practitioners.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <ul class="point-list">
+        <li>Maintain a <strong>daily teaching diary</strong> — record what worked and what did not</li>
+        <li><strong>Observe your own lessons</strong> through video recording and self-review</li>
+        <li>Seek <strong>feedback from students</strong> regularly through questionnaires</li>
+        <li>Participate in <strong>peer observation</strong> — observe colleagues and discuss practices</li>
+        <li>Engage in <strong>professional reading</strong> — journals, research papers on mathematics education</li>
+        <li>Attend <strong>workshops and seminars</strong> on mathematics teaching and share learning</li>
+        <li>Conduct <strong>action research</strong> on specific classroom challenges</li>
+        <li>Set <strong>personal professional goals</strong> each semester and review them</li>
+        <li><strong>Discuss with mentors</strong> or experienced teachers about teaching dilemmas</li>
+        <li>Stay updated with <strong>new technologies</strong> for teaching mathematics</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.10</span>
+      <span class="q-text">a) What is the role of mathematics teacher in maintaining mathematics library? b) Mention any four reference books that brings decorum to mathematics library in your school.</span>
+      <span class="q-marks">(3+2)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Role of Mathematics Teacher in Maintaining Library:</div>
+        <ul class="point-list">
+          <li><strong>Selection:</strong> Carefully select and recommend books, journals and materials for the library</li>
+          <li><strong>Organisation:</strong> Maintain proper cataloguing and classification of books</li>
+          <li><strong>Guidance:</strong> Guide students on which books to refer for specific topics</li>
+          <li><strong>Encouragement:</strong> Motivate students to develop the habit of visiting the library regularly</li>
+          <li><strong>Maintenance:</strong> Ensure books are kept in good condition; arrange for repair or replacement</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Four Reference Books for Mathematics Library:</div>
+        <ul class="point-list b">
+          <li><strong>The Man Who Knew Infinity</strong> — Robert Kanigel (Biography of Ramanujan)</li>
+          <li><strong>Mathematics — NCERT Textbooks</strong> (Class 9-12)</li>
+          <li><strong>Higher Algebra</strong> — Hall and Knight</li>
+          <li><strong>How to Solve It</strong> — George Pólya (Problem-solving strategies)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-c">Part C — Mathematics Problems</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.17</span>
+      <span class="q-text">Two water taps together can fill a tank in 9⅜ hours. The tap of larger diameter takes 10 hours less than the smaller one to fill the tank separately. Find the time in which each tap can separately fill the tank.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">Let smaller tap take x hours; larger tap takes (x-10) hours.
+Together: 9⅜ = 75/8 hours
+
+1/x + 1/(x-10) = 8/75
+
+(x-10+x) / [x(x-10)] = 8/75
+75(2x-10) = 8x(x-10)
+150x - 750 = 8x² - 80x
+8x² - 230x + 750 = 0
+4x² - 115x + 375 = 0
+
+Using quadratic formula:
+x = [115 ± √(115² - 4×4×375)] / 8
+x = [115 ± √(13225 - 6000)] / 8
+x = [115 ± √7225] / 8
+x = [115 ± 85] / 8
+
+x = 200/8 = 25  or  x = 30/8 = 3.75 (reject — gives negative for large tap)
+
+<span class="math-result">Smaller tap: 25 hours
+Larger tap: 25 - 10 = 15 hours</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.18</span>
+      <span class="q-text">Name the type of quadrilateral (if any) formed by the points: i) (-1,-2); (1,0); (-1,2); (-3,0)  ii) (-3,5); (3,1); (0,3); (-1,-4)  iii) (4,5); (7,6); (4,3); (1,2)</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">i) A(-1,-2), B(1,0), C(-1,2), D(-3,0)
+AB = √(4+4) = 2√2
+BC = √(4+4) = 2√2
+CD = √(4+4) = 2√2
+DA = √(4+4) = 2√2  ← all sides equal
+
+Diagonals: AC = √(0+16) = 4; BD = √(16+0) = 4 ← equal
+
+All sides equal + equal diagonals:
+<span class="math-result">→ Square</span>
+
+ii) A(-3,5), B(3,1), C(0,3), D(-1,-4)
+[Computing distances shows no regular pattern]
+<span class="math-result">→ No special quadrilateral (general quadrilateral)</span>
+
+iii) A(4,5), B(7,6), C(4,3), D(1,2)
+AB = √(9+1) = √10
+BC = √(9+9) = 3√2
+CD = √(9+1) = √10
+DA = √(9+9) = 3√2  ← opposite sides equal
+
+Check diagonals: AC = |5-3| = 2 (vertical); BD: √(36+16) = √52
+<span class="math-result">→ Parallelogram (opposite sides equal)</span></div>
+    </div>
+  </div>
+
+</div><!-- end tab2020 -->
+
+<!-- ==================== 2019 ==================== -->
+<div id="tab2019" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">III Semester B.Ed. Examination — September 2019</div>
+      <div class="paper-code">GN-035 (10952) · Content and Pedagogy of Mathematics · CBCS 2 Years Course</div>
+    </div>
+    <div class="paper-marks">70 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A — Long Questions</div>
+  <div class="part-desc">Answer any THREE. 10 marks each (3×10=30)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) Explain briefly the characteristics of a good Mathematics textbook. b) Examine the present VIII Std. Mathematics textbook in the light of these characteristics.</span>
+      <span class="q-marks">(5+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.1 in 2022 tab — Characteristics of a Good Maths Textbook (5 marks) and Critical Analysis (5 marks, adapt for VIII Std. as required).</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) Why should Mathematics club be organised in a secondary school? b) How should it be organized? c) What activities can be organised through this club?</span>
+      <span class="q-marks">(3+4+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.2 in the 2023 tab for complete answers on Mathematics Club — objectives (why it should be organised), organisation (how), and activities.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) What is a Mathematics laboratory? b) What is its importance in a secondary school? c) How do you organise the Mathematics laboratory in a secondary school?</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is a Mathematics Laboratory? (2 marks)</div>
+        <div class="ans-prose">A Mathematics laboratory is a specially equipped room in a school containing mathematical instruments, models, charts, measuring tools, computers and other materials that enable students to learn mathematics through hands-on activities, exploration and experimentation.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Importance in Secondary School (4 marks)</div>
+        <ul class="point-list b">
+          <li>Enables <strong>learning by doing</strong> — students discover mathematical concepts themselves</li>
+          <li>Makes abstract concepts <strong>concrete and tangible</strong></li>
+          <li>Develops <strong>practical and investigative skills</strong></li>
+          <li>Caters to <strong>different learning styles</strong> — visual, kinesthetic learners</li>
+          <li>Reduces <strong>fear of mathematics</strong> — learning becomes enjoyable</li>
+          <li>Demonstrates the <strong>utilitarian value</strong> of mathematics in real life</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Organising the Lab (4 marks) — See Q.7 in 2023 tab</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <span class="q-text">a) List the professional qualities of a Mathematics teacher. b) Explain the role of inservice programmes and orientation programmes in improving the professional qualities of a Mathematics teacher.</span>
+      <span class="q-marks">(4+6)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.2 in the 2022 tab for complete answers on professional qualities and role of inservice/orientation programmes.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <span class="q-text">a) What is Action Research? b) Prepare an action plan for conducting action research in Mathematics.</span>
+      <span class="q-marks">(2+8)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.4 in the 2023 tab for definition and detailed 10-step plan for Action Research in Mathematics Teaching.</div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B — Short Questions</div>
+  <div class="part-desc">Answer any FIVE. 5 marks each (5×5=25)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">Explain the criteria for selection of teaching-learning materials in Mathematics.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.1(b) in the 2023 tab for the complete criteria for selection of TLM with 9 points.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">a) List four special characteristics of gifted children in Mathematics. b) Explain briefly the enrichment activities that can be organised for them.</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Four Special Characteristics of Gifted Children:</div>
+        <ul class="point-list">
+          <li>Ability to think and reason logically at <strong>higher levels of abstraction</strong></li>
+          <li><strong>Recognise patterns and structures</strong> in mathematics readily</li>
+          <li><strong>High speed and accuracy</strong> in both oral and written calculations</li>
+          <li><strong>High level problem-solving skills</strong> — enjoy complex, non-routine problems</li>
+        </ul>
+        <div class="key-note">★ From 2018 Official Scheme: also includes — draw inferences, establish new relationships, deductive logic, high mathematical vocabulary</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Enrichment Activities:</div>
+        <ul class="point-list b">
+          <li><strong>Enriched curriculum</strong> — advanced topics, mathematical proof writing</li>
+          <li><strong>Differential assignments</strong> — challenging problems beyond textbook</li>
+          <li><strong>Mathematics exhibition and club activities</strong> — organising and leading</li>
+          <li><strong>Olympiad preparation</strong> — RMO, IOQM, IMO training</li>
+          <li><strong>Research projects</strong> — independent mathematical investigations</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.9</span>
+      <span class="q-text">Explain briefly that Mathematics teacher as a reflective practitioner.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.13 in the 2023 tab for the complete answer on mathematics teacher as a reflective practitioner.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.11</span>
+      <span class="q-text">What are the advantages of using chart and models in the teaching of mathematics?</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">Charts:</div>
+        <ul class="point-list">
+          <li>Provide <strong>visual representation</strong> of mathematical concepts at a glance</li>
+          <li>Display <strong>formulae, tables, sequences</strong> in an organised, memorable format</li>
+          <li>Attract attention and <strong>sustain interest</strong> in the classroom</li>
+          <li>Can be <strong>displayed permanently</strong> for ongoing reference by students</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Models:</div>
+        <ul class="point-list b">
+          <li>Make <strong>three-dimensional concepts concrete</strong> — especially in mensuration and geometry</li>
+          <li>Enable <strong>hands-on learning</strong> — students can hold and manipulate shapes</li>
+          <li>Help students <strong>visualise relationships</strong> between 2D and 3D figures</li>
+          <li>Develop <strong>spatial reasoning skills</strong></li>
+          <li>Increase <strong>retention of learning</strong> through physical interaction</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.12</span>
+      <span class="q-text">Explain the importance of Mathematics library in a secondary school.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.9 in the 2023 tab for the complete answer on importance of Mathematics Library.</div>
+    </div>
+  </div>
+
+  <div class="part-label part-c">Part C — Mathematics Problems</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.14</span>
+      <span class="q-text">a) Find r if ⁵Pᵣ = 2 × ⁶Pᵣ₋₁  b) Find n if ²ⁿC₃ : ⁿC₃ = 11:1</span>
+      <span class="q-marks">(2½+2½)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">a) ⁵Pᵣ = 2 × ⁶Pᵣ₋₁
+5!/(5-r)! = 2 × 6!/(6-(r-1))!
+5!/(5-r)! = 2 × 6!/(7-r)!
+(7-r)! × 5! = 2 × 6! × (5-r)!
+(7-r)(6-r)(5-r)! × 5! = 2 × 6 × 5! × (5-r)!
+(7-r)(6-r) = 12
+42 - 13r + r² = 12
+r² - 13r + 30 = 0
+(r-3)(r-10) = 0
+r = 3  (r=10 is invalid as r ≤ 5)
+<span class="math-result">∴ r = 3</span>
+
+b) ²ⁿC₃ : ⁿC₃ = 11:1
+[2n!/(3!(2n-3)!)] / [n!/(3!(n-3)!)] = 11
+2n! × (n-3)! / [n! × (2n-3)!] = 11
+2n(2n-1)(2n-2) / [n(n-1)(n-2)] = 11
+4(2n-1)/(n-2) = 11 [simplifying]
+8n-4 = 11n-22
+18 = 3n
+<span class="math-result">∴ n = 6</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.15</span>
+      <span class="q-text">Find the area of a sector of a circle with radius 6 cm, if angle of the sector is 60°. (use π = 22/7)</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">Area of sector = (θ/360°) × πr²
+                   = (60/360) × (22/7) × 6 × 6
+                   = (1/6) × (22/7) × 36
+                   = (1/6) × 792/7
+                   = 792/42
+                   = 132/7
+<span class="math-result">Area of sector = 18.86 cm²  (= 132/7 cm²)</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.18</span>
+      <span class="q-text">Find the sum of odd integers from 01 to 2001.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="math-block">Odd integers: 1, 3, 5, ..., 2001
+This is an AP with a=1, d=2, l=2001
+
+Number of terms n: l = a + (n-1)d
+2001 = 1 + (n-1)×2
+2000 = 2(n-1)
+n-1 = 1000  →  n = 1001
+
+Sₙ = n/2 (a + l)
+   = 1001/2 × (1 + 2001)
+   = 1001/2 × 2002
+   = 1001 × 1001
+<span class="math-result">Sum of odd integers from 1 to 2001 = 1,002,001</span></div>
+    </div>
+  </div>
+
+</div><!-- end tab2019 -->
+
+<!-- ==================== 2018 (with official scheme) ==================== -->
+<div id="tab2018" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">III Semester B.Ed. Examination — September/October 2018 ★ Official Answer Key</div>
+      <div class="paper-code">SS-020 · Content and Pedagogy of Mathematics (CBCS 2 Years Course)</div>
+    </div>
+    <div class="paper-marks">70 Marks</div>
+  </div>
+
+  <div class="scheme-note">
+    ★ This paper includes the <strong>official Scheme of Valuation</strong> prepared by <strong>Dr. G. Vijayakumari, Principal, Vijaya Teachers College, Jayanagar, Bengaluru — 560011</strong>. Answers below follow the official key exactly.
+  </div>
+
+  <div class="part-label part-a">Section A — Long Questions</div>
+  <div class="part-desc">Answer any THREE. 10 marks each (3×10=30)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) List the criteria for selecting teaching-learning materials in teaching mathematics. b) Select any four teaching-learning materials and explain how do you use while teaching a topic in mathematics.</span>
+      <span class="q-marks">(4+6)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Criteria for Selecting TLM — any 8 points × ½ mark = 4 marks</div>
+        <div class="key-note">★ OFFICIAL SCHEME (Dr. G. Vijayakumari, 2018)</div>
+        <ul class="point-list">
+          <li>Consider the <strong>age, intellectual level and previous experience</strong> of the learners</li>
+          <li>It should <strong>serve the desired purpose</strong>; help in achieving stated objectives</li>
+          <li>Provide required <strong>multi-sensory experience</strong> to the learners</li>
+          <li><strong>Appropriateness to the content</strong> being taught</li>
+          <li><strong>Accuracy in measurement and clarity</strong> of concepts</li>
+          <li>Appropriateness in size and <strong>clearly visible</strong> (in case of visual materials)</li>
+          <li>Clearly <strong>audible</strong> in case of audio materials</li>
+          <li>Should be prepared out of <strong>available and inexpensive materials</strong></li>
+          <li><strong>Cost should be reasonable</strong> and easily available</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Four TLMs and How to Use — explanation in 5/6 sentences each × 1½ marks = 6 marks</div>
+        <div class="key-note">★ OFFICIAL SCHEME: Each TLM described in 5-6 sentences, each carrying 1½ marks</div>
+        <div class="ans-head" style="margin-top:0.4rem;">1. Number Line (for Integers):</div>
+        <ul class="point-list b">
+          <li>A horizontal line with numbers marked at equal intervals — negative on left, positive on right</li>
+          <li>Teacher uses it to demonstrate addition: starting from 3, move 4 steps right → 3+4=7</li>
+          <li>Subtraction: starting from 5, move 3 steps left → 5-3=2</li>
+          <li>Helps make addition and subtraction of integers <strong>visual and concrete</strong></li>
+        </ul>
+        <div class="ans-head" style="margin-top:0.4rem;">2. Geo-board (for Geometry):</div>
+        <ul class="point-list b">
+          <li>A square board with nails arranged in a grid pattern; rubber bands are stretched between nails</li>
+          <li>Used to form triangles, quadrilaterals and other polygons</li>
+          <li>Students can explore <strong>area and perimeter</strong> by counting unit squares and edges</li>
+          <li>Enables discovery of properties like angle sum of triangles</li>
+        </ul>
+        <div class="ans-head" style="margin-top:0.4rem;">3. 3D Models (for Mensuration):</div>
+        <ul class="point-list b">
+          <li>Physical models of cube, cone, cylinder, sphere made of cardboard or plastic</li>
+          <li>Used when teaching volume and surface area</li>
+          <li>Students can <strong>open up models</strong> (nets) to understand surface area formula derivation</li>
+        </ul>
+        <div class="ans-head" style="margin-top:0.4rem;">4. Fraction Strips (for Fractions):</div>
+        <ul class="point-list b">
+          <li>Strips of equal length divided into different fractions — halves, thirds, quarters etc.</li>
+          <li>Used to compare fractions visually: ½ vs ⅓ vs ¼</li>
+          <li>Helps teach addition and subtraction of fractions with unlike denominators concretely</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) What is Mathematics exhibition? What are the objectives of Mathematics exhibitions? b) As a teacher of mathematics, how would you organise mathematics exhibition in your school?</span>
+      <span class="q-marks">(6+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Mathematics Exhibition and Objectives — 2 + 4 marks</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "organizing and providing a platform for talented students in mathematics to display charts, models, boards, manipulatives etc. related to mathematical ideas" — 2 marks. Objectives: any 8 points × ½ mark = 4 marks</div>
+        <div class="ans-prose" style="margin-bottom:0.6rem;"><strong>Definition:</strong> Mathematics exhibition is an event that provides a platform for talented students in mathematics to display charts, models, boards, manipulatives and related materials, showcasing mathematical ideas in creative and visual ways.</div>
+        <div class="ans-head b">Objectives:</div>
+        <ul class="point-list b">
+          <li>To provide a platform for <strong>talented students to exhibit their talents</strong></li>
+          <li>To <strong>create interest and appreciate talented students</strong> in mathematics</li>
+          <li>To <strong>concretise abstract mathematical ideas</strong></li>
+          <li>To represent mathematical ideas in <strong>figure, picture and symbolic form</strong></li>
+          <li>To bring awareness about the <strong>nature of mathematics and enriched information</strong> of mathematics</li>
+          <li>To provide exposure about <strong>interesting mathematical ideas</strong> to all students</li>
+          <li>To <strong>identify talented students</strong> in mathematics and award them</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">b) Organisation of Mathematics Exhibition — 4 marks</div>
+        <div class="key-note">★ OFFICIAL SCHEME: Explanation including — selection of theme, level, participants, venue; taking permissions and inviting participants; planning; execution and evaluation</div>
+        <ul class="point-list c">
+          <li><strong>Theme selection:</strong> Decide on a central mathematical theme (e.g., "Mathematics in Nature")</li>
+          <li><strong>Level and participants:</strong> Determine which classes/groups will participate; allow individual and group entries</li>
+          <li><strong>Venue:</strong> Select school hall, courtyard or specific rooms; ensure sufficient display space</li>
+          <li><strong>Permissions:</strong> Get approval from principal; notify parents; invite external judges</li>
+          <li><strong>Planning:</strong> Form committees — exhibits, decorations, logistics, judges; set timeline</li>
+          <li><strong>Execution:</strong> Guide students in creating displays; supervise setup; conduct judging</li>
+          <li><strong>Evaluation:</strong> Award prizes; display winning entries; document for future reference</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) What is computer? How does the computer helps the students effectively in teaching mathematics through using internet? b) Write the four advantages of using computer and internet in teaching mathematics.</span>
+      <span class="q-marks">(6+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Computer? (2 marks) + Effectiveness through Internet (4 marks)</div>
+        <div class="key-note">★ OFFICIAL SCHEME: Definition — 2 marks. Internet effectiveness — explanation including 4+ points — 4 marks</div>
+        <div class="ans-prose" style="margin-bottom:0.6rem;"><strong>Computer:</strong> A computer is an electronic machine or device that is able to take information (input), and process it to make new information (output). It can store large information and calculations can be done easily and quickly.</div>
+        <div class="ans-head b">Effectiveness through Internet:</div>
+        <ul class="point-list b">
+          <li>Encourages <strong>development of new teaching methods</strong>; allows teachers to create exciting ways to educate students</li>
+          <li>Enables proving <strong>mathematical theorems</strong> using computer programs</li>
+          <li>Symbolic representation of <strong>mathematical computation</strong></li>
+          <li>Study and development of <strong>algorithms and software</strong> for manipulating mathematical expressions</li>
+          <li>Easy and quick method of <strong>computing and constructing numerical solutions</strong></li>
+          <li>Enhances <strong>communication and availability of mathematical information</strong></li>
+          <li>Convenient and easy way of <strong>resource sharing</strong></li>
+          <li>Effective in <strong>motivating and increasing interest</strong> in mathematics</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">b) Four Advantages of Computer and Internet — each in 2/3 sentences = 4 marks</div>
+        <div class="key-note">★ OFFICIAL SCHEME: 4 points × 1 mark each, with explanation in 2-3 sentences</div>
+        <ul class="point-list c">
+          <li><strong>Multimedia presentation:</strong> Using sound, animation, images, text, linking of related instructional content makes lessons vivid and memorable</li>
+          <li><strong>Simulations:</strong> Simulations of mathematical concepts provide more engaging and exploring activities for students</li>
+          <li><strong>Critical thinking:</strong> Develop skills such as critical thinking, problem solving skills; develop ability to evaluate mathematical information and make judgements</li>
+          <li><strong>Communication skills:</strong> Develop communication skills — ability to present ideas and share experiences; develop proficiency in using technology</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.4</span>
+      <span class="q-text">a) What are the characteristics of Gifted children in Mathematics? b) How would you identify the gifted children in mathematics class and suggest the enrichment programmes provided to them?</span>
+      <span class="q-marks">(4+6)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Characteristics of Gifted Children — any 8 × ½ mark = 4 marks</div>
+        <div class="key-note">★ OFFICIAL SCHEME, Dr. G. Vijayakumari</div>
+        <ul class="point-list">
+          <li>Ability to think and reason logically</li>
+          <li>To think on <strong>higher levels of abstraction</strong></li>
+          <li><strong>Draw inferences and establish new relationships</strong></li>
+          <li>Make predictions based on <strong>mathematical data</strong></li>
+          <li>Recognize <strong>patterns and structures</strong> in mathematics readily</li>
+          <li>Capability of <strong>deductive logic</strong></li>
+          <li>High speed and accuracy in both <strong>oral and written calculations</strong></li>
+          <li>High level <strong>problem solving skills</strong></li>
+          <li>Enjoys studying <strong>mathematics books and journals</strong></li>
+          <li>High <strong>mathematical vocabulary</strong></li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Identification (3 marks) + Enrichment Programmes (3 marks)</div>
+        <div class="key-note">★ OFFICIAL SCHEME: Identification techniques — 3 marks; Enrichment programs — any 6 points × ½ = 3 marks</div>
+        <div class="ans-head" style="margin-top:0.4rem;">Identification:</div>
+        <ul class="point-list b">
+          <li><strong>Observing unique characteristics</strong> of gifted children in classroom</li>
+          <li><strong>Assessing and taking scores</strong> on intelligence, especially reasoning ability</li>
+          <li>Scores on <strong>mathematical aptitude test</strong></li>
+          <li>Score on <strong>interest in maths and attitude</strong> towards mathematics</li>
+        </ul>
+        <div class="ans-head" style="margin-top:0.4rem;">Enrichment Programmes:</div>
+        <ul class="point-list b">
+          <li><strong>Enriched curriculum</strong></li>
+          <li><strong>Differential assignments</strong></li>
+          <li><strong>Graded exercises with optional problems</strong></li>
+          <li>Providing <strong>original and independent work</strong></li>
+          <li>Provision for <strong>projects and seminars</strong></li>
+          <li>Organising <strong>mathematics exhibition and mathematics club activities</strong></li>
+          <li>Organising <strong>mathematics quiz and Olympiads</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.5</span>
+      <span class="q-text">a) Mention the skills of professional growth of mathematics teacher. b) What is the role of inservice programmes and orientation programmes in improving the professional growth of mathematics teacher?</span>
+      <span class="q-marks">(2+8)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Skills of Professional Growth — any 4 × ½ mark = 2 marks</div>
+        <div class="key-note">★ OFFICIAL SCHEME (Note: vague question. Any 4 skills × ½ mark each)</div>
+        <ul class="point-list">
+          <li><strong>Information processing skills</strong> — acquiring and updating latest knowledge</li>
+          <li>Skill in effectively <strong>communicating mathematical ideas</strong></li>
+          <li>Skill in <strong>preparing and presenting seminar papers</strong> in mathematics</li>
+          <li>Skill in <strong>preparing and using TLM</strong> in maths</li>
+          <li><strong>Collaborative skills</strong></li>
+          <li>Skill in <strong>adapting new methods and techniques</strong> of teaching mathematics</li>
+          <li>Skills in <strong>assessment and evaluation strategies</strong></li>
+          <li><strong>Research skills</strong></li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Role of Inservice and Orientation — 5 marks inservice + 3 marks orientation</div>
+        <div class="key-note">★ OFFICIAL SCHEME: 5 marks for inservice, 3 marks for orientation (many points overlap)</div>
+        <ul class="point-list b">
+          <li>Develops and enriches teachers knowledge; develops required skills for mathematics teachers</li>
+          <li>Enhance their <strong>communication skills</strong></li>
+          <li>Update their knowledge about <strong>new methods and techniques</strong> of teaching mathematics</li>
+          <li>Orient them on <strong>new education policy</strong> regarding maths</li>
+          <li>Orient them on <strong>new trends in mathematics education</strong></li>
+          <li>Develop skills in preparation and use of <strong>TLM in mathematics</strong></li>
+          <li>Enhance knowledge and skills in latest <strong>assessment and evaluation strategies</strong></li>
+          <li><strong>Technology</strong> in teaching and learning process</li>
+          <li>Develop skill in integrating <strong>technology in teaching-learning</strong> process</li>
+          <li>Develop <strong>collaborative and cooperative skills</strong></li>
+          <li>Develop <strong>research skills</strong> in mathematics education (conduct action research)</li>
+          <li>Develop <strong>positive attitude</strong> towards the profession and the subject</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Section B — Short Questions</div>
+  <div class="part-desc">Answer any FIVE. 5 marks each (5×5=25)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">How does television and radio help in teaching mathematics at secondary school level?</span>
+      <span class="q-marks">(2½+2½)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: Radio — 2½ marks; Television — 2½ marks</div>
+      <div class="ans-section">
+        <div class="ans-head">Radio:</div>
+        <ul class="point-list">
+          <li>Develop <strong>interest in maths</strong> by listening to talks and discussions on mathematical topics</li>
+          <li>Enriching knowledge on <strong>mathematical content, mathematicians and history</strong> of maths</li>
+          <li>Providing exposure to <strong>problem solving techniques</strong> and solutions to difficult problems</li>
+          <li>Organising discussions after radio programs to <strong>increase understanding and critical thinking</strong></li>
+          <li>Integrating radio programs with <strong>classroom teaching and learning</strong></li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Television:</div>
+        <ul class="point-list b">
+          <li>Helps in providing <strong>visual presentation</strong> of content through pictures, figures and symbols</li>
+          <li>Helps in viewing <strong>videos on mathematics lessons</strong></li>
+          <li>Presenting <strong>virtual classrooms</strong></li>
+          <li><strong>Concrete presentation of abstract</strong> mathematical ideas</li>
+          <li>Enriches their knowledge on mathematical ideas; <strong>exposure to experts</strong> in maths through their talks and discussions</li>
+          <li>Organising <strong>interactive sessions</strong> with peer group and experts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">What is mathematics library? Explain its purpose and activities.</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">Definition — 1 mark</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "There is no definition as such for mathematics library. Hence, an explanation including the following points — 1 mark: It is a subject based library for mathematics – contains books, periodicals, journals related to mathematics"</div>
+        <div class="ans-prose">A mathematics library is a <strong>subject-based library for mathematics</strong> that contains books, periodicals and journals related to mathematics, managed for use by students and teachers in the school.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Purpose of Mathematics Library — 4 marks</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "providing source for mathematical information; to inculcate good reading and study habits; promote self-study and independent work; provide intensive and extensive study in mathematics; to provide extended reading to go beyond the syllabus; to plug in the learning gaps and ideas not understood in the class; to provide elaborated drill work; to cater to the needs of gifted children..."</div>
+        <ul class="point-list b">
+          <li>Providing <strong>source for mathematical information</strong></li>
+          <li>To inculcate <strong>good reading and study habits</strong></li>
+          <li>Promote <strong>self-study and independent work</strong></li>
+          <li>Provide <strong>intensive and extensive study</strong> in mathematics</li>
+          <li>To provide <strong>extended reading to go beyond the syllabus</strong></li>
+          <li>To <strong>plug in the learning gaps</strong> and ideas not understood in class</li>
+          <li>To provide <strong>elaborated drill work</strong></li>
+          <li>To <strong>cater to the needs of gifted children</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">What is Mathematics Olympiad? Mention its objectives and importance in Teaching Mathematics.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">Definition — 1 mark</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "It is a competitive activity in mathematics to provide an opportunity to and identify talented or gifted children in mathematics" — 1 mark</div>
+        <div class="ans-prose">Mathematics Olympiad is a competitive activity in mathematics to provide an opportunity to and identify talented or gifted children in mathematics. It is "a competitive activity to test the knowledge and skills in mathematics."</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Objectives and Importance — any 8 × ½ = 4 marks</div>
+        <div class="key-note">★ OFFICIAL SCHEME: 8 points listed</div>
+        <ul class="point-list b">
+          <li>To <strong>improve or expand one's knowledge</strong> in mathematics</li>
+          <li>To promote, a <strong>fun way to study</strong></li>
+          <li>To enable students to <strong>think from different angles</strong> or 'think out of the box'</li>
+          <li>To develop the <strong>spirit of competition</strong></li>
+          <li>To promote a <strong>healthy debate amongst participants</strong> in order to learn from each other</li>
+          <li>To aid in <strong>vocabulary development</strong> in mathematics</li>
+          <li>To develop <strong>good communication skills</strong></li>
+          <li>To enhance <strong>speed and accuracy</strong> in oral and written calculations</li>
+          <li>To aid in the <strong>team building process</strong></li>
+          <li>To provoke discussion and <strong>healthy debate</strong> amongst participants/teams</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.9</span>
+      <span class="q-text">What is the role of projects and refresher courses to attain professional growth of a Mathematics Teacher?</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: Projects — 2½ marks; Refresher Courses — 2½ marks</div>
+      <div class="ans-section">
+        <div class="ans-head">Projects:</div>
+        <ul class="point-list">
+          <li>Helps in <strong>exploring new knowledge</strong> in mathematics, provides hands-on experience</li>
+          <li>Develops <strong>investigative skills and research skills</strong></li>
+          <li>To <strong>carry on in-depth study</strong> on a mathematical idea; to do field work; to gain practical experience</li>
+          <li>To carry on <strong>intensive and extensive study</strong></li>
+          <li>To enhance <strong>practical skills</strong></li>
+          <li>To develop products such as <strong>lesson plans, teaching-learning materials, test materials</strong></li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Refresher Courses:</div>
+        <ul class="point-list b">
+          <li>Provide <strong>wake-up call</strong> to remind teachers of their teacher roles</li>
+          <li>Enhances their <strong>professional ethics</strong> which in the end will improve their performance and thus quality education</li>
+          <li>To improve <strong>service delivery</strong> in terms of self-expression and communication</li>
+          <li>To continuously respond adequately to the <strong>changing requirements of learners</strong> such as their background, aspirations and learning styles</li>
+          <li>Gain the <strong>skill and confidence</strong> to bring out the content better</li>
+          <li>Improve <strong>competences of teachers</strong> and enhance the learning process; <strong>capacity building</strong> in teachers</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.10</span>
+      <span class="q-text">Explain the need and significance of Human resources and Natural resources in mathematics.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: "To give exposure to experts; to provide enriched information; to have interactions with experts; to give demonstrations, talks and discussions... To connect mathematics with nature; to use naturally available resources and inexpensive things; to give exposure to real things and reality... (Note: sufficient content is not available for 5 marks)"</div>
+      <div class="ans-section">
+        <div class="ans-head">Human Resources:</div>
+        <ul class="point-list">
+          <li>To give <strong>exposure to experts</strong> — mathematicians, scientists, engineers</li>
+          <li>To provide <strong>enriched information</strong> from professionals who use mathematics</li>
+          <li>To have <strong>interactions with experts</strong> through guest lectures</li>
+          <li>To give <strong>demonstrations, talks and discussions</strong> on applied mathematics</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Natural Resources:</div>
+        <ul class="point-list b">
+          <li>To connect <strong>mathematics with nature</strong> — patterns in leaves, spirals in shells, fractals</li>
+          <li>To use <strong>naturally available and inexpensive things</strong> as TLM — seeds, pebbles, sticks</li>
+          <li>To give exposure to <strong>real things and reality</strong> — outdoor measurement activities</li>
+          <li>Shows students that <strong>mathematics exists in the natural world</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.11</span>
+      <span class="q-text">What is the role of seminar and workshop in improving the professional qualities of a Mathematics teacher?</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: Seminar — 2½ marks × ½ each; Workshop — 2½ marks × ½ each</div>
+      <div class="ans-section">
+        <div class="ans-head">Seminar:</div>
+        <ul class="point-list">
+          <li><strong>Updating latest knowledge</strong></li>
+          <li>Collecting and organising information on a <strong>specific mathematical topic</strong></li>
+          <li>Enhance <strong>presentation skills</strong></li>
+          <li>Increase <strong>resourcefulness</strong> of the teachers</li>
+          <li><strong>Share ideas</strong></li>
+          <li>Develop skill in <strong>constructive discussions</strong></li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Workshop:</div>
+        <ul class="point-list b">
+          <li>Develops <strong>practical skills</strong></li>
+          <li>Provides <strong>hands-on experience</strong></li>
+          <li>Develop products such as <strong>lesson plans, learning materials, test items</strong></li>
+          <li>Develop <strong>technological skills</strong></li>
+          <li>To master <strong>new techniques of teaching and evaluation</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.12</span>
+      <span class="q-text">What is mathematics quiz programme? What are its objectives?</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: Definition/explanation — 2 marks; Objectives: any 6 points × ½ mark = 3 marks</div>
+      <div class="ans-section">
+        <div class="ans-head">What is Mathematics Quiz Programme?</div>
+        <div class="ans-prose">A Mathematics quiz programme is a competitive activity held at school level to test students' mathematical knowledge, speed and accuracy. It is "a competitive activity to test the knowledge and skills in mathematics" in an engaging, game-like format.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Objectives — any 6 × ½ mark:</div>
+        <ul class="point-list b">
+          <li>To <strong>improve or expand one's knowledge</strong> in mathematics</li>
+          <li>To promote a <strong>fun way to study</strong></li>
+          <li>To enable students to <strong>think from different angles / think out of the box</strong></li>
+          <li>To develop the <strong>spirit of competition</strong></li>
+          <li>To promote a <strong>healthy debate</strong> amongst participants to learn from each other</li>
+          <li>To aid in <strong>vocabulary development</strong> in mathematics</li>
+          <li>To develop <strong>good communication skills</strong></li>
+          <li>To enhance <strong>speed and accuracy</strong> in oral and written calculations</li>
+          <li>To aid in the <strong>team building process</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.13</span>
+      <span class="q-text">Critically analyse the present 9th standard mathematics text book.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: "Listing out or discussing good points – weak points or errors – providing suggestions – 2+2+1 marks. Points related to content presentation, illustration and explanations, exercises and problems, figures and graphs, physical qualities – price – committee"</div>
+      <div class="ans-section">
+        <div class="ans-head">Good Points (2 marks):</div>
+        <ul class="point-list">
+          <li>Follows curriculum systematically; concepts presented in <strong>logical sequence</strong></li>
+          <li>Adequate exercises with <strong>solved examples</strong> before practice problems</li>
+          <li>Good use of <strong>diagrams in geometry</strong> and co-ordinate geometry chapters</li>
+          <li>Contains <strong>real-life word problems</strong> connecting concepts to daily life</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Weak Points/Errors (2 marks):</div>
+        <ul class="point-list b">
+          <li>Some explanations are <strong>too brief</strong> for self-study by average students</li>
+          <li>Limited activities for <strong>discovery learning</strong></li>
+          <li>Insufficient <strong>higher-order thinking questions</strong></li>
+          <li>Some diagrams are <strong>small and unclear</strong></li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">Suggestions (1 mark):</div>
+        <ul class="point-list c">
+          <li>Include more <strong>application-based and project work</strong></li>
+          <li>Add <strong>digital learning links</strong> (QR codes) for supplementary resources</li>
+          <li>Include a <strong>glossary</strong> of mathematical terms</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-c">Section C — Mathematics Problems</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.14</span>
+      <span class="q-text">If a + b + c = 0 prove that a(a² - bc) + b(b² - ca) + c(c² - ab) = 0</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ From Official Scheme with full worked solution</div>
+      <div class="math-block">Given: a + b + c = 0  →  a + b = -c  ...(i)
+
+By cubing both sides of (i):
+(a+b)³ = -c³
+a³ + b³ + 3ab(a+b) = -c³
+a³ + b³ + 3ab(-c) = -c³  [from (i)]
+a³ + b³ - 3abc = -c³
+a³ + b³ + c³ = 3abc  ...(ii)
+
+LHS = a(a² - bc) + b(b² - ca) + c(c² - ab)
+    = a³ - abc + b³ - abc + c³ - abc
+    = a³ + b³ + c³ - 3abc
+<span class="math-step">= 3abc - 3abc</span>  [from (ii)]
+<span class="math-result">= 0 = RHS  (Proved)</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.15</span>
+      <span class="q-text">If A = [[3,1],[2,5]] show that A² - 8A + 13I = 0</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ From Official Scheme with full worked solution</div>
+      <div class="math-block">A = [[3, 1], [2, 5]]
+
+A² = A × A = [[3,1],[2,5]] × [[3,1],[2,5]]
+   = [[3×3+1×2, 3×1+1×5], [2×3+5×2, 2×1+5×5]]
+   = [[11, 8], [16, 27]]
+
+8A = [[24, 8], [16, 40]]
+
+13I = [[13, 0], [0, 13]]
+
+A² - 8A + 13I = [[11,8],[16,27]] - [[24,8],[16,40]] + [[13,0],[0,13]]
+              = [[-13, 0], [0, -13]] + [[13, 0], [0, 13]]
+<span class="math-result">= [[0, 0], [0, 0]] = 0  (Proved)</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.16</span>
+      <span class="q-text">Two tangents TP and TQ are drawn to a circle with centre 'O' from the external point 'T'. Prove that ∠PTQ = 2∠OPQ.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ Full proof from Official Scheme of Valuation</div>
+      <div class="math-block">Given: TP and TQ are tangents from external point T to circle centre O.
+P and Q are points of contact.
+To prove: ∠PTQ = 2∠OPQ
+
+In △PTQ:
+TP = TQ  (tangents from external point)
+∴ ∠TPQ = ∠TQP  ...(i)  (angles opposite equal sides)
+
+OP ⊥ PT  (radius ⊥ tangent)
+∴ ∠OPT = 90°
+∴ ∠OPQ + ∠TPQ = 90°
+∴ ∠TPQ = 90° - ∠OPQ  ...(ii)
+
+In △PTQ:
+∠PTQ + ∠TPQ + ∠TQP = 180°  (angle sum)
+∠PTQ + ∠TPQ + ∠TPQ = 180°  [from (i)]
+∠PTQ + 2∠TPQ = 180°
+∠PTQ = 180° - 2∠TPQ
+∠PTQ = 180° - 2(90° - ∠OPQ)  [from (ii)]
+∠PTQ = 180° - 180° + 2∠OPQ
+<span class="math-result">∴ ∠PTQ = 2∠OPQ  (Proved)</span></div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num c">Q.17</span>
+      <span class="q-text">7th term of a HP is 3/2 and its 10th term is 12/17. Find T₈.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ Full solution from Official Scheme (Harmonic Progression — reciprocals form an AP)</div>
+      <div class="math-block">For HP, the reciprocals form an AP.
+7th term of HP = 3/2  →  7th term of AP = 2/3
+10th term of HP = 12/17  →  10th term of AP = 17/12
+
+In AP: a + 6d = 2/3  ...(i)
+       a + 9d = 17/12  ...(ii)
+
+Subtract (i) from (ii):
+3d = 17/12 - 2/3 = 17/12 - 8/12 = 9/12 = 3/4
+∴ d = 1/4
+
+From (i): a = 2/3 - 6(1/4) = 2/3 - 3/2 = 4/6 - 9/6 = -5/6
+
+8th term of AP = a + 7d = -5/6 + 7(1/4) = -5/6 + 7/4
+              = -10/12 + 21/12 = 11/12
+
+∴ 8th term of HP = 12/11
+<span class="math-result">T₈ of HP = 12/11</span></div>
+    </div>
+  </div>
+
+</div><!-- end tab2018 -->
+
+<!-- ==================== IMPORTANT QUESTIONS ==================== -->
+<div id="tabIQ" class="tab-content">
+  <div class="iq-intro">
+    <p>⭐ Questions ranked by frequency across all <strong>6 papers (2018–2023)</strong>. Top questions appear in 5–6 out of 6 papers. Focus on HIGH frequency questions first for exam preparation.</p>
+  </div>
+
+  <div class="iq-group">
+    <div class="iq-group-title">🔴 Part A — High Frequency Long Questions (10 marks)</div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">6/6 papers</span>
+      <span class="iq-text"><strong>Mathematics Teacher Professionalism</strong> — professional qualities, need for professionalism, role of seminars/workshops/refresher courses/orientation/inservice programmes</span>
+      <span class="iq-years">2023, 2022, 2021<br>2020, 2019, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">6/6 papers</span>
+      <span class="iq-text"><strong>Teaching-Learning Materials (TLM)</strong> — criteria for selection, how TLM brings effective learning, advantages of smart boards, using specific TLMs in teaching</span>
+      <span class="iq-years">2023, 2022, 2021<br>2020, 2019, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">5/6 papers</span>
+      <span class="iq-text"><strong>Action Research in Mathematics</strong> — definition, 10 steps of action research, preparing an action plan</span>
+      <span class="iq-years">2023, 2022, 2021<br>2019, 2018 (not 2020)</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">5/6 papers</span>
+      <span class="iq-text"><strong>Gifted Children in Mathematics</strong> — who are they, characteristics, identification methods, enrichment programmes</span>
+      <span class="iq-years">2023, 2022, 2021<br>2020, 2018 (not 2019 Part A)</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">5/6 papers</span>
+      <span class="iq-text"><strong>Mathematics Club</strong> — objectives, how to organise, activities through the club</span>
+      <span class="iq-years">2023, 2022, 2021<br>2019, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">4/6 papers</span>
+      <span class="iq-text"><strong>Mathematics Textbook</strong> — characteristics of a good textbook, critical analysis of present textbook</span>
+      <span class="iq-years">2022, 2021, 2019, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">4/6 papers</span>
+      <span class="iq-text"><strong>Slow Learners in Mathematics</strong> — who they are, identification, measures/remedial programmes</span>
+      <span class="iq-years">2023, 2022, 2021, 2020</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">3/6 papers</span>
+      <span class="iq-text"><strong>Mathematics Laboratory</strong> — what it is, importance, how to organise, equipment, as school-based resource</span>
+      <span class="iq-years">2022, 2020, 2019</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">3/6 papers</span>
+      <span class="iq-text"><strong>E-resources / Computer / Internet in Mathematics</strong> — meaning, how they help, advantages of websites</span>
+      <span class="iq-years">2020, 2019, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">2/6 papers</span>
+      <span class="iq-text"><strong>Mathematics Exhibition</strong> — what it is, objectives, how to organise</span>
+      <span class="iq-years">2022, 2018</span>
+    </div>
+  </div>
+
+  <div class="iq-group">
+    <div class="iq-group-title">🟡 Part B — High Frequency Short Questions (5 marks)</div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">6/6 papers</span>
+      <span class="iq-text"><strong>Mathematics Teacher as Reflective Practitioner</strong> — meaning, why necessary, suggestions for being reflective</span>
+      <span class="iq-years">2023, 2022, 2021<br>2020, 2019, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">6/6 papers</span>
+      <span class="iq-text"><strong>Mathematics Quiz</strong> — what it is, objectives, how to organise at school level</span>
+      <span class="iq-years">2023, 2022, 2021<br>2020, 2019, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">5/6 papers</span>
+      <span class="iq-text"><strong>Mathematics Olympiad</strong> — what it is, objectives, importance, how to organise</span>
+      <span class="iq-years">2023, 2022, 2020<br>2019, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">5/6 papers</span>
+      <span class="iq-text"><strong>Mathematics Library</strong> — importance, purpose, activities, teacher's role</span>
+      <span class="iq-years">2023, 2022, 2020<br>2019, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">5/6 papers</span>
+      <span class="iq-text"><strong>Television/Radio/Newspapers in Mathematics Teaching</strong> — how they help at secondary school level</span>
+      <span class="iq-years">2023, 2022, 2021<br>2020, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">4/6 papers</span>
+      <span class="iq-text"><strong>Characteristics of a Good Mathematics Textbook</strong> (as short question)</span>
+      <span class="iq-years">2023, 2022, 2021, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">4/6 papers</span>
+      <span class="iq-text"><strong>Blackboard / Smart Board advantages</strong> in teaching mathematics</span>
+      <span class="iq-years">2023, 2022, 2021, 2020</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">4/6 papers</span>
+      <span class="iq-text"><strong>Natural / Human / Community Resources</strong> in mathematics teaching</span>
+      <span class="iq-years">2023, 2022, 2020, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">3/6 papers</span>
+      <span class="iq-text"><strong>Workbooks and Worksheets</strong> — need and importance in mathematics teaching</span>
+      <span class="iq-years">2023, 2022, 2020</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">3/6 papers</span>
+      <span class="iq-text"><strong>Internet advantages in teaching Mathematics</strong></span>
+      <span class="iq-years">2021, 2020, 2019</span>
+    </div>
+  </div>
+
+  <div class="iq-group">
+    <div class="iq-group-title">🟢 Part C — Recurring Mathematics Problems</div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">6/6 papers</span>
+      <span class="iq-text"><strong>Arithmetic Progressions (AP)</strong> — find nth term, sum of series, application problems</span>
+      <span class="iq-years">All papers</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">5/6 papers</span>
+      <span class="iq-text"><strong>Trigonometry</strong> — proving identities involving tan, cot, sec, cosec; evaluating expressions</span>
+      <span class="iq-years">2023, 2022, 2020<br>2019, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">5/6 papers</span>
+      <span class="iq-text"><strong>Coordinate Geometry</strong> — area of triangle/quadrilateral, identifying type of quadrilateral from vertices</span>
+      <span class="iq-years">2023, 2022, 2021<br>2020, 2019</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">4/6 papers</span>
+      <span class="iq-text"><strong>Circle Theorems / Tangents</strong> — proofs involving tangents from external point, supplementary angles</span>
+      <span class="iq-years">2022, 2021, 2020, 2018</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">4/6 papers</span>
+      <span class="iq-text"><strong>Quadratic Equations</strong> — solving by formula, substitution; word problems</span>
+      <span class="iq-years">2022, 2021, 2020, 2019</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">3/6 papers</span>
+      <span class="iq-text"><strong>Probability</strong> — basic probability, independent events, real-life application problems</span>
+      <span class="iq-years">2021, 2020, 2019</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-low">2/6 papers</span>
+      <span class="iq-text"><strong>Matrices</strong> — matrix multiplication, proving polynomial identities for 2×2 matrices</span>
+      <span class="iq-years">2022, 2018</span>
+    </div>
+  </div>
+</div><!-- end tabIQ -->
+
+</div><!-- content-area -->
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: document.querySelector('.tabs-section').offsetTop - 10, behavior: 'smooth'});
+}
+
+function toggleQ(card) {
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>
