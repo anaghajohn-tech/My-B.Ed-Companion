@@ -1,0 +1,1943 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-05 · ICT in Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117; --surface: #161b22; --surface2: #1c2330; --border: #30363d;
+    --accent: #79c0ff; --accent2: #ffa657; --accent3: #56d364;
+    --amber: #e3b341; --purple: #d2a8ff; --text: #e6edf3; --muted: #7d8590;
+    --highlight: rgba(121,192,255,0.08);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Literata', Georgia, serif; min-height: 100vh; line-height: 1.7; }
+
+  .header {
+    background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #1a1f2e 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 2.5rem 1.5rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .header::before {
+    content: ''; position: absolute; top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(121,192,255,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .header-inner { max-width: 900px; margin: 0 auto; }
+  .breadcrumb { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--muted); letter-spacing: 0.08em; margin-bottom: 1rem; }
+  .breadcrumb a { color: var(--accent); text-decoration: none; }
+  .subject-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(121,192,255,0.12); border: 1px solid rgba(121,192,255,0.3);
+    color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    padding: 0.3rem 0.8rem; border-radius: 20px; margin-bottom: 1rem; letter-spacing: 0.05em;
+  }
+  .subject-badge::before { content: '◆'; font-size: 8px; }
+  h1 { font-family: 'Syne', sans-serif; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--muted); margin-bottom: 1.5rem; }
+  .meta-row { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+  .meta-chip { font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 0.25rem 0.6rem; border-radius: 4px; letter-spacing: 0.04em; }
+  .chip-sem { background: rgba(86,211,100,0.15); color: var(--accent3); border: 1px solid rgba(86,211,100,0.3); }
+  .chip-papers { background: rgba(255,166,87,0.15); color: var(--accent2); border: 1px solid rgba(255,166,87,0.3); }
+  .chip-key { background: rgba(210,168,255,0.15); color: var(--purple); border: 1px solid rgba(210,168,255,0.3); }
+
+  .tabs-section { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 0; }
+  .tabs-scroll { display: flex; gap: 0.4rem; overflow-x: auto; scrollbar-width: none; }
+  .tabs-scroll::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0; background: var(--surface); border: 1px solid var(--border);
+    color: var(--muted); font-family: 'IBM Plex Mono', monospace; font-size: 11px;
+    padding: 0.5rem 1rem; border-radius: 6px 6px 0 0; cursor: pointer; transition: all 0.2s;
+    border-bottom: none; letter-spacing: 0.03em; position: relative; bottom: -1px;
+  }
+  .tab-btn:hover { color: var(--text); background: var(--surface2); }
+  .tab-btn.active { color: var(--accent); background: var(--surface2); border-bottom: 2px solid var(--accent); }
+  .tab-btn.iq-tab.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+  .content-area {
+    max-width: 900px; margin: 0 auto;
+    background: var(--surface2); border: 1px solid var(--border); border-top: none;
+    border-radius: 0 0 8px 8px; padding: 1.5rem 1rem; margin-bottom: 3rem;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .paper-header {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1rem 1.2rem; margin-bottom: 1.5rem;
+    display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; justify-content: space-between;
+  }
+  .paper-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: #fff; }
+  .paper-code { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 2px; }
+  .paper-marks { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent3); background: rgba(86,211,100,0.1); border: 1px solid rgba(86,211,100,0.25); padding: 0.2rem 0.6rem; border-radius: 4px; }
+
+  .part-label {
+    font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 0.4rem 0.8rem; border-radius: 4px;
+    margin: 1.5rem 0 0.8rem; display: inline-block;
+  }
+  .part-a { background: rgba(121,192,255,0.12); color: var(--accent); border: 1px solid rgba(121,192,255,0.25); }
+  .part-b { background: rgba(255,166,87,0.12); color: var(--accent2); border: 1px solid rgba(255,166,87,0.25); }
+  .part-desc { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); margin-bottom: 1rem; }
+
+  .q-card { border: 1px solid var(--border); border-radius: 8px; margin-bottom: 0.8rem; overflow: hidden; transition: border-color 0.2s; }
+  .q-card:hover { border-color: rgba(121,192,255,0.35); }
+  .q-header { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.9rem 1rem; cursor: pointer; background: var(--surface); user-select: none; }
+  .q-header:hover { background: rgba(255,255,255,0.03); }
+  .q-num { font-family: 'IBM Plex Mono', monospace; font-size: 10px; font-weight: 500; color: var(--accent); background: rgba(121,192,255,0.12); border: 1px solid rgba(121,192,255,0.25); padding: 0.2rem 0.5rem; border-radius: 4px; flex-shrink: 0; margin-top: 2px; }
+  .q-num.b { color: var(--accent2); background: rgba(255,166,87,0.12); border-color: rgba(255,166,87,0.25); }
+  .q-text { flex: 1; font-size: 0.9rem; color: var(--text); line-height: 1.5; }
+  .q-marks { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); flex-shrink: 0; margin-top: 2px; }
+  .q-toggle { font-size: 14px; color: var(--muted); flex-shrink: 0; margin-top: 2px; transition: transform 0.2s; }
+  .q-card.open .q-toggle { transform: rotate(180deg); }
+
+  .q-body { display: none; padding: 1rem 1.2rem; background: rgba(0,0,0,0.2); border-top: 1px solid var(--border); }
+  .q-card.open .q-body { display: block; }
+
+  .ans-section { margin-bottom: 1rem; }
+  .ans-section:last-child { margin-bottom: 0; }
+  .ans-head { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--accent); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.4rem; }
+  .ans-head.b { color: var(--accent2); }
+  .ans-head.c { color: var(--accent3); }
+  .ans-head.p { color: var(--purple); }
+  .point-list { list-style: none; padding: 0; }
+  .point-list li { font-size: 13.5px; color: #c8d5e8; padding: 0.35rem 0 0.35rem 1.3rem; line-height: 1.8; border-bottom: 1px solid rgba(255,255,255,0.04); position: relative; }
+  .point-list li:last-child { border-bottom: none; }
+  .point-list li::before { content: '›'; color: var(--accent); font-weight: 700; position: absolute; left: 0; top: 0.38rem; }
+  .point-list.b li::before { color: var(--accent2); }
+  .point-list.c li::before { color: var(--accent3); }
+  .point-list.p li::before { color: var(--purple); }
+  .point-list li strong { color: #fff; font-weight: 600; }
+  .ans-prose { font-size: 13.5px; color: #c8d5e8; line-height: 1.85; }
+  .ans-prose strong { color: #fff; font-weight: 600; }
+
+  .key-note { background: rgba(210,168,255,0.08); border-left: 3px solid var(--purple); padding: 0.6rem 0.8rem; margin: 0.6rem 0; border-radius: 0 4px 4px 0; font-size: 12px; color: #c8b8ff; font-style: italic; }
+
+  .scheme-note { background: rgba(210,168,255,0.08); border: 1px solid rgba(210,168,255,0.25); border-radius: 6px; padding: 0.6rem 0.9rem; font-size: 12px; color: #c8b8ff; margin-bottom: 1.2rem; }
+
+  /* IMPORTANT QUESTIONS */
+  .iq-intro { background: linear-gradient(135deg, rgba(227,179,65,0.1), rgba(227,179,65,0.05)); border: 1px solid rgba(227,179,65,0.3); border-radius: 8px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; }
+  .iq-intro p { font-size: 13px; color: #d4bc7a; line-height: 1.7; }
+  .iq-group { margin-bottom: 2rem; }
+  .iq-group-title { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; color: var(--amber); letter-spacing: 0.08em; text-transform: uppercase; padding-bottom: 0.5rem; border-bottom: 1px solid rgba(227,179,65,0.2); margin-bottom: 1rem; }
+  .iq-item { display: flex; gap: 0.8rem; align-items: flex-start; padding: 0.7rem 0.9rem; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); margin-bottom: 0.5rem; transition: border-color 0.2s; }
+  .iq-item:hover { border-color: rgba(227,179,65,0.4); }
+  .iq-freq { font-family: 'IBM Plex Mono', monospace; font-size: 10px; padding: 0.2rem 0.5rem; border-radius: 4px; flex-shrink: 0; white-space: nowrap; margin-top: 2px; }
+  .freq-high { background: rgba(255,166,87,0.2); color: var(--accent2); border: 1px solid rgba(255,166,87,0.3); }
+  .freq-mid { background: rgba(227,179,65,0.15); color: var(--amber); border: 1px solid rgba(227,179,65,0.3); }
+  .freq-low { background: rgba(125,133,144,0.15); color: var(--muted); border: 1px solid rgba(125,133,144,0.3); }
+  .iq-text { font-size: 13.5px; color: var(--text); line-height: 1.5; flex: 1; }
+  .iq-years { font-family: 'IBM Plex Mono', monospace; font-size: 10px; color: var(--muted); flex-shrink: 0; line-height: 1.8; text-align: right; }
+
+  .diff-table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 0.5rem 0; }
+  .diff-table th { background: rgba(121,192,255,0.1); color: var(--accent); font-family: 'IBM Plex Mono', monospace; font-size: 11px; padding: 0.5rem 0.8rem; text-align: left; border: 1px solid var(--border); }
+  .diff-table td { padding: 0.5rem 0.8rem; border: 1px solid var(--border); color: #c8d5e8; vertical-align: top; }
+  .diff-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+  @media (max-width: 600px) {
+    .header { padding: 1.5rem 1rem 1.2rem; }
+    .content-area { margin: 0 0.5rem 2rem; }
+    .iq-years { display: none; }
+    .diff-table { font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="breadcrumb"><a href="../index.html">B.Ed Companion</a> › Semester 1 › HC-05</div>
+    <div class="subject-badge">HC-05 · Code 81505 / ED-005</div>
+    <h1>ICT in <span>Education</span></h1>
+    <div class="subtitle">I Semester · CBCS 2-Year Course · Bangalore University · 35 Marks / 1½ Hours</div>
+    <div class="meta-row">
+      <span class="meta-chip chip-sem">1st Semester</span>
+      <span class="meta-chip chip-papers">9 Papers: 2016–2025</span>
+      <span class="meta-chip chip-key">2016 Official Scheme — Prof. B.R. Gopal</span>
+    </div>
+  </div>
+</div>
+
+<div class="tabs-section">
+  <div class="tabs-scroll">
+    <button class="tab-btn active" onclick="showTab('tab2025')">2025</button>
+    <button class="tab-btn" onclick="showTab('tab2024')">2024</button>
+    <button class="tab-btn" onclick="showTab('tab2023')">2023</button>
+    <button class="tab-btn" onclick="showTab('tab2022')">2022</button>
+    <button class="tab-btn" onclick="showTab('tab2021')">2021</button>
+    <button class="tab-btn" onclick="showTab('tab2019s')">Sep 2019</button>
+    <button class="tab-btn" onclick="showTab('tab2019a')">Apr 2019</button>
+    <button class="tab-btn" onclick="showTab('tab2018')">2018</button>
+    <button class="tab-btn" onclick="showTab('tab2016')">2016 ★ Key</button>
+    <button class="tab-btn iq-tab" onclick="showTab('tabIQ')">⭐ Important Qs</button>
+  </div>
+</div>
+
+<div class="content-area">
+
+<!-- ==================== 2025 ==================== -->
+<div id="tab2025" class="tab-content active">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">I Semester B.Ed. Examination — May/June 2025</div>
+      <div class="paper-code">ED-005 · HC-05: ICT in Education (CBCS Scheme)</div>
+    </div>
+    <div class="paper-marks">35 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A — Long Questions</div>
+  <div class="part-desc">Answer any TWO. Each answer ≤ 3 pages. 10 marks each (2×10=20)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) What is communication? b) What are the types of communication? c) Explain the factors of non-verbal communication that influence the teaching-learning process.</span>
+      <span class="q-marks">(2+3+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Communication? (2 marks)</div>
+        <div class="ans-prose"><strong>Communication</strong> is the process of transmitting information, ideas, thoughts, feelings and emotions from one person to another through a medium. It involves a sender, message, channel, receiver and feedback. In education, communication is the exchange of knowledge and understanding between teacher and students.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Types of Communication (3 marks)</div>
+        <ul class="point-list b">
+          <li><strong>Verbal Communication:</strong> Using spoken or written words — lectures, discussions, textbooks, blackboard writing</li>
+          <li><strong>Non-verbal Communication:</strong> Using body language, gestures, facial expressions, posture, eye contact, appearance, space (proxemics)</li>
+          <li><strong>Visual Communication:</strong> Using charts, diagrams, graphs, films, displays</li>
+          <li><strong>Electronic/Digital Communication:</strong> Using email, internet, multimedia, video conferencing</li>
+          <li><strong>One-way vs Two-way:</strong> Broadcasting (one-way) vs interactive communication (two-way with feedback)</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Factors of Non-Verbal Communication Influencing Teaching-Learning (5 marks)</div>
+        <ul class="point-list c">
+          <li><strong>Facial Expressions:</strong> A teacher's smile, frown, or raised eyebrow sends powerful signals about approval, disapproval or expectations — students respond accordingly</li>
+          <li><strong>Eye Contact:</strong> Maintaining eye contact with students shows interest and keeps them engaged; avoiding it may signal lack of confidence or disinterest</li>
+          <li><strong>Gestures:</strong> Hand movements, pointing, nodding — emphasise key points and make explanations more vivid and memorable</li>
+          <li><strong>Posture and Body Language:</strong> Open posture (facing class, leaning forward) signals enthusiasm; closed posture (arms folded, turning away) creates distance</li>
+          <li><strong>Proxemics (Space):</strong> Moving closer to students signals attention and concern; standing far away at all times creates emotional distance</li>
+          <li><strong>Para-language (Voice):</strong> Tone, pitch, volume, pace — a monotone voice loses students; varied intonation maintains interest and emphasises important ideas</li>
+          <li><strong>Appearance:</strong> Teacher's dress and grooming send messages about professionalism and create first impressions that influence student respect</li>
+          <li><strong>Silence:</strong> Purposeful silence after a question gives students thinking time and shows the teacher values thoughtful responses</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) What is computer assisted instruction? b) Explain briefly the types of computer assisted instruction. c) Mention the role of the teacher in computer assisted instructions.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Computer Assisted Instruction? (2 marks)</div>
+        <div class="ans-prose"><strong>Computer Assisted Instruction (CAI)</strong> is an interactive instructional technique where a computer is used to present instructional material, monitor student learning, and provide immediate feedback. It allows students to learn at their own pace through programmed content delivered via the computer.</div>
+        <div class="key-note">★ From 2016 Official Scheme (Prof. B.R. Gopal): CAI "is for teaching" — distinguishing it from Computer Adaptive Testing which "is for testing".</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Types of CAI (4 marks)</div>
+        <ul class="point-list b">
+          <li><strong>Drill and Practice:</strong> Presents a series of problems/questions for the student to practice. Provides immediate feedback — correct/incorrect. Used for reinforcing already-taught skills (e.g., multiplication tables, spelling). Best for mastery of routine skills.</li>
+          <li><strong>Tutorial:</strong> Presents new information to the student step by step, asks questions, and branches based on responses. Acts as a substitute teacher. Includes explanation, examples, and assessment in one sequence.</li>
+          <li><strong>Simulation:</strong> Creates a model of a real-world system or process. Students interact with the simulation to explore concepts safely (e.g., virtual chemistry lab, flight simulator). Develops problem-solving and decision-making skills.</li>
+          <li><strong>Games:</strong> Educational games that teach concepts through competitive, engaging play. Motivates students through challenge and reward. Teaches strategic thinking alongside subject content.</li>
+          <li><strong>Problem-solving:</strong> Presents complex problems requiring the student to apply reasoning and knowledge. Develops higher-order thinking skills.</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Role of Teacher in CAI (4 marks)</div>
+        <ul class="point-list c">
+          <li><strong>Planner/Designer:</strong> Selects appropriate CAI programs aligned with curriculum objectives; designs learning sequences</li>
+          <li><strong>Facilitator:</strong> Guides students through the CAI process; answers questions the computer cannot address</li>
+          <li><strong>Monitor:</strong> Observes student progress through the CAI system; identifies students who need additional help</li>
+          <li><strong>Motivator:</strong> Encourages students who feel frustrated or bored; maintains enthusiasm for computer-based learning</li>
+          <li><strong>Evaluator:</strong> Assesses effectiveness of CAI programs used; uses data generated by the computer to inform teaching</li>
+          <li><strong>Technical Manager:</strong> Ensures hardware and software are functioning; troubleshoots basic technical problems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) What is computer? b) Explain the role of computer in education. c) Briefly explain the types of computer software.</span>
+      <span class="q-marks">(1+4+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is a Computer? (1 mark)</div>
+        <div class="ans-prose">A <strong>computer</strong> is an electronic machine or device that accepts data (input), processes it according to stored instructions (a program), and produces results (output). It can store large amounts of information and perform calculations rapidly and accurately.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Role of Computer in Education (4 marks)</div>
+        <ul class="point-list b">
+          <li>Enables <strong>individualised/self-paced learning</strong> through CAI programs tailored to each student's pace and level</li>
+          <li>Provides <strong>immediate feedback</strong> — students know right away if their answers are correct</li>
+          <li>Acts as a <strong>teaching tool</strong> — multimedia presentations, simulations, virtual labs</li>
+          <li>Facilitates <strong>assessment</strong> — Computer Adaptive Testing adjusts difficulty based on student responses</li>
+          <li>Supports <strong>teacher preparation</strong> — lesson plans, question papers, result analysis</li>
+          <li>Enables access to <strong>global resources</strong> via internet — enriching educational content</li>
+          <li>Develops students' <strong>technological literacy</strong> — essential for the 21st century</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Types of Computer Software (5 marks)</div>
+        <ul class="point-list c">
+          <li><strong>System Software:</strong> Controls and manages the hardware and other software. Includes Operating Systems (Windows, macOS, Linux, Android) and utility programs.</li>
+          <li><strong>Application Software:</strong> Programs designed for specific user tasks. Includes word processors (MS Word), spreadsheets (Excel), presentations (PowerPoint), databases (Access).</li>
+          <li><strong>Programming Software:</strong> Tools used by developers to write programs — compilers, interpreters, text editors, IDEs (e.g., Python IDLE, VS Code).</li>
+          <li><strong>Educational Software:</strong> Specifically designed for learning — CAI programs, simulations, encyclopaedias, e-learning platforms.</li>
+          <li><strong>Freeware/Open-source Software:</strong> Available free of cost — GeoGebra, LibreOffice, Mozilla Firefox. Important for schools with limited budgets.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B — Short Questions</div>
+  <div class="part-desc">Answer any THREE. Each answer ≤ 1½ pages. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.4</span>
+      <span class="q-text">Mention any five differences between verbal and non-verbal communication.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <table class="diff-table">
+        <tr><th>Verbal Communication</th><th>Non-Verbal Communication</th></tr>
+        <tr><td>Uses words — spoken or written</td><td>Uses body language, gestures, expressions, symbols</td></tr>
+        <tr><td>Conscious and deliberate</td><td>Often unconscious and involuntary</td></tr>
+        <tr><td>Easier to control and modify</td><td>Difficult to control; often reveals true feelings</td></tr>
+        <tr><td>Precise and specific meaning possible</td><td>Can be ambiguous; meaning depends on context and culture</td></tr>
+        <tr><td>Can be recorded (writing) or transmitted over distance easily</td><td>Primarily effective in face-to-face interaction</td></tr>
+        <tr><td>Used to convey information and facts</td><td>Used to convey emotions, attitudes, and relationships</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.5</span>
+      <span class="q-text">a) What is educational technology? b) How is the knowledge of educational technology helpful to a teacher?</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Educational Technology?</div>
+        <div class="ans-prose"><strong>Educational Technology</strong> is the systematic application of scientific knowledge about teaching and learning to improve the effectiveness, efficiency and quality of education. It includes the use of hardware (machines, devices), software (programs, media) and a systems approach (planned, organised methodology) in the teaching-learning process.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) How Educational Technology Helps a Teacher:</div>
+        <ul class="point-list b">
+          <li>Enables the teacher to use <strong>varied and effective teaching methods</strong> — moving beyond chalk-and-talk</li>
+          <li>Helps in <strong>presenting abstract concepts concretely</strong> through simulations, animations and models</li>
+          <li>Allows <strong>individualised instruction</strong> — different students can learn at different paces</li>
+          <li>Facilitates <strong>efficient assessment</strong> and tracking of student progress</li>
+          <li>Enriches lessons with <strong>multimedia content</strong> — video, audio, graphics</li>
+          <li>Saves <strong>preparation time</strong> through digital resources and ready-made materials</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">a) What is computer software? b) Explain the types of computer software.</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Computer Software?</div>
+        <div class="ans-prose"><strong>Software</strong> is a set of instructions (programs) that tells the computer hardware what to do. It is the non-physical, intangible component of a computer system.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Types — See Q.3(c) above for complete answer on types of software.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">a) What is computer adaptive testing? b) List out the advantages of computer adaptive testing.</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Computer Adaptive Testing (CAT)?</div>
+        <div class="ans-prose"><strong>Computer Adaptive Testing (CAT)</strong> is a computer-based assessment method that adjusts the difficulty of questions based on the test-taker's responses. If the student answers correctly, the next question is harder; if incorrectly, the next is easier. This provides a more precise and efficient measurement of ability compared to fixed tests.</div>
+        <div class="key-note">★ From 2016 Scheme: CAT "is for testing" — distinguishing it from CAI which "is for teaching".</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Advantages of CAT:</div>
+        <ul class="point-list b">
+          <li><strong>Efficient:</strong> Requires fewer questions than fixed tests to achieve the same measurement accuracy</li>
+          <li><strong>Precise:</strong> Provides a more accurate estimate of student ability by targeting questions at the right level</li>
+          <li><strong>Immediate results:</strong> Scores and reports available instantly after completion</li>
+          <li><strong>Reduced test anxiety:</strong> Students are not overwhelmed by questions far above or below their level</li>
+          <li><strong>Fair:</strong> Each student gets questions appropriate to their level — not too easy or too hard</li>
+          <li><strong>Secure:</strong> Large item banks mean different students get different questions — reduces cheating</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">Explain the basic principles of programmed instruction.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ From 2016 Official Scheme: "The five basic principles are: Principle of small steps, principle of active responding, principle of immediate confirmation, principle of self pacing and principle of student testing."</div>
+      <ul class="point-list">
+        <li><strong>Principle of Small Steps:</strong> Learning material is broken into very small, manageable units (frames). Each frame presents one idea only, ensuring gradual progress without overwhelming the learner.</li>
+        <li><strong>Principle of Active Responding:</strong> The learner must actively respond to each frame — fill in a blank, choose an answer, or solve a problem. Passive reading is not sufficient; engagement is required at every step.</li>
+        <li><strong>Principle of Immediate Confirmation (Feedback):</strong> After each response, the correct answer is immediately revealed. This reinforces correct responses and corrects errors before they are reinforced.</li>
+        <li><strong>Principle of Self-Pacing:</strong> Each learner proceeds at their own pace — faster learners are not held back, slower learners are not rushed. The system accommodates individual differences.</li>
+        <li><strong>Principle of Student Testing (Evaluation):</strong> The program regularly tests student progress. The test results are used to evaluate not just the student but also the effectiveness of the program itself.</li>
+      </ul>
+    </div>
+  </div>
+</div><!-- end tab2025 -->
+
+<!-- ==================== 2024 ==================== -->
+<div id="tab2024" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">I Semester B.Ed. Examination — June/July 2024</div>
+      <div class="paper-code">81505 · HC-5: Information and Communication Technology in Education (CBCS Scheme)</div>
+    </div>
+    <div class="paper-marks">35 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A — Long Questions</div>
+  <div class="part-desc">Answer any TWO. 10 marks each (2×10=20)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) Define Communication. b) What are the barriers of communication in the classroom? c) As a teacher how will you overcome those barriers?</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Definition of Communication (2 marks)</div>
+        <div class="ans-prose"><strong>Communication</strong> is the process of sharing information, ideas, feelings and thoughts between a sender and receiver through a medium, with the aim of creating mutual understanding. In education, effective communication between teacher and student is essential for learning to occur.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Barriers of Communication in the Classroom (4 marks)</div>
+        <ul class="point-list b">
+          <li><strong>Physical Barriers:</strong> Noise, poor acoustics, large class size, poor seating arrangement, inadequate lighting</li>
+          <li><strong>Language Barriers:</strong> Use of difficult vocabulary, regional language differences, technical jargon not understood by students</li>
+          <li><strong>Psychological Barriers:</strong> Student fear, anxiety, low self-esteem, prejudice or pre-conceived notions about the teacher or subject</li>
+          <li><strong>Cultural Barriers:</strong> Different cultural backgrounds affecting interpretation of gestures, examples, or references used</li>
+          <li><strong>Perceptual Barriers:</strong> Students and teacher perceiving the same information differently based on background, experience</li>
+          <li><strong>Attitudinal Barriers:</strong> Lack of interest, poor motivation, negative attitude towards the subject or teacher</li>
+          <li><strong>Timing Barriers:</strong> Lesson delivered when students are tired, hungry or distracted</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) How a Teacher Can Overcome Barriers (4 marks)</div>
+        <ul class="point-list c">
+          <li>Use <strong>simple, clear language</strong> appropriate to students' level; define unfamiliar terms</li>
+          <li>Create a <strong>supportive, non-threatening</strong> classroom environment where students feel safe to ask questions</li>
+          <li>Use <strong>multiple modes of communication</strong> — verbal explanation plus visual aids, demonstrations</li>
+          <li>Arrange <strong>seating</strong> to maximise visibility and reduce physical barriers</li>
+          <li>Use <strong>eye contact and movement</strong> around the room to maintain attention</li>
+          <li>Encourage <strong>feedback and questions</strong> — check understanding regularly</li>
+          <li>Be aware of <strong>cultural sensitivity</strong> in examples, gestures and references used</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) What is Computer Assisted Instruction? b) Briefly explain the types of CAI. c) Mention the Educational Implications of CAI.</span>
+      <span class="q-marks">(2+5+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) CAI — See Q.2(a) in 2025 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Types of CAI — See Q.2(b) in 2025 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Educational Implications of CAI (3 marks)</div>
+        <ul class="point-list c">
+          <li>Promotes <strong>individualised learning</strong> — each student progresses at their own pace</li>
+          <li>Provides <strong>immediate, non-judgmental feedback</strong> — reduces anxiety about making mistakes</li>
+          <li>Makes learning <strong>interactive and engaging</strong> — more effective than passive reception</li>
+          <li>Can reach students in <strong>remote areas</strong> through e-learning platforms</li>
+          <li>Frees teachers from <strong>repetitive drilling tasks</strong> — allowing focus on higher-order teaching</li>
+          <li>Develops <strong>digital literacy</strong> in students alongside subject knowledge</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) What is programmed instruction? b) Briefly explain the types of programmed instruction. c) List the characteristics of programmed instruction.</span>
+      <span class="q-marks">(2+6+2)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Programmed Instruction? (2 marks)</div>
+        <div class="ans-prose"><strong>Programmed Instruction (PI)</strong> is a planned sequence of learning experiences leading to proficiency in a skill or knowledge area, based on stimulus-response relationships that have been proven to be effective. It presents content in small frames, requires active student responding, and provides immediate feedback. Based on Skinner's operant conditioning theory.</div>
+        <div class="key-note">★ From 2016 Official Scheme: "a planned sequence of experiences, leading to proficiency, in terms of stimulus-response relationship"</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Types of Programmed Instruction (6 marks)</div>
+        <div class="ans-head" style="margin-top:0.4rem;">1. Linear Programmed Instruction (Skinner):</div>
+        <ul class="point-list b">
+          <li>All students follow the <strong>same sequence</strong> of frames regardless of responses</li>
+          <li>Small steps with <strong>constructed responses</strong> (fill in the blank)</li>
+          <li>Positive reinforcement through immediate feedback</li>
+          <li>Designed so students make very <strong>few errors</strong> (errorless learning)</li>
+        </ul>
+        <div class="ans-head b" style="margin-top:0.6rem;">2. Branched Programmed Instruction (Crowder):</div>
+        <ul class="point-list b">
+          <li>Students follow <strong>different paths</strong> based on their responses</li>
+          <li>Uses <strong>multiple-choice questions</strong>; each answer leads to a different frame</li>
+          <li>Correct answer → move forward; Wrong answer → remedial branch with explanation</li>
+          <li>Allows for <strong>individual differences</strong> — faster learners skip remedial material</li>
+          <li>More flexible and <strong>personalised</strong> than linear PI</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Characteristics of Programmed Instruction (2 marks)</div>
+        <ul class="point-list c">
+          <li>Small steps / frames of content</li>
+          <li>Active responding required from learner</li>
+          <li>Immediate feedback and reinforcement</li>
+          <li>Self-pacing — learner controls rate of progress</li>
+          <li>Logical, sequential arrangement of content</li>
+          <li>Tested and validated before use</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B — Short Questions</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.4</span>
+      <span class="q-text">Explain the role of multimedia approach in the classroom for effective communication.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ From 2016 Official Scheme: "It enables the students to represent information using several different media. It can arouse the curiosity among the learner and provide vivid impression. It can develop positive attitudes among the learners towards the teaching-learning process..."</div>
+      <ul class="point-list">
+        <li>Enables students to <strong>represent information using several different media</strong> — text, audio, video, graphics, animation</li>
+        <li><strong>Arouses curiosity</strong> among learners and provides vivid impression — more memorable than single-medium presentation</li>
+        <li>Develops <strong>positive attitudes</strong> among learners towards the teaching-learning process</li>
+        <li>Allows for <strong>self-pacing</strong> — students can replay, pause, and review multimedia content</li>
+        <li>Can be implemented through multimedia approach to <strong>bridge language barriers</strong> — visuals and audio communicate beyond words</li>
+        <li>Makes abstract concepts <strong>concrete through visualisation</strong> — animations, 3D models, simulations</li>
+        <li>Caters to <strong>multiple learning styles</strong> — visual learners, auditory learners, kinaesthetic learners</li>
+        <li>Maintains <strong>student engagement longer</strong> than single-medium instruction</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.5</span>
+      <span class="q-text">a) What is Computer Adaptive Testing? b) What are the advantages of Computer Adaptive Testing?</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.7 in 2025 tab for complete answer on Computer Adaptive Testing — definition and advantages.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">Define Educational Technology. How is the knowledge of Educational Technology helpful to a teacher?</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.5 in 2025 tab for definition of Educational Technology and how it helps teachers. Covers both parts of this question.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">Write the meaning and significance of video-lessons.</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">What are Video Lessons?</div>
+        <div class="ans-prose"><strong>Video lessons</strong> are pre-recorded or live teaching sessions delivered through video technology (DVD, YouTube, NPTEL, SWAYAM, etc.) that combine visual and audio to present educational content.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Significance of Video Lessons:</div>
+        <ul class="point-list b">
+          <li>Provides <strong>visual and audio stimulation</strong> simultaneously — enhances retention significantly</li>
+          <li>Students can <strong>pause, rewind and rewatch</strong> — supports self-paced and revision learning</li>
+          <li>Expert teachers can <strong>reach millions of students</strong> simultaneously — democratises quality education</li>
+          <li>Makes learning <strong>available anytime, anywhere</strong> — flexible learning beyond classroom hours</li>
+          <li>Can demonstrate <strong>experiments, procedures, historical events</strong> that cannot be reproduced in class</li>
+          <li>Useful for <strong>absent students</strong> to catch up on missed content</li>
+          <li>Combined with smart class technology, creates <strong>immersive learning experiences</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">What is operating system? Briefly explain its types.</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">What is an Operating System?</div>
+        <div class="ans-prose">An <strong>Operating System (OS)</strong> is system software that manages the computer's hardware resources and provides common services for application programs. It acts as an interface between the user and the computer hardware.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Types of Operating Systems:</div>
+        <ul class="point-list b">
+          <li><strong>Single-user, Single-tasking:</strong> Allows only one user to do one task at a time (e.g., early MS-DOS)</li>
+          <li><strong>Single-user, Multi-tasking:</strong> One user can run multiple programs simultaneously (e.g., Windows, macOS)</li>
+          <li><strong>Multi-user:</strong> Multiple users can access the computer simultaneously (e.g., Unix, Linux servers)</li>
+          <li><strong>Real-time OS:</strong> Processes data as it arrives with minimal delay — used in medical equipment, control systems</li>
+          <li><strong>Mobile OS:</strong> Designed for smartphones and tablets (e.g., Android, iOS)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- end tab2024 -->
+
+<!-- ==================== 2023 ==================== -->
+<div id="tab2023" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">I Semester B.Ed. Examination — June 2023</div>
+      <div class="paper-code">81505 · HC5: Information and Communication Technology in Education (CBCS Scheme)</div>
+    </div>
+    <div class="paper-marks">35 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A — Long Questions</div>
+  <div class="part-desc">Answer any TWO. 10 marks each (2×10=20)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) Define Educational Technology. b) List out any four objectives of Educational Technology. c) Briefly explain the components of Educational Technology.</span>
+      <span class="q-marks">(2+2+6)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Definition of Educational Technology (2 marks)</div>
+        <div class="ans-prose"><strong>Educational Technology</strong> is the systematic application of scientific knowledge about learning and the conditions of learning to improve the efficiency and effectiveness of teaching and training. (AECT definition) It encompasses hardware, software, and a systems approach to education.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Four Objectives of Educational Technology (2 marks)</div>
+        <ul class="point-list b">
+          <li>To <strong>construct a definite specific pattern</strong> to help teaching and learning</li>
+          <li>To <strong>shape new learning situations</strong> and instructional programs</li>
+          <li>To provide learning opportunity to <strong>deprived communities at lower cost</strong></li>
+          <li>To <strong>self-guide and organise instructional materials</strong></li>
+          <li>To provide <strong>equal opportunity</strong> to all classrooms</li>
+          <li>To provide <strong>higher technology</strong> to even ordinary children</li>
+        </ul>
+        <div class="key-note">★ From 2016 Official Scheme, Prof. B.R. Gopal</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Components of Educational Technology (6 marks)</div>
+        <ul class="point-list c">
+          <li><strong>Hardware Component:</strong> Physical equipment used in education — computers, projectors, smart boards, tablets, audio-visual equipment, laboratory instruments. Hardware provides the medium through which educational content is delivered.</li>
+          <li><strong>Software Component:</strong> Programs and digital content — educational software (CAI programs, simulations), multimedia content, e-books, online courses, learning management systems (LMS). Software provides the actual instructional content and tools.</li>
+          <li><strong>Systems Approach (Process Component):</strong> A planned, organised methodology for designing, implementing and evaluating instruction. Includes instructional design models (ADDIE), needs analysis, objective setting, content organisation, evaluation. This is the "methodology" dimension of educational technology.</li>
+          <li><strong>Human Component:</strong> Teachers, students, instructional designers, technicians who use, manage and benefit from educational technology. The most important component — technology is only as effective as the people who use it.</li>
+          <li><strong>Communication Networks:</strong> Internet, intranet, LAN, cloud platforms that connect learners and resources — enabling e-learning, distance education, collaborative learning.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) What is Programmed Instruction? b) Briefly explain the types of Programmed Instruction. c) Mention the advantages and limitations of Programmed Instruction.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Programmed Instruction — See Q.3(a) in 2024 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Types of PI — See Q.3(b) in 2024 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Advantages and Limitations of Programmed Instruction (4 marks)</div>
+        <div class="ans-head" style="margin-top:0.4rem;">Advantages:</div>
+        <ul class="point-list c">
+          <li>Enables <strong>self-paced, individualised learning</strong></li>
+          <li>Provides <strong>immediate feedback</strong> — reinforces correct responses instantly</li>
+          <li>Reduces dependence on teacher for routine learning</li>
+          <li>Systematic and <strong>logically organised</strong> content</li>
+          <li>Can be used <strong>anytime and anywhere</strong></li>
+          <li>Suitable for students who missed classes or need revision</li>
+        </ul>
+        <div class="ans-head b" style="margin-top:0.6rem;">Limitations:</div>
+        <ul class="point-list b">
+          <li>Does not develop <strong>creativity or higher-order thinking</strong> well</li>
+          <li>Can be <strong>monotonous and boring</strong> — lacks human interaction</li>
+          <li>Preparation of PI materials is <strong>time-consuming and expensive</strong></li>
+          <li>Cannot address <strong>emotional and social aspects</strong> of learning</li>
+          <li>Not suitable for all subjects — especially arts, physical education</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) What is Information and Communication? b) What are the types of Communication? c) Explain the barriers of Communication.</span>
+      <span class="q-marks">(3+2+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Information and Communication? (3 marks)</div>
+        <div class="ans-prose"><strong>Information</strong> is processed, organised data that is meaningful and useful for decision-making. <strong>Communication</strong> is the process of transmitting that information from sender to receiver through a channel, with the goal of creating shared understanding. In education, ICT refers to the integration of information technology and communication technologies to facilitate learning.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Types of Communication (2 marks) — See Q.1(b) in 2025 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Barriers of Communication (5 marks) — See Q.1(b) in 2024 tab for complete list of 7 barriers with explanations</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B — Short Questions</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.4</span>
+      <span class="q-text">Explain briefly the components of non-verbal communication.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <ul class="point-list">
+        <li><strong>Facial Expressions:</strong> Expressions of happiness, surprise, anger, sadness, fear — these are largely universal and communicate emotions more powerfully than words</li>
+        <li><strong>Gestures:</strong> Hand and arm movements that accompany speech — pointing, waving, thumbs up. Can be emblems (replacing words), illustrators (emphasising), or regulators (controlling conversation)</li>
+        <li><strong>Posture and Body Language:</strong> Open vs closed body positions; leaning forward (interest) vs leaning away (disinterest); crossed arms (defensive)</li>
+        <li><strong>Eye Contact:</strong> Maintaining eye contact signals attention and honesty; avoidance may indicate anxiety, deception, or submission</li>
+        <li><strong>Proxemics (Space/Distance):</strong> Intimate (0-45cm), personal (45cm-1.2m), social (1.2-3.6m), public (3.6m+). Space communicates relationship and status</li>
+        <li><strong>Para-language (Vocal cues):</strong> Voice qualities — tone, pitch, pace, volume, pauses — these modify the meaning of spoken words enormously</li>
+        <li><strong>Appearance and Artifacts:</strong> Clothing, grooming, accessories send messages about identity, status and professionalism</li>
+        <li><strong>Touch (Haptics):</strong> Handshakes, pats on the back communicate warmth, authority, comfort — though culturally variable</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.5</span>
+      <span class="q-text">Explain the role of multimedia approach in the classroom for effective communication.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.4 in 2024 tab for the complete answer on the role of multimedia approach in the classroom.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">Briefly explain the principles of programmed Instructions.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See Q.8 in 2025 tab for the complete answer on the five basic principles of programmed instruction with the official scheme wording.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">Write the significance of video lesson and smart class.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">Video Lessons — See Q.7 in 2024 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Significance of Smart Class:</div>
+        <div class="key-note">★ From 2016 Official Scheme: "Advanced mode of education, very easier and convenient. It is an excellent mode of education with much advantages. It helps students gain knowledge in a technical and advanced manner..."</div>
+        <ul class="point-list b">
+          <li><strong>Advanced mode of education</strong> — very easy and convenient for both teacher and students</li>
+          <li>Helps students gain knowledge in a <strong>technical and advanced manner</strong></li>
+          <li>Runs in a <strong>planned way</strong> — systematic and structured delivery</li>
+          <li>Exceeds <strong>proficiency and efficiency</strong> in the classroom compared to traditional methods</li>
+          <li>Is a <strong>solution designed to help teachers and students</strong> — provides digital textbooks, 3D animations, video content</li>
+          <li>Meets the <strong>challenge in education</strong> — addresses diverse learning needs</li>
+          <li>Helps students <strong>involve in learning</strong> actively through interactive features</li>
+          <li>Combines projector, smart board, computer, internet — a <strong>complete learning environment</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">Explain the different modes of Computer Assisted Instruction.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ From 2016 Official Scheme: "The different modes of CAI are: 1) Drill and practice 2) Tutorial and Dialogues 3) Simulation and games."</div>
+      <div class="ans-prose">See Q.2(b) in 2025 tab for full description of all five types/modes of CAI including Drill &amp; Practice, Tutorial, Simulation, Games, and Problem-solving.</div>
+    </div>
+  </div>
+</div><!-- end tab2023 -->
+
+<!-- ==================== 2022 ==================== -->
+<div id="tab2022" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">I Semester B.Ed. Examination — July 2022</div>
+      <div class="paper-code">81505 · HC5: ICT in Education (CBCS Semester Scheme)</div>
+    </div>
+    <div class="paper-marks">35 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A</div>
+  <div class="part-desc">Answer any TWO. 10 marks each (2×10=20)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) Define communication. b) Explain the process of communication. c) Explain briefly the barriers of communication.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Definition — See Q.1(a) in 2024 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Process of Communication (4 marks)</div>
+        <ul class="point-list b">
+          <li><strong>Sender (Source):</strong> The person who initiates communication; encodes the message from their thoughts</li>
+          <li><strong>Encoding:</strong> Converting thoughts/ideas into symbols (words, images, gestures) that can be transmitted</li>
+          <li><strong>Message:</strong> The content being communicated — information, ideas, feelings</li>
+          <li><strong>Channel (Medium):</strong> The means of transmission — speech, writing, electronic media, body language</li>
+          <li><strong>Receiver:</strong> The person who receives the message; decodes it using their background knowledge</li>
+          <li><strong>Decoding:</strong> Interpreting the received symbols back into meaning — affected by receiver's knowledge, culture, state of mind</li>
+          <li><strong>Feedback:</strong> Receiver's response to the sender — confirms whether the message was understood correctly</li>
+          <li><strong>Noise:</strong> Any interference at any stage that distorts the message — physical, psychological, semantic</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Barriers of Communication — See Q.1(b) in 2024 tab</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) What is programmed instruction? b) Explain the branched programmed instruction. c) Mention the advantages and limitations of branched programmed instruction.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Programmed Instruction — See Q.3(a) in 2024 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Branched Programmed Instruction — See Q.3(b) in 2024 tab (Crowder section)</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Advantages and Limitations of Branched PI (4 marks)</div>
+        <div class="ans-head" style="margin-top:0.4rem;">Advantages:</div>
+        <ul class="point-list c">
+          <li>More <strong>flexible</strong> than linear — accommodates different learning paces</li>
+          <li>Provides <strong>remedial instruction</strong> exactly where needed</li>
+          <li>Multiple-choice format is <strong>easier to respond</strong> to than constructed responses</li>
+          <li>Faster learners can <strong>skip unnecessary material</strong></li>
+          <li>More <strong>realistic</strong> — reflects how human learning actually works</li>
+        </ul>
+        <div class="ans-head b" style="margin-top:0.6rem;">Limitations:</div>
+        <ul class="point-list b">
+          <li>Multiple choice may lead to <strong>guessing</strong> rather than genuine learning</li>
+          <li>More <strong>complex to design</strong> than linear programs</li>
+          <li>Students may not <strong>read wrong-answer explanations</strong> carefully</li>
+          <li>Branching logic can become very <strong>complicated</strong> for complex topics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) Define computer assisted instruction. b) Explain the types of computer assisted instruction. c) Mention the advantages and disadvantages of computer assisted instruction.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) &amp; b) CAI Definition and Types — See Q.2(a) and Q.2(b) in 2025 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Advantages and Disadvantages of CAI (4 marks)</div>
+        <div class="ans-head" style="margin-top:0.4rem;">Advantages:</div>
+        <ul class="point-list c">
+          <li>Self-paced, <strong>individualised learning</strong></li>
+          <li><strong>Immediate feedback</strong> at every step</li>
+          <li>Available <strong>24/7</strong> — not limited to class hours</li>
+          <li>Consistent quality — same instruction every time</li>
+          <li>Engaging through games, simulations, multimedia</li>
+          <li>Records and tracks <strong>student progress</strong> automatically</li>
+        </ul>
+        <div class="ans-head b" style="margin-top:0.6rem;">Disadvantages:</div>
+        <ul class="point-list b">
+          <li>High initial <strong>cost of hardware and software</strong></li>
+          <li>Requires <strong>technical skills</strong> from both teachers and students</li>
+          <li>Reduces <strong>human interaction</strong> — social dimension of learning lost</li>
+          <li>Cannot develop <strong>communication skills</strong> as effectively</li>
+          <li>May cause <strong>eye strain and fatigue</strong> from extended screen use</li>
+          <li>Not all content can be <strong>effectively taught by computer</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.4</span>
+      <span class="q-text">Write the scope of Educational Technology.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <ul class="point-list">
+        <li><strong>Instructional Design:</strong> Systematic planning of teaching — objectives, content, methods, evaluation. Applying scientific principles to make instruction more effective.</li>
+        <li><strong>Development of Teaching Materials:</strong> Creating educational software, multimedia content, e-learning modules, programmed instruction materials.</li>
+        <li><strong>Management of Learning Environments:</strong> Organising and managing the physical and virtual learning environment — labs, smart classrooms, LMS platforms.</li>
+        <li><strong>Evaluation of Learning:</strong> Computer adaptive testing, online assessments, automated grading, learning analytics.</li>
+        <li><strong>Distance Education:</strong> Using technology to deliver education to remote learners — MOOC platforms (SWAYAM, Coursera), video conferencing.</li>
+        <li><strong>Teacher Training:</strong> Using technology for in-service teacher development — online workshops, virtual classrooms, simulation-based training.</li>
+        <li><strong>Special Education:</strong> Assistive technologies for learners with disabilities — screen readers, text-to-speech, adaptive input devices.</li>
+        <li><strong>Research:</strong> Using technology for educational research — data collection tools, statistical software, online surveys.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">a) What is Computer Adaptive Testing? b) Mention its characteristics.</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) CAT Definition — See Q.7(a) in 2025 tab</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Characteristics of CAT:</div>
+        <ul class="point-list b">
+          <li>Uses a large <strong>item bank</strong> with questions classified by difficulty and content</li>
+          <li>Adapts in <strong>real time</strong> — each question is selected based on performance on previous questions</li>
+          <li>Provides a <strong>precise ability estimate</strong> with fewer items than fixed tests</li>
+          <li>Each student gets a <strong>unique test</strong> — enhances security</li>
+          <li>Scores are based on <strong>Item Response Theory (IRT)</strong> — not just number correct</li>
+          <li><strong>Immediate scoring and reporting</strong> upon completion</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">Explain briefly the types of Computer Hardware.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <ul class="point-list">
+        <li><strong>Input Devices:</strong> Allow user to enter data into the computer — keyboard, mouse, microphone, scanner, webcam, touchscreen, joystick</li>
+        <li><strong>Output Devices:</strong> Display or produce results from the computer — monitor, printer, speakers, projector, headphones</li>
+        <li><strong>Processing Unit (CPU):</strong> The "brain" of the computer — Central Processing Unit performs all calculations and logical operations. Includes ALU and Control Unit.</li>
+        <li><strong>Primary Memory (RAM/ROM):</strong> RAM (Random Access Memory) — temporary, volatile storage for currently running programs. ROM (Read Only Memory) — permanent storage for boot instructions.</li>
+        <li><strong>Secondary Storage:</strong> Permanent, long-term storage — hard disk drive (HDD), solid state drive (SSD), USB flash drives, CD/DVD drives, memory cards</li>
+        <li><strong>Motherboard:</strong> The main circuit board connecting all components; contains slots for CPU, RAM, and expansion cards</li>
+      </ul>
+      <div class="key-note">★ From 2016 Official Scheme: Input devices "like key board, mouse, microphone, computer disc" and output devices "like Monitor, printer, Dot-matrix, Inkjets printer and laser printer."</div>
+    </div>
+  </div>
+</div><!-- end tab2022 -->
+
+<!-- ==================== 2021 ==================== -->
+<div id="tab2021" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">I Semester B.Ed. Examination — September 2021</div>
+      <div class="paper-code">81505 · Paper HC-5 – ICT in Education (CBCS Scheme – 2 Years Course)</div>
+    </div>
+    <div class="paper-marks">35 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A</div>
+  <div class="part-desc">Answer any TWO. 10 marks each (2×10=20)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) What is information and communication? b) What are the types of communication? c) Explain the barriers of communication / components of communication.</span>
+      <span class="q-marks">(3+2+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2023 tab Q.3 for Information and Communication definition, 2025 tab Q.1(b) for Types, and 2024 tab Q.1(b) for Barriers of Communication.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) What is programmed instruction? b) Explain the principles of programmed instruction. c) List out the advantages of programmed instruction.</span>
+      <span class="q-marks">(2+5+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Definition and b) Principles — See 2025 tab Q.8 and 2024 tab Q.3(a)</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Advantages of Programmed Instruction (3 marks)</div>
+        <ul class="point-list c">
+          <li>Enables <strong>self-paced, individualised learning</strong> — each student learns at their own speed</li>
+          <li>Provides <strong>immediate feedback</strong> at every step — reinforces learning</li>
+          <li>Systematic, <strong>logical organisation</strong> of content ensures no gaps</li>
+          <li>Can be used <strong>without a teacher</strong> present — promotes independent learning</li>
+          <li>Reduces anxiety — <strong>non-threatening</strong> learning environment</li>
+          <li>Suitable for <strong>revision and remediation</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) What is Educational Technology? b) What are the objectives of Educational Technology? c) Explain briefly scope of Educational Technology.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2023 Q.1 for definition, objectives and components of Educational Technology. For scope, see 2022 Part B Q.4.</div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.4</span>
+      <span class="q-text">Briefly explain the components of non-verbal communication.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2023 Part B Q.4 for the complete 8-component answer on non-verbal communication.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.5</span>
+      <span class="q-text">What is 'Video Lessons'? Write the significance of video lessons.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2024 Part B Q.7 for meaning and significance of video lessons.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">What are the merits and demerits of computer assisted instruction?</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2022 Part A Q.3(c) for complete advantages and disadvantages of CAI.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">Mention the differences between linear and branched programmed instruction.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <table class="diff-table">
+        <tr><th>Linear Programmed Instruction (Skinner)</th><th>Branched Programmed Instruction (Crowder)</th></tr>
+        <tr><td>All students follow the same sequence</td><td>Different students follow different paths based on responses</td></tr>
+        <tr><td>Constructed response (fill in blank)</td><td>Multiple choice responses</td></tr>
+        <tr><td>Designed for near-errorless learning (very small steps)</td><td>Allows errors; uses them as diagnostic opportunities</td></tr>
+        <tr><td>Positive reinforcement by confirming correct answers</td><td>Wrong answers lead to remedial branches with explanation</td></tr>
+        <tr><td>Simpler to design</td><td>More complex to design; needs larger frame network</td></tr>
+        <tr><td>Less individualised — same for all</td><td>More individualised — faster learners skip material</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">Explain briefly the types of computer software.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2025 Part A Q.3(c) for the complete answer on types of computer software — System, Application, Programming, Educational, and Freeware/Open-source.</div>
+    </div>
+  </div>
+</div><!-- end tab2021 -->
+
+<!-- ==================== SEP 2019 ==================== -->
+<div id="tab2019s" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">I Semester B.Ed. Examination — September 2019</div>
+      <div class="paper-code">GN-003 (10243) · HC-5: ICT in Education (CBCS 2 Years Course)</div>
+    </div>
+    <div class="paper-marks">35 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A</div>
+  <div class="part-desc">Answer any TWO. 10 marks each (2×10=20)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">What is communication? What are the barriers of communication in the classroom? As a teacher how will you overcome those barriers?</span>
+      <span class="q-marks">(1+5+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2024 tab Q.1 for definition of communication, barriers in classroom (7 types), and how a teacher overcomes them — complete answer covering all parts.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">What is Programmed Instruction? Explain the principles of programmed instruction. What are the advantages of programmed instruction?</span>
+      <span class="q-marks">(1+5+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2025 Q.8 for the five principles (with official scheme wording), 2024 Q.3(a) for definition, and 2021 Q.2(c) for advantages.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">Define Educational Technology. List the objectives of Educational Technology. How is the knowledge of Educational Technology helpful for a teacher?</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2023 Q.1(a) for definition, Q.1(b) for objectives, and 2025 Q.5(b) for how educational technology helps a teacher.</div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.4</span>
+      <span class="q-text">What are 'Video lessons'? List out the significance of Video lessons.</span>
+      <span class="q-marks">(1+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2024 Part B Q.7 for meaning and significance of video lessons.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.5</span>
+      <span class="q-text">Briefly explain any two components of Educational Technology.</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">Choose any two from the five components covered in 2023 Q.1(c): Hardware, Software, Systems Approach, Human Component, or Communication Networks. Each deserves about 2-3 sentences with examples.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">What is operating system? Briefly explain its types.</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2024 Part B Q.8 for complete answer on operating system definition and types.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">Explain the role of multimedia approach in the classroom for effective communication.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2024 Part B Q.4 for the complete answer on multimedia approach in classroom for effective communication.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">Explain briefly the types of Computer Assisted Instruction.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2025 Part A Q.2(b) for the five types of CAI — Drill &amp; Practice, Tutorial, Simulation, Games, Problem-solving — each described in a paragraph.</div>
+    </div>
+  </div>
+</div><!-- end tab2019s -->
+
+<!-- ==================== APR 2019 ==================== -->
+<div id="tab2019a" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">I Semester B.Ed. Examination — April/May 2019</div>
+      <div class="paper-code">81505 · Paper HC-5: Information and Communication Technology in Education (CBCS Scheme)</div>
+    </div>
+    <div class="paper-marks">35 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A</div>
+  <div class="part-desc">Answer any TWO. 10 marks each (2×10=20)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) What is information technology? b) Write the importance of educational technology. c) Write the meaning and significance of multi-media approach.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) What is Information Technology? (2 marks)</div>
+        <div class="ans-prose"><strong>Information Technology (IT)</strong> refers to the use of computers, software, networks and other technologies to process, store, retrieve, and transmit information. In education, IT encompasses all digital tools and systems used to support teaching, learning and administration.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Importance of Educational Technology (4 marks)</div>
+        <ul class="point-list b">
+          <li>Makes learning more <strong>efficient and effective</strong> through planned, systematic instruction</li>
+          <li>Caters to <strong>individual differences</strong> — different learning paces and styles</li>
+          <li>Brings the <strong>world into the classroom</strong> — access to global information and expertise</li>
+          <li>Enables <strong>distance education</strong> — quality learning regardless of location</li>
+          <li>Provides <strong>immediate feedback</strong> and assessment — improves learning outcomes</li>
+          <li>Prepares students for a <strong>technology-driven society and economy</strong></li>
+          <li>Enriches teacher preparation and <strong>professional development</strong></li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Multimedia Approach — See 2024 Part B Q.4 for full answer</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) Write the meaning and definition of information. b) Briefly explain the components of communication. c) Explain the types of communication.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Meaning and Definition of Information (2 marks)</div>
+        <div class="ans-prose"><strong>Information</strong> is data that has been processed, organised and given meaning so that it becomes useful for decision-making or communication. Data is raw facts; information is data with context and interpretation. In ICT, information is typically digital and can be stored, transmitted, processed and retrieved electronically.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Components of Communication (4 marks)</div>
+        <ul class="point-list b">
+          <li><strong>Source/Sender:</strong> The originator who has a message to communicate</li>
+          <li><strong>Message:</strong> The content — information, ideas, feelings to be conveyed</li>
+          <li><strong>Encoding:</strong> Converting the message into symbols (words, images, gestures)</li>
+          <li><strong>Channel:</strong> The medium of transmission — speech, print, electronic, digital</li>
+          <li><strong>Receiver:</strong> The person who receives and decodes the message</li>
+          <li><strong>Decoding:</strong> Interpreting the symbols received</li>
+          <li><strong>Feedback:</strong> Receiver's response — confirms message receipt and understanding</li>
+          <li><strong>Noise:</strong> Anything that distorts the message at any stage</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Types of Communication — See 2025 Q.1(b)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) What is Computer Assisted Instruction? b) Explain the types of Computer Assisted Instruction. c) Write the advantages and limitations of Computer Assisted Instruction.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2022 Part A Q.3 for complete answer covering CAI definition, types, and advantages/disadvantages.</div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.4</span>
+      <span class="q-text">Briefly explain the types of programmed instructions.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2024 Q.3(b) for full explanation of Linear (Skinner) and Branched (Crowder) programmed instruction types.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.5</span>
+      <span class="q-text">What are the objectives of educational technology?</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2023 Q.1(b) for list of objectives of Educational Technology, from the official 2016 scheme by Prof. B.R. Gopal.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">List out the barriers of communication.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2024 Q.1(b) for the complete list of 7 barriers of communication with brief explanations of each.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">Write the meaning and significance of video-lessons.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2024 Part B Q.7 for meaning and full significance of video lessons (7 points).</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">a) What is Computer Adoptive Testing? b) What are the advantages of Computer Adoptive Testing?</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2025 Part B Q.7 for definition and advantages of Computer Adaptive Testing.</div>
+    </div>
+  </div>
+</div><!-- end tab2019a -->
+
+<!-- ==================== 2018 ==================== -->
+<div id="tab2018" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">I Semester B.Ed. Examination — September/October 2018</div>
+      <div class="paper-code">SS-002 · HC-5: Information and Communication Technology in Education (CBCS 2 Years)</div>
+    </div>
+    <div class="paper-marks">35 Marks</div>
+  </div>
+
+  <div class="part-label part-a">Part A</div>
+  <div class="part-desc">Answer any TWO. 10 marks each (2×10=20)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) What is information and communication? b) What are the types of communication? c) Explain the barriers of communication.</span>
+      <span class="q-marks">(3+2+5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2023 Q.3 for information/communication definition, 2025 Q.1(b) for types, and 2024 Q.1(b) for barriers.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) Define Educational Technology. b) List out any four objectives of Educational Technology. c) Briefly explain the components of Educational Technology.</span>
+      <span class="q-marks">(2+2+6)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2023 Q.1 for full answer covering definition, objectives, and components of Educational Technology.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) What is Programmed Instruction? b) Briefly explain the types of Programmed Instruction. c) Mention the advantages and limitations of Programmed Instruction.</span>
+      <span class="q-marks">(2+4+4)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2023 Q.2 for full answer on Programmed Instruction — definition, types (linear and branched), advantages and limitations.</div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.4</span>
+      <span class="q-text">Explain the role of teacher in Computer Assisted Instruction.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2025 Q.2(c) for the complete six-point answer on the role of teacher in CAI — Planner, Facilitator, Monitor, Motivator, Evaluator, Technical Manager.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.5</span>
+      <span class="q-text">a) What is windows operating system? b) Mention the types of operating system.</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Windows Operating System:</div>
+        <div class="ans-prose"><strong>Windows</strong> is a graphical user interface (GUI) operating system developed by Microsoft. It provides a visual environment with icons, windows, menus and a desktop to interact with the computer. It is the most widely used OS in schools and offices worldwide.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Types of Operating System — See 2024 Part B Q.8 for complete types</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">a) What is 'Video Lessons'? b) Write the significance of Video Lessons.</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2024 Part B Q.7 for complete answer on Video Lessons — meaning and significance.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">Briefly explain the principles of Programmed Instructions.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2025 Part B Q.8 for all five principles with the official scheme wording — Small Steps, Active Responding, Immediate Confirmation, Self-Pacing, Student Testing.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">a) What is Software? b) What are its types?</span>
+      <span class="q-marks">(2+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-prose">See 2025 Q.3(c) for definition and types of computer software — System, Application, Programming, Educational, Freeware.</div>
+    </div>
+  </div>
+</div><!-- end tab2018 -->
+
+<!-- ==================== 2016 WITH OFFICIAL SCHEME ==================== -->
+<div id="tab2016" class="tab-content">
+  <div class="paper-header">
+    <div>
+      <div class="paper-title">I Semester B.Ed. Examination — August 2016 ★ Official Answer Key</div>
+      <div class="paper-code">PG-1005 · HC-5: ICT in Education (CBCS 2 Years Course)</div>
+    </div>
+    <div class="paper-marks">35 Marks</div>
+  </div>
+
+  <div class="scheme-note">
+    ★ This paper includes the <strong>official Scheme of Valuation</strong> prepared by <strong>Prof. B.R. Gopal, Chief Examiner, MES Teachers College, Rajajinagar II Block, Bengaluru — 560010</strong>. Answers below follow the official key exactly.
+  </div>
+
+  <div class="part-label part-a">Part A — Long Questions</div>
+  <div class="part-desc">Answer any TWO. 10 marks each (2×10=20)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.1</span>
+      <span class="q-text">a) What is Programmed Instruction? b) Explain briefly the basic principles of Programmed Instruction. c) Mention the differences between Linear and Branching Programmed Instruction.</span>
+      <span class="q-marks">(2+5+3)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Meaning of Programmed Instruction — OFFICIAL SCHEME</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "Programmed instruction is a planned sequence of experiences, leading to proficiency, in terms of stimulus-response relationship with have proven to be effective."</div>
+        <div class="ans-prose"><strong>Programmed Instruction</strong> is a planned sequence of experiences, leading to proficiency, in terms of stimulus-response relationships that have proven to be effective. Based on Skinner's operant conditioning, it breaks learning into small frames, requires active responding, and provides immediate reinforcement.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Five Basic Principles — OFFICIAL SCHEME</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "The five basic principles are: Principle of small steps, principle of active responding, principle of immediate confirmation, principle of self pacing and principle of student testing. If they mention five points give half mark, students explain all the five give full allotted marks."</div>
+        <ul class="point-list b">
+          <li><strong>Principle of Small Steps:</strong> Content divided into very small, manageable frames — one concept per frame — ensuring gradual, errorless progress</li>
+          <li><strong>Principle of Active Responding:</strong> Student must respond at each frame — fill in blank, answer question. Active participation at every step.</li>
+          <li><strong>Principle of Immediate Confirmation (Feedback):</strong> Correct answer shown immediately after student responds — reinforces correct learning, corrects errors instantly</li>
+          <li><strong>Principle of Self-Pacing:</strong> Each student works at their own pace — no external pressure; accommodates individual differences</li>
+          <li><strong>Principle of Student Testing (Evaluation):</strong> Regular testing built into the program — evaluates both student achievement and the program's effectiveness</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head c">c) Differences — OFFICIAL SCHEME</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "Mention the difference between liner and branching programmed instruction about three points each on their experiences and nature of instruction."</div>
+        <table class="diff-table">
+          <tr><th>Linear (Skinner)</th><th>Branched (Crowder)</th></tr>
+          <tr><td>Same path for all students</td><td>Different paths based on responses</td></tr>
+          <tr><td>Constructed response (fill in blank)</td><td>Multiple choice responses</td></tr>
+          <tr><td>Very small steps, near-errorless</td><td>Larger steps; errors guide to remedial frames</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.2</span>
+      <span class="q-text">a) Define Educational Technology. b) Explain the hardware, software and systems approach components of Educational Technology.</span>
+      <span class="q-marks">(2+8)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) Meaning of Educational Technology — OFFICIAL SCHEME</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "Meaning of Educational Technology in Brief either with definition or in their own words about three or four sentences."</div>
+        <div class="ans-prose"><strong>Educational Technology</strong> is the systematic application of scientific knowledge about teaching and learning to improve the effectiveness and efficiency of the educational process. It involves three major components — hardware, software, and a systems approach — working together to achieve learning objectives.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Three Components — OFFICIAL SCHEME</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "Meaning of hardware, software and system approach components students has to write with example for all the three in brief."</div>
+        <div class="ans-head" style="margin-top:0.4rem;">Hardware Component:</div>
+        <ul class="point-list b">
+          <li>Physical equipment used in teaching — projectors, smart boards, computers, tablets, audio systems, lab equipment</li>
+          <li>Enables delivery of educational content through machines</li>
+          <li>Examples: Computer lab, smart classroom projector, language lab</li>
+        </ul>
+        <div class="ans-head b" style="margin-top:0.5rem;">Software Component:</div>
+        <ul class="point-list b">
+          <li>Programs, digital content and instructional materials used in education</li>
+          <li>Includes CAI programs, educational simulations, e-books, multimedia content, LMS platforms</li>
+          <li>Examples: Khan Academy, SWAYAM, GeoGebra, PowerPoint presentations</li>
+        </ul>
+        <div class="ans-head b" style="margin-top:0.5rem;">Systems Approach:</div>
+        <ul class="point-list b">
+          <li>A planned, systematic methodology for designing, implementing and evaluating instruction</li>
+          <li>Treats teaching as a system with interrelated components — objectives, content, methods, media, evaluation</li>
+          <li>Uses models like ADDIE (Analysis, Design, Development, Implementation, Evaluation)</li>
+          <li>Ensures instruction is organised, purposeful and continuously improved</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num">Q.3</span>
+      <span class="q-text">a) What is Computer Assisted Instruction and Computer Adaptive Testing? b) Explain in brief the different modes of Computer Assisted Instruction.</span>
+      <span class="q-marks">(4+6)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <div class="ans-head">a) CAI and CAT — OFFICIAL SCHEME</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "Meaning of Computer Assisted Instruction and Computer Adoptive Testing in brief, first is for teaching and second one is for testing because now a day most of the work is based on computer both teaching and testing of students achievement so both are essential in the process of learning."</div>
+        <div class="ans-prose"><strong>CAI (Computer Assisted Instruction)</strong> is the use of a computer to present and manage learning — it is for <strong>teaching</strong>. <strong>CAT (Computer Adaptive Testing)</strong> adjusts question difficulty based on student performance — it is for <strong>testing</strong>. Both are essential because modern education increasingly relies on computers for both instructional delivery and assessment of student achievement.</div>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">b) Modes of CAI — OFFICIAL SCHEME</div>
+        <div class="key-note">★ OFFICIAL SCHEME: "The different modes of CAI are: 1) Drill and practice 2) Tutorial and Dialogues 3) Simulation and games. It should be in brief."</div>
+        <div class="ans-head" style="margin-top:0.4rem;">1. Drill and Practice:</div>
+        <ul class="point-list b">
+          <li>Presents a series of practice items for already-taught material</li>
+          <li>Immediate feedback on each response — correct or incorrect</li>
+          <li>Builds speed and accuracy through repetition</li>
+        </ul>
+        <div class="ans-head b" style="margin-top:0.5rem;">2. Tutorial and Dialogues:</div>
+        <ul class="point-list b">
+          <li>Presents new information, asks questions, and responds to student answers</li>
+          <li>Simulates one-on-one tutoring interaction</li>
+          <li>Branches to remediation or advancement based on performance</li>
+        </ul>
+        <div class="ans-head b" style="margin-top:0.5rem;">3. Simulation and Games:</div>
+        <ul class="point-list b">
+          <li>Creates models of real-world systems for safe, risk-free exploration</li>
+          <li>Games add competitive, motivational elements to learning</li>
+          <li>Develops problem-solving, decision-making and strategic thinking</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label part-b">Part B — Short Questions</div>
+  <div class="part-desc">Answer any THREE. 5 marks each (3×5=15)</div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.4</span>
+      <span class="q-text">How will you overcome the barriers of communication which may arise during the classroom teaching?</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: "Teacher is supreme in the classroom, has to see the situation of the classroom, overcome the barriers, it may be speaking, listening, observing, writing, reading, it may be verbal and non-verbal like facial, eye-contact, Gesture, posture, space, symbolic, sound etc. Brief explanation with four or five points."</div>
+      <div class="ans-prose">See 2024 Q.1(c) for complete 7-point answer on how a teacher overcomes classroom communication barriers.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.5</span>
+      <span class="q-text">Explain the role of multi-media approach in a classroom for effective communication.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: "Role of multi-media Approach in classroom. It enables the students to represent information using several different media. It can arouse the curiosity among the learner and provide them vivid impression. It can develop positive attitudes among the learners towards the teaching learning process. It allows for self-facing. It can be implemented through the multimedia approach. It can bridge language barriers since audio is not the only means of communication."</div>
+      <div class="ans-prose">See 2024 Part B Q.4 for the complete 8-point answer incorporating all the scheme points above.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.6</span>
+      <span class="q-text">List the objectives of Educational Technology.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: "Objectives of Educational technology are as follows: To construct definite specific pattern to help teaching and learning. To shape new learning situation and instructional programs. To provide learning opportunity to deprived community at lower cost. To self guide organizing instructional materials. To provide equal opportunity to all class rooms. To provide higher technology to even ordinary children."</div>
+      <ul class="point-list">
+        <li>To construct a <strong>definite specific pattern</strong> to help teaching and learning</li>
+        <li>To shape <strong>new learning situations and instructional programs</strong></li>
+        <li>To provide learning opportunity to <strong>deprived community at lower cost</strong></li>
+        <li>To self-guide <strong>organising instructional materials</strong></li>
+        <li>To provide <strong>equal opportunity</strong> to all classrooms</li>
+        <li>To provide <strong>higher technology to even ordinary children</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.7</span>
+      <span class="q-text">Explain the significance of Smart classroom.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: "Significance of smart classroom are as follows, Advanced mode of education, very easier and convenient. It is a excellent mode of education much advantages. It helps students gain knowledge in a technical and advanced manner. It runs in a planned way. It learns things in an efficient way. It exceeds proficiency and efficiency in the classroom. It is a solution designed to help teachers and students. It meets the challenge in education. It helps students to involve in learning."</div>
+      <div class="ans-prose">See 2023 Part B Q.7 for the complete answer on significance of smart class with all scheme points incorporated.</div>
+    </div>
+  </div>
+
+  <div class="q-card" onclick="toggleQ(this)">
+    <div class="q-header">
+      <span class="q-num b">Q.8</span>
+      <span class="q-text">Explain briefly the input and output devices of a computer.</span>
+      <span class="q-marks">(5)</span>
+      <span class="q-toggle">▾</span>
+    </div>
+    <div class="q-body">
+      <div class="key-note">★ OFFICIAL SCHEME: "Brief explanation about input like key board, mouse, microphone, computer disc and output devices like Monitor, printer, Dot-matrix, Inkjets printer and laser printer."</div>
+      <div class="ans-section">
+        <div class="ans-head">Input Devices:</div>
+        <ul class="point-list">
+          <li><strong>Keyboard:</strong> Most common input device — types text, numbers and commands</li>
+          <li><strong>Mouse:</strong> Pointing device — moves cursor, clicks to select, drag items</li>
+          <li><strong>Microphone:</strong> Converts voice/sound to digital input — used for dictation, voice commands, recording</li>
+          <li><strong>Scanner:</strong> Converts physical documents and images to digital form</li>
+          <li><strong>Joystick/Gamepad:</strong> Used for games and interactive simulations</li>
+          <li><strong>Touchscreen:</strong> Input directly on the display surface — tablets, smartphones, smart boards</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <div class="ans-head b">Output Devices:</div>
+        <ul class="point-list b">
+          <li><strong>Monitor:</strong> Primary visual output device — displays all information and images</li>
+          <li><strong>Printer:</strong> Produces paper copies — Dot-matrix (impact), Inkjet (liquid ink), Laser (toner powder)</li>
+          <li><strong>Speakers:</strong> Produce audio output — music, speech, alerts</li>
+          <li><strong>Projector:</strong> Projects computer display on a large screen — essential in classrooms</li>
+          <li><strong>Headphones:</strong> Personal audio output</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div><!-- end tab2016 -->
+
+<!-- ==================== IMPORTANT QUESTIONS ==================== -->
+<div id="tabIQ" class="tab-content">
+  <div class="iq-intro">
+    <p>⭐ Questions ranked by frequency across all <strong>9 papers (2016–2025)</strong>. The top questions appear in 7–9 out of 9 papers. Prioritise HIGH frequency questions first.</p>
+  </div>
+
+  <div class="iq-group">
+    <div class="iq-group-title">🔴 Part A — High Frequency Long Questions (10 marks each)</div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">9/9 papers</span>
+      <span class="iq-text"><strong>Programmed Instruction</strong> — definition, five basic principles (small steps, active responding, immediate feedback, self-pacing, student testing), types (linear vs branched), advantages &amp; limitations</span>
+      <span class="iq-years">All 9 papers</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">9/9 papers</span>
+      <span class="iq-text"><strong>Communication</strong> — definition, types (verbal/non-verbal), barriers, process/components, how to overcome barriers</span>
+      <span class="iq-years">All 9 papers</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">9/9 papers</span>
+      <span class="iq-text"><strong>Computer Assisted Instruction (CAI)</strong> — definition, types/modes (drill &amp; practice, tutorial, simulation, games), role of teacher, advantages &amp; disadvantages</span>
+      <span class="iq-years">All 9 papers</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">8/9 papers</span>
+      <span class="iq-text"><strong>Educational Technology</strong> — definition, objectives, components (hardware/software/systems approach), scope</span>
+      <span class="iq-years">2016, 2017, 2018, 2019a, 2019s, 2021, 2022, 2023</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">4/9 papers</span>
+      <span class="iq-text"><strong>Non-verbal Communication</strong> — factors, components; influence on teaching-learning process</span>
+      <span class="iq-years">2025, 2023, 2021, 2017</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">3/9 papers</span>
+      <span class="iq-text"><strong>Computer / Role of Computer in Education</strong> — what is computer, role in education, types of software</span>
+      <span class="iq-years">2025, 2018, 2017</span>
+    </div>
+  </div>
+
+  <div class="iq-group">
+    <div class="iq-group-title">🟡 Part B — High Frequency Short Questions (5 marks each)</div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">9/9 papers</span>
+      <span class="iq-text"><strong>Video Lessons / Smart Class</strong> — meaning, significance. These two appear together in almost every paper.</span>
+      <span class="iq-years">All 9 papers</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">9/9 papers</span>
+      <span class="iq-text"><strong>Multimedia Approach in Classroom</strong> — role for effective communication</span>
+      <span class="iq-years">All 9 papers</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">8/9 papers</span>
+      <span class="iq-text"><strong>Computer Adaptive Testing (CAT)</strong> — definition, advantages/characteristics</span>
+      <span class="iq-years">2025, 2024, 2022, 2021, 2019a, 2019s, 2018, 2016</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">8/9 papers</span>
+      <span class="iq-text"><strong>Principles of Programmed Instruction</strong> (as short question)</span>
+      <span class="iq-years">2025, 2023, 2022, 2021, 2019s, 2018, 2017, 2016</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">7/9 papers</span>
+      <span class="iq-text"><strong>Computer Software</strong> — definition and types (system, application, programming, educational)</span>
+      <span class="iq-years">2025, 2022, 2021, 2019s, 2018, 2017, 2016</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-high">7/9 papers</span>
+      <span class="iq-text"><strong>Objectives of Educational Technology</strong> (as short question)</span>
+      <span class="iq-years">2023, 2022, 2021, 2019a, 2019s, 2017, 2016</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">6/9 papers</span>
+      <span class="iq-text"><strong>Components of Non-Verbal Communication</strong></span>
+      <span class="iq-years">2023, 2021, 2019s, 2018, 2017, 2016</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">6/9 papers</span>
+      <span class="iq-text"><strong>Linear vs Branched Programmed Instruction</strong> — differences</span>
+      <span class="iq-years">2022, 2021, 2019a, 2019s, 2017, 2016</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">5/9 papers</span>
+      <span class="iq-text"><strong>Operating System</strong> — what it is, types</span>
+      <span class="iq-years">2024, 2022, 2019s, 2018, 2017</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">5/9 papers</span>
+      <span class="iq-text"><strong>Scope of Educational Technology</strong></span>
+      <span class="iq-years">2022, 2021, 2019s, 2018, 2017</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">4/9 papers</span>
+      <span class="iq-text"><strong>MS PowerPoint / E-mail / Internet</strong> — what it is, uses and steps</span>
+      <span class="iq-years">2022, 2019a, 2017, 2016</span>
+    </div>
+
+    <div class="iq-item">
+      <span class="iq-freq freq-mid">4/9 papers</span>
+      <span class="iq-text"><strong>Input and Output Devices</strong> of a computer</span>
+      <span class="iq-years">2022, 2019a, 2017, 2016</span>
+    </div>
+  </div>
+
+  <div class="iq-group">
+    <div class="iq-group-title">📋 From the Official Question Bank Sheet</div>
+    <div class="iq-item">
+      <span class="iq-freq freq-low">Bank</span>
+      <span class="iq-text">What is primary memory? Differences between RAM and ROM</span>
+      <span class="iq-years">Question Bank</span>
+    </div>
+    <div class="iq-item">
+      <span class="iq-freq freq-low">Bank</span>
+      <span class="iq-text">What is e-learning? What are the characteristics of e-learning?</span>
+      <span class="iq-years">Question Bank</span>
+    </div>
+    <div class="iq-item">
+      <span class="iq-freq freq-low">Bank</span>
+      <span class="iq-text">What is e-publishing?</span>
+      <span class="iq-years">Question Bank</span>
+    </div>
+    <div class="iq-item">
+      <span class="iq-freq freq-low">Bank</span>
+      <span class="iq-text">Explain the generations of computer in revolution</span>
+      <span class="iq-years">Question Bank</span>
+    </div>
+    <div class="iq-item">
+      <span class="iq-freq freq-low">Bank</span>
+      <span class="iq-text">What is internet? Which devices are required for internet connectivity? Educational uses of internet.</span>
+      <span class="iq-years">Question Bank</span>
+    </div>
+    <div class="iq-item">
+      <span class="iq-freq freq-low">Bank</span>
+      <span class="iq-text">What is E-Mail? Explain the role of computer in education.</span>
+      <span class="iq-years">Question Bank</span>
+    </div>
+  </div>
+</div><!-- end tabIQ -->
+
+</div><!-- content-area -->
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({top: document.querySelector('.tabs-section').offsetTop - 10, behavior: 'smooth'});
+}
+function toggleQ(card) { card.classList.toggle('open'); }
+</script>
+</body>
+</html>
