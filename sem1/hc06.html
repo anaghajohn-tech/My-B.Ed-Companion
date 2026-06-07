@@ -1,0 +1,2328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-06 Language Across the Curriculum | B.Ed Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f0f13;
+    --surface: #17171e;
+    --surface2: #1e1e28;
+    --surface3: #252532;
+    --border: #2e2e3e;
+    --accent: #a78bfa;
+    --accent2: #7c3aed;
+    --accent-glow: rgba(167,139,250,0.15);
+    --gold: #f59e0b;
+    --gold-dim: rgba(245,158,11,0.12);
+    --green: #34d399;
+    --green-dim: rgba(52,211,153,0.1);
+    --red: #f87171;
+    --red-dim: rgba(248,113,113,0.1);
+    --blue: #60a5fa;
+    --blue-dim: rgba(96,165,250,0.1);
+    --text: #e8e8f0;
+    --text-muted: #8888a8;
+    --text-dim: #5555708;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  .site-header {
+    background: linear-gradient(135deg, #1a0a2e 0%, #0f0f13 60%);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .back-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: opacity 0.2s;
+  }
+  .back-link:hover { opacity: 0.7; }
+  .site-header h1 {
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1a0a2e 0%, #0d1a2e 50%, #0f0f13 100%);
+    padding: 3rem 2rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(167,139,250,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 900px; margin: 0 auto; }
+  .subject-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(167,139,250,0.1);
+    border: 1px solid rgba(167,139,250,0.3);
+    color: var(--accent);
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    margin-bottom: 1rem;
+  }
+  .hero h2 {
+    font-family: 'Crimson Pro', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+    color: var(--text);
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+  .meta-tag {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.25rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+  .meta-tag.scheme { border-color: rgba(245,158,11,0.4); color: var(--gold); background: var(--gold-dim); }
+
+  /* YEAR TABS */
+  .tabs-wrapper {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .tabs-wrapper::-webkit-scrollbar { display: none; }
+  .tabs {
+    display: flex;
+    gap: 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    min-width: max-content;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 1rem 1.1rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* MAIN CONTENT */
+  .content { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem; }
+  .year-panel { display: none; }
+  .year-panel.active { display: block; }
+
+  .year-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .year-title {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .paper-code {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    padding: 0.2rem 0.6rem;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+  }
+  .scheme-badge {
+    background: var(--gold-dim);
+    border: 1px solid rgba(245,158,11,0.4);
+    color: var(--gold);
+    padding: 0.2rem 0.7rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* PART LABEL */
+  .part-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin: 2rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .part-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* QUESTION CARDS */
+  .q-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .q-card:hover { border-color: rgba(167,139,250,0.3); }
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .q-num {
+    min-width: 28px;
+    height: 28px;
+    background: var(--accent2);
+    color: white;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .q-num.partb { background: #0e7490; }
+  .q-marks {
+    background: var(--surface3);
+    color: var(--text-muted);
+    border-radius: 5px;
+    padding: 0.15rem 0.5rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .q-text {
+    flex: 1;
+    font-size: 0.93rem;
+    color: var(--text);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .q-toggle {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+    margin-top: 3px;
+    transition: transform 0.2s;
+  }
+  .q-card.open .q-toggle { transform: rotate(180deg); }
+  .q-body {
+    display: none;
+    padding: 0 1.25rem 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+  .q-card.open .q-body { display: block; }
+
+  /* ANSWER CONTENT */
+  .answer-intro {
+    font-family: 'Crimson Pro', serif;
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0.75rem 0 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .ans-section {
+    margin-bottom: 1.2rem;
+  }
+  .ans-section h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+  }
+  .ans-section p {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+  }
+  .ans-list {
+    list-style: none;
+    padding: 0;
+  }
+  .ans-list li {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.6;
+    padding: 0.3rem 0 0.3rem 1.2rem;
+    position: relative;
+  }
+  .ans-list li::before {
+    content: '›';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* COMPARISON TABLE */
+  .diff-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0.75rem 0;
+    font-size: 0.88rem;
+  }
+  .diff-table th {
+    background: var(--surface2);
+    color: var(--accent);
+    padding: 0.6rem 0.9rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+    border: 1px solid var(--border);
+  }
+  .diff-table td {
+    padding: 0.55rem 0.9rem;
+    border: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .diff-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+  /* SCHEME NOTE */
+  .scheme-note {
+    background: linear-gradient(135deg, var(--gold-dim), transparent);
+    border: 1px solid rgba(245,158,11,0.3);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    margin-top: 0.75rem;
+    font-size: 0.82rem;
+    color: var(--gold);
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+  .scheme-note .star { font-size: 1rem; flex-shrink: 0; }
+
+  /* IMPORTANT QUESTIONS */
+  .imp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .imp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+  }
+  .imp-card.high { border-color: rgba(248,113,113,0.4); }
+  .imp-card.med { border-color: rgba(167,139,250,0.3); }
+  .freq-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: 999px;
+    margin-bottom: 0.5rem;
+  }
+  .freq-badge.high { background: var(--red-dim); color: var(--red); }
+  .freq-badge.med { background: var(--accent-glow); color: var(--accent); }
+  .freq-badge.low { background: var(--surface3); color: var(--text-muted); }
+  .imp-q { font-size: 0.88rem; color: var(--text); line-height: 1.5; }
+  .imp-years { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    .hero { padding: 2rem 1rem 1.5rem; }
+    .content { padding: 1.5rem 1rem; }
+    .imp-grid { grid-template-columns: 1fr; }
+    .diff-table { font-size: 0.82rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="back-link">← My B.Ed Companion</a>
+  <h1>Semester 1 / HC-06</h1>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="subject-badge">HC-06 · Semester 1</div>
+    <h2>Language Across the Curriculum</h2>
+    <div class="hero-meta">
+      <span class="meta-tag">9 Papers: 2017–2024</span>
+      <span class="meta-tag">Max. Marks: 35</span>
+      <span class="meta-tag">Part A: 2×10=20 | Part B: 3×5=15</span>
+      <span class="meta-tag scheme">★ Official Scheme (Oct 2017)</span>
+    </div>
+  </div>
+</div>
+
+<div class="tabs-wrapper">
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('imp')">★ Important</button>
+    <button class="tab-btn" onclick="showTab('2024')">July 2024</button>
+    <button class="tab-btn" onclick="showTab('2023')">June 2023</button>
+    <button class="tab-btn" onclick="showTab('2022')">July 2022</button>
+    <button class="tab-btn" onclick="showTab('2021')">Oct 2021</button>
+    <button class="tab-btn" onclick="showTab('2020')">Feb/Mar 2020</button>
+    <button class="tab-btn" onclick="showTab('2019b')">Sep 2019</button>
+    <button class="tab-btn" onclick="showTab('2019a')">Apr/May 2019</button>
+    <button class="tab-btn" onclick="showTab('2018')">Sep/Oct 2018</button>
+    <button class="tab-btn" onclick="showTab('2017')">Oct 2017 ★</button>
+  </div>
+</div>
+
+<div class="content">
+
+<!-- ===================== IMPORTANT QUESTIONS ===================== -->
+<div id="tab-imp" class="year-panel active">
+  <div class="year-header">
+    <span class="year-title">Important Questions</span>
+    <span class="paper-code">Frequency Analysis · 9 Papers</span>
+  </div>
+  <p style="color:var(--text-muted);font-size:0.88rem;margin-bottom:1.5rem;">Questions ranked by how frequently they appear across all available papers.</p>
+
+  <div class="part-label">Part A — Long Answer (appeared 5+ times)</div>
+  <div class="imp-grid">
+    <div class="imp-card high">
+      <span class="freq-badge high">★ 9/9 papers</span>
+      <div class="imp-q">Need, purpose and benefits of Language Across the Curriculum (LAC)</div>
+      <div class="imp-years">2017, 2018, 2019a, 2019b, 2020, 2021, 2022, 2023, 2024</div>
+    </div>
+    <div class="imp-card high">
+      <span class="freq-badge high">★ 7/9 papers</span>
+      <div class="imp-q">Chomsky's Language Acquisition Theory (LAT / LAD) and its educational implications</div>
+      <div class="imp-years">2017, 2018, 2019a, 2019b, 2020, 2022, 2023</div>
+    </div>
+    <div class="imp-card high">
+      <span class="freq-badge high">★ 6/9 papers</span>
+      <div class="imp-q">Study skills: meaning, importance, and using them to develop reading in children</div>
+      <div class="imp-years">2018, 2019b, 2020, 2021, 2022, 2023</div>
+    </div>
+    <div class="imp-card high">
+      <span class="freq-badge high">★ 5/9 papers</span>
+      <div class="imp-q">Social stimulation: meaning and role of different stimuli in language development</div>
+      <div class="imp-years">2018, 2019b, 2020, 2021, 2023</div>
+    </div>
+    <div class="imp-card med">
+      <span class="freq-badge med">6/9 papers</span>
+      <div class="imp-q">Functions of language (diverse/various functions)</div>
+      <div class="imp-years">2019b, 2020, 2021, 2022, 2023, 2024</div>
+    </div>
+    <div class="imp-card med">
+      <span class="freq-badge med">5/9 papers</span>
+      <div class="imp-q">Strategies for developing writing skills among children</div>
+      <div class="imp-years">2017, 2018, 2019a, 2023, 2024</div>
+    </div>
+  </div>
+
+  <div class="part-label">Part B — Short Answer (appeared 4+ times)</div>
+  <div class="imp-grid">
+    <div class="imp-card high">
+      <span class="freq-badge high">★ 8/9 papers</span>
+      <div class="imp-q">Multilingualism: definition and its nature in Indian classrooms</div>
+      <div class="imp-years">2018, 2019a, 2019b, 2020, 2021, 2022, 2023, 2024 — indirect</div>
+    </div>
+    <div class="imp-card high">
+      <span class="freq-badge high">★ 8/9 papers</span>
+      <div class="imp-q">Speech defects: types/causes and role of teacher in correcting them</div>
+      <div class="imp-years">2018, 2019a, 2019b, 2020, 2021, 2022, 2023, 2024</div>
+    </div>
+    <div class="imp-card high">
+      <span class="freq-badge high">★ 8/9 papers</span>
+      <div class="imp-q">Expository vs. Narrative text: differentiation / analysis</div>
+      <div class="imp-years">2017, 2018, 2019a, 2019b, 2020, 2021, 2022, 2023</div>
+    </div>
+    <div class="imp-card high">
+      <span class="freq-badge high">★ 7/9 papers</span>
+      <div class="imp-q">Characteristics of good communication and its importance in classroom teaching</div>
+      <div class="imp-years">2019b, 2020, 2021, 2022, 2023, 2024</div>
+    </div>
+    <div class="imp-card high">
+      <span class="freq-badge high">★ 6/9 papers</span>
+      <div class="imp-q">Transactional and Reflective text: explanation with examples</div>
+      <div class="imp-years">2019a, 2019b, 2020, 2021, 2024</div>
+    </div>
+    <div class="imp-card med">
+      <span class="freq-badge med">5/9 papers</span>
+      <div class="imp-q">Scanning and Skimming reading strategies with examples</div>
+      <div class="imp-years">2019a, 2020, 2022, 2023, 2024 — indirect</div>
+    </div>
+    <div class="imp-card med">
+      <span class="freq-badge med">4/9 papers</span>
+      <div class="imp-q">Social stimuli in language (Part B version — briefly explain two)</div>
+      <div class="imp-years">2019a, 2019b, 2020, 2023</div>
+    </div>
+    <div class="imp-card med">
+      <span class="freq-badge med">4/9 papers</span>
+      <div class="imp-q">Role of subject teachers and language teachers in LAC approach</div>
+      <div class="imp-years">2023, 2024</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== JULY 2024 ===================== -->
+<div id="tab-2024" class="year-panel">
+  <div class="year-header">
+    <span class="year-title">July 2024</span>
+    <span class="paper-code">ED-006</span>
+  </div>
+
+  <div class="part-label">Part A — Long Answer (2×10=20) — Attempt any two</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">1</span>
+      <span class="q-text">a) Mention the aims of LAC approach. b) What are the advantages of considering this approach in the school context? (4+6)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">LAC (Language Across the Curriculum) recognizes language as the primary medium of learning in all subjects.</div>
+      <div class="ans-section">
+        <h4>a) Aims of LAC</h4>
+        <ul class="ans-list">
+          <li>To recognize language as a tool for thinking and learning across all disciplines</li>
+          <li>To make all teachers aware that they are also language teachers</li>
+          <li>To improve students' ability to use language for reading, writing, speaking and listening in subject areas</li>
+          <li>To bridge the gap between language learning and content learning</li>
+          <li>To promote language proficiency as a means of academic success</li>
+          <li>To help students express subject-specific knowledge using appropriate language</li>
+          <li>To encourage collaborative learning through discussion and writing</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>b) Advantages in school context</h4>
+        <ul class="ans-list">
+          <li><strong>Integrated learning:</strong> Language and content are learnt simultaneously, saving time and effort</li>
+          <li><strong>Improved comprehension:</strong> Students understand textbooks and classroom instructions better</li>
+          <li><strong>Active participation:</strong> Students engage more when language is natural and purposeful</li>
+          <li><strong>Critical thinking:</strong> Students articulate ideas, argue, and reason through language</li>
+          <li><strong>Writing skills:</strong> Note-making, report writing, and essay skills develop across subjects</li>
+          <li><strong>Multilingual benefit:</strong> Recognizes and uses students' home language as a resource</li>
+          <li><strong>Teacher development:</strong> Encourages subject teachers to become language-conscious</li>
+          <li><strong>Better assessment:</strong> Students can express what they know more accurately</li>
+          <li><strong>Lifelong literacy:</strong> Students develop reading and writing habits beyond the classroom</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">2</span>
+      <span class="q-text">Explain the different strategies that can be adopted to develop writing skills among children. (10)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">Writing is a complex cognitive skill. Multiple strategies help children develop it progressively.</div>
+      <div class="ans-section">
+        <h4>1. Process Writing Approach</h4>
+        <p>Writing is taught as a process: pre-writing → drafting → revising → editing → publishing. Students learn that good writing requires multiple drafts, not just one attempt.</p>
+      </div>
+      <div class="ans-section">
+        <h4>2. Guided Writing</h4>
+        <p>Teacher provides a model text, discusses its structure, and then students write a similar text with scaffolding. Reduces anxiety and builds confidence.</p>
+      </div>
+      <div class="ans-section">
+        <h4>3. Free Writing / Journal Writing</h4>
+        <p>Children write freely without fear of correction. Encourages fluency, personal voice, and self-expression. Builds habit of writing regularly.</p>
+      </div>
+      <div class="ans-section">
+        <h4>4. Story Writing</h4>
+        <p>Using story starters, picture prompts, or story frames. Develops narrative skills, imagination, sequencing, and descriptive language.</p>
+      </div>
+      <div class="ans-section">
+        <h4>5. Paragraph and Sentence Construction</h4>
+        <p>Teaching topic sentences, supporting details, and concluding sentences. Students practice linking ideas coherently within and across paragraphs.</p>
+      </div>
+      <div class="ans-section">
+        <h4>6. Note-Making</h4>
+        <p>Students learn to take notes from textbooks, lectures, and discussions. Develops summarizing and organizational skills essential for academic writing.</p>
+      </div>
+      <div class="ans-section">
+        <h4>7. Persuasive Writing</h4>
+        <p>Students write arguments for or against a topic, learning to state opinions, provide evidence, and address counterarguments.</p>
+      </div>
+      <div class="ans-section">
+        <h4>8. Collaborative / Pair Writing</h4>
+        <p>Students co-write, discuss, and improve each other's work. Peer feedback develops critical awareness of language use.</p>
+      </div>
+      <div class="ans-section">
+        <h4>9. Writing across subjects</h4>
+        <p>Subject teachers assign writing tasks (lab reports, geography field notes, math word problems). Reinforces content learning through writing.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">3</span>
+      <span class="q-text">a) What is communication? b) What are the characteristics of good communication? c) Why do you think it is important in the classroom teaching? (2+4+4)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Communication — Definition</h4>
+        <p>Communication is the process of transmitting ideas, thoughts, feelings, and information from one person to another through verbal, non-verbal, or written means, resulting in shared understanding.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Characteristics of Good Communication</h4>
+        <ul class="ans-list">
+          <li><strong>Clarity:</strong> Message is expressed in simple, unambiguous language</li>
+          <li><strong>Completeness:</strong> Contains all necessary information; nothing important is left out</li>
+          <li><strong>Conciseness:</strong> Brief and to the point; avoids unnecessary repetition</li>
+          <li><strong>Correctness:</strong> Factually accurate with proper language use</li>
+          <li><strong>Courtesy:</strong> Respectful and considerate of the receiver's perspective</li>
+          <li><strong>Consistency:</strong> Message is logically organized and free from contradictions</li>
+          <li><strong>Active listening:</strong> Good communication is two-way — the receiver listens attentively</li>
+          <li><strong>Feedback:</strong> Receiver responds, confirming that the message was understood</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>c) Importance in classroom teaching</h4>
+        <ul class="ans-list">
+          <li>Clear teacher communication ensures students understand lessons accurately</li>
+          <li>Encourages student participation, questions, and discussion</li>
+          <li>Non-verbal cues (gestures, eye contact) maintain attention and convey enthusiasm</li>
+          <li>Helps teacher assess student understanding through feedback and responses</li>
+          <li>Creates a positive classroom climate based on mutual respect</li>
+          <li>Models good language use for students to emulate</li>
+          <li>Effective communication of instructions reduces confusion and classroom management problems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label">Part B — Short Answer (3×5=15) — Attempt any three</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">4</span>
+      <span class="q-text">Explain the nature of transactional text and reflective text with examples.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Transactional Text</h4>
+        <p>Text written to communicate information, instructions, or ideas to others. The focus is on the reader and achieving a practical outcome.</p>
+        <p><strong>Examples:</strong> Letters, notices, reports, advertisements, instructions, business emails, news articles.</p>
+        <p><strong>Features:</strong> Clear purpose, audience-focused, formal/informal register, factual content.</p>
+      </div>
+      <div class="ans-section">
+        <h4>Reflective Text</h4>
+        <p>Text written to explore one's own thoughts, feelings, and experiences. The focus is on the writer's inner world and personal growth.</p>
+        <p><strong>Examples:</strong> Personal diaries, journals, autobiographies, personal essays, reflective portfolios.</p>
+        <p><strong>Features:</strong> First-person narrative, subjective, exploratory, uses descriptive and expressive language.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">5</span>
+      <span class="q-text">a) What are speech defects? b) Explain how a teacher can resolve any two speech defects. (2+3)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Speech Defects</h4>
+        <p>Speech defects are disorders or impairments in the normal production of speech sounds that affect clear communication. They may be caused by physical, neurological, psychological, or environmental factors.</p>
+        <p><strong>Types:</strong> Stuttering (stammering), Lisping, Cluttering, Articulation disorders, Voice disorders.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Teacher's role in correcting two defects</h4>
+        <p><strong>1. Stuttering:</strong> The teacher should create a patient, non-pressurized environment. Allow the child sufficient time to speak without interruption. Use slow, deliberate speech as a model. Encourage the child through drama and role-play activities.</p>
+        <p><strong>2. Lisping (mispronunciation of 's' as 'th'):</strong> The teacher can use tongue exercises and pronunciation drills. Refer the child to a speech therapist if needed. Use mirror exercises where the child watches tongue placement while speaking.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">6</span>
+      <span class="q-text">What is the role of subject teachers and language teachers in LAC approach?</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Role of Subject Teachers</h4>
+        <ul class="ans-list">
+          <li>Recognize that every subject has its own language and vocabulary</li>
+          <li>Teach subject-specific terms explicitly (e.g., osmosis in science, integer in maths)</li>
+          <li>Encourage students to read, write, and discuss in the subject area</li>
+          <li>Use reading strategies (skimming, scanning) when teaching textbooks</li>
+          <li>Assign writing tasks like lab reports, summaries, and problem-solving explanations</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>Role of Language Teachers</h4>
+        <ul class="ans-list">
+          <li>Teach reading and writing skills that can be applied across subjects</li>
+          <li>Help students understand text structures (expository, narrative, transactional)</li>
+          <li>Develop general language skills: vocabulary, grammar, comprehension</li>
+          <li>Collaborate with subject teachers to provide contextualized language practice</li>
+          <li>Support students from multilingual backgrounds in bridging home and school language</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">7</span>
+      <span class="q-text">Explain the different functions of language.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Functions of Language (Halliday's model and others)</h4>
+        <ul class="ans-list">
+          <li><strong>Instrumental:</strong> Used to satisfy needs and desires ("I want…")</li>
+          <li><strong>Regulatory:</strong> Used to control behaviour of others ("Don't do that…")</li>
+          <li><strong>Interactional:</strong> Used to maintain social relationships and interact with others</li>
+          <li><strong>Personal:</strong> Used to express personal identity, feelings, and individuality</li>
+          <li><strong>Heuristic:</strong> Used to explore and learn about the world ("Why…?", "How…?")</li>
+          <li><strong>Imaginative:</strong> Used to create fictional and imaginative worlds (stories, poems)</li>
+          <li><strong>Representational/Informative:</strong> Used to convey facts, information, and ideas</li>
+          <li><strong>Emotive/Expressive:</strong> Used to express emotions and attitudes</li>
+          <li><strong>Phatic:</strong> Used in social/ritual exchanges ("How are you?") — maintains rapport</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">8</span>
+      <span class="q-text">a) What are study skills? b) What is the importance of study skills to students? (2+3)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Study Skills — Definition</h4>
+        <p>Study skills are a set of strategies and techniques that help learners to effectively acquire, retain, and apply knowledge. They include reading, note-making, time management, memory techniques, and exam preparation strategies.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Importance to students</h4>
+        <ul class="ans-list">
+          <li>Enable students to study independently and efficiently</li>
+          <li>Improve comprehension and retention of subject matter</li>
+          <li>Develop critical thinking and analytical abilities</li>
+          <li>Reduce exam anxiety through organized preparation</li>
+          <li>Build lifelong learning habits that go beyond formal schooling</li>
+          <li>Help manage time and prioritize tasks effectively</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== JUNE 2023 ===================== -->
+<div id="tab-2023" class="year-panel">
+  <div class="year-header">
+    <span class="year-title">June 2023</span>
+    <span class="paper-code">AB-006</span>
+  </div>
+
+  <div class="part-label">Part A — Long Answer (2×10=20) — Attempt any two</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">1</span>
+      <span class="q-text">a) Explain the different functions of language. b) Explain the role of subject teachers and language teachers in LAC approach. (5+5)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See July 2024 Q7 for functions of language. Role of teachers covered in 2024 Q6.</div>
+      <div class="ans-section">
+        <h4>a) Functions of Language</h4>
+        <ul class="ans-list">
+          <li><strong>Instrumental:</strong> Satisfies material needs ("I want…")</li>
+          <li><strong>Regulatory:</strong> Controls others' behavior</li>
+          <li><strong>Interactional:</strong> Maintains social relationships</li>
+          <li><strong>Personal:</strong> Expresses personal identity and feelings</li>
+          <li><strong>Heuristic:</strong> Used to explore and enquire about the world</li>
+          <li><strong>Imaginative:</strong> Creates fictional/imaginative worlds</li>
+          <li><strong>Informative/Representational:</strong> Conveys facts and information</li>
+          <li><strong>Emotive:</strong> Expresses emotions and attitudes</li>
+          <li><strong>Phatic:</strong> Maintains social rapport ("Hello", "Good morning")</li>
+          <li><strong>Metalinguistic:</strong> Language used to talk about language itself</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>b) Role of teachers in LAC</h4>
+        <p><strong>Subject teachers:</strong> Teach subject-specific vocabulary explicitly; use reading strategies in textbook teaching; assign subject-related writing tasks; create opportunities for discussion and debate within the subject.</p>
+        <p><strong>Language teachers:</strong> Teach generic literacy skills (reading, writing, comprehension); help students with text structure and register; collaborate with subject teachers to support language across the curriculum; provide reading material in the target language that crosses subject areas.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">2</span>
+      <span class="q-text">a) Explain Language Acquisition Theory according to Chomsky. b) What are the implementations of Chomsky's language acquisition theory? (6+4)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Chomsky's Language Acquisition Theory (LAT / Innateness Theory)</h4>
+        <p>Noam Chomsky proposed that human beings are born with an innate capacity for language acquisition. This is called the <strong>Language Acquisition Device (LAD)</strong>.</p>
+        <ul class="ans-list">
+          <li><strong>LAD:</strong> A hypothetical mental organ present in the brain that enables children to acquire language naturally</li>
+          <li><strong>Universal Grammar:</strong> The LAD contains knowledge of universal grammatical principles shared by all human languages</li>
+          <li><strong>Innate capacity:</strong> Children do not just imitate; they generate novel sentences — proof of innate grammatical rules</li>
+          <li><strong>Language acquisition is natural:</strong> All normal children acquire language by age 5–6, regardless of intelligence or teaching</li>
+          <li><strong>Critical period:</strong> Language acquisition is most effective during early childhood (approximately 2–12 years)</li>
+          <li><strong>Poverty of stimulus:</strong> Children acquire complex grammar despite receiving limited and imperfect input — proves innate knowledge</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>b) Educational Implications</h4>
+        <ul class="ans-list">
+          <li>Language learning should start early — expose children to rich language environments from birth</li>
+          <li>Avoid over-correction; children will naturally internalize grammatical rules</li>
+          <li>Provide meaningful input; children learn by interacting, not just drilling</li>
+          <li>Second language teaching is best during the critical period (early schooling)</li>
+          <li>Encourage students to generate language creatively, not just memorize sentences</li>
+          <li>Trust the child's natural language-learning capacity; the role of teacher is to provide environment, not impose rigid rules</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">3</span>
+      <span class="q-text">a) Mention the reading strategies. b) Explain the importance of developing reading skill among children. c) Explain skimming and scanning strategies with suitable examples. (2+4+4)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Reading Strategies</h4>
+        <ul class="ans-list">
+          <li>Skimming — reading for gist/overview</li>
+          <li>Scanning — searching for specific information</li>
+          <li>Intensive reading — close, detailed reading for full comprehension</li>
+          <li>Extensive reading — reading widely for pleasure and general understanding</li>
+          <li>Oral reading — reading aloud</li>
+          <li>Silent reading — reading independently without vocalizing</li>
+          <li>Predictive reading — using context clues to anticipate meaning</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>b) Importance of reading skill development</h4>
+        <ul class="ans-list">
+          <li>Foundation for all academic learning — students who read well perform better across all subjects</li>
+          <li>Expands vocabulary, general knowledge, and cognitive ability</li>
+          <li>Develops critical thinking and the ability to evaluate information</li>
+          <li>Builds empathy through exposure to different perspectives and experiences</li>
+          <li>Enhances writing skills — reading good texts models good writing</li>
+          <li>Prepares students for lifelong learning in an information-rich world</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>c) Skimming and Scanning</h4>
+        <p><strong>Skimming</strong> is reading quickly to get the general idea (gist) of a text. You read headings, first sentences of paragraphs, and the conclusion.<br>
+        <em>Example:</em> A student quickly reads through a newspaper article to find out what it is generally about before deciding to read it fully.</p>
+        <p><strong>Scanning</strong> is moving your eyes quickly over a text to find specific information — a name, date, or fact.<br>
+        <em>Example:</em> Looking through a history chapter to find the year a war ended, or checking a phone book for a specific name.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label">Part B — Short Answer (3×5=15) — Attempt any three</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">4</span>
+      <span class="q-text">a) What is language across the curriculum? b) Explain the benefits of LAC approach. (1+4)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) What is LAC?</h4>
+        <p>Language Across the Curriculum (LAC) is an approach that views language — reading, writing, speaking, and listening — as integral to learning in ALL subjects, not just in language classes. Every teacher is also a language teacher.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Benefits</h4>
+        <ul class="ans-list">
+          <li>Language proficiency improves naturally within meaningful contexts</li>
+          <li>Content learning deepens when students engage with it through language</li>
+          <li>Develops critical and higher-order thinking skills</li>
+          <li>Bridges home language and school language for multilingual learners</li>
+          <li>Fosters independent, active learners who can read, write, and discuss across subjects</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">5</span>
+      <span class="q-text">a) Define multilingualism. b) Explain the nature of multilingualism in Indian classrooms. (1+4)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Definition</h4>
+        <p>Multilingualism is the ability of an individual or community to use three or more languages for communication.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Nature in Indian classrooms</h4>
+        <ul class="ans-list">
+          <li>India has over 122 major languages and 1,600+ dialects — classrooms are inherently multilingual</li>
+          <li>Students often speak a home language (mother tongue), a regional language, and English</li>
+          <li>The medium of instruction (often English or state language) may differ from the child's home language</li>
+          <li>Teachers must bridge the gap between the child's language and the school language</li>
+          <li>LAC encourages using the child's home language as a resource, not an obstacle</li>
+          <li>Translanguaging — using multiple languages fluidly — is a natural strategy students use</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">6</span>
+      <span class="q-text">a) What is social stimulation? b) Briefly explain the role of any two social stimuli in language. (1+4)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Social Stimulation</h4>
+        <p>Social stimulation refers to the social interactions, experiences, and environmental cues that motivate and trigger language development in children. Language is acquired through meaningful social interaction, not in isolation.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Role of two social stimuli</h4>
+        <p><strong>1. Family / Home environment:</strong> Parents and siblings are the first and most powerful language models. The richness of conversation, storytelling, and vocabulary at home directly shapes the child's language development. Children raised in language-rich homes develop larger vocabularies and better communication skills.</p>
+        <p><strong>2. Peer interaction / Play:</strong> Interaction with peers in play situations promotes language negotiation, turn-taking, and creative language use. Children create new words, slang, and discourse patterns through peer interaction — driving language innovation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">7</span>
+      <span class="q-text">Differentiate between expository and narrative texts.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <table class="diff-table">
+        <tr><th>Expository Text</th><th>Narrative Text</th></tr>
+        <tr><td>Matter is informative; explains and describes facts</td><td>Tells a story for entertainment or to convey experience</td></tr>
+        <tr><td>Articles are concise and simple</td><td>May be complex with multiple characters/plots</td></tr>
+        <tr><td>Presents information with clarity and logic</td><td>Involves a problematic event leading to a solution</td></tr>
+        <tr><td>Writing is organized and to the point</td><td>Extremely versatile; has no strict limitations</td></tr>
+        <tr><td>Makes deliberate, true points</td><td>May be fictional or recount real experiences or viewpoints</td></tr>
+        <tr><td>Examples: textbooks, reports, encyclopaedias</td><td>Examples: novels, short stories, folk tales, myths</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">8</span>
+      <span class="q-text">Briefly explain the writing strategies that can be adopted to develop writing skills among children.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Writing Strategies (Brief)</h4>
+        <ul class="ans-list">
+          <li><strong>Process writing:</strong> Prewriting → drafting → revising → editing → publishing</li>
+          <li><strong>Note-making:</strong> Organizing information from lectures and texts into structured notes</li>
+          <li><strong>Persuasive writing:</strong> Writing arguments with evidence and counterarguments</li>
+          <li><strong>Story writing:</strong> Using picture prompts or story starters to develop narrative skills</li>
+          <li><strong>Paragraph writing:</strong> Teaching topic sentence, support sentences, concluding sentence structure</li>
+          <li><strong>Journal writing:</strong> Daily free writing to build fluency and voice</li>
+          <li><strong>Collaborative writing:</strong> Pair/group writing followed by peer review</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== JULY 2022 ===================== -->
+<div id="tab-2022" class="year-panel">
+  <div class="year-header">
+    <span class="year-title">July 2022</span>
+    <span class="paper-code">BA-021</span>
+  </div>
+
+  <div class="part-label">Part A — Long Answer (2×10=20) — Attempt any two</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">1</span>
+      <span class="q-text">a) What is Language Across Curriculum? b) Explain the purpose and benefit of Language Across Curriculum. (2+8)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) What is LAC?</h4>
+        <p>Language Across the Curriculum (LAC) is an educational approach that emphasizes the role of language — reading, writing, speaking, listening — as the primary medium of learning in all subject areas, not merely in English/language classes. Originated from the Bullock Report (UK, 1975): "Every teacher is a teacher of language."</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Purpose</h4>
+        <ul class="ans-list">
+          <li>To integrate language development with content learning across all disciplines</li>
+          <li>To make all teachers conscious of the language demands of their subjects</li>
+          <li>To help students communicate knowledge effectively in every subject</li>
+          <li>To support multilingual learners by valuing home languages</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>Benefits</h4>
+        <ul class="ans-list">
+          <li>More effective teaching and learning across all subjects</li>
+          <li>Awareness of effectiveness of language skills in academic performance</li>
+          <li>Accelerates thinking — language as a tool for cognitive development</li>
+          <li>Increases knowledge and understanding through reading and discussion</li>
+          <li>Develops critical literacy — students learn to question and analyse texts</li>
+          <li>Reduces the disadvantage of students whose home language differs from school language</li>
+          <li>Encourages collaborative inquiry and discussion-based learning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">2</span>
+      <span class="q-text">a) What are speech defects? b) What are the causes of speech defects? c) Explain the role of teacher in correcting the speech defects in children. (2+4+4)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Speech Defects</h4>
+        <p>Speech defects are abnormalities in the production of speech sounds that deviate from normal speech patterns, making communication difficult.</p>
+        <p><strong>Types:</strong> Stuttering, Lisping, Cluttering, Mutism, Voice disorders, Articulation disorders.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Causes of Speech Defects</h4>
+        <ul class="ans-list">
+          <li><strong>Physical causes:</strong> Cleft palate, lip, tongue-tie, hearing impairment</li>
+          <li><strong>Neurological causes:</strong> Brain damage, cerebral palsy, stroke</li>
+          <li><strong>Psychological causes:</strong> Anxiety, trauma, emotional distress, fear</li>
+          <li><strong>Environmental causes:</strong> Lack of language stimulation, bilingual confusion, imitation of poor speech models</li>
+          <li><strong>Developmental causes:</strong> Delayed language development due to premature birth, illness, neglect</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>c) Role of teacher</h4>
+        <ul class="ans-list">
+          <li>Create a supportive, non-ridicule classroom environment</li>
+          <li>Give the child time to speak without rushing or interrupting</li>
+          <li>Provide a good speech model — speak clearly and correctly</li>
+          <li>Use drama, songs, rhymes, and role-play to build confidence</li>
+          <li>Refer the child to a speech therapist when the problem is serious</li>
+          <li>Coordinate with parents to ensure practice continues at home</li>
+          <li>Avoid drawing public attention to the child's speech difficulty</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">3</span>
+      <span class="q-text">a) What are study skills? b) What is the importance of study skills? c) How do you effectively use study skill in development of reading in children? (2+4+4)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Study Skills</h4>
+        <p>Study skills are strategies and techniques that enable learners to acquire, retain, understand, and apply knowledge effectively. They include reading, note-taking, summarizing, time management, and examination skills.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Importance of Study Skills</h4>
+        <ul class="ans-list">
+          <li>Enables self-directed and independent learning</li>
+          <li>Increases efficiency — students learn more in less time</li>
+          <li>Improves memory and retention of information</li>
+          <li>Develops analytical and critical thinking</li>
+          <li>Reduces exam anxiety through planned, organized preparation</li>
+          <li>Builds habits of lifelong learning and intellectual curiosity</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>c) Using study skills to develop reading</h4>
+        <ul class="ans-list">
+          <li>Teach skimming to preview a chapter before detailed reading</li>
+          <li>Teach scanning to locate answers and specific information quickly</li>
+          <li>Encourage students to use SQ3R method (Survey, Question, Read, Recite, Review)</li>
+          <li>Teach students to identify key words, topic sentences, and main ideas</li>
+          <li>Use note-making and mind maps after reading to consolidate understanding</li>
+          <li>Assign extensive reading (storybooks, newspapers) to build fluency and vocabulary</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label">Part B — Short Answer (3×5=15) — Attempt any three</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">4</span>
+      <span class="q-text">a) Mention the characteristics of good communication. b) Why do you think it is important in the classroom teaching? (3+2)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Characteristics of Good Communication</h4>
+        <ul class="ans-list">
+          <li>Clarity — simple, unambiguous language</li>
+          <li>Completeness — includes all necessary information</li>
+          <li>Conciseness — brief and to the point</li>
+          <li>Correctness — factually and grammatically accurate</li>
+          <li>Courtesy — respectful and considerate</li>
+          <li>Active listening and feedback</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>Importance in classroom teaching</h4>
+        <p>Effective communication ensures students understand lessons clearly, participate actively, and develop language skills. It models correct language use, creates a positive climate, and helps the teacher gauge student understanding through feedback.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">5</span>
+      <span class="q-text">Differentiate between expository and narrative texts.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <table class="diff-table">
+        <tr><th>Expository Text</th><th>Narrative Text</th></tr>
+        <tr><td>Informative; explains, describes, instructs</td><td>Tells a story; primarily for entertainment</td></tr>
+        <tr><td>Concise, logical, organized</td><td>Can be complex with plot, characters, setting</td></tr>
+        <tr><td>Based on facts</td><td>May be fictional or based on experience</td></tr>
+        <tr><td>Examples: textbooks, reports, encyclopaedias</td><td>Examples: novels, short stories, folk tales</td></tr>
+        <tr><td>Clear purpose — to inform or explain</td><td>Purpose — to entertain, inspire, or illuminate</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">6</span>
+      <span class="q-text">What is multilingualism? Bring out the nature of multilingualism in Indian School Classroom. (2+3)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Multilingualism</h4>
+        <p>The ability of an individual or community to use three or more languages competently for communication.</p>
+      </div>
+      <div class="ans-section">
+        <h4>Nature in Indian classrooms</h4>
+        <p>India's linguistic diversity means most classrooms contain students speaking different home languages. The medium of instruction may be English or the state language, creating a mismatch. Teachers must bridge this gap by acknowledging and using children's home languages as resources. The Three Language Formula (mother tongue, regional language, English) adds complexity. LAC encourages translanguaging as a natural pedagogical tool.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">7</span>
+      <span class="q-text">Explain the theory of Language development according to Chomsky.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Chomsky's Theory (Brief)</h4>
+        <p>Chomsky proposed the <strong>Innateness Theory / Nativist Theory</strong> of language acquisition. Key concepts:</p>
+        <ul class="ans-list">
+          <li><strong>LAD (Language Acquisition Device):</strong> An innate mental mechanism in humans that processes language input and produces grammar</li>
+          <li><strong>Universal Grammar:</strong> All human languages share deep structural rules; the LAD knows these rules innately</li>
+          <li><strong>Acquisition vs. Learning:</strong> Children acquire language naturally; they don't simply learn by imitation</li>
+          <li><strong>Critical Period:</strong> Best language acquisition occurs in early childhood (before puberty)</li>
+          <li>Children generate novel sentences never heard before — proves rule-governed creativity, not mere imitation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">8</span>
+      <span class="q-text">"A classroom teacher promotes the skill of writing among High School students." Substantiate.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Teacher's Role in Promoting Writing at High School Level</h4>
+        <ul class="ans-list">
+          <li>Assigns varied writing tasks across subjects — reports, essays, summaries, creative writing</li>
+          <li>Teaches process writing: guides students through drafting, revision, and editing</li>
+          <li>Models good writing by demonstrating on the board and sharing mentor texts</li>
+          <li>Provides constructive written and oral feedback on students' compositions</li>
+          <li>Organizes peer review sessions where students critique and improve each other's writing</li>
+          <li>Teaches specific skills: paragraph structure, argumentation, technical writing</li>
+          <li>Creates authentic writing audiences — school magazine, notice boards, presentations — to motivate students</li>
+          <li>Encourages journaling and reflective writing to build fluency and personal voice</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== OCTOBER 2021 ===================== -->
+<div id="tab-2021" class="year-panel">
+  <div class="year-header">
+    <span class="year-title">October 2021</span>
+    <span class="paper-code">AG-005</span>
+  </div>
+
+  <div class="part-label">Part A — Long Answer (2×10=20) — Attempt any two</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">1</span>
+      <span class="q-text">a) Explain the need and benefits of language across the curriculum. b) How does functions of language help inside and outside the classroom? (5+5)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Need and benefits of LAC</h4>
+        <p><strong>Need:</strong> All subjects depend on language for learning. Without language proficiency, students cannot access content. Language and learning are inseparable — content knowledge is built through reading, writing, and discussion.</p>
+        <p><strong>Benefits:</strong> Effective teaching and learning; accelerates thinking; develops cognitive skills; increases knowledge; bridges home and school language; builds lifelong literacy habits.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Functions of language inside and outside classroom</h4>
+        <p><strong>Inside classroom:</strong> Language is used to instruct, explain, question, discuss, argue, and assess. Students use language to negotiate meaning, express understanding, and collaborate. Writing, reading, listening, and speaking are all employed in learning activities.</p>
+        <p><strong>Outside classroom:</strong> Language serves social, emotional, and practical functions — maintaining relationships (phatic), expressing identity (personal), exploring the world (heuristic), creating stories (imaginative), giving instructions (regulatory), and sharing information (informative). Language extends beyond school into the full life of the learner.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">2</span>
+      <span class="q-text">a) What is Social Stimulation? b) Explain the role of different stimuli in language. (2+8)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Social Stimulation</h4>
+        <p>Social stimulation refers to the social interactions and environmental experiences that stimulate language development. Children acquire language by being embedded in a rich social environment where language is used meaningfully.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Role of different stimuli in language</h4>
+        <ul class="ans-list">
+          <li><strong>Family / Home:</strong> Parents are the first language models. Conversations, storytelling, and reading at home build vocabulary, syntax, and communication skills</li>
+          <li><strong>Peers / Play:</strong> Interaction with friends develops conversational skills, turn-taking, negotiation, and creative language use</li>
+          <li><strong>School / Teacher:</strong> Formal language instruction; teachers introduce standard language, reading, writing, and academic vocabulary</li>
+          <li><strong>Community / Neighbourhood:</strong> Local cultural events, community language, dialect, and oral traditions shape language identity</li>
+          <li><strong>Media (TV, Radio, Books):</strong> Exposure to varied vocabulary, narrative styles, and diverse language uses broadens linguistic repertoire</li>
+          <li><strong>Religious / Cultural events:</strong> Rituals, prayers, ceremonies use specialized language forms that expand linguistic range</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">3</span>
+      <span class="q-text">a) What are study skills? b) What is the importance of study skills? c) How do you effectively use this skill in development of reading in children? (2+4+4)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">Same question as July 2022 Q3 — see that tab for full detailed answer.</div>
+      <div class="ans-section">
+        <h4>Study Skills Summary</h4>
+        <p><strong>Definition:</strong> Strategies and techniques for efficient acquisition, retention, and application of knowledge.</p>
+        <p><strong>Importance:</strong> Self-directed learning; efficiency; memory; critical thinking; exam preparedness; lifelong habits.</p>
+        <p><strong>For reading development:</strong> Teach skimming (gist) and scanning (specific info); SQ3R method; key word identification; note-making after reading; extensive reading for fluency.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label">Part B — Short Answer (3×5=15) — Attempt any three</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">4</span>
+      <span class="q-text">Bring out the nature of multilingualism in Indian classrooms.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p>India has 122 major languages and 1600+ dialects. Classrooms reflect this diversity with students from varied linguistic backgrounds. The medium of instruction (English/state language) often differs from the child's mother tongue. LAC values multilingualism as a resource — using home language supports comprehension and confidence. The Three Language Formula adds another layer of complexity. Teachers need to be language-sensitive and use translanguaging strategies to help all learners access the curriculum.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">5</span>
+      <span class="q-text">Explain the theory of language development according to Chomsky.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See July 2022 Q7 for full answer on Chomsky's theory.</div>
+      <div class="ans-section">
+        <p>Chomsky's Nativist/Innateness Theory: LAD (Language Acquisition Device) — Universal Grammar — critical period — children generate novel sentences proving rule-governed acquisition, not imitation — language is innate to humans.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">6</span>
+      <span class="q-text">Explain the role of teacher in correcting the speech defects in children.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <ul class="ans-list">
+          <li>Create a patient, non-ridiculing classroom environment</li>
+          <li>Allow the child adequate time to complete their speech</li>
+          <li>Model correct speech without directly correcting or embarrassing the child</li>
+          <li>Use drama, songs, poetry, and choral activities to reduce speech anxiety</li>
+          <li>Identify the type of speech defect (stuttering, lisping, articulation) for appropriate intervention</li>
+          <li>Use mirror/pronunciation exercises for articulatory defects</li>
+          <li>Refer to professional speech therapist for serious cases</li>
+          <li>Communicate with parents for consistent home support</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">7</span>
+      <span class="q-text">Explain transactional and reflective text.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Transactional Text</h4>
+        <p>Written to communicate with others for a practical purpose — giving information, instructions, or persuading. The writer's focus is on the reader's needs.</p>
+        <p><em>Examples:</em> Letters, notices, reports, business emails, advertisements, news articles.</p>
+      </div>
+      <div class="ans-section">
+        <h4>Reflective Text</h4>
+        <p>Written for personal reflection — to explore one's own thoughts, feelings, and experiences. Focus is on the writer's inner world and personal growth.</p>
+        <p><em>Examples:</em> Diary entries, personal journals, autobiographies, reflective essays, portfolios.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">8</span>
+      <span class="q-text">What is the importance of oral language in the classroom?</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <ul class="ans-list">
+          <li>Oral language is the foundation upon which literacy (reading and writing) is built</li>
+          <li>Develops vocabulary — students learn new words through listening and speaking</li>
+          <li>Promotes comprehension — explaining ideas aloud deepens understanding</li>
+          <li>Provides different reading experiences: oral, loud, silent, intensive, extensive</li>
+          <li>Articulation and pronunciation practice improve language clarity</li>
+          <li>Expression of feelings and opinions builds emotional and communicative competence</li>
+          <li>Discussion and debate develop higher-order thinking and argument skills</li>
+          <li>Enables teacher to detect language difficulties and provide immediate feedback</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== FEB/MAR 2020 ===================== -->
+<div id="tab-2020" class="year-panel">
+  <div class="year-header">
+    <span class="year-title">February/March 2020</span>
+    <span class="paper-code">PJ-754</span>
+  </div>
+
+  <div class="part-label">Part A — Long Answer (2×10=20) — Attempt any two</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">1</span>
+      <span class="q-text">a) Explain the need and benefits of language across the curriculum. b) Explain the different functions of language. (5+5)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">Core LAC question — see 2021 Q1(a) and 2024 Q7 for detailed answers.</div>
+      <div class="ans-section">
+        <h4>a) Need and Benefits of LAC</h4>
+        <p><strong>Need:</strong> Subjects depend on language; language and learning are interrelated; content and context together lead to effective learning.</p>
+        <p><strong>Benefits:</strong> More effective teaching and learning; knowledge of effectiveness of language skills; accelerator to thinking; leads to cognitive development; increases knowledge and understanding.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Functions of Language</h4>
+        <p>Instrumental, Regulatory, Interactional, Personal, Heuristic, Imaginative, Representational/Informative, Emotive, Phatic, Metalinguistic. (See 2024 Q7 for full explanations.)</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">2</span>
+      <span class="q-text">a) Explain the theories of language development with reference to Chomsky's language acquisition theory. b) Write the implementations of teaching the language through this theory. (6+4)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See 2023 Q2 for full detailed answer on Chomsky's theory and implementations.</div>
+      <div class="ans-section">
+        <h4>Chomsky's Theory Summary</h4>
+        <p>LAD (Language Acquisition Device) contains Universal Grammar. Children have innate language capacity — acquire language naturally during critical period. Novel sentences prove rule-governed creativity, not mere imitation.</p>
+      </div>
+      <div class="ans-section">
+        <h4>Classroom Implementations</h4>
+        <ul class="ans-list">
+          <li>Expose children to rich language from early childhood</li>
+          <li>Do not over-correct — allow natural rule internalization</li>
+          <li>Provide meaningful input, not just drills</li>
+          <li>Start second language learning early (critical period)</li>
+          <li>Encourage creative language use and generation of novel sentences</li>
+          <li>Create language-rich environments: storytelling, discussion, drama</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">3</span>
+      <span class="q-text">a) What is importance of Study Skill? b) How do you effectively use this skill in development of reading in children? (5+5)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See 2022 Q3 for the complete detailed answer.</div>
+      <div class="ans-section">
+        <h4>Study Skills for Reading Development</h4>
+        <p><strong>Importance:</strong> Efficient learning; improved retention; critical thinking; independent studying; exam readiness; lifelong learning habits.</p>
+        <p><strong>For reading:</strong> Skimming for gist; scanning for specific info; SQ3R method; intensive and extensive reading; note-making after reading; predictive reading using context clues.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label">Part B — Short Answer (3×5=15) — Attempt any three</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">4</span>
+      <span class="q-text">What is Social Stimulation? Explain briefly the role of any two stimuli in language.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See 2023 Q6 for detailed answer. Brief version below.</div>
+      <div class="ans-section">
+        <p><strong>Social Stimulation:</strong> Social interactions and environmental cues that trigger language acquisition. Language develops through social engagement, not in isolation.</p>
+        <p><strong>Family/Home:</strong> Primary language environment; richness of conversation and stories at home shapes language competence.</p>
+        <p><strong>School/Teacher:</strong> Introduces formal, academic language; develops literacy skills; provides standard language models through structured teaching.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">5</span>
+      <span class="q-text">Bring out the nature of multilingualism in Indian Classrooms.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p>India is home to 122 major languages and 1600+ dialects. In classrooms, students often come from varied linguistic backgrounds with different mother tongues. The medium of instruction may differ from their home language. Three Language Formula: mother tongue + regional language + English. LAC encourages teachers to use and value children's home languages as resources rather than obstacles. Translanguaging is a natural strategy used by students and should be embraced.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">6</span>
+      <span class="q-text">What are speech defects? Explain the role of teacher in correcting the speech defects in children. (2+3)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p><strong>Speech defects:</strong> Disorders in speech sound production — stuttering, lisping, cluttering, articulation disorders, voice disorders.</p>
+        <p><strong>Teacher's role:</strong> Patient, supportive environment; allow sufficient time; model correct speech; use drama and song; mirror exercises for articulation; refer to speech therapist when needed; coordinate with parents.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">7</span>
+      <span class="q-text">Differentiate between expository and narrative texts.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <table class="diff-table">
+        <tr><th>Expository Text</th><th>Narrative Text</th></tr>
+        <tr><td>Informative; explains, describes</td><td>Tells a story; entertainment-focused</td></tr>
+        <tr><td>Logical, organized structure</td><td>Complex with plot and characters</td></tr>
+        <tr><td>Factual and objective</td><td>May be fictional or personal</td></tr>
+        <tr><td>Examples: textbooks, reports</td><td>Examples: novels, folk tales</td></tr>
+        <tr><td>True, deliberate points</td><td>Not purely fictional; narrates experiences</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">8</span>
+      <span class="q-text">Mention the characteristics of good communication. Why do you think it is important in the classroom teaching? (2½+2½)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p><strong>Characteristics:</strong> Clarity; Completeness; Conciseness; Correctness; Courtesy; Consistency; Active listening; Feedback.</p>
+        <p><strong>Importance in classroom:</strong> Ensures accurate understanding of lessons; promotes student engagement and participation; models good language use; creates positive classroom climate; enables assessment through feedback.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== SEPTEMBER 2019 ===================== -->
+<div id="tab-2019b" class="year-panel">
+  <div class="year-header">
+    <span class="year-title">September 2019</span>
+    <span class="paper-code">GN-005</span>
+  </div>
+
+  <div class="part-label">Part A — Long Answer (2×10=20) — Attempt any two</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">1</span>
+      <span class="q-text">a) Explain the different functions of language. b) Explain the various barriers in using language and explain how to overcome it. (5+5)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Functions of Language</h4>
+        <p>Instrumental, Regulatory, Interactional, Personal, Heuristic, Imaginative, Representational, Emotive, Phatic. (See 2024 Q7 for details.)</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Barriers in using language and how to overcome them</h4>
+        <ul class="ans-list">
+          <li><strong>Language barrier:</strong> Different mother tongues; overcome by using simple, clear language and visual aids</li>
+          <li><strong>Cultural barrier:</strong> Different cultural connotations of words; overcome through cultural sensitivity and awareness</li>
+          <li><strong>Psychological barrier:</strong> Fear, anxiety, low confidence; overcome by creating a safe, encouraging environment</li>
+          <li><strong>Physical barrier:</strong> Noise, poor acoustics, hearing impairment; overcome by proper classroom arrangement and speaking clearly</li>
+          <li><strong>Semantic barrier:</strong> Ambiguity, technical jargon; overcome by using appropriate vocabulary for the audience</li>
+          <li><strong>Emotional barrier:</strong> Stress, prejudice, bias; overcome by empathetic listening and emotional awareness</li>
+          <li><strong>Information overload:</strong> Too much information at once; overcome by organizing content in manageable units</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">2</span>
+      <span class="q-text">a) What is the importance of oral language in the classroom? b) What is the significant role of discourse in the classroom? (5+5)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) Importance of oral language in classroom</h4>
+        <ul class="ans-list">
+          <li>Foundation for all literacy development — reading and writing build on spoken language</li>
+          <li>Develops vocabulary through listening and speaking activities</li>
+          <li>Different reading types — oral, loud, silent, intensive, extensive — support varied comprehension skills</li>
+          <li>Articulation practice improves pronunciation and speech clarity</li>
+          <li>Enables expression of feelings and ideas, developing communicative competence</li>
+          <li>Helps teacher detect language difficulties in students immediately</li>
+          <li>Discussion and debate develop higher-order thinking</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>b) Role of discourse in the classroom</h4>
+        <ul class="ans-list">
+          <li>Teacher-student interactions are correlated with student achievement</li>
+          <li>Students acquire ways of thinking and talking in the discipline through discourse</li>
+          <li>Learn to participate in disciplinary discussion (how scientists argue, how historians reason)</li>
+          <li>Acquire higher mental processes through internalization of discourse patterns</li>
+          <li>Knowledge and beliefs are changed and deepened through discussion</li>
+          <li>Students learn to structure sentences and arguments meaningfully</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">3</span>
+      <span class="q-text">a) What is the importance of Study Skills? b) How do you effectively use this skill in development of reading in children? (5+5)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See 2022 Q3 for full detailed answer.</div>
+      <div class="ans-section">
+        <h4>Study Skills — Importance and Reading Development</h4>
+        <p>Study skills enable efficient, independent learning. For reading development: use skimming (gist), scanning (specific info), SQ3R, intensive and extensive reading, note-making, and context clue strategies.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label">Part B — Short Answer (3×5=15) — Attempt any three</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">4</span>
+      <span class="q-text">Briefly explain the role of the different Social Stimuli in language.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p>Social stimuli trigger language acquisition through interaction. Key stimuli: Family (first language models); Peers/Play (conversational skills, negotiation); School/Teacher (formal language, academic vocabulary); Community (dialect, cultural oral traditions); Media (varied vocabulary and narrative styles); Religious/Cultural events (specialized language forms).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">5</span>
+      <span class="q-text">Which are the theories developed by Chomsky and Skinner on language acquisition?</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Chomsky's Theory (Innateness/Nativist)</h4>
+        <p>Children have innate capacity for language acquisition. LAD — master language in short time — abstract rules — sufficient vocabulary — consistent utterances. LAD = universal grammar = storehouse of rules — applied in all languages — decipher relationships in any language.</p>
+      </div>
+      <div class="ans-section">
+        <h4>Skinner's Theory (Behaviourist) ★</h4>
+        <p>Language behavior is acquired through operant conditioning. Emphasis on utterances in situation. Effective language behavior produces responses to correct stimuli. Incorrect responses are not reinforced. Gradual 'shaping' through reinforcement promotes language. Continuous modeling leads to extensive vocabulary.</p>
+        <div class="scheme-note"><span class="star">★</span> Official Scheme of Valuation (Oct 2017) — Smt. Vijayambika N, Sri Sarvajna College of Education</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">6</span>
+      <span class="q-text">What is the nature of expository text? Analyse the expository text.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Nature of Expository Text</h4>
+        <p>Expository text is written primarily to inform, explain, describe, or instruct. It is factual, objective, and organized logically to convey information clearly to the reader.</p>
+        <ul class="ans-list">
+          <li>Matter is informative — explains and describes facts and concepts</li>
+          <li>Articles are concise and simple — avoids unnecessary embellishment</li>
+          <li>Information presented with clarity and logical organization</li>
+          <li>Writing is to the point — no fictional or narrative elements</li>
+          <li>Makes true, deliberate points with supporting evidence</li>
+          <li>Uses headings, subheadings, diagrams, and glossaries</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>Analysis</h4>
+        <p>Examples include textbooks, encyclopaedias, scientific reports, news articles, and instructional manuals. The reader expects clear, verifiable information. The writer avoids personal bias (unlike reflective text) and focuses on the needs of the reader (unlike narrative text).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">7</span>
+      <span class="q-text">Mention the characteristics of good communication. Why do you think it is important in the classroom teaching? (2½+2½)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p><strong>Characteristics:</strong> Clarity; Completeness; Conciseness; Correctness; Courtesy; Feedback; Active listening.</p>
+        <p><strong>Importance in classroom:</strong> Clear communication ensures students understand; promotes participation; models good language; creates positive climate; allows teacher to assess comprehension through responses.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">8</span>
+      <span class="q-text">Explain any two: a) Multilingual b) Bilingual c) Mother tongue d) School dialect</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p><strong>a) Multilingual:</strong> A person or community that uses three or more languages for communication. India is predominantly multilingual — most citizens know multiple languages.</p>
+        <p><strong>b) Bilingual:</strong> A person or community that uses two languages with a degree of proficiency. Common in border regions and urban areas where two languages coexist.</p>
+        <p><strong>c) Mother tongue:</strong> The first language acquired naturally from birth, from parents and the immediate home environment. It is the primary language through which a child understands the world.</p>
+        <p><strong>d) School dialect:</strong> The variety of language used officially in school — typically the standard/prestige form of the regional or national language. May differ significantly from students' home dialects.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== APRIL/MAY 2019 ===================== -->
+<div id="tab-2019a" class="year-panel">
+  <div class="year-header">
+    <span class="year-title">April/May 2019</span>
+    <span class="paper-code">GS-004</span>
+  </div>
+
+  <div class="part-label">Part A — Long Answer (2×10=20) — Attempt any two</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">1</span>
+      <span class="q-text">a) What is L.A.C? b) Explain the need, purpose and benefit of Language Across Curriculum. (2+8)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>a) What is LAC?</h4>
+        <p>Language Across the Curriculum (LAC) is an educational approach recognizing that language is the primary medium of learning in all subjects. Originated from the Bullock Report (UK, 1975). Every teacher is a teacher of language, and every lesson is a language lesson.</p>
+      </div>
+      <div class="ans-section">
+        <h4>b) Need, Purpose and Benefit</h4>
+        <p><strong>Need:</strong></p>
+        <ul class="ans-list">
+          <li>Subjects depend on language — students cannot access content without language proficiency</li>
+          <li>Language and learning are inseparable and interrelated</li>
+          <li>Content and context together lead to effective learning</li>
+        </ul>
+        <p><strong>Purpose:</strong></p>
+        <ul class="ans-list">
+          <li>Improves language proficiency within meaningful contexts</li>
+          <li>Enhances students' learning outcomes across all subjects</li>
+          <li>Integrates language education with the learning of specific subjects</li>
+          <li>Promotes learning of the entire curriculum through language</li>
+        </ul>
+        <p><strong>Benefits:</strong></p>
+        <ul class="ans-list">
+          <li>Contributes to support for learning difficulties</li>
+          <li>More effective teaching and learning</li>
+          <li>Awareness of effectiveness of language skills</li>
+          <li>Accelerator to thinking and cognitive development</li>
+          <li>Increases knowledge and understanding</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">2</span>
+      <span class="q-text">a) Explain the theory of language development according to Chomsky. b) List the educational implications of this theory in the classroom. (6+4)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See 2023 Q2 for the complete detailed answer on Chomsky's theory and implications.</div>
+      <div class="ans-section">
+        <p>LAD → Universal Grammar → Innate capacity → Critical period → Novel sentence generation proves acquisition, not imitation.</p>
+        <p><strong>Implications:</strong> Early language exposure; avoid over-correction; meaningful input; early second language; creative language generation; language-rich environments.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">3</span>
+      <span class="q-text">Explain the different strategies that can be adopted to develop writing skills among children. (10)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See July 2024 Q2 for the complete detailed answer on writing strategies.</div>
+      <div class="ans-section">
+        <p>Process writing; guided writing; free/journal writing; story writing; paragraph construction; note-making; persuasive writing; collaborative writing; writing across subjects.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label">Part B — Short Answer (3×5=15) — Attempt any three</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">4</span>
+      <span class="q-text">What are speech defects? Explain the role of teacher in correcting the speech defects in children.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p><strong>Speech defects:</strong> Abnormalities in speech sound production. Types: stuttering, lisping, cluttering, voice disorders, articulation disorders.</p>
+        <p><strong>Teacher's role:</strong> Patient and supportive environment; allow adequate speaking time; model correct speech; use drama and songs; mirror exercises; refer to speech therapist; involve parents.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">5</span>
+      <span class="q-text">What is social stimulation? Briefly explain the role of any two stimuli in language. (1+4)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p>See 2023 Q6 for detailed answer. Social stimulation = social interactions that trigger language. Family and peer interaction are the two primary stimuli.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">6</span>
+      <span class="q-text">Explain transactional and reflective text.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p><strong>Transactional text:</strong> Written to communicate with others for practical purposes. Audience-focused. Examples: letters, reports, notices, emails.</p>
+        <p><strong>Reflective text:</strong> Written to explore personal thoughts and feelings. Writer-focused. Examples: diary, journal, autobiography, personal essay.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">7</span>
+      <span class="q-text">List the characteristics of Good Communication.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <ul class="ans-list">
+          <li>Clarity — simple, unambiguous language</li>
+          <li>Completeness — all necessary information included</li>
+          <li>Conciseness — brief and to the point</li>
+          <li>Correctness — factually and grammatically accurate</li>
+          <li>Courtesy — respectful, considerate tone</li>
+          <li>Consistency — logical, coherent organization</li>
+          <li>Credibility — trustworthy and honest</li>
+          <li>Active listening and feedback mechanism</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">8</span>
+      <span class="q-text">Explain the Scanning and Skimming strategy with an example. (2½+2½)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p><strong>Skimming:</strong> Reading quickly to get the general idea (gist) of a text. You read headings, subheadings, first and last sentences of paragraphs. <em>Example:</em> A student quickly reads through a chapter heading and first sentences to understand what the chapter is about before a detailed read.</p>
+        <p><strong>Scanning:</strong> Moving eyes rapidly over text to find specific information — a date, name, or fact. <em>Example:</em> Looking through a history textbook to find the date of the Battle of Panipat, or scanning a timetable for a specific train time.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== SEPT/OCT 2018 ===================== -->
+<div id="tab-2018" class="year-panel">
+  <div class="year-header">
+    <span class="year-title">September/October 2018</span>
+    <span class="paper-code">SS-004</span>
+  </div>
+
+  <div class="part-label">Part A — Long Answer (2×10=20) — Attempt any two</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">1</span>
+      <span class="q-text">What is the need, purpose and benefits of "Language across the Curriculum"? (2+3+5)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See Apr/May 2019 Q1 for the complete detailed answer with official scheme guidance.</div>
+      <div class="ans-section">
+        <p><strong>Need (2M):</strong> Subjects depend on language; language and learning are interrelated; content and context lead to effective learning.</p>
+        <p><strong>Purpose (3M):</strong> Improves language proficiency; enhances learning outcomes; integrates language with subject learning; promotes learning of entire curriculum.</p>
+        <p><strong>Benefits (5M):</strong> More effective teaching and learning; awareness of language skill effectiveness; accelerates thinking; leads to cognitive development; increases knowledge and understanding; supports learning difficulties; bridges home and school language.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">2</span>
+      <span class="q-text">What is social stimulation? Explain the role of the different stimuli in language. (2+8)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See October 2021 Q2 for full detailed answer.</div>
+      <div class="ans-section">
+        <p>Social stimulation = social interactions that trigger language acquisition. Stimuli: Family; Peers; School/Teacher; Community; Media; Religious/Cultural events. Each provides a different type of language input that contributes to overall language development.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">3</span>
+      <span class="q-text">What is the importance of study skills? How do you effectively use this skill in development of reading in Children? (6+4)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="answer-intro">See July 2022 Q3 for the complete detailed answer.</div>
+      <div class="ans-section">
+        <p>Study skills = strategies for efficient learning. Importance: self-directed learning; efficiency; memory; critical thinking; exam readiness; lifelong habits. For reading: skimming, scanning, SQ3R, intensive/extensive reading, note-making.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="part-label">Part B — Short Answer (3×5=15) — Attempt any three</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">4</span>
+      <span class="q-text">Briefly explain the strategies that can be adopted to develop writing skills among children.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p>See 2023 Q8 and 2024 Q2 for detailed strategies. Key strategies: process writing; note-making; persuasive writing; story writing; paragraph writing; journal writing; collaborative writing; writing across subjects.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">5</span>
+      <span class="q-text">Bring out the nature of multilingualism in Indian classrooms.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p>India has 122 major languages and 1600+ dialects. Indian classrooms are inherently multilingual with students speaking different home languages. The medium of instruction may differ from the child's mother tongue. The Three Language Formula adds complexity. LAC encourages teachers to use home language as a resource, not an obstacle. Translanguaging is a natural and legitimate classroom strategy.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">6</span>
+      <span class="q-text">Which are the theories developed by Chomsky and Skinner on language acquisition?</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p><strong>Chomsky:</strong> Innate capacity for language — LAD — Universal Grammar — critical period — children generate novel sentences — acquisition not mere imitation.</p>
+        <p><strong>Skinner:</strong> Operant conditioning — language behavior shaped through reinforcement — correct responses reinforced; incorrect responses not reinforced — continuous modeling builds vocabulary.</p>
+        <div class="scheme-note"><span class="star">★</span> Both theories confirmed in the Official Scheme of Valuation (Oct 2017) — Smt. Vijayambika N, Sri Sarvajna College of Education</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">7</span>
+      <span class="q-text">Differentiate between expository and narrative texts.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <table class="diff-table">
+        <tr><th>Expository Text</th><th>Narrative Text</th></tr>
+        <tr><td>Matter informative, explains, describes</td><td>Text for entertainment, narrative</td></tr>
+        <tr><td>Articles concise, simple</td><td>Complicated story</td></tr>
+        <tr><td>Information with clarity</td><td>Problematic event — find solutions</td></tr>
+        <tr><td>Writing organized and to the point</td><td>Extremely versatile; no limitations</td></tr>
+        <tr><td>True and deliberate points</td><td>Not purely fictional; narrates experiences or viewpoints</td></tr>
+      </table>
+      <div class="scheme-note"><span class="star">★</span> Table format confirmed by Official Scheme of Valuation (Oct 2017) — Smt. Vijayambika N</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">8</span>
+      <span class="q-text">How does functions of language help inside and outside the classroom?</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <p><strong>Inside classroom:</strong> Instruction (informative), questioning (heuristic), discussion (interactional), expressing opinions (personal), creative tasks (imaginative), giving instructions (regulatory).</p>
+        <p><strong>Outside classroom:</strong> Social interaction (phatic/interactional), daily transactions (transactional), personal expression (personal), creative pursuits (imaginative), learning about the world (heuristic), community participation (regulatory/informative).</p>
+        <p>Language permeates every aspect of life; its functions extend far beyond formal education, making LAC essential for holistic development.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===================== OCTOBER 2017 ===================== -->
+<div id="tab-2017" class="year-panel">
+  <div class="year-header">
+    <span class="year-title">October 2017</span>
+    <span class="paper-code">SN-006</span>
+    <span class="scheme-badge">★ Official Scheme Available</span>
+  </div>
+
+  <div class="part-label">Part A — Long Answer (2×10=20) — Attempt any two</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">1</span>
+      <span class="q-text">What is the need, purpose and benefits of "language across the curriculum"? (2+3+5)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Need (2M) ★</h4>
+        <ul class="ans-list">
+          <li>Context necessary for learning — subjects depend on language</li>
+          <li>Language and learning are interrelated</li>
+          <li>Content and context together lead to effective learning</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>Purpose (3M) ★</h4>
+        <ul class="ans-list">
+          <li>Improves language proficiency</li>
+          <li>Enhances students' learning outcomes</li>
+          <li>Language education leads to learning of specific subjects</li>
+          <li>Promotes learning of the entire curriculum</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>Benefits (5M) ★</h4>
+        <ul class="ans-list">
+          <li>Contribute to getting support for learning issues</li>
+          <li>More effective teaching and learning</li>
+          <li>Awareness of effectiveness of language skills</li>
+          <li>Accelerator to thinking</li>
+          <li>Leads to cognitive development</li>
+          <li>Increase knowledge and understanding</li>
+        </ul>
+      </div>
+      <div class="scheme-note"><span class="star">★</span> Official Scheme of Valuation — Smt. Vijayambika N, Asst. Professor, Sri Sarvajna College of Education, Vijayanagara, Bengaluru</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">2</span>
+      <span class="q-text">What is the importance of oral language in the classroom? What is the significant role of discourse in the classroom? (4+6)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Importance of oral language ★</h4>
+        <ul class="ans-list">
+          <li>Develops vocabulary — Pictures, Games, Flowchart</li>
+          <li>Different reading skills — Oral, Loud, Silent, Intensive, Extensive</li>
+          <li>Read and draw the message</li>
+          <li>Articulation, practice pronunciation</li>
+          <li>Expression of feelings</li>
+          <li>Comprehension of meaning</li>
+          <li>Detect faults and analyze weakness</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>Significance of role of discourse ★</h4>
+        <ul class="ans-list">
+          <li>Teacher-student interactions correlated with student achievement</li>
+          <li>Acquire ways of thinking and talking</li>
+          <li>Learn to participate in discussion</li>
+          <li>Acquire higher mental processes through internalization</li>
+          <li>Knowledge and beliefs are changed</li>
+          <li>Structure sentences meaningfully</li>
+        </ul>
+      </div>
+      <div class="scheme-note"><span class="star">★</span> Official Scheme of Valuation — Smt. Vijayambika N</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num">3</span>
+      <span class="q-text">What reading and writing strategies can the teacher of Social Science, Science and Mathematics develop to enhance the language skills of the students? (10)</span>
+      <span class="q-marks">10M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Reading Strategies ★</h4>
+        <ul class="ans-list">
+          <li>Acquisition, storage, retrieval and use of information</li>
+          <li>Skimming — reading for gist and general overview</li>
+          <li>Scanning — reading for specific information</li>
+          <li>Brief explanation of skimming and scanning with examples from Social Science, Science and Mathematics lessons</li>
+        </ul>
+      </div>
+      <div class="ans-section">
+        <h4>Writing Strategies ★</h4>
+        <ul class="ans-list">
+          <li>Note making — organizing information from lectures and texts</li>
+          <li>Persuasive writing — stating arguments with evidence</li>
+          <li>Process writing — drafting, revising, editing</li>
+          <li>Story writing — narrative techniques for engagement</li>
+          <li>Paragraph writing — structured, coherent paragraphs</li>
+          <li>Examples from content areas: Social Science (historical accounts), Science (lab reports), Mathematics (problem-solving explanations)</li>
+        </ul>
+      </div>
+      <div class="scheme-note"><span class="star">★</span> Official Scheme — Smt. Vijayambika N</div>
+    </div>
+  </div>
+
+  <div class="part-label">Part B — Short Answer (3×5=15) — Attempt any three</div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">4</span>
+      <span class="q-text">What is dialect? Explain the 'deficit theory' of Eller (1989). (2+3)</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Dialect ★</h4>
+        <p>A dialect is a form of spoken language that is peculiar to a specific region, social group, or community. It differs from the standard language in vocabulary, grammar, and pronunciation.</p>
+      </div>
+      <div class="ans-section">
+        <h4>Deficit Theory (Eller, 1989) ★</h4>
+        <ul class="ans-list">
+          <li>Linguistically deprived child — primitive language — not adequate vehicle for cognition</li>
+          <li>Concreteness of language — difficult to develop abstractness</li>
+          <li>Psycholinguistics — structure of language — universal but complex</li>
+          <li>By age 6, children internalize rules of language</li>
+          <li>Linguistic styles deviate from standard — like educated vs. uneducated speech</li>
+          <li>Deficient and deviates from standard English</li>
+        </ul>
+      </div>
+      <div class="scheme-note"><span class="star">★</span> Official Scheme — Smt. Vijayambika N</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">5</span>
+      <span class="q-text">Which are the theories developed by Chomsky and Skinner on language acquisition?</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Chomsky's Theory ★</h4>
+        <p>Children have innate capacity for language acquisition. LAD — master language in short time — abstract rules — sufficient vocabulary — consistent utterances. LAD = universal grammar = storehouse of rules — applied in all languages — decipher relationships in any language.</p>
+      </div>
+      <div class="ans-section">
+        <h4>Skinner's Theory ★</h4>
+        <p>Language behavior acquired through operant conditioning. Emphasis of utterances in situation. Effective language behavior produces responses to correct stimuli. Incorrect responses not reinforced. Gradual 'shaping' through reinforcement promotes language. Continuous modeling leads to extensive vocabulary.</p>
+      </div>
+      <div class="scheme-note"><span class="star">★</span> Official Scheme — Smt. Vijayambika N</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">6</span>
+      <span class="q-text">What is meant by social stimulation? What is the role of speech mechanism in development of correct pronunciation?</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Social Stimulation</h4>
+        <p>Social interactions and environmental experiences that motivate and trigger language development. Language is acquired through rich social engagement.</p>
+      </div>
+      <div class="ans-section">
+        <h4>Role of speech mechanism in pronunciation ★</h4>
+        <p>Vowels — modified laryngeal tones — voice within mouth cavity — blended in articulating speech. Mass of muscle tissue capable of movement in throat and lower jaw, upward and backward, downward and backward, downward and forward. Consonants produced by friction of air; tongue is brought in proximity with teeth, upper gums, hard and soft palate. Pronunciation varies from region to region.</p>
+      </div>
+      <div class="scheme-note"><span class="star">★</span> Official Scheme — Smt. Vijayambika N</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">7</span>
+      <span class="q-text">Differentiate between expository and narrative texts.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <table class="diff-table">
+        <tr><th>Expository Text ★</th><th>Narrative Text ★</th></tr>
+        <tr><td>Matter informative, explains, describes</td><td>Text for entertainment, narrative</td></tr>
+        <tr><td>Articles concise, simple</td><td>Complicated story</td></tr>
+        <tr><td>Information with clarity</td><td>Problematic event — find solutions</td></tr>
+        <tr><td>Writing organized and to the point</td><td>Extremely versatile and has no limitations</td></tr>
+        <tr><td>True and deliberate points</td><td>Not purely fictional — narrates experiences or different view points</td></tr>
+      </table>
+      <div class="scheme-note"><span class="star">★</span> Official Scheme — Smt. Vijayambika N</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-header" onclick="toggle(this)">
+      <span class="q-num partb">8</span>
+      <span class="q-text">Briefly explain the strategies that can be adopted to develop writing skills among children.</span>
+      <span class="q-marks">5M</span>
+      <span class="q-toggle">▼</span>
+    </div>
+    <div class="q-body">
+      <div class="ans-section">
+        <h4>Writing Skills Strategies ★</h4>
+        <ul class="ans-list">
+          <li>Write in simple correct English in idiomatic language</li>
+          <li>Organize ideas and thoughts in paragraph form</li>
+          <li>Enhance vocabulary of pupils through reading and word study</li>
+          <li>Develop power of imagination through creative writing tasks</li>
+          <li>Develop self-expression with ease through journal and free writing</li>
+        </ul>
+      </div>
+      <div class="scheme-note"><span class="star">★</span> Official Scheme — Smt. Vijayambika N</div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .content -->
+
+<script>
+function showTab(id) {
+  document.querySelectorAll('.year-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  event.target.classList.add('active');
+}
+function toggle(header) {
+  header.parentElement.classList.toggle('open');
+}
+</script>
+</body>
+</html>
