@@ -118,6 +118,27 @@
     font-weight: 500;
   }
   .meta-tag.scheme { border-color: rgba(245,158,11,0.4); color: var(--gold); background: var(--gold-dim); }
+  .study-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, rgba(167,139,250,0.15), rgba(167,139,250,0.08));
+    border: 1px solid rgba(167,139,250,0.45);
+    color: var(--accent);
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 1rem;
+    transition: background 0.2s, border-color 0.2s, transform 0.15s;
+  }
+  .study-btn:hover {
+    background: linear-gradient(135deg, rgba(167,139,250,0.25), rgba(167,139,250,0.15));
+    border-color: rgba(167,139,250,0.7);
+    transform: translateY(-1px);
+  }
 
   /* YEAR TABS */
   .tabs-wrapper {
@@ -421,6 +442,7 @@
       <span class="meta-tag">Part A: 2×10=20 | Part B: 3×5=15</span>
       <span class="meta-tag scheme">★ Official Scheme (Oct 2017)</span>
     </div>
+    <a href="../sem1/hc06_study.html" class="study-btn">📖 Study Material →</a>
   </div>
 </div>
 

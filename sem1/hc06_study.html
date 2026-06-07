@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-06 Study Material | Language Across the Curriculum</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Crimson+Pro:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0d10;
+  --surface: #14141a;
+  --surface2: #1a1a24;
+  --surface3: #20202e;
+  --border: #2a2a3a;
+  --accent: #7dd3fc;
+  --accent2: #0ea5e9;
+  --green: #86efac;
+  --green-dim: rgba(134,239,172,0.1);
+  --yellow: #fde68a;
+  --yellow-dim: rgba(253,230,138,0.1);
+  --red: #fca5a5;
+  --red-dim: rgba(252,165,165,0.08);
+  --purple: #c4b5fd;
+  --purple-dim: rgba(196,181,253,0.1);
+  --orange: #fdba74;
+  --text: #e2e8f0;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  line-height: 1.7;
+}
+
+/* SITE HEADER */
+.site-header {
+  background: linear-gradient(135deg, #0a1628 0%, #0d0d10 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.back-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: opacity 0.2s;
+}
+.back-link:hover { opacity: 0.7; }
+.header-sep { color: var(--border); }
+.site-header span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #0a1628 0%, #0d1220 50%, #0d0d10 100%);
+  padding: 3rem 2rem 2.5rem;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%;
+  transform: translateX(-50%);
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(125,211,252,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(125,211,252,0.1);
+  border: 1px solid rgba(125,211,252,0.25);
+  color: var(--accent);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin-bottom: 1rem;
+}
+.hero h1 {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+.hero p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+}
+.exam-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.chip {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-family: 'JetBrains Mono', monospace;
+}
+.chip.hot { border-color: rgba(252,165,165,0.4); color: var(--red); background: var(--red-dim); }
+
+/* NAV */
+.toc-nav {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.toc-nav::-webkit-scrollbar { display: none; }
+.toc-inner {
+  display: flex;
+  gap: 0;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  min-width: max-content;
+}
+.toc-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.85rem 1rem;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  white-space: nowrap;
+  transition: all 0.2s;
+}
+.toc-btn:hover { color: var(--text); }
+.toc-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* LAYOUT */
+.wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+.unit { display: none; }
+.unit.active { display: block; }
+
+/* UNIT HEADER */
+.unit-header {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.unit-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.unit-header h2 {
+  font-family: 'Crimson Pro', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+.unit-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-style: italic;
+  font-family: 'Crimson Pro', serif;
+}
+
+/* SECTION */
+.section {
+  margin-bottom: 2.5rem;
+}
+.section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* PROSE */
+.prose p {
+  font-size: 0.95rem;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 0.75rem;
+}
+.prose strong { color: var(--yellow); font-weight: 600; }
+
+/* DEFINITION BOX */
+.def-box {
+  background: linear-gradient(135deg, rgba(125,211,252,0.06), transparent);
+  border: 1px solid rgba(125,211,252,0.25);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 10px 10px 0;
+  padding: 1rem 1.25rem;
+  margin: 1rem 0 1.5rem;
+}
+.def-box .def-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.def-box p {
+  font-family: 'Crimson Pro', serif;
+  font-size: 1.05rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* POINT LIST */
+.point-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.point-list li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.93rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+.point-list li .dot {
+  min-width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-top: 0.55rem;
+  flex-shrink: 0;
+}
+.point-list li strong { color: var(--yellow); }
+
+/* CARD GRID */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1rem 1.1rem;
+}
+.info-card.green { border-color: rgba(134,239,172,0.3); }
+.info-card.yellow { border-color: rgba(253,230,138,0.3); }
+.info-card.purple { border-color: rgba(196,181,253,0.3); }
+.info-card.orange { border-color: rgba(253,186,116,0.3); }
+.info-card.blue { border-color: rgba(125,211,252,0.3); }
+.info-card h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.info-card.green h4 { color: var(--green); }
+.info-card.yellow h4 { color: var(--yellow); }
+.info-card.purple h4 { color: var(--purple); }
+.info-card.orange h4 { color: var(--orange); }
+.info-card.blue h4 { color: var(--accent); }
+.info-card p, .info-card li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.info-card ul { list-style: none; padding: 0; }
+.info-card ul li { padding: 0.2rem 0 0.2rem 0.8rem; position: relative; }
+.info-card ul li::before { content: '–'; position: absolute; left: 0; color: var(--text-dim); }
+
+/* THEORY BLOCK */
+.theory-block {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem;
+}
+.theory-block .theory-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.theory-block .theory-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  font-family: 'JetBrains Mono', monospace;
+}
+.theory-block.chomsky { border-color: rgba(125,211,252,0.3); }
+.theory-block.chomsky .theory-tag { background: rgba(125,211,252,0.1); color: var(--accent); }
+.theory-block.skinner { border-color: rgba(134,239,172,0.3); }
+.theory-block.skinner .theory-tag { background: rgba(134,239,172,0.1); color: var(--green); }
+.theory-block.vygotsky { border-color: rgba(196,181,253,0.3); }
+.theory-block.vygotsky .theory-tag { background: rgba(196,181,253,0.1); color: var(--purple); }
+.theory-block p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 0.6rem;
+}
+.theory-block p:last-child { margin-bottom: 0; }
+.theory-block strong { color: var(--text); }
+
+/* COMPARISON TABLE */
+.comp-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.88rem;
+  margin: 1rem 0;
+}
+.comp-table th {
+  background: var(--surface2);
+  color: var(--accent);
+  padding: 0.65rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--border);
+}
+.comp-table td {
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--border);
+  color: var(--text);
+  vertical-align: top;
+  line-height: 1.55;
+}
+.comp-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+/* EXAM ALERT */
+.exam-alert {
+  background: linear-gradient(135deg, rgba(252,165,165,0.07), transparent);
+  border: 1px solid rgba(252,165,165,0.3);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin: 1.25rem 0;
+}
+.exam-alert .icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+.exam-alert .content { flex: 1; }
+.exam-alert .label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+.exam-alert p {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+.exam-alert strong { color: var(--text); }
+
+/* MEMORY AID */
+.memory-box {
+  background: var(--yellow-dim);
+  border: 1px solid rgba(253,230,138,0.3);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  margin: 1.25rem 0;
+}
+.memory-box .mem-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--yellow);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+.memory-box p {
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+.memory-box strong { color: var(--yellow); }
+
+/* NUMBERED STEPS */
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.step {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.step-num {
+  min-width: 28px;
+  height: 28px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.step-body { flex: 1; }
+.step-body strong {
+  font-size: 0.9rem;
+  color: var(--text);
+  display: block;
+  margin-bottom: 0.2rem;
+}
+.step-body p {
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* TWO COLUMN */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+@media (max-width: 600px) {
+  .two-col { grid-template-columns: 1fr; }
+  .card-grid { grid-template-columns: 1fr; }
+  .comp-table { font-size: 0.82rem; }
+  .comp-table th, .comp-table td { padding: 0.5rem 0.6rem; }
+}
+
+/* SUMMARY BOX */
+.summary-box {
+  background: var(--green-dim);
+  border: 1px solid rgba(134,239,172,0.25);
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin: 1.25rem 0;
+}
+.summary-box .sum-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.summary-box ul { list-style: none; padding: 0; }
+.summary-box li {
+  font-size: 0.9rem;
+  color: var(--text);
+  padding: 0.25rem 0 0.25rem 1rem;
+  position: relative;
+  line-height: 1.55;
+}
+.summary-box li::before { content: '✓'; position: absolute; left: 0; color: var(--green); font-size: 0.75rem; }
+
+/* SPEECH TABLE */
+.speech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+}
+.speech-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.8rem;
+}
+.speech-card .s-name { font-weight: 700; font-size: 0.88rem; color: var(--red); margin-bottom: 0.3rem; }
+.speech-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <a href="../index.html" class="back-link">← My B.Ed Companion</a>
+  <span class="header-sep">/</span>
+  <a href="hc06.html" class="back-link">HC-06 Question Papers</a>
+</header>
+
+<div class="hero">
+  <div class="hero-badge">HC-06 · Semester 1 · Study Material</div>
+  <h1>Language Across the Curriculum</h1>
+  <p>Complete notes covering all exam topics — explained simply, organized clearly.</p>
+  <div class="exam-chips">
+    <span class="chip hot">★ LAC — appears every paper</span>
+    <span class="chip hot">★ Chomsky — 7/9 papers</span>
+    <span class="chip hot">★ Speech defects — 8/9 papers</span>
+    <span class="chip">9 previous papers analyzed</span>
+    <span class="chip">Official scheme included</span>
+  </div>
+</div>
+
+<nav class="toc-nav">
+  <div class="toc-inner">
+    <button class="toc-btn active" onclick="showUnit('u1', this)">1. LAC</button>
+    <button class="toc-btn" onclick="showUnit('u2', this)">2. Functions of Language</button>
+    <button class="toc-btn" onclick="showUnit('u3', this)">3. Language Theories</button>
+    <button class="toc-btn" onclick="showUnit('u4', this)">4. Social Stimulation</button>
+    <button class="toc-btn" onclick="showUnit('u5', this)">5. Study Skills</button>
+    <button class="toc-btn" onclick="showUnit('u6', this)">6. Oral Language</button>
+    <button class="toc-btn" onclick="showUnit('u7', this)">7. Reading Strategies</button>
+    <button class="toc-btn" onclick="showUnit('u8', this)">8. Writing Strategies</button>
+    <button class="toc-btn" onclick="showUnit('u9', this)">9. Text Types</button>
+    <button class="toc-btn" onclick="showUnit('u10', this)">10. Communication</button>
+    <button class="toc-btn" onclick="showUnit('u11', this)">11. Speech Defects</button>
+    <button class="toc-btn" onclick="showUnit('u12', this)">12. Multilingualism</button>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+<!-- ===== UNIT 1: LAC ===== -->
+<div id="u1" class="unit active">
+  <div class="unit-header">
+    <div class="unit-num">Unit 1 · Most Important</div>
+    <h2>Language Across the Curriculum (LAC)</h2>
+    <p class="unit-desc">This topic appears in EVERY paper. Learn it thoroughly.</p>
+  </div>
+
+  <div class="exam-alert">
+    <span class="icon">🔥</span>
+    <div class="content">
+      <div class="label">Exam Frequency</div>
+      <p>LAC (need / purpose / benefits) appeared in <strong>all 9 papers</strong>. This is your guaranteed Part A question. Marks: 10.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What is LAC?</div>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <p>Language Across the Curriculum (LAC) is an educational approach that recognizes language — reading, writing, speaking, and listening — as the primary medium of learning in <em>all subjects</em>, not just in language classes. Every teacher is also a language teacher.</p>
+    </div>
+    <div class="prose">
+      <p>The idea came from the <strong>Bullock Report (UK, 1975)</strong> which famously said: <em>"Every teacher is a teacher of language."</em> This means a science teacher, a maths teacher, a social science teacher — all of them teach through language and must be aware of that.</p>
+      <p>Think of it this way: even if you know the concept of photosynthesis, you need language to read about it, write about it, and explain it. Without language, you cannot access any subject.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Need for LAC</div>
+    <div class="prose">
+      <p>Why do we need this approach? Three simple reasons:</p>
+    </div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span><strong>Subjects depend on language</strong> — You cannot read a history book, solve a maths word problem, or understand a science experiment without language.</span></li>
+      <li><span class="dot"></span><span><strong>Language and learning are interrelated</strong> — You learn by talking, reading, writing, and listening. These are language activities. Separate them and learning breaks down.</span></li>
+      <li><span class="dot"></span><span><strong>Content and context lead to effective learning</strong> — When language is taught within a real subject context (like writing a lab report in science), it is more meaningful and effective.</span></li>
+    </ul>
+    <div class="memory-box">
+      <div class="mem-label">💡 Easy to Remember</div>
+      <p>Need = <strong>S-L-C</strong>: Subjects depend on language · Language and learning interrelated · Content + context = effective learning</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Purpose of LAC</div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span><strong>Improves language proficiency</strong> — Students become better language users across all contexts, not just in English class.</span></li>
+      <li><span class="dot"></span><span><strong>Enhances students' learning outcomes</strong> — When language skills improve, performance in all subjects improves.</span></li>
+      <li><span class="dot"></span><span><strong>Language education leads to learning of specific subjects</strong> — Good reading skills help in history; good writing helps in science reports.</span></li>
+      <li><span class="dot"></span><span><strong>Promotes learning of the entire curriculum</strong> — Language becomes the thread that connects all subjects together.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Benefits of LAC ★ (Official Scheme)</div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span><strong>More effective teaching and learning</strong> — Both teacher and student benefit when language is used purposefully.</span></li>
+      <li><span class="dot"></span><span><strong>Awareness of language skill effectiveness</strong> — Teachers recognize that their subject has its own language demands.</span></li>
+      <li><span class="dot"></span><span><strong>Accelerator to thinking</strong> — Language fuels thinking. When students articulate ideas, they think more deeply.</span></li>
+      <li><span class="dot"></span><span><strong>Leads to cognitive development</strong> — Language development and cognitive development go hand in hand.</span></li>
+      <li><span class="dot"></span><span><strong>Increases knowledge and understanding</strong> — Reading, writing, and discussion deepen understanding of subject matter.</span></li>
+      <li><span class="dot"></span><span><strong>Contributes to support for learning issues</strong> — Students who struggle with content often struggle with language; LAC addresses this.</span></li>
+      <li><span class="dot"></span><span><strong>Bridges home language and school language</strong> — Especially important in multilingual India.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Aims of LAC</div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span>Recognize language as a tool for thinking and learning in all disciplines</span></li>
+      <li><span class="dot"></span><span>Make all teachers aware that they are also language teachers</span></li>
+      <li><span class="dot"></span><span>Improve students' reading, writing, speaking, and listening in every subject</span></li>
+      <li><span class="dot"></span><span>Bridge the gap between language learning and content learning</span></li>
+      <li><span class="dot"></span><span>Promote language proficiency as a means of academic success</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Advantages in School Context (2024 paper)</div>
+    <div class="card-grid">
+      <div class="info-card blue">
+        <h4>Integrated Learning</h4>
+        <p>Language and content are learnt together — saves time, builds both simultaneously.</p>
+      </div>
+      <div class="info-card green">
+        <h4>Better Comprehension</h4>
+        <p>Students understand textbooks and instructions better when language skills are developed.</p>
+      </div>
+      <div class="info-card yellow">
+        <h4>Critical Thinking</h4>
+        <p>Students learn to argue, reason, and evaluate through language across subjects.</p>
+      </div>
+      <div class="info-card purple">
+        <h4>Teacher Development</h4>
+        <p>Subject teachers become language-conscious; improves quality of teaching.</p>
+      </div>
+      <div class="info-card orange">
+        <h4>Multilingual Benefit</h4>
+        <p>Recognizes home language as a resource, especially valuable in India.</p>
+      </div>
+      <div class="info-card blue">
+        <h4>Lifelong Literacy</h4>
+        <p>Students develop reading and writing habits that go beyond formal schooling.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Role of Teachers in LAC</div>
+    <div class="two-col">
+      <div class="info-card blue">
+        <h4>Subject Teachers</h4>
+        <ul>
+          <li>Teach subject-specific vocabulary explicitly</li>
+          <li>Use skimming/scanning when teaching textbooks</li>
+          <li>Assign subject-related writing tasks</li>
+          <li>Create opportunities for discussion and debate</li>
+          <li>Recognize that every lesson is a language lesson</li>
+        </ul>
+      </div>
+      <div class="info-card green">
+        <h4>Language Teachers</h4>
+        <ul>
+          <li>Teach generic literacy skills (reading, writing)</li>
+          <li>Help students with text structures and registers</li>
+          <li>Collaborate with subject teachers</li>
+          <li>Support multilingual learners</li>
+          <li>Provide cross-subject reading material</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="summary-box">
+    <div class="sum-label">Quick Revision Checklist</div>
+    <ul>
+      <li>LAC = language in ALL subjects, not just language class</li>
+      <li>Origin: Bullock Report (UK, 1975) — "Every teacher is a language teacher"</li>
+      <li>Need: subjects depend on language, language + learning interrelated, content + context = effective learning</li>
+      <li>Purpose: improves proficiency, enhances outcomes, connects language to subjects</li>
+      <li>Benefits: effective T&L, thinking accelerator, cognitive development, more knowledge</li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 2: FUNCTIONS OF LANGUAGE ===== -->
+<div id="u2" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 2 · Important</div>
+    <h2>Functions of Language</h2>
+    <p class="unit-desc">Appeared in 6/9 papers. Know all 9 functions with examples.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What are Functions?</div>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <p>Functions of language refer to the different purposes or uses for which language is employed in everyday life — from expressing needs to creating stories to maintaining social relationships.</p>
+    </div>
+    <div class="prose">
+      <p>The most famous classification is by <strong>Michael Halliday</strong>, who studied how children use language. He identified 7 functions initially, which are extended to 9 in educational contexts.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">The 9 Functions of Language</div>
+    <div class="card-grid">
+      <div class="info-card blue">
+        <h4>1. Instrumental</h4>
+        <p>Used to satisfy needs and get things done.<br><em>"I want water." "Give me that."</em></p>
+      </div>
+      <div class="info-card green">
+        <h4>2. Regulatory</h4>
+        <p>Used to control behavior of others.<br><em>"Sit down." "Don't run."</em></p>
+      </div>
+      <div class="info-card purple">
+        <h4>3. Interactional</h4>
+        <p>Used to maintain social relationships.<br><em>"How are you?" "Nice to meet you."</em></p>
+      </div>
+      <div class="info-card yellow">
+        <h4>4. Personal</h4>
+        <p>Used to express personal identity, feelings, individuality.<br><em>"I feel sad." "I love poetry."</em></p>
+      </div>
+      <div class="info-card orange">
+        <h4>5. Heuristic</h4>
+        <p>Used to explore and learn about the world.<br><em>"Why does this happen?" "How does it work?"</em></p>
+      </div>
+      <div class="info-card blue">
+        <h4>6. Imaginative</h4>
+        <p>Used to create fictional and imaginative worlds.<br><em>Stories, poems, plays, myths.</em></p>
+      </div>
+      <div class="info-card green">
+        <h4>7. Informative / Representational</h4>
+        <p>Used to convey facts and information.<br><em>News, lectures, textbooks.</em></p>
+      </div>
+      <div class="info-card purple">
+        <h4>8. Emotive / Expressive</h4>
+        <p>Used to express emotions and attitudes.<br><em>"That's wonderful!" "I'm terrified."</em></p>
+      </div>
+      <div class="info-card yellow">
+        <h4>9. Phatic</h4>
+        <p>Social ritual — maintains rapport, not to exchange info.<br><em>"Good morning!" "How's the weather?"</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Functions Inside and Outside Classroom</div>
+    <div class="two-col">
+      <div class="info-card blue">
+        <h4>Inside Classroom</h4>
+        <ul>
+          <li>Informative — teacher explains content</li>
+          <li>Heuristic — students ask questions</li>
+          <li>Regulatory — teacher gives instructions</li>
+          <li>Interactional — group discussions</li>
+          <li>Personal — students express opinions</li>
+          <li>Imaginative — creative writing tasks</li>
+        </ul>
+      </div>
+      <div class="info-card green">
+        <h4>Outside Classroom</h4>
+        <ul>
+          <li>Phatic — social greetings</li>
+          <li>Personal — expressing identity</li>
+          <li>Instrumental — getting daily needs</li>
+          <li>Regulatory — giving directions</li>
+          <li>Imaginative — storytelling</li>
+          <li>Emotive — expressing feelings</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="memory-box">
+    <div class="mem-label">💡 Memory Trick — I RIPHIEP</div>
+    <p><strong>I</strong>nstrumental · <strong>R</strong>egulatory · <strong>I</strong>nterational · <strong>P</strong>ersonal · <strong>H</strong>euristic · <strong>I</strong>maginative · <strong>I</strong>nformative · <strong>E</strong>motive · <strong>P</strong>hatic</p>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 3: LANGUAGE THEORIES ===== -->
+<div id="u3" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 3 · Very Important</div>
+    <h2>Theories of Language Acquisition</h2>
+    <p class="unit-desc">Chomsky appears in 7/9 papers. Chomsky + Skinner together in many papers.</p>
+  </div>
+
+  <div class="exam-alert">
+    <span class="icon">🔥</span>
+    <div class="content">
+      <div class="label">Exam Tip</div>
+      <p>Questions ask for: (a) Chomsky's theory alone, or (b) Chomsky + Skinner together, or (c) Chomsky's theory + educational implications. <strong>Learn all three parts.</strong></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Chomsky's Theory — Innateness / Nativist Theory</div>
+    <div class="theory-block chomsky">
+      <div class="theory-name">Noam Chomsky <span class="theory-tag">Nativist / Innateness Theory</span></div>
+      <p><strong>Core idea:</strong> Human beings are born with an innate (built-in) capacity for language acquisition. Language is not just learned — it is a biological endowment unique to humans.</p>
+      <p><strong>LAD — Language Acquisition Device:</strong> Chomsky proposed that the human brain contains a hypothetical mental organ called the <em>Language Acquisition Device</em>. This LAD "knows" the rules of all human languages in a general form — called Universal Grammar.</p>
+      <p><strong>Universal Grammar:</strong> All human languages share deep structural principles. The LAD stores these universal rules, which is why children can acquire any language they are exposed to.</p>
+      <p><strong>Evidence — Novel Sentences:</strong> Children regularly produce sentences they have never heard before (e.g., "I goed to school"). This proves they are not just imitating — they have internalized grammatical rules and apply them creatively. This is called <em>rule-governed creativity</em>.</p>
+      <p><strong>Critical Period:</strong> Language acquisition is most natural and effective during a critical period — approximately birth to puberty (2–12 years). After this period, acquiring a first language becomes extremely difficult.</p>
+      <p><strong>Poverty of Stimulus:</strong> Children acquire complex grammar even though the language input they receive is imperfect and incomplete. This "poverty of stimulus" is proof that grammatical knowledge must be innate, not learned purely from input.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Educational Implications of Chomsky's Theory ★</div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span><strong>Start language learning early</strong> — Expose children to rich language from birth; take advantage of the critical period.</span></li>
+      <li><span class="dot"></span><span><strong>Avoid over-correction</strong> — Children will naturally internalize grammatical rules. Constant correction disrupts natural acquisition.</span></li>
+      <li><span class="dot"></span><span><strong>Provide meaningful input, not drills</strong> — Children learn language by interacting meaningfully, not by memorizing grammar rules in isolation.</span></li>
+      <li><span class="dot"></span><span><strong>Second language in early schooling</strong> — Use the critical period advantage to introduce second/third languages early.</span></li>
+      <li><span class="dot"></span><span><strong>Encourage creative language use</strong> — Let students generate their own sentences and express their own ideas. Trust their natural capacity.</span></li>
+      <li><span class="dot"></span><span><strong>Create language-rich environments</strong> — Storytelling, drama, discussion, read-alouds — these provide the natural input the LAD needs.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Skinner's Theory — Behaviourist Theory ★ (Official Scheme)</div>
+    <div class="theory-block skinner">
+      <div class="theory-name">B.F. Skinner <span class="theory-tag">Behaviourist Theory</span></div>
+      <p><strong>Core idea:</strong> Language behavior is acquired through <em>operant conditioning</em> — the same way any behavior is learned through reinforcement and punishment.</p>
+      <p><strong>How it works:</strong> When a child produces a correct utterance (e.g., says "Mama"), adults respond positively (smile, repeat, reward). This reinforcement encourages the child to repeat the behavior. Incorrect utterances are not reinforced (or are corrected), so they die out.</p>
+      <p><strong>Shaping:</strong> Language is gradually shaped through reinforcement. Each small correct step is reinforced, leading progressively to more complex language.</p>
+      <p><strong>Modeling:</strong> Continuous modeling of language by adults (parents, teachers) builds vocabulary and syntax over time.</p>
+      <p><strong>Key difference from Chomsky:</strong> Skinner says language is <em>learned</em> (from environment); Chomsky says language is <em>acquired</em> (from innate capacity). Skinner emphasizes nurture; Chomsky emphasizes nature.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Chomsky vs Skinner — Quick Comparison</div>
+    <table class="comp-table">
+      <tr><th>Aspect</th><th>Chomsky (Nativist)</th><th>Skinner (Behaviourist)</th></tr>
+      <tr><td>Core belief</td><td>Language is innate (born with it)</td><td>Language is learned from environment</td></tr>
+      <tr><td>Mechanism</td><td>LAD + Universal Grammar</td><td>Operant conditioning + reinforcement</td></tr>
+      <tr><td>Child's role</td><td>Active — generates own sentences</td><td>Passive — imitates and is reinforced</td></tr>
+      <tr><td>Key evidence</td><td>Novel sentences, poverty of stimulus</td><td>Stimulus-response-reinforcement</td></tr>
+      <tr><td>Emphasis</td><td>Nature (biology)</td><td>Nurture (environment)</td></tr>
+      <tr><td>Critical period</td><td>Yes — birth to puberty</td><td>Not emphasized</td></tr>
+    </table>
+  </div>
+
+  <div class="memory-box">
+    <div class="mem-label">💡 Remember</div>
+    <p><strong>Chomsky = C for Creative</strong> — children create new sentences from innate rules.<br>
+    <strong>Skinner = S for Stimulus</strong> — language shaped by Stimulus → Response → Reinforcement.</p>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 4: SOCIAL STIMULATION ===== -->
+<div id="u4" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 4 · Important</div>
+    <h2>Social Stimulation in Language</h2>
+    <p class="unit-desc">Appeared in 5/9 papers (Part A) and 4/9 papers (Part B). Must know.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What is Social Stimulation?</div>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <p>Social stimulation refers to the social interactions, environmental experiences, and contextual cues that motivate and trigger language development in children. Language is not acquired in isolation — it is acquired through meaningful social engagement.</p>
+    </div>
+    <div class="prose">
+      <p>Vygotsky's idea is central here: <strong>language develops through social interaction</strong>. The child is surrounded by language users, and through participation in social activities, gradually takes on the language of the community.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Role of Different Social Stimuli ★</div>
+    <div class="card-grid">
+      <div class="info-card blue">
+        <h4>1. Family / Home</h4>
+        <p>Parents and siblings are the first and most powerful language models. Richness of conversation, storytelling, and vocabulary at home directly shapes the child's language. A language-rich home = better vocabulary and communication skills.</p>
+      </div>
+      <div class="info-card green">
+        <h4>2. Peers / Play</h4>
+        <p>Interaction with friends develops conversational skills, turn-taking, and negotiation. Children create slang, jokes, and new words through peer interaction. Play is a language laboratory for children.</p>
+      </div>
+      <div class="info-card purple">
+        <h4>3. School / Teacher</h4>
+        <p>Introduces formal, standard, academic language. Teachers provide reading, writing, and grammar instruction. The classroom expands the child's linguistic repertoire beyond home language.</p>
+      </div>
+      <div class="info-card yellow">
+        <h4>4. Community / Neighbourhood</h4>
+        <p>Local cultural events, community language, dialect, and oral traditions shape language identity. The child learns how language works in their specific cultural context.</p>
+      </div>
+      <div class="info-card orange">
+        <h4>5. Media (TV, Books, Radio)</h4>
+        <p>Exposes children to varied vocabulary, narrative styles, and diverse language uses. Good quality media — stories, documentaries, news — broadens linguistic range significantly.</p>
+      </div>
+      <div class="info-card blue">
+        <h4>6. Religious / Cultural Events</h4>
+        <p>Prayers, rituals, ceremonies, festivals use specialized language forms. These expand the child's register range and cultural-linguistic identity.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Speech Mechanism & Correct Pronunciation ★ (2017 paper)</div>
+    <div class="prose">
+      <p>The physical organs that produce speech are called the <strong>speech mechanism</strong> or <strong>articulatory system</strong>.</p>
+    </div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span><strong>Vowels</strong> — Produced by modified laryngeal tones. Voice is produced in the larynx, then shaped in the mouth cavity by the tongue and lips.</span></li>
+      <li><span class="dot"></span><span><strong>Consonants</strong> — Produced by friction or stoppage of air. The tongue is brought close to the teeth, upper gums, hard palate, or soft palate.</span></li>
+      <li><span class="dot"></span><span><strong>Jaw and tongue movement</strong> — The mass of muscle tissue in the throat and lower jaw moves upward/backward/downward/forward to produce different sounds.</span></li>
+      <li><span class="dot"></span><span><strong>Pronunciation varies</strong> — Regional accents and dialects exist because different communities use slightly different articulations of the same sounds.</span></li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 5: STUDY SKILLS ===== -->
+<div id="u5" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 5 · Very Important</div>
+    <h2>Study Skills</h2>
+    <p class="unit-desc">Appeared in 6/9 papers. Know definition, importance, and how to use for reading.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What are Study Skills?</div>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <p>Study skills are a set of strategies, methods, and techniques that enable learners to acquire, understand, retain, and apply knowledge efficiently and effectively.</p>
+    </div>
+    <div class="prose">
+      <p>Study skills are sometimes called <strong>learning strategies</strong> or <strong>learning-to-learn skills</strong>. They are not automatic — they must be explicitly taught. A student with good study skills can learn independently, without always needing a teacher to guide them.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Types of Study Skills</div>
+    <div class="card-grid">
+      <div class="info-card blue">
+        <h4>Reading Skills</h4>
+        <p>Skimming, scanning, intensive reading, extensive reading, SQ3R method.</p>
+      </div>
+      <div class="info-card green">
+        <h4>Note-Making</h4>
+        <p>Organizing information from lectures and texts into structured, summarized notes.</p>
+      </div>
+      <div class="info-card purple">
+        <h4>Time Management</h4>
+        <p>Planning study sessions, prioritizing tasks, avoiding procrastination.</p>
+      </div>
+      <div class="info-card yellow">
+        <h4>Memory Techniques</h4>
+        <p>Mnemonics, mind maps, spaced repetition, association techniques.</p>
+      </div>
+      <div class="info-card orange">
+        <h4>Exam Skills</h4>
+        <p>Understanding question formats, answering technique, time management in exams.</p>
+      </div>
+      <div class="info-card blue">
+        <h4>Critical Thinking</h4>
+        <p>Evaluating information, forming arguments, analyzing and synthesizing content.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Importance of Study Skills ★</div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span><strong>Self-directed learning</strong> — Students become independent learners who do not always need the teacher to tell them what and how to study.</span></li>
+      <li><span class="dot"></span><span><strong>Increased efficiency</strong> — Students learn more in less time; they work smarter, not harder.</span></li>
+      <li><span class="dot"></span><span><strong>Better retention</strong> — Techniques like spaced repetition and mind maps improve long-term memory.</span></li>
+      <li><span class="dot"></span><span><strong>Critical thinking</strong> — Study skills help students analyze, evaluate, and question information rather than just memorize it.</span></li>
+      <li><span class="dot"></span><span><strong>Exam readiness</strong> — Organized preparation reduces exam anxiety and improves performance.</span></li>
+      <li><span class="dot"></span><span><strong>Lifelong learning</strong> — Habits of learning developed in school continue throughout adult life.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Using Study Skills to Develop Reading in Children ★</div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div class="step-body">
+          <strong>Teach Skimming</strong>
+          <p>Before reading a chapter, skim through headings, bold words, and the first/last sentences. Students get the big picture first, then read for detail.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div class="step-body">
+          <strong>Teach Scanning</strong>
+          <p>For specific information (a date, a name, a fact), train students to move their eyes quickly over the text to locate the target. This builds reading speed.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div class="step-body">
+          <strong>SQ3R Method</strong>
+          <p><strong>S</strong>urvey (skim) → <strong>Q</strong>uestion (turn headings into questions) → <strong>R</strong>ead (carefully) → <strong>R</strong>ecite (answer from memory) → <strong>R</strong>eview (check answers). This is a complete reading study strategy.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <div class="step-body">
+          <strong>Key Word Identification</strong>
+          <p>Teach students to identify topic sentences and key words in paragraphs. This helps them extract the main idea quickly without reading every word.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <div class="step-body">
+          <strong>Note-Making After Reading</strong>
+          <p>After reading a section, students write brief notes or draw a mind map. This consolidates understanding and improves retention.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">6</span>
+        <div class="step-body">
+          <strong>Extensive Reading</strong>
+          <p>Assign storybooks, comics, and newspapers for pleasure reading. Wide reading builds vocabulary, fluency, and love of reading naturally.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 6: ORAL LANGUAGE ===== -->
+<div id="u6" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 6</div>
+    <h2>Oral Language in the Classroom</h2>
+    <p class="unit-desc">Appeared in 4/9 papers. Know importance of oral language and role of discourse.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Importance of Oral Language ★ (Official Scheme)</div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span><strong>Develops vocabulary</strong> — Through oral activities like pictures, games, and flowcharts, students encounter and learn new words naturally.</span></li>
+      <li><span class="dot"></span><span><strong>Different reading skills</strong> — Oral reading, loud reading, silent reading, intensive, and extensive reading are all forms that oral language supports.</span></li>
+      <li><span class="dot"></span><span><strong>Read and draw the message</strong> — Oral activities where students read and then represent meaning visually improve comprehension.</span></li>
+      <li><span class="dot"></span><span><strong>Articulation and pronunciation practice</strong> — Speaking activities develop clear, accurate pronunciation and speech habits.</span></li>
+      <li><span class="dot"></span><span><strong>Expression of feelings</strong> — Oral language gives students a means to communicate emotions and personal responses.</span></li>
+      <li><span class="dot"></span><span><strong>Comprehension of meaning</strong> — Listening and speaking activities deepen understanding of concepts.</span></li>
+      <li><span class="dot"></span><span><strong>Detect faults and analyze weakness</strong> — The teacher can hear students' language difficulties and address them immediately.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Role of Discourse in the Classroom ★ (Official Scheme)</div>
+    <div class="def-box">
+      <div class="def-label">Discourse</div>
+      <p>Discourse refers to extended, connected language use — conversations, discussions, debates, explanations, and narratives — that goes beyond single sentences. Classroom discourse is the interaction between teacher and students and among students themselves.</p>
+    </div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span><strong>Teacher-student interactions correlated with student achievement</strong> — Research shows that quality of classroom talk directly predicts how much students learn.</span></li>
+      <li><span class="dot"></span><span><strong>Acquire ways of thinking and talking</strong> — Through disciplinary discourse (how scientists argue, how historians reason), students learn subject-specific thinking.</span></li>
+      <li><span class="dot"></span><span><strong>Learn to participate in discussion</strong> — Students learn conversational norms: turn-taking, listening, responding, disagreeing respectfully.</span></li>
+      <li><span class="dot"></span><span><strong>Higher mental processes through internalization</strong> — Vygotsky: social language becomes inner language; discourse drives cognitive development.</span></li>
+      <li><span class="dot"></span><span><strong>Knowledge and beliefs are changed</strong> — Genuine discussion challenges existing ideas and builds deeper understanding.</span></li>
+      <li><span class="dot"></span><span><strong>Structure sentences meaningfully</strong> — Participating in classroom discourse teaches students how to organize and present ideas.</span></li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 7: READING STRATEGIES ===== -->
+<div id="u7" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 7 · Important</div>
+    <h2>Reading Strategies</h2>
+    <p class="unit-desc">Skimming and scanning asked in 5+ papers. Know both with clear examples.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Types of Reading</div>
+    <div class="card-grid">
+      <div class="info-card blue">
+        <h4>Oral Reading</h4>
+        <p>Reading aloud. Helps pronunciation, fluency, and confidence. Good for young learners.</p>
+      </div>
+      <div class="info-card green">
+        <h4>Silent Reading</h4>
+        <p>Reading without vocalizing. Faster and used for independent comprehension.</p>
+      </div>
+      <div class="info-card purple">
+        <h4>Intensive Reading</h4>
+        <p>Close, careful reading for full comprehension of every detail. Used for difficult texts.</p>
+      </div>
+      <div class="info-card yellow">
+        <h4>Extensive Reading</h4>
+        <p>Wide reading of easy, interesting texts for pleasure. Builds vocabulary and fluency naturally.</p>
+      </div>
+      <div class="info-card orange">
+        <h4>Skimming</h4>
+        <p>Quick reading for the general idea. Read headings, first sentences, and conclusion.</p>
+      </div>
+      <div class="info-card blue">
+        <h4>Scanning</h4>
+        <p>Rapid eye movement to find a specific piece of information — a name, date, or fact.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Skimming — Explained ★</div>
+    <div class="def-box">
+      <div class="def-label">Skimming</div>
+      <p>Reading a text quickly to get the general meaning (gist) without reading every word. You read the title, headings, first sentence of each paragraph, and the conclusion.</p>
+    </div>
+    <div class="prose">
+      <p><strong>When to use it:</strong> Before reading a chapter in detail; to decide if an article is worth reading; to preview an exam paper before starting to write.</p>
+      <p><strong>Example:</strong> A student opens a history chapter on World War I. Before reading fully, she quickly reads the heading, subheadings, and the first sentence of each section. In 2 minutes, she knows: the chapter covers causes, major battles, and consequences. Now she reads in detail with this framework in mind.</p>
+      <p><strong>Classroom use (Social Science):</strong> Teacher asks students to skim a newspaper article about elections in 1 minute and report the main topic. This builds pre-reading and comprehension skills.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Scanning — Explained ★</div>
+    <div class="def-box">
+      <div class="def-label">Scanning</div>
+      <p>Moving eyes rapidly over a text to locate a specific piece of information — a name, number, date, or keyword — without reading the whole text.</p>
+    </div>
+    <div class="prose">
+      <p><strong>When to use it:</strong> Finding a specific fact in a textbook; looking up a word in a dictionary; checking a phone number in a directory; finding an answer to a comprehension question.</p>
+      <p><strong>Example (Mathematics):</strong> A student needs to find the formula for the area of a trapezium. She scans the chapter without reading every word, moving her eyes quickly until she spots the word "trapezium." Found in 20 seconds.</p>
+      <p><strong>Example (Science):</strong> A student scans a chapter to find the year penicillin was discovered. She looks for a number that looks like a year rather than reading sentences.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Skimming vs Scanning</div>
+    <table class="comp-table">
+      <tr><th>Skimming</th><th>Scanning</th></tr>
+      <tr><td>Reading for general idea / gist</td><td>Reading for specific information</td></tr>
+      <tr><td>Read title, headings, first sentences</td><td>Move eyes quickly looking for a keyword</td></tr>
+      <tr><td>Get an overview</td><td>Find a specific fact</td></tr>
+      <tr><td>Used to preview a text</td><td>Used to answer specific questions</td></tr>
+      <tr><td>Example: Checking if an article is relevant</td><td>Example: Finding a date or name in a text</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">SQ3R Method — Full Form</div>
+    <div class="steps">
+      <div class="step"><span class="step-num">S</span><div class="step-body"><strong>Survey</strong><p>Skim through the chapter — title, headings, pictures, summary. Get the big picture in 2–3 minutes.</p></div></div>
+      <div class="step"><span class="step-num">Q</span><div class="step-body"><strong>Question</strong><p>Turn each heading into a question. "The Causes of WW1" becomes "What were the causes of WW1?" This gives reading a purpose.</p></div></div>
+      <div class="step"><span class="step-num">R1</span><div class="step-body"><strong>Read</strong><p>Read each section carefully, looking for answers to your questions. Active, purposeful reading.</p></div></div>
+      <div class="step"><span class="step-num">R2</span><div class="step-body"><strong>Recite</strong><p>Close the book and recall the answers from memory. Speaking or writing them out reinforces retention.</p></div></div>
+      <div class="step"><span class="step-num">R3</span><div class="step-body"><strong>Review</strong><p>Go back and check your answers. Re-read anything you could not recall. Final consolidation.</p></div></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 8: WRITING STRATEGIES ===== -->
+<div id="u8" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 8 · Important</div>
+    <h2>Writing Strategies</h2>
+    <p class="unit-desc">Appeared in 5/9 papers. Know the strategies with brief explanations.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Why Teach Writing Strategies?</div>
+    <div class="prose">
+      <p>Writing is the most complex language skill. Students often struggle because they think good writing means getting it right the first time. Writing strategies teach students that writing is a <strong>process</strong>, not a single act.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Key Writing Strategies ★</div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div class="step-body">
+          <strong>Process Writing Approach</strong>
+          <p>Writing is taught as a process: <em>Pre-writing → Drafting → Revising → Editing → Publishing</em>. Students learn that good writing requires multiple drafts. Teachers guide each stage rather than just evaluating the final product.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div class="step-body">
+          <strong>Guided Writing</strong>
+          <p>Teacher shows a model text, discusses its structure, then students write a similar text with teacher support. Reduces anxiety, builds confidence.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div class="step-body">
+          <strong>Journal / Free Writing</strong>
+          <p>Children write freely without fear of correction. Builds fluency, personal voice, and habit of writing. Emphasis is on quantity and expression, not accuracy.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <div class="step-body">
+          <strong>Story Writing</strong>
+          <p>Using picture prompts, story starters, or story frames. Develops narrative skills, imagination, sequencing, and descriptive vocabulary. Children who read widely write better stories.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <div class="step-body">
+          <strong>Note-Making</strong>
+          <p>Students learn to take notes from textbooks and lectures. Develops summarizing, organizational skills, and the ability to distinguish main ideas from supporting details.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">6</span>
+        <div class="step-body">
+          <strong>Persuasive Writing</strong>
+          <p>Students write arguments for/against a position. Teaches how to state an opinion, provide evidence, address counterarguments, and conclude logically. Develops critical thinking.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">7</span>
+        <div class="step-body">
+          <strong>Paragraph Writing</strong>
+          <p>Teaching topic sentence + supporting sentences + concluding sentence. Students practice building coherent, well-organized paragraphs before writing full essays.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">8</span>
+        <div class="step-body">
+          <strong>Collaborative / Pair Writing</strong>
+          <p>Students co-write, then give feedback to each other. Peer review develops critical awareness of language and teaches revision skills.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">9</span>
+        <div class="step-body">
+          <strong>Writing Across Subjects</strong>
+          <p>Science teachers assign lab reports; geography teachers assign field notes; maths teachers ask students to explain problem-solving steps. Writing reinforces content learning.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Official Scheme Writing Skills ★ (Vijayambika N)</div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span>Write in simple, correct English in idiomatic language</span></li>
+      <li><span class="dot"></span><span>Organize ideas and thoughts in paragraph form</span></li>
+      <li><span class="dot"></span><span>Enhance vocabulary of pupils through reading and word study</span></li>
+      <li><span class="dot"></span><span>Develop power of imagination through creative writing tasks</span></li>
+      <li><span class="dot"></span><span>Develop self-expression with ease through journal and free writing</span></li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 9: TEXT TYPES ===== -->
+<div id="u9" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 9 · Very Important</div>
+    <h2>Types of Text</h2>
+    <p class="unit-desc">Expository vs Narrative in 8/9 papers. Transactional & Reflective in 5/9 papers.</p>
+  </div>
+
+  <div class="exam-alert">
+    <span class="icon">🔥</span>
+    <div class="content">
+      <div class="label">High Frequency</div>
+      <p>Expository vs Narrative differentiation appears in almost every paper. <strong>Memorize the comparison table.</strong> Transactional vs Reflective also comes frequently.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Expository vs Narrative Text ★ (Official Scheme Table)</div>
+    <table class="comp-table">
+      <tr><th>Expository Text</th><th>Narrative Text</th></tr>
+      <tr><td>Matter is informative; explains and describes facts</td><td>Text for entertainment; tells a story or narrative</td></tr>
+      <tr><td>Articles are concise and simple</td><td>May be complicated with multiple characters/plots</td></tr>
+      <tr><td>Presents information with clarity and logical organization</td><td>Involves a problematic event that finds a solution</td></tr>
+      <tr><td>Writing is organized and to the point</td><td>Extremely versatile; has no strict limitations</td></tr>
+      <tr><td>Makes deliberate, true points</td><td>Not purely fictional — narrates experiences or viewpoints</td></tr>
+      <tr><td>Examples: textbooks, reports, encyclopaedias, news</td><td>Examples: novels, short stories, folk tales, myths</td></tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Transactional vs Reflective Text ★</div>
+    <div class="two-col">
+      <div class="info-card blue">
+        <h4>Transactional Text</h4>
+        <p>Written to communicate with others for a practical purpose. The writer's focus is on the <strong>reader's needs</strong>.</p>
+        <ul style="margin-top:0.5rem">
+          <li>Purpose: to inform, instruct, persuade, or request</li>
+          <li>Audience-focused; formal or informal</li>
+          <li>Examples: letters, notices, reports, news articles, advertisements, emails, instructions</li>
+        </ul>
+      </div>
+      <div class="info-card green">
+        <h4>Reflective Text</h4>
+        <p>Written to explore one's own thoughts, feelings, and experiences. The writer's focus is on their own <strong>inner world</strong>.</p>
+        <ul style="margin-top:0.5rem">
+          <li>Purpose: personal reflection, self-exploration, growth</li>
+          <li>First-person; subjective; exploratory</li>
+          <li>Examples: diary entries, journals, autobiographies, personal essays, reflective portfolios</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">All Four Text Types — Quick Overview</div>
+    <div class="card-grid">
+      <div class="info-card blue">
+        <h4>Expository</h4>
+        <p>Informs, explains, describes. Factual, logical. Textbooks, reports, encyclopaedias.</p>
+      </div>
+      <div class="info-card yellow">
+        <h4>Narrative</h4>
+        <p>Tells a story. Fictional or experiential. Novels, folk tales, myths, autobiographies.</p>
+      </div>
+      <div class="info-card green">
+        <h4>Transactional</h4>
+        <p>Communicates with others for a purpose. Letters, notices, emails, reports.</p>
+      </div>
+      <div class="info-card purple">
+        <h4>Reflective</h4>
+        <p>Explores personal inner world. Diary, journal, personal essay, portfolio.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 10: COMMUNICATION ===== -->
+<div id="u10" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 10 · Important</div>
+    <h2>Communication in the Classroom</h2>
+    <p class="unit-desc">Good communication characteristics appeared in 7/9 papers.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What is Communication?</div>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <p>Communication is the process of transmitting ideas, thoughts, feelings, or information from one person to another through verbal, non-verbal, or written means, resulting in shared understanding.</p>
+    </div>
+    <div class="prose">
+      <p>Effective communication is <strong>two-way</strong> — it requires not just a sender and a message, but a receiver who understands, and feedback that confirms understanding. Communication can be verbal (spoken words), non-verbal (body language, gestures), or written (text, signs).</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Characteristics of Good Communication — The 7 Cs ★</div>
+    <div class="card-grid">
+      <div class="info-card blue">
+        <h4>1. Clarity</h4>
+        <p>Message expressed in simple, unambiguous language. The receiver should understand exactly what is meant without guessing.</p>
+      </div>
+      <div class="info-card green">
+        <h4>2. Completeness</h4>
+        <p>Contains all necessary information. Nothing important is left out. The receiver should not need to ask follow-up questions for basic details.</p>
+      </div>
+      <div class="info-card purple">
+        <h4>3. Conciseness</h4>
+        <p>Brief and to the point. Avoids unnecessary repetition and padding. Respects the receiver's time.</p>
+      </div>
+      <div class="info-card yellow">
+        <h4>4. Correctness</h4>
+        <p>Factually accurate with proper language use. Errors in facts or grammar undermine credibility and cause confusion.</p>
+      </div>
+      <div class="info-card orange">
+        <h4>5. Courtesy</h4>
+        <p>Respectful and considerate of the receiver's perspective and feelings. Does not offend or alienate.</p>
+      </div>
+      <div class="info-card blue">
+        <h4>6. Consistency</h4>
+        <p>Logically organized and free from contradictions. Message should be coherent from start to finish.</p>
+      </div>
+      <div class="info-card green">
+        <h4>7. Credibility + Feedback</h4>
+        <p>Trustworthy and honest. Good communication also includes a feedback mechanism — the receiver confirms understanding.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Importance of Communication in Classroom Teaching ★</div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span><strong>Ensures accurate understanding</strong> — Clear teacher communication means students grasp lessons correctly the first time.</span></li>
+      <li><span class="dot"></span><span><strong>Promotes active participation</strong> — When communication is welcoming and clear, students ask questions and join discussions.</span></li>
+      <li><span class="dot"></span><span><strong>Models good language</strong> — Teacher's speech models correct vocabulary, pronunciation, and sentence structure for students.</span></li>
+      <li><span class="dot"></span><span><strong>Positive classroom climate</strong> — Courteous, consistent communication builds trust and reduces anxiety.</span></li>
+      <li><span class="dot"></span><span><strong>Assessment through feedback</strong> — By observing student responses, teacher can gauge understanding and adjust teaching.</span></li>
+      <li><span class="dot"></span><span><strong>Reduces classroom management issues</strong> — Clear instructions mean fewer misunderstandings and disruptions.</span></li>
+      <li><span class="dot"></span><span><strong>Non-verbal cues</strong> — Eye contact, gestures, and facial expressions maintain attention and convey enthusiasm and empathy.</span></li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 11: SPEECH DEFECTS ===== -->
+<div id="u11" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 11 · Very Important</div>
+    <h2>Speech Defects</h2>
+    <p class="unit-desc">Appeared in 8/9 papers. Know types, causes, and teacher's role thoroughly.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What are Speech Defects?</div>
+    <div class="def-box">
+      <div class="def-label">Definition</div>
+      <p>Speech defects are abnormalities or disorders in the normal production of speech sounds that deviate significantly from accepted speech patterns, making communication difficult or unclear.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Types of Speech Defects</div>
+    <div class="speech-grid">
+      <div class="speech-card">
+        <div class="s-name">Stuttering / Stammering</div>
+        <p>Involuntary repetition or prolongation of sounds, syllables, or words. "I w-w-want water." Often linked to anxiety or neurological factors.</p>
+      </div>
+      <div class="speech-card">
+        <div class="s-name">Lisping</div>
+        <p>Mispronunciation of sibilant sounds — "s" sounds like "th". "Sun" becomes "thun." Caused by incorrect tongue placement.</p>
+      </div>
+      <div class="speech-card">
+        <div class="s-name">Cluttering</div>
+        <p>Speaking so rapidly that speech becomes unclear and disorganized. Words run together and are hard to follow.</p>
+      </div>
+      <div class="speech-card">
+        <div class="s-name">Articulation Disorders</div>
+        <p>Inability to produce certain sounds correctly. Substituting, omitting, or distorting specific speech sounds.</p>
+      </div>
+      <div class="speech-card">
+        <div class="s-name">Voice Disorders</div>
+        <p>Abnormalities in pitch, loudness, or quality of voice — hoarseness, unusual nasality, or extremely soft voice.</p>
+      </div>
+      <div class="speech-card">
+        <div class="s-name">Mutism</div>
+        <p>Selective or total absence of speech. Often psychological — child can speak but refuses in certain situations.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Causes of Speech Defects</div>
+    <div class="two-col">
+      <div class="info-card red" style="border-color:rgba(252,165,165,0.3)">
+        <h4 style="color:var(--red)">Physical Causes</h4>
+        <ul>
+          <li>Cleft palate or cleft lip</li>
+          <li>Tongue-tie (short frenulum)</li>
+          <li>Hearing impairment</li>
+          <li>Dental problems</li>
+        </ul>
+      </div>
+      <div class="info-card purple">
+        <h4>Neurological Causes</h4>
+        <ul>
+          <li>Brain damage at birth</li>
+          <li>Cerebral palsy</li>
+          <li>Stroke or injury</li>
+          <li>Developmental delays</li>
+        </ul>
+      </div>
+      <div class="info-card yellow">
+        <h4>Psychological Causes</h4>
+        <ul>
+          <li>Anxiety, fear, trauma</li>
+          <li>Low self-confidence</li>
+          <li>Emotional distress</li>
+          <li>Selective mutism</li>
+        </ul>
+      </div>
+      <div class="info-card green">
+        <h4>Environmental Causes</h4>
+        <ul>
+          <li>Poor speech models at home</li>
+          <li>Lack of language stimulation</li>
+          <li>Bilingual/multilingual confusion</li>
+          <li>Imitation of someone with a speech defect</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Role of Teacher in Correcting Speech Defects ★</div>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">1</span>
+        <div class="step-body">
+          <strong>Create a supportive environment</strong>
+          <p>Never mock, mimic, or draw public attention to the child's speech difficulty. A safe, non-threatening classroom reduces anxiety — a major trigger for speech problems.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">2</span>
+        <div class="step-body">
+          <strong>Give adequate time to speak</strong>
+          <p>Do not rush or interrupt the child. Allow them to complete their speech at their own pace. Patience from the teacher signals acceptance to the whole class.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">3</span>
+        <div class="step-body">
+          <strong>Model correct speech</strong>
+          <p>Speak clearly and correctly. When the child makes an error, gently restate the correct form naturally in your response without directly correcting and embarrassing the child.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">4</span>
+        <div class="step-body">
+          <strong>Use drama, songs, rhymes, role-play</strong>
+          <p>These activities build confidence in speaking in a low-pressure, fun context. Choral speaking (whole class together) helps children with stuttering to speak more fluently.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">5</span>
+        <div class="step-body">
+          <strong>Mirror and articulation exercises</strong>
+          <p>For articulatory defects (like lisping), use mirror exercises where the child watches tongue and lip placement while speaking. Pronunciation drills done privately help.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">6</span>
+        <div class="step-body">
+          <strong>Refer to speech therapist</strong>
+          <p>For serious or persistent speech defects, the teacher should refer the child to a qualified speech-language therapist. The teacher's role is supportive, not to replace professional help.</p>
+        </div>
+      </div>
+      <div class="step">
+        <span class="step-num">7</span>
+        <div class="step-body">
+          <strong>Involve parents</strong>
+          <p>Coordinate with parents to ensure consistent practice and support at home. Parents need guidance on what to do (be patient, model good speech) and what not to do (don't correct harshly).</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== UNIT 12: MULTILINGUALISM ===== -->
+<div id="u12" class="unit">
+  <div class="unit-header">
+    <div class="unit-num">Unit 12 · Important</div>
+    <h2>Multilingualism</h2>
+    <p class="unit-desc">Appeared in 8/9 papers. Know definition, nature in Indian classrooms, and dialect/deficit theory.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Key Definitions</div>
+    <div class="card-grid">
+      <div class="info-card blue">
+        <h4>Multilingualism</h4>
+        <p>The ability of an individual or community to use <strong>three or more languages</strong> for communication. India is predominantly multilingual.</p>
+      </div>
+      <div class="info-card green">
+        <h4>Bilingualism</h4>
+        <p>The ability to use <strong>two languages</strong> with competence. Common in border regions and urban areas where two language communities coexist.</p>
+      </div>
+      <div class="info-card purple">
+        <h4>Mother Tongue</h4>
+        <p>The <strong>first language</strong> acquired naturally from birth, from parents and the home environment. It is the primary language through which a child understands the world.</p>
+      </div>
+      <div class="info-card yellow">
+        <h4>School Dialect</h4>
+        <p>The <strong>standard/prestige variety</strong> of language used officially in school. May differ from the student's home dialect — creates a gap that teachers must bridge.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Nature of Multilingualism in Indian Classrooms ★</div>
+    <div class="prose">
+      <p>India is one of the most linguistically diverse countries in the world, with over <strong>122 major languages</strong> and more than <strong>1,600 dialects</strong>. This diversity is directly reflected in classrooms.</p>
+    </div>
+    <ul class="point-list">
+      <li><span class="dot"></span><span><strong>Diverse linguistic backgrounds</strong> — In a single classroom, students may speak different mother tongues (Kannada, Tamil, Telugu, Urdu, Hindi, etc.).</span></li>
+      <li><span class="dot"></span><span><strong>Medium-home language mismatch</strong> — The medium of instruction (often English or state language) frequently differs from the child's home language, creating comprehension challenges.</span></li>
+      <li><span class="dot"></span><span><strong>Three Language Formula</strong> — Students learn (1) mother tongue, (2) regional/national language (Hindi), and (3) English — adding layers of linguistic complexity.</span></li>
+      <li><span class="dot"></span><span><strong>Home language as a resource</strong> — LAC encourages teachers to use the child's home language as a bridge, not treat it as an obstacle to learning.</span></li>
+      <li><span class="dot"></span><span><strong>Translanguaging</strong> — Students naturally move between languages (e.g., explaining something in Kannada, then switching to English for technical terms). This is a legitimate cognitive strategy, not a failure.</span></li>
+      <li><span class="dot"></span><span><strong>Code-switching</strong> — Shifting between languages or dialects in conversation depending on context, audience, and topic. Very common in Indian classrooms and should be respected.</span></li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Dialect and Deficit Theory ★ (2017 paper only)</div>
+    <div class="def-box">
+      <div class="def-label">Dialect</div>
+      <p>A dialect is a form of spoken language peculiar to a specific region, social group, or community. It may differ from the standard language in vocabulary, grammar, and pronunciation but is a complete and valid language system.</p>
+    </div>
+    <div class="theory-block vygotsky">
+      <div class="theory-name">Deficit Theory (Eller, 1989) <span class="theory-tag">★ 2017 Paper</span></div>
+      <p><strong>Core claim:</strong> Children who speak non-standard dialects (regional dialects, working-class speech) are linguistically deprived — their language is a primitive, concrete form that is not an adequate vehicle for abstract thought and cognition.</p>
+      <p><strong>Key points of the theory:</strong></p>
+      <ul style="list-style:none;padding:0;margin-top:0.5rem">
+        <li style="font-size:0.88rem;color:var(--text-muted);padding:0.2rem 0 0.2rem 1rem;position:relative"><span style="position:absolute;left:0;color:var(--purple)">–</span> Linguistically deprived child has a primitive language — not adequate vehicle for cognition</li>
+        <li style="font-size:0.88rem;color:var(--text-muted);padding:0.2rem 0 0.2rem 1rem;position:relative"><span style="position:absolute;left:0;color:var(--purple)">–</span> Concreteness of dialect language makes it difficult to develop abstract thinking</li>
+        <li style="font-size:0.88rem;color:var(--text-muted);padding:0.2rem 0 0.2rem 1rem;position:relative"><span style="position:absolute;left:0;color:var(--purple)">–</span> By age 6, children internalize the rules of their language (standard or non-standard)</li>
+        <li style="font-size:0.88rem;color:var(--text-muted);padding:0.2rem 0 0.2rem 1rem;position:relative"><span style="position:absolute;left:0;color:var(--purple)">–</span> Linguistic styles deviate from standard — like educated vs. uneducated speech</li>
+        <li style="font-size:0.88rem;color:var(--text-muted);padding:0.2rem 0 0.2rem 1rem;position:relative"><span style="position:absolute;left:0;color:var(--purple)">–</span> Dialect is deficient and deviates from standard English</li>
+      </ul>
+      <p style="margin-top:0.75rem"><strong>Criticism:</strong> Linguists today largely reject the Deficit Theory. All dialects are rule-governed, complete language systems. The "deficit" reflects social prejudice, not linguistic reality. LAC takes a more positive view — multilingualism and dialect diversity are assets.</p>
+    </div>
+  </div>
+
+  <div class="summary-box">
+    <div class="sum-label">Final Revision — All Units at a Glance</div>
+    <ul>
+      <li>LAC = language in all subjects; every teacher is a language teacher (Bullock Report 1975)</li>
+      <li>Functions of language: Instrumental, Regulatory, Interactional, Personal, Heuristic, Imaginative, Informative, Emotive, Phatic</li>
+      <li>Chomsky: LAD + Universal Grammar + innate capacity + critical period; Skinner: operant conditioning + reinforcement</li>
+      <li>Social stimulation: language develops through social interaction — family, peers, school, community, media</li>
+      <li>Study skills: skimming, scanning, SQ3R, note-making, extensive reading</li>
+      <li>Oral language: vocabulary development, pronunciation, comprehension, detecting faults</li>
+      <li>Skimming = gist; Scanning = specific information</li>
+      <li>Writing strategies: process writing, guided writing, journal, story, note-making, persuasive, paragraph, peer review</li>
+      <li>Expository = informative/factual; Narrative = story/entertainment; Transactional = to others; Reflective = personal</li>
+      <li>Good communication: 7 Cs — Clarity, Completeness, Conciseness, Correctness, Courtesy, Consistency, Credibility</li>
+      <li>Speech defects: stuttering, lisping, cluttering; teacher role = support, patience, model, refer to therapist</li>
+      <li>India = 122 languages + 1600 dialects; multilingualism as resource, not obstacle; translanguaging is valid</li>
+    </ul>
+  </div>
+</div>
+
+</div><!-- end wrapper -->
+
+<script>
+function showUnit(id, btn) {
+  document.querySelectorAll('.unit').forEach(u => u.classList.remove('active'));
+  document.querySelectorAll('.toc-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
