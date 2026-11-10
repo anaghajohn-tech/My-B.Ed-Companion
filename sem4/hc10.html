@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-10 National Concern and Education | B.Ed Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Crimson+Pro:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f0e12;--s:#1a1820;--s2:#221f2b;--b:#322e3e;--a:#c9a0dc;--g:#f5c26b;--r:#f08a8a;--t:#e8e4ee;--m:#9a94a8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:'Outfit',sans-serif;line-height:1.6}
+a{color:var(--a);text-decoration:none}
+.top{padding:.9rem 1.5rem;border-bottom:1px solid var(--b);font-size:.85rem}
+.hero{padding:2.2rem 1.5rem 1.4rem;max-width:960px;margin:0 auto}
+.badge{display:inline-block;border:1px solid rgba(201,160,220,.4);color:var(--a);padding:.2rem .8rem;border-radius:99px;font-size:.75rem;font-weight:600;margin-bottom:.8rem}
+h1{font-family:'Crimson Pro',serif;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;margin-bottom:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+.chip{background:var(--s2);border:1px solid var(--b);color:var(--m);padding:.2rem .65rem;border-radius:6px;font-size:.76rem}
+.chip.g{border-color:rgba(245,194,107,.4);color:var(--g)}
+.study{display:inline-block;border:1px solid rgba(201,160,220,.5);background:rgba(201,160,220,.1);color:var(--a);padding:.5rem 1.1rem;border-radius:8px;font-weight:600;font-size:.85rem}
+.study:hover{background:rgba(201,160,220,.2)}
+.nav{position:sticky;top:0;z-index:9;background:var(--s);border-bottom:1px solid var(--b);overflow-x:auto;white-space:nowrap;padding:0 1rem}
+.nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--m);font:500 .8rem 'Outfit',sans-serif;padding:.85rem .9rem;cursor:pointer}
+.nav button.on{color:var(--a);border-bottom-color:var(--a)}
+.wrap{max-width:960px;margin:0 auto;padding:1.6rem 1.5rem 4rem}
+.pane{display:none}.pane.on{display:block}
+.yh{display:flex;gap:.8rem;align-items:center;margin-bottom:.4rem}
+h2{font-family:'Crimson Pro',serif;font-size:1.5rem}
+.code{font-size:.74rem;color:var(--m);border:1px solid var(--b);border-radius:6px;padding:.1rem .5rem}
+.pl{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m);margin:1.4rem 0 .7rem}
+.q{display:flex;gap:.8rem;align-items:flex-start;background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.75rem 1rem;margin-bottom:.55rem}
+.n{min-width:28px;height:28px;border-radius:6px;background:#7c4a96;color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.pb .n{background:#2f7f8f}
+.qt{flex:1;font-size:.9rem}
+.qt a{display:inline-block;margin-top:.25rem;font-size:.74rem;color:var(--m)}
+.qt a:hover{color:var(--a)}
+.mk{font-size:.72rem;color:var(--g);white-space:nowrap;margin-top:.2rem}
+.freq{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.7rem;margin:.8rem 0}
+.fc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.7rem 1rem;font-size:.86rem}
+.fc.hot{border-color:rgba(240,138,138,.45)}
+.fc b{display:block;font-size:.72rem;color:var(--r)}
+.tip{background:rgba(245,194,107,.08);border:1px solid rgba(245,194,107,.3);border-radius:8px;padding:.6rem .9rem;font-size:.84rem;color:var(--g)}
+</style>
+</head>
+<body>
+<div class="top"><a href="../index.html">← My B.Ed Companion</a> &nbsp;/&nbsp; Semester 4 / HC-10</div>
+<div class="hero">
+  <div class="badge">HC-10 · Semester 4</div>
+  <h1>National Concern and Education</h1>
+  <div class="chips">
+    <span class="chip g">7 papers: 2018 – 2023</span><span class="chip">Max. Marks: 70</span>
+    <span class="chip">Part A: 3 of 5 × 10 = 30</span><span class="chip">Part B: 8 of 12 × 5 = 40</span>
+  </div>
+  <a class="study" href="hc10_study.html">📖 Study Material →</a>
+</div>
+<div class="nav" id="nav"></div>
+<div class="wrap" id="wrap"></div>
+
+<script>
+var IMP=[
+['7/7','Universalization of Secondary Education: meaning, objectives, problems, measures','use',1],
+['7/7','Human Rights Education: meaning, objectives, values through co-curricular activities','hr',1],
+['7/7','Life skills: meaning, importance, strategies','ls',1],
+['7/7','Community and Panchayat Raj in universalization','use',1],
+['7/7','Teacher helping adolescents through school activities','ado',1],
+['6/7','Measures to protect rights of women and children','hr',1],
+['6/7','Constitutional provisions / equality of educational opportunity','use',1],
+['6/7','Eco-friendly life style','env',1],
+['6/7','Four life skills recommended by UNESCO','ls',0],
+['6/7','AIDS: meaning, symptoms, NIMHANS / NACO / KSAPS','aids',0],
+['5/7','NHRC / SHRC structure and functions','hr',0],
+['5/7','Sustainable development','env',0],
+['5/7','Multicultural education: meaning and strategies','mc',0],
+['4/7','Population education: meaning, factors, measures','pop',0],
+['4/7','Environmental education: meaning, objectives, national concern','env',0]];
+// [no, text, marks, topic]
+var P=[
+{id:'n23',tab:'Nov 2023',code:'BN-001',
+A:[[1,'a) What is universalization of secondary education? b) Meaning and importance c) Measures taken by Government','2+3+5','use'],
+[2,'a) What is Human Rights Education? b) Objectives of HRE c) Functions of NHRC','2+4+4','hr'],
+[3,'a) Meaning of population growth b) Measures to achieve stability c) Consequences of population growth','2+5+3','pop'],
+[4,'a) What is sustainable development? b) Concept and importance c) Suggestions to promote eco-friendly life style','2+4+4','env'],
+[5,'a) How do you develop life skills at secondary stage? b) How do you develop management of emotion?','5+5','ls']],
+B:[[6,'Challenges to attain universalization of secondary education','5','use'],
+[7,'Reforms of the Right to Education Act 2009','5','hr'],
+[8,'Rights and privileges the Constitution of India gives its citizens','5','hr'],
+[9,'Promote human rights values through co-curricular activities','5','hr'],
+[10,'Measures to protect rights of women and children','5','hr'],
+[11,'Why is environmental education a national concern?','5','env'],
+[12,'Strategies adopted in providing multicultural education','5','mc'],
+[13,'Role of NACO in AIDS awareness and control','5','aids'],
+[14,'Strategies to teach life skills at secondary level','5','ls'],
+[15,'How do you give adolescent education through school activities?','5','ado'],
+[16,'Community and Panchayat Raj in universalization of secondary education','5','use'],
+[17,'Educational implications of teaching life skills at secondary schools','5','ls']]},
+{id:'f23',tab:'Feb 2023',code:'FB-001',
+A:[[1,'a) What is universalization of secondary education? b) Problems in achieving it c) Role of a teacher, with examples','2+4+4','use'],
+[2,'a) Historical perspectives of Human Rights b) Role of education in overcoming violation of women and children rights c) Measures to protect their rights','3+4+3','hr'],
+[3,'a) What is environmental education? b) Why is it a national concern? c) How do you achieve its objectives?','2+4+4','env'],
+[4,'a) What is multicultural education? b) Why is it important for students? c) Suitable strategies to teach it','2+4+4','mc'],
+[5,'a) What is life skills education? b) Strategies to teach it, with examples c) Educational implications','2+4+4','ls']],
+B:[[6,'"Universalization of Secondary Education is a tool to bring equality in education." Justify','5','use'],
+[7,'How do school and community help in achieving universalization of secondary education?','3+2','use'],
+[8,'Role of National Human Rights Commission','5','hr'],
+[9,'How co-scholastic activities develop human rights culture and values','5','hr'],
+[10,'a) What is population education? b) Role of education in stabilizing population growth','2+3','pop'],
+[11,'a) What is sustainable development? b) How is it associated with protecting the environment?','2+3','env'],
+[12,'a) Misconceptions about HIV transmission and prevention b) Why is HIV awareness important for adolescents?','2+3','aids'],
+[13,'a) Problems of adolescents b) How do you help them overcome these problems?','2+3','ado'],
+[14,'a) Life skills suggested by UNESCO b) Why is life skills education necessary for adolescents?','2+3','ls'],
+[15,'Constitutional obligations to achieve universalization of secondary education','5','use'],
+[16,'Structure and functions of State Human Rights Commission','2+3','hr'],
+[17,'How is KSAPS helping to spread awareness about AIDS?','5','aids']]},
+{id:'n21',tab:'Nov 2021',code:'OP-368',
+A:[[1,'a) What is universalization of secondary education? b) Its importance c) Measures taken by Government of India','2+4+4','use'],
+[2,'a) What are Human Rights? b) Historical background of the Universal Declaration of Human Rights c) Similarities between Fundamental Rights and Human Rights','2+4+4','hr'],
+[3,'a) What is AIDS? b) Causes of transmission c) Role of NACO in AIDS awareness education','1+4+5','aids'],
+[4,'a) What is soil pollution? b) Causes c) Measures to control soil pollution','2+4+4','env'],
+[5,'a) What is life skill education? b) Importance at secondary level c) Suitable strategies to teach it','2+4+4','ls']],
+B:[[6,'a) Problems of universalization of secondary education b) Suggestions to overcome them','2+3','use'],
+[7,'a) Example of violation of women and children human rights b) Suggestions to protect them','2+3','hr'],
+[8,'Role of State Human Rights Commission (SHRC)','5','hr'],
+[9,'How do you develop awareness about sustainable development among secondary students, with examples?','5','env'],
+[10,'a) Factors affecting population growth b) Measures to control it','3+2','pop'],
+[11,'a) What is an eco-friendly life style? b) Suggestions to promote it among students','1+4','env'],
+[12,'a) Prevailing inequalities in universalization b) Constitutional provisions for equality of educational opportunity','2+3','use'],
+[13,'How do community and Panchayat Raj help in universalization of secondary education?','5','use'],
+[14,'a) What is Human Rights Education? b) How do you achieve its objectives at school level?','1+4','hr'],
+[15,'a) What is multicultural education? b) Strategies you use to provide it','2+3','mc'],
+[16,'Explain any four life skills recommended by UNESCO','5','ls'],
+[17,'How do you help students overcome problems of adolescence through school activities?','5','ado']]},
+{id:'o20',tab:'Oct 2020',code:'PG-278',
+A:[[1,'a) What is universalization of secondary education? b) Problems c) Measures by Government','2+4+4','use'],
+[2,'a) What is Human Rights Education? b) Its importance c) Promote human rights values through co-curricular activities','2+4+4','hr'],
+[3,'a) Meaning of population education b) Factors affecting population growth c) Measures to achieve stability','2+3+5','pop'],
+[4,'a) Meaning of life skill education b) Importance at secondary stage c) Strategies of life skills','2+4+4','ls'],
+[5,'a) What is AIDS? b) Symptoms c) Role of any two agencies in AIDS awareness','2+3+5','aids']],
+B:[[6,'Functions of National Human Rights Commission','5','hr'],
+[7,'How do you help secondary students overcome problems of adolescents?','5','ado'],
+[8,'Develop awareness about sustainable development among secondary students','5','env'],
+[9,'a) What is environmental education? b) Its objectives','2+3','env'],
+[10,'a) What is eco-friendly life style? b) Suggestions to promote it among students','2+3','env'],
+[11,'Measures to protect human rights of women and children','5','hr'],
+[12,'Four life skills recommended by UNESCO','5','ls'],
+[13,'a) Meaning of equality of educational opportunities b) Constitutional provisions for universalization','2+3','use'],
+[14,'Role of NIMHANS in AIDS awareness','5','aids'],
+[15,'a) What is multicultural education? b) Strategies adopted','1+4','mc'],
+[16,'Role of community and Panchayat Raj institution in universalization','5','use'],
+[17,'Importance of universalization of secondary education','5','use']]},
+{id:'f20',tab:'Feb/Mar 2020',code:'PJ-770',
+A:[[1,'a) What is universalization of secondary education? b) Its objectives c) Measures by Government','2+3+5','use'],
+[2,'a) What is environmental education? b) Its objectives c) Measures to control environmental pollution','2+4+4','env'],
+[3,'a) Meaning of life skill education b) Importance at secondary stage c) Strategies of life skills','2+4+4','ls'],
+[4,'a) What is human rights education? b) Its objectives c) Promote human rights values through co-curricular activities','2+4+4','hr'],
+[5,'a) Meaning of population education b) Factors affecting population growth c) Measures to achieve stability','2+3+5','pop']],
+B:[[6,'Functions of National Human Rights Commission','5','hr'],
+[7,'a) What is eco-friendly life style? b) Suggestions to promote it among students','2+3','env'],
+[8,'Concept of sustainable development','5','env'],
+[9,'a) What is multicultural education? b) Strategies adopted','1+4','mc'],
+[10,'Role of NIMHANS in AIDS awareness','5','aids'],
+[11,'Role of community and Panchayat Raj in universalization','5','use'],
+[12,'a) What is adolescence education? b) As a teacher, how do you give it through school activities?','2+3','ado'],
+[13,'a) Meaning of equality of educational opportunities b) Constitutional provisions for universalization','2+3','use'],
+[14,'Importance of universalization of secondary education','5','use'],
+[15,'a) What is AIDS? b) Symptoms of AIDS','2+3','aids'],
+[16,'Four life skills recommended by UNESCO','5','ls'],
+[17,'Measures to protect human rights of women and children','5','hr']]},
+{id:'m19',tab:'Mar 2019',code:'PJ-821',
+A:[[1,'a) What is universalization of secondary education? b) Its objectives c) Measures by Government','2+3+5','use'],
+[2,'a) What is human rights education? b) Its objectives c) Promote human rights values through co-curricular activities','2+4+4','hr'],
+[3,'a) What is environmental education? b) Its objectives c) Measures to control environmental pollution','2+4+4','env'],
+[4,'a) Meaning of population education b) Factors affecting population growth c) Measures to achieve stability','2+3+5','pop'],
+[5,'a) Meaning of life skill education b) Importance at secondary stage c) Strategies of life skills','2+4+4','ls']],
+B:[[6,'Role of community and school in universalizing secondary education','5','use'],
+[7,'a) Misconceptions about HIV transmission b) Measures to prevent AIDS transmission','2+3','aids'],
+[8,'Structure and functions of National Human Rights Commission','5','hr'],
+[9,'a) What is multicultural education? b) Strategies you use as a teacher','2+3','mc'],
+[10,'a) What is adolescence education? b) As a teacher, how do you give it through school activities?','1+4','ado'],
+[11,'Challenges to attain universalization of secondary education','5','use'],
+[12,'Rights and provisions for women and children in the Indian Constitution','2½+2½','hr'],
+[13,'a) What is eco-friendly life style? b) Suggestions to promote it among students','2+3','env'],
+[14,'a) Skills recommended by UNESCO b) Explain any three','2+3','ls'],
+[15,'Role of NIMHANS in AIDS awareness','5','aids'],
+[16,'Constitutional provisions to attain universalization of secondary education','5','use'],
+[17,'Measures to protect human rights of women and children','5','hr']]},
+{id:'m18',tab:'Mar 2018',code:'PG-842',
+A:[[1,'a) What is universalization of secondary education? b) Problems c) Measures by Government','2+4+4','use'],
+[2,'a) What are Human Rights? b) Importance of Human Rights Education c) Promote human rights culture among secondary children','2+3+5','hr'],
+[3,'a) What is environmental education? b) Its objectives c) Why is it a national concern?','2+3+5','env'],
+[4,'a) What is AIDS? b) Symptoms c) Role of any two agencies in AIDS awareness','2+3+5','aids'],
+[5,'a) What are life skills? b) Four life skills recommended by UNESCO c) Importance at secondary stage','2+4+4','ls']],
+B:[[6,'a) Meaning of equality of educational opportunities b) Constitutional provisions for universalization','2+3','use'],
+[7,'Functions of National Human Rights Commission','5','hr'],
+[8,'a) What is multicultural education? b) Strategies adopted','1+4','mc'],
+[9,'Adverse effects of population explosion','5','pop'],
+[10,'Develop awareness about sustainable development among secondary students','5','env'],
+[11,'"Eco-friendly life style is the way to protect environment." Substantiate','5','env'],
+[12,'a) What is population education? b) Its objectives','2+3','pop'],
+[13,'Role of community and Panchayat Raj in universalization','5','use'],
+[14,'Concept of sustainable development','5','env'],
+[15,'Importance of universalization of secondary education','5','use'],
+[16,'As a teacher, how do you help students overcome problems of adolescents?','5','ado'],
+[17,'a) Objectives of Human Rights Education b) Why is it considered very important?','2½+2½','hr']]}
+];
+var TOP={use:'Universalization',hr:'Human Rights',ls:'Life Skills',env:'Environment',pop:'Population',aids:'AIDS',mc:'Multicultural',ado:'Adolescence'};
+var nav=document.getElementById('nav'),wrap=document.getElementById('wrap');
+function rows(list,cls){return list.map(function(q){return '<div class="q '+cls+'"><span class="n">'+q[0]+'</span><div class="qt">'+q[1]+'<br><a href="hc10_study.html#'+q[3]+'">Notes: '+TOP[q[3]]+' →</a></div><span class="mk">'+q[2]+'M</span></div>'}).join('')}
+var btns='<button class="on" data-p="imp">★ Important</button>';
+var panes='<div class="pane on" id="p-imp"><div class="yh"><h2>Important Questions</h2><span class="code">7 papers</span></div><div class="freq">'+IMP.map(function(i){return '<div class="fc'+(i[3]?' hot':'')+'"><b>'+(i[3]?'★ ':'')+i[0]+' papers</b>'+i[1]+'</div>'}).join('')+'</div><div class="tip">Universalization, Human Rights and Life Skills appear in Part A every year, so these three are your safest choices.</div></div>';
+P.forEach(function(p){
+  btns+='<button data-p="'+p.id+'">'+p.tab+'</button>';
+  panes+='<div class="pane" id="p-'+p.id+'"><div class="yh"><h2>'+p.tab+'</h2><span class="code">'+p.code+'</span></div><div class="pl">Part A · attempt any 3 (3×10=30)</div>'+rows(p.A,'')+'<div class="pl">Part B · attempt any 8 (8×5=40)</div>'+rows(p.B,'pb')+'</div>';
+});
+nav.innerHTML=btns;wrap.innerHTML=panes;
+nav.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('.nav button,.pane').forEach(function(x){x.classList.remove('on')});
+  b.classList.add('on');document.getElementById('p-'+b.dataset.p).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});});
+</script>
+</body>
+</html>
