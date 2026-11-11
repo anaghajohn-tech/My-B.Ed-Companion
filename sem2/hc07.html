@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-07 Learning and Teaching | B.Ed Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Crimson+Pro:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e100d;--s:#171a15;--s2:#1f241d;--b:#2f362c;--a:#8fbc88;--g:#f5c26b;--r:#f08a8a;--t:#e6eae3;--m:#97a093}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:'Outfit',sans-serif;line-height:1.6}
+a{color:var(--a);text-decoration:none}
+.top{padding:.9rem 1.5rem;border-bottom:1px solid var(--b);font-size:.85rem}
+.hero{padding:2.2rem 1.5rem 1.4rem;max-width:960px;margin:0 auto}
+.badge{display:inline-block;border:1px solid rgba(143,188,136,.4);color:var(--a);padding:.2rem .8rem;border-radius:99px;font-size:.75rem;font-weight:600;margin-bottom:.8rem}
+h1{font-family:'Crimson Pro',serif;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;margin-bottom:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+.chip{background:var(--s2);border:1px solid var(--b);color:var(--m);padding:.2rem .65rem;border-radius:6px;font-size:.76rem}
+.chip.g{border-color:rgba(245,194,107,.4);color:var(--g)}
+.study{display:inline-block;border:1px solid rgba(143,188,136,.5);background:rgba(143,188,136,.1);color:var(--a);padding:.5rem 1.1rem;border-radius:8px;font-weight:600;font-size:.85rem}
+.study:hover{background:rgba(143,188,136,.2)}
+.nav{position:sticky;top:0;z-index:9;background:var(--s);border-bottom:1px solid var(--b);overflow-x:auto;white-space:nowrap;padding:0 1rem}
+.nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--m);font:500 .8rem 'Outfit',sans-serif;padding:.85rem .9rem;cursor:pointer}
+.nav button.on{color:var(--a);border-bottom-color:var(--a)}
+.wrap{max-width:960px;margin:0 auto;padding:1.6rem 1.5rem 4rem}
+.pane{display:none}.pane.on{display:block}
+.yh{display:flex;gap:.8rem;align-items:center;margin-bottom:.4rem}
+h2{font-family:'Crimson Pro',serif;font-size:1.5rem}
+.code{font-size:.74rem;color:var(--m);border:1px solid var(--b);border-radius:6px;padding:.1rem .5rem}
+.pl{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m);margin:1.4rem 0 .7rem}
+.q{display:flex;gap:.8rem;align-items:flex-start;background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.75rem 1rem;margin-bottom:.55rem}
+.n{min-width:28px;height:28px;border-radius:6px;background:#4a8544;color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.pb .n{background:#2f7f8f}
+.qt{flex:1;font-size:.9rem}
+.qt a{display:inline-block;margin-top:.25rem;font-size:.74rem;color:var(--m)}
+.qt a:hover{color:var(--a)}
+.mk{font-size:.72rem;color:var(--g);white-space:nowrap;margin-top:.2rem}
+.freq{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.7rem;margin:.8rem 0}
+.fc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.7rem 1rem;font-size:.86rem}
+.fc.hot{border-color:rgba(240,138,138,.45)}
+.fc b{display:block;font-size:.72rem;color:var(--r)}
+.tip{background:rgba(245,194,107,.08);border:1px solid rgba(245,194,107,.3);border-radius:8px;padding:.6rem .9rem;font-size:.84rem;color:var(--g)}
+</style>
+</head>
+<body>
+<div class="top"><a href="../index.html">← My B.Ed Companion</a> &nbsp;/&nbsp; Semester 2 / HC-07</div>
+<div class="hero">
+  <div class="badge">HC-07 · Semester 2</div>
+  <h1>Learning and Teaching</h1>
+  <div class="chips">
+    <span class="chip g">3 papers: 2022 · 2023 · 2025</span><span class="chip">Max. Marks: 70</span>
+    <span class="chip">Part A: 3 of 5 × 10 = 30</span><span class="chip">Part B: 8 of 12 × 5 = 40</span>
+  </div>
+  <a class="study" href="hc07_study.html">📖 Study Material →</a>
+</div>
+<div class="nav" id="nav"></div>
+<div class="wrap" id="wrap"></div>
+
+<script>
+var IMP=[
+['3/3','Piaget: stages of cognitive development; importance of cognitive psychology','cog',1],
+['3/3','Constructivism: meaning, role of teacher, classroom; learning as construction of knowledge','cons',1],
+['3/3','Learning styles: meaning, types, factors','ls',1],
+['3/3','Dyslexia: characteristics and remedial measures','dys',1],
+['3/3','Dyscalculia: meaning and characteristics','dys',1],
+['3/3','Discovery learning cycle; Bruner\'s principles of assessing learning','disc',1],
+['3/3','Effective teaching: components; principles of teaching','eff',1],
+['3/3','Teaching styles and factors affecting them','ts',1],
+['3/3','Vygotsky\'s socio-cultural theory (ZPD)','vyg',1],
+['3/3','Hemispheres of the brain: thinking activities','brain',1],
+['3/3','Creativity: meaning, characteristics, fostering','crea',1],
+['3/3','Emotional development: factors; why teachers need it','emo',1],
+['2/3','Gifted children: characteristics, programmes','gift',0],
+['2/3','Educationally backward children: causes, remedies','back',0]];
+// [no, text, marks, topic]
+var P=[
+{id:'n25',tab:'Oct/Nov 2025',code:'ED-032',
+A:[[1,'a) What is cognitive psychology? b) Importance of cognitive psychology c) Stages of cognitive development according to Piaget','2+3+5','cog'],
+[2,'a) What is learning style? b) Explain any three learning styles with example c) Importance of learning style in the teaching-learning process','2+6+2','ls'],
+[3,'a) What is dyslexia? b) Characteristics of a learner with dyslexia c) Remedial measures to overcome dyslexia','2+5+3','dys'],
+[4,'a) What is discovery learning? b) Stages of the learning cycle for discovery c) Principles to assess quality of learning according to Bruner','2+4+4','disc'],
+[5,'a) What is effective teaching? b) Components of effective teaching c) Parameters of effective teaching','2+2+6','eff']],
+B:[[6,'a) Who is a gifted child? b) Educational programmes for gifted children','2+3','gift'],
+[7,'Role of hemispheres in thinking','5','brain'],
+[8,'a) What are teaching styles? b) Factors affecting teaching styles','2+3','ts'],
+[9,'Explain the concept "Learning as construction of knowledge"','5','cons'],
+[10,'a) What is constructivism? b) Role of teacher in a constructivist classroom','2+3','cons'],
+[11,'Vygotsky\'s Social-Cultural theory [ZPD]','5','vyg'],
+[12,'How does the emotional development of the learner affect the learning process?','5','emo'],
+[13,'a) What is creativity? b) How would you foster creativity among children?','2+3','crea'],
+[14,'a) What is dyscalculia? b) Characteristics of children with dyscalculia','2+3','dys'],
+[15,'a) Who are educationally backward children? b) Remedial measures you would suggest','2+3','back'],
+[16,'Principles of effective teaching','5','eff'],
+[17,'How do you motivate the learners in the construction of knowledge?','5','cons']]},
+{id:'n23',tab:'Nov 2023',code:'BN-007',
+A:[[1,'a) What is constructivism? b) Role of teacher in constructivist classroom c) Characteristics of a constructivist classroom','2+5+3','cons'],
+[2,'a) Importance of cognitive psychology b) Stages of cognitive development according to Jean Piaget','4+6','cog'],
+[3,'a) What are learning styles? b) Factors affecting learning styles c) Types of learning styles','2+6+2','ls'],
+[4,'a) What is dyslexia? b) Characteristics of a learner with dyslexia c) Remedial measures to overcome dyslexia','2+5+3','dys'],
+[5,'a) Socio-cultural theory of Vygotsky b) Relevance of Vygotsky\'s socio-cultural theory to teaching and learning','5+5','vyg']],
+B:[[6,'a) What is discalculia? b) Characteristics of children with discalculia','2+3','dys'],
+[7,'Explain the concept "Learning as construction of knowledge"','5','cons'],
+[8,'Principles of assessing the quality of learning according to Bruner','5','disc'],
+[9,'Stages of the learning cycle for discovery','5','disc'],
+[10,'Thinking activities carried out by right and left hemispheres of the brain','5','brain'],
+[11,'a) What are teaching styles? b) Factors affecting teaching styles','2+3','ts'],
+[12,'Principles of teaching','5','eff'],
+[13,'a) What is constructivism? b) Role of teacher in constructivist classroom','2+3','cons'],
+[14,'Why is knowledge of emotional development essential for secondary school teachers?','5','emo'],
+[15,'a) What is creativity? b) How do you foster creativity among children?','2+3','crea'],
+[16,'a) What is effective teaching? b) Components of effective teaching','2+3','eff'],
+[17,'a) Who is a gifted child? b) Characteristics of gifted children','2+3','gift']]},
+{id:'n22',tab:'Nov 2022',code:'BN-001',
+A:[[1,'a) Importance of cognitive psychology b) Stages of cognitive development according to Jean Piaget','4+6','cog'],
+[2,'a) Who are educationally backward children? b) Causes of educational backwardness c) Remedial measures you would suggest','2+4+4','back'],
+[3,'a) What is constructivism? b) Role of teacher in a constructivist classroom c) Characteristics of a constructivist classroom','2+4+4','cons'],
+[4,'a) What is dyslexia? b) Characteristics of a learner with dyslexia c) Remedial measures to overcome dyslexia','2+5+3','dys'],
+[5,'a) What is learning style? b) Explain any four learning styles with example c) Factors affecting learning style','2+4+4','ls']],
+B:[[6,'Vygotsky\'s Socio-cultural theory (ZPD)','5','vyg'],
+[7,'a) Who are creative children? b) Characteristics of creative children','1+4','crea'],
+[8,'Thinking activities carried out by right and left hemispheres of the brain','5','brain'],
+[9,'a) What is effective teaching? b) Components of effective teaching','2+3','eff'],
+[10,'a) What are teaching styles? b) Factors affecting teaching styles','2+3','ts'],
+[11,'Why is knowledge of emotional development essential for secondary school teachers?','5','emo'],
+[12,'a) What is discovery learning? b) Stages of the learning cycle for discovery','1+4','disc'],
+[13,'a) What is discalculia? b) Characteristics of children with discalculia','2+3','dys'],
+[14,'Principles of assessing quality of learning according to Bruner','5','disc'],
+[15,'Explain the concept "Learning as construction of knowledge"','5','cons'],
+[16,'Principles of teaching','5','eff'],
+[17,'Factors influencing emotional development of the child','5','emo']]}
+];
+var TOP={cog:'Piaget',vyg:'Vygotsky',cons:'Constructivism',disc:'Discovery / Bruner',ls:'Learning Styles',ts:'Teaching Styles',eff:'Effective Teaching',brain:'Brain',dys:'Dyslexia / Dyscalculia',crea:'Creativity',emo:'Emotional Development',gift:'Gifted',back:'Backward Children',mot:'Motivation & Strategies'};
+var GQ=[
+['cog',['Meaning of cognitive psychology','Importance of cognitive psychology in learning and teaching','Cognitive development according to Piaget']],
+['vyg',['Meaning of socio-cultural theory; its importance in learning and teaching','Socio-cultural theory according to Vygotsky (ZPD)','Socio-cultural conditions in learning']],
+['cons',['Learning as construction of knowledge (NCERT 2005)','What is constructivism? Implications for curriculum and pedagogy','Characteristics of a constructivist classroom','Characteristics of a constructivist teacher']],
+['disc',['Meaning and concept of discovery learning','Principles to assess quality of learning (Bruner)','Learning cycle for discovery']],
+['ls',['Concept and types of learning style','Importance of learning style in teaching','Factors affecting learning style']],
+['ts',['Concept of teaching style; types of teaching style','How teaching style affects learning; factors affecting it','How are learning and teaching style interrelated?']],
+['eff',['Meaning, components and parameters of effective teaching','Identification of teaching skills','Principles of teaching']],
+['brain',['Role of hemispheres in thinking']],
+['mot',['What is learners\' motivation? How do you motivate students?','Learning in and outside school','Classroom instruction strategies']],
+['emo',['Meaning and process of emotional development','Need to study it and its effect on teaching and learning']],
+['gift',['Define gifted children; characteristics; educational programmes']],
+['crea',['Define creative children; characteristics; educational programmes']],
+['back',['Define educationally backward children; characteristics; educational programmes']],
+['dys',['Dyscalculia, Dyslexia and Dysgraphia: meaning, characteristics, remedial measures']]];
+var nav=document.getElementById('nav'),wrap=document.getElementById('wrap');
+function rows(list,cls){return list.map(function(q){return '<div class="q '+cls+'"><span class="n">'+q[0]+'</span><div class="qt">'+q[1]+'<br><a href="hc07_study.html#'+q[3]+'">Notes: '+TOP[q[3]]+' →</a></div><span class="mk">'+q[2]+'M</span></div>'}).join('')}
+var btns='<button class="on" data-p="imp">★ Important</button>'+'<button data-p="gq">★ Girish Imp Qs</button>';
+var panes='<div class="pane on" id="p-imp"><div class="yh"><h2>Important Questions</h2><span class="code">3 papers</span></div><div class="freq">'+IMP.map(function(i){return '<div class="fc'+(i[3]?' hot':'')+'"><b>'+(i[3]?'★ ':'')+i[0]+' papers</b>'+i[1]+'</div>'}).join('')+'</div><div class="tip">Almost every topic repeats in all three papers, so the whole syllabus is small. Cover all 13 topics in the study material and you can answer any question here.</div></div>';
+P.forEach(function(p){
+  btns+='<button data-p="'+p.id+'">'+p.tab+'</button>';
+  panes+='<div class="pane" id="p-'+p.id+'"><div class="yh"><h2>'+p.tab+'</h2><span class="code">'+p.code+'</span></div><div class="pl">Part A · attempt any 3 (3×10=30)</div>'+rows(p.A,'')+'<div class="pl">Part B · attempt any 8 (8×5=40)</div>'+rows(p.B,'pb')+'</div>';
+});
+panes+='<div class="pane" id="p-gq"><div class="yh"><h2>Teacher\'s Important Questions</h2><span class="code">Dr. Girish S · Sem 2 list</span></div><div class="tip">A teacher\'s expected-questions list, not an official paper. Tap a topic for notes.</div>'+GQ.map(function(g){return '<div class="pl"><a href="hc07_study.html#'+g[0]+'">'+TOP[g[0]]+' →</a></div>'+g[1].map(function(t){return '<div class="q"><div class="qt">'+t+'</div></div>'}).join('')}).join('')+'</div>';
+nav.innerHTML=btns;wrap.innerHTML=panes;
+nav.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('.nav button,.pane').forEach(function(x){x.classList.remove('on')});
+  b.classList.add('on');document.getElementById('p-'+b.dataset.p).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});});
+</script>
+</body>
+</html>
