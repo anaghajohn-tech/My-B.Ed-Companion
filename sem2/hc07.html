@@ -147,13 +147,13 @@ var GQ=[
 ['dys',['Dyscalculia, Dyslexia and Dysgraphia: meaning, characteristics, remedial measures']]];
 var nav=document.getElementById('nav'),wrap=document.getElementById('wrap');
 function rows(list,cls){return list.map(function(q){return '<div class="q '+cls+'"><span class="n">'+q[0]+'</span><div class="qt">'+q[1]+'<br><a href="hc07_study.html#'+q[3]+'">Notes: '+TOP[q[3]]+' →</a></div><span class="mk">'+q[2]+'M</span></div>'}).join('')}
-var btns='<button class="on" data-p="imp">★ Important</button>'+'<button data-p="gq">★ Girish Imp Qs</button>';
+var btns='<button class="on" data-p="imp">★ Important</button>'+'<button data-p="gq">★ Teacher Imp Qs</button>';
 var panes='<div class="pane on" id="p-imp"><div class="yh"><h2>Important Questions</h2><span class="code">3 papers</span></div><div class="freq">'+IMP.map(function(i){return '<div class="fc'+(i[3]?' hot':'')+'"><b>'+(i[3]?'★ ':'')+i[0]+' papers</b>'+i[1]+'</div>'}).join('')+'</div><div class="tip">Almost every topic repeats in all three papers, so the whole syllabus is small. Cover all 13 topics in the study material and you can answer any question here.</div></div>';
 P.forEach(function(p){
   btns+='<button data-p="'+p.id+'">'+p.tab+'</button>';
   panes+='<div class="pane" id="p-'+p.id+'"><div class="yh"><h2>'+p.tab+'</h2><span class="code">'+p.code+'</span></div><div class="pl">Part A · attempt any 3 (3×10=30)</div>'+rows(p.A,'')+'<div class="pl">Part B · attempt any 8 (8×5=40)</div>'+rows(p.B,'pb')+'</div>';
 });
-panes+='<div class="pane" id="p-gq"><div class="yh"><h2>Teacher\'s Important Questions</h2><span class="code">Dr. Girish S · Sem 2 list</span></div><div class="tip">A teacher\'s expected-questions list, not an official paper. Tap a topic for notes.</div>'+GQ.map(function(g){return '<div class="pl"><a href="hc07_study.html#'+g[0]+'">'+TOP[g[0]]+' →</a></div>'+g[1].map(function(t){return '<div class="q"><div class="qt">'+t+'</div></div>'}).join('')}).join('')+'</div>';
+panes+='<div class="pane" id="p-gq"><div class="yh"><h2>Teacher\'s Important Questions</h2><span class="code">Teacher list · Sem 2</span></div><div class="tip">A teacher\'s expected-questions list, not an official paper. Tap a topic for notes.</div>'+GQ.map(function(g){return '<div class="pl"><a href="hc07_study.html#'+g[0]+'">'+TOP[g[0]]+' →</a></div>'+g[1].map(function(t){return '<div class="q"><div class="qt">'+t+'</div></div>'}).join('')}).join('')+'</div>';
 nav.innerHTML=btns;wrap.innerHTML=panes;
 nav.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
   document.querySelectorAll('.nav button,.pane').forEach(function(x){x.classList.remove('on')});

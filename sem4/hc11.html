@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-11 Creating an Inclusive School | B.Ed Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Crimson+Pro:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f0e12;--s:#1a1820;--s2:#221f2b;--b:#322e3e;--a:#c9a0dc;--g:#f5c26b;--r:#f08a8a;--t:#e8e4ee;--m:#9a94a8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:'Outfit',sans-serif;line-height:1.6}
+a{color:var(--a);text-decoration:none}
+.top{padding:.9rem 1.5rem;border-bottom:1px solid var(--b);font-size:.85rem}
+.hero{padding:2.2rem 1.5rem 1.4rem;max-width:960px;margin:0 auto}
+.badge{display:inline-block;border:1px solid rgba(201,160,220,.4);color:var(--a);padding:.2rem .8rem;border-radius:99px;font-size:.75rem;font-weight:600;margin-bottom:.8rem}
+h1{font-family:'Crimson Pro',serif;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;margin-bottom:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+.chip{background:var(--s2);border:1px solid var(--b);color:var(--m);padding:.2rem .65rem;border-radius:6px;font-size:.76rem}
+.chip.g{border-color:rgba(245,194,107,.4);color:var(--g)}
+.study{display:inline-block;border:1px solid rgba(201,160,220,.5);background:rgba(201,160,220,.1);color:var(--a);padding:.5rem 1.1rem;border-radius:8px;font-weight:600;font-size:.85rem}
+.study:hover{background:rgba(201,160,220,.2)}
+.nav{position:sticky;top:0;z-index:9;background:var(--s);border-bottom:1px solid var(--b);overflow-x:auto;white-space:nowrap;padding:0 1rem}
+.nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--m);font:500 .8rem 'Outfit',sans-serif;padding:.85rem .9rem;cursor:pointer}
+.nav button.on{color:var(--a);border-bottom-color:var(--a)}
+.wrap{max-width:960px;margin:0 auto;padding:1.6rem 1.5rem 4rem}
+.pane{display:none}.pane.on{display:block}
+.yh{display:flex;gap:.8rem;align-items:center;margin-bottom:.4rem}
+h2{font-family:'Crimson Pro',serif;font-size:1.5rem}
+.code{font-size:.74rem;color:var(--m);border:1px solid var(--b);border-radius:6px;padding:.1rem .5rem}
+.pl{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m);margin:1.4rem 0 .7rem}
+.q{display:flex;gap:.8rem;align-items:flex-start;background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.75rem 1rem;margin-bottom:.55rem}
+.n{min-width:28px;height:28px;border-radius:6px;background:#7c4a96;color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.pb .n{background:#2f7f8f}
+.qt{flex:1;font-size:.9rem}
+.qt a{display:inline-block;margin-top:.25rem;font-size:.74rem;color:var(--m)}
+.qt a:hover{color:var(--a)}
+.mk{font-size:.72rem;color:var(--g);white-space:nowrap;margin-top:.2rem}
+.freq{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.7rem;margin:.8rem 0}
+.fc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.7rem 1rem;font-size:.86rem}
+.fc.hot{border-color:rgba(240,138,138,.45)}
+.fc b{display:block;font-size:.72rem;color:var(--r)}
+.tip{background:rgba(245,194,107,.08);border:1px solid rgba(245,194,107,.3);border-radius:8px;padding:.6rem .9rem;font-size:.84rem;color:var(--g)}
+</style>
+</head>
+<body>
+<div class="top"><a href="../index.html">← My B.Ed Companion</a> &nbsp;/&nbsp; Semester 4 / HC-11</div>
+<div class="hero">
+  <div class="badge">HC-11 · Semester 4</div>
+  <h1>Creating an Inclusive School</h1>
+  <div class="chips">
+    <span class="chip g">5 papers: 2018 – 2024</span><span class="chip">Max. Marks: 70</span>
+    <span class="chip">Part A: 3 of 5 × 10 = 30</span><span class="chip">Part B: 8 of 12 × 5 = 40</span>
+  </div>
+  <a class="study" href="hc11_study.html">📖 Study Material →</a>
+</div>
+<div class="nav" id="nav"></div>
+<div class="wrap" id="wrap"></div>
+
+<script>
+var IMP=[
+['5/5','Inclusive education: meaning, importance, advantages and limitations','inc',1],
+['5/5','Barriers in inclusive education: social, attitudinal, educational; how to overcome','bar',1],
+['5/5','Differentiated instruction: content and process','dif',1],
+['5/5','Universal Design for Learning (UDL) and its components','udl',1],
+['5/5','Co-teaching methods and team teaching','cot',1],
+['5/5','Peer mediated instruction; Class Wide Peer Tutoring','pmi',1],
+['4/5','Early detection; functional assessment of SEN','det',1],
+['4/5','Role of inclusive classroom and inclusive teacher','cls',1],
+['4/5','Provisions for inclusive education as per RTE','law',1],
+['4/5','PWD Act 1995 and inclusive education','law',1],
+['4/5','Curricular and co-curricular adaptation','dif',1],
+['4/5','Strategies for children with diverse needs','dif',0],
+['4/5','ICT in inclusive education','ict',0],
+['4/5','Sensory disabilities: visual impairment, accommodating the learner','dis',0],
+['3/5','National Policy for Persons with Disabilities 2006','law',0],
+['3/5','Gifted children: educational programmes','gift',0],
+['2/5','Learning disability: dysgraphia, dyscalculia; cerebral palsy','dis',0]];
+var P=[
+{id:'n24',tab:'Sep/Oct 2024',code:'30552',
+A:[[1,'a) What is meant by inclusive education? b) How would you overcome the barriers in inclusive education? c) Advantages and limitations of inclusive education','2+4+4','inc'],
+[2,'a) Who are sensory disabled children? b) Characteristics of children with visual impairment c) As a teacher, how would you accommodate visually challenged students in your class room?','2+3+5','dis'],
+[3,'a) What is Peer Mediated Instruction (PMI)? Its advantages b) How do you make use of Class Wide Peer Tutoring (CWPT) in inclusive classrooms?','2+2+6','pmi'],
+[4,'a) What is differentiated instruction in inclusive education? b) How can content and process be modified according to the diverse needs of students?','3+7','dif'],
+[5,'Different co-teaching methods; explain any two of them','2+4+4','cot']],
+B:[[6,'How do you bring curricular adaptation for meeting the needs of children with special needs?','5','dif'],
+[7,'How does PWD Act 1995 help in promoting inclusive education?','5','law'],
+[8,'What is Universal Design for Learning (UDL)? Explain briefly its components','1+4','udl'],
+[9,'Inclusive education strategies to fulfil the needs of children with diverse needs','5','dif'],
+[10,'How can ICT be used for inclusive academic instruction?','5','ict'],
+[11,'Attitudinal barriers in inclusive education','5','bar'],
+[12,'Importance of functional assessment of Special Education Need (SEN)','5','det'],
+[13,'What is learning disability? Characteristics of children with dysgraphia and dyscalculia','5','dis'],
+[14,'Meaning and characteristics of children with cerebral palsy','5','dis'],
+[15,'National Policy for Persons with Disabilities 2006','5','law'],
+[16,'Special provisions for the education of the disadvantaged group','5','law'],
+[17,'What is team-teaching? Explain the teaching method','5','cot']]},
+{id:'f23',tab:'Feb/Mar 2023',code:'30552',
+A:[[1,'a) What is meant by inclusive education? b) Advantages and limitations c) How would you overcome the barriers in inclusive education?','2+4+4','inc'],
+[2,'a) Who are sensory disabled children? b) Characteristics of children with visual impairment c) How would you accommodate visually challenged students in your class room?','2+3+5','dis'],
+[3,'How does PWD Act 1995 help in promoting inclusive education?','10','law'],
+[4,'a) Who are gifted children? b) Educational programmes you would suggest for engaging gifted children','2+8','gift'],
+[5,'a) What is peer mediated instruction (PMI)? Its advantages b) How do you use class wide peer tutoring (CWPT) in inclusive classrooms?','2+2+6','pmi']],
+B:[[6,'What are the provisions for inclusive education as per RTE?','5','law'],
+[7,'List out the social and attitudinal barriers of inclusive education','5','bar'],
+[8,'Inclusive education strategies to fulfil the children with diverse needs','5','dif'],
+[9,'Why is early detection important in inclusive education?','5','det'],
+[10,'What is learning disability? Characteristics of children with dysgraphia and dyscalculia','1+2+2','dis'],
+[11,'What are the specifics for children with locomotor disabilities?','5','dis'],
+[12,'Need for accommodation and modification in inclusive education','5','dif'],
+[13,'Role of inclusive teacher and inclusive class room in facilitating inclusive education','5','cls'],
+[14,'What is differentiated instruction in inclusive education? Its merits and limitations','2+3','dif'],
+[15,'What is universal design for learning (UDL)? Explain briefly its components','1+4','udl'],
+[16,'Role of ICT in inclusive education','5','ict'],
+[17,'What is co-teaching method? Explain team teaching method','1+4','cot']]},
+{id:'o21',tab:'Oct 2021',code:'30552',
+A:[[1,'a) What is the importance of inclusive education? b) Advantages and limitations of inclusive education c) Social barriers in inclusive education','2+6+2','inc'],
+[2,'a) Importance of early detection in inclusive education b) Role of inclusive class room in facilitating inclusive education','5+5','det'],
+[3,'Specifics for children with sensory and locomotor disabilities','5+5','dis'],
+[4,'a) What is differentiated instruction? b) Differentiated instruction with reference to content and process','2+8','dif'],
+[5,'a) What is universal design for learning? b) Components of universal design for learning','2+8','udl']],
+B:[[6,'Provisions of inclusive education according to Right to Education','5','law'],
+[7,'Educational and attitudinal barriers in inclusive education','5','bar'],
+[8,'Characteristics of children with visual impairment','5','dis'],
+[9,'Persons with Disabilities Act 1995 in relation to inclusive education','5','law'],
+[10,'Characteristics of children with autism','5','dis'],
+[11,'Adaptations in co-curricular activities for meeting the diverse needs of children with special needs','5','dif'],
+[12,'Importance of functional assessment of special education needs','5','det'],
+[13,'Any two inclusive education strategies for children with diverse needs','5','dif'],
+[14,'National policy for persons with disabilities 2006','5','law'],
+[15,'Role of ICT in inclusive education','5','ict'],
+[16,'Two types of peer mediated instructions in inclusive education','5','pmi'],
+[17,'a) What is co-teaching method? b) Explain the team teaching method','1+4','cot']]},
+{id:'f20',tab:'Feb/Mar 2020',code:'PJ-771',
+A:[[1,'What is inclusive education? Importance of inclusive education. Merits and limitations','2+4+4','inc'],
+[2,'What is Universal Design for Learning? Explain any two principles','2+8','udl'],
+[3,'Different co-teaching methods; explain any two of them','2+8','cot'],
+[4,'Role of inclusive classroom and inclusive teacher in facilitating inclusive education','5+5','cls'],
+[5,'What is differentiated instruction in inclusive education? How can content and process be modified according to diverse needs?','2+8','dif']],
+B:[[6,'Why is early detection important in inclusive education?','5','det'],
+[7,'Provisions for inclusive education as per RTE','5','law'],
+[8,'Various peer mediated instructions in inclusive education','5','pmi'],
+[9,'Meaning and steps of adaptation for children with multiple disabilities in inclusive education','5','dif'],
+[10,'Specifics to be adopted for children with neuro developmental disabilities','5','dis'],
+[11,'Focus of the persons with disability (PWD Act 1995) with reference to inclusive education','5','law'],
+[12,'Attitudinal barriers in inclusive education','5','bar'],
+[13,'Educational programmes that can be organised for gifted children in inclusive setting','5','gift'],
+[14,'How can ICT be used for inclusive academic instruction?','5','ict'],
+[15,'How do you adapt co-curricular activities for meeting the needs of children with special needs?','5','dif'],
+[16,'Meaning and characteristics of children with cerebral palsy','5','dis'],
+[17,'Importance of functional assessment of SEN','5','det']]},
+{id:'m18',tab:'Mar 2018',code:'PG-843',
+A:[[1,'Explain the meaning and importance of inclusive education','10','inc'],
+[2,'a) Why early detection is important in inclusive education? b) Role of inclusive classroom in inclusive education','5+5','det'],
+[3,'Features of the National Policy for Persons with Disabilities 2006','10','law'],
+[4,'Different co-teaching methods; explain any two of them','2+4+4','cot'],
+[5,'What is differentiated instruction in inclusive education? How can content and process be modified according to diverse needs?','3+7','dif']],
+B:[[6,'Provisions for inclusive education as per RTE','5','law'],
+[7,'How is social barrier an obstacle in implementing inclusive education?','5','bar'],
+[8,'List the inclusive education strategies for children with diverse needs and explain any one','2+3','dif'],
+[9,'How do you bring curricular adaptation for meeting the needs of children with special needs?','5','dif'],
+[10,'Characteristics of children with developmental disabilities','5','dis'],
+[11,'Role of inclusive teacher in facilitating inclusive education','5','cls'],
+[12,'Specifics to be adopted for children with sensory disabilities','5','dis'],
+[13,'Educational programme that can be organised for gifted children','5','gift'],
+[14,'Special provisions for the education of the disadvantaged group','5','law'],
+[15,'What is Functional Assessment of SEN? Discuss its steps','5','det'],
+[16,'What is Universal Design for Learning? Briefly explain any one of them','2+3','udl'],
+[17,'Various peer mediated instructions in inclusive education','5','pmi']]}
+];
+var TOP={inc:'Inclusive Education',bar:'Barriers',det:'Detection & Assessment',cls:'Classroom & Teacher',dis:'Disabilities',gift:'Gifted Children',dif:'Differentiation & Adaptation',udl:'UDL',pmi:'Peer Mediated Instruction',cot:'Co-teaching',law:'Laws & Policies',ict:'ICT'};
+var nav=document.getElementById('nav'),wrap=document.getElementById('wrap');
+function rows(list,cls){return list.map(function(q){return '<div class="q '+cls+'"><span class="n">'+q[0]+'</span><div class="qt">'+q[1]+'<br><a href="hc11_study.html#'+q[3]+'">Notes: '+TOP[q[3]]+' →</a></div><span class="mk">'+q[2]+'M</span></div>'}).join('')}
+var btns='<button class="on" data-p="imp">★ Important</button>';
+var panes='<div class="pane on" id="p-imp"><div class="yh"><h2>Important Questions</h2><span class="code">5 papers</span></div><div class="freq">'+IMP.map(function(i){return '<div class="fc'+(i[3]?' hot':'')+'"><b>'+(i[3]?'★ ':'')+i[0]+' papers</b>'+i[1]+'</div>'}).join('')+'</div><div class="tip">Inclusive education, barriers, differentiated instruction, UDL, co-teaching and peer mediated instruction appeared in all 5 papers. Cover these first.</div></div>';
+P.forEach(function(p){
+  btns+='<button data-p="'+p.id+'">'+p.tab+'</button>';
+  panes+='<div class="pane" id="p-'+p.id+'"><div class="yh"><h2>'+p.tab+'</h2><span class="code">'+p.code+'</span></div><div class="pl">Part A · attempt any 3 (3×10=30)</div>'+rows(p.A,'')+'<div class="pl">Part B · attempt any 8 (8×5=40)</div>'+rows(p.B,'pb')+'</div>';
+});
+nav.innerHTML=btns;wrap.innerHTML=panes;
+nav.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('.nav button,.pane').forEach(function(x){x.classList.remove('on')});
+  b.classList.add('on');document.getElementById('p-'+b.dataset.p).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});});
+</script>
+</body>
+</html>
