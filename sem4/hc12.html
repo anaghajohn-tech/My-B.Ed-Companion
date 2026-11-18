@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HC-12 Knowledge and Curriculum | B.Ed Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Crimson+Pro:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0f0e12;--s:#1a1820;--s2:#221f2b;--b:#322e3e;--a:#c9a0dc;--g:#f5c26b;--r:#f08a8a;--t:#e8e4ee;--m:#9a94a8}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:'Outfit',sans-serif;line-height:1.6}
+a{color:var(--a);text-decoration:none}
+.top{padding:.9rem 1.5rem;border-bottom:1px solid var(--b);font-size:.85rem}
+.hero{padding:2.2rem 1.5rem 1.4rem;max-width:960px;margin:0 auto}
+.badge{display:inline-block;border:1px solid rgba(201,160,220,.4);color:var(--a);padding:.2rem .8rem;border-radius:99px;font-size:.75rem;font-weight:600;margin-bottom:.8rem}
+h1{font-family:'Crimson Pro',serif;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;margin-bottom:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+.chip{background:var(--s2);border:1px solid var(--b);color:var(--m);padding:.2rem .65rem;border-radius:6px;font-size:.76rem}
+.chip.g{border-color:rgba(245,194,107,.4);color:var(--g)}
+.study{display:inline-block;border:1px solid rgba(201,160,220,.5);background:rgba(201,160,220,.1);color:var(--a);padding:.5rem 1.1rem;border-radius:8px;font-weight:600;font-size:.85rem}
+.study:hover{background:rgba(201,160,220,.2)}
+.nav{position:sticky;top:0;z-index:9;background:var(--s);border-bottom:1px solid var(--b);overflow-x:auto;white-space:nowrap;padding:0 1rem}
+.nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--m);font:500 .8rem 'Outfit',sans-serif;padding:.85rem .9rem;cursor:pointer}
+.nav button.on{color:var(--a);border-bottom-color:var(--a)}
+.wrap{max-width:960px;margin:0 auto;padding:1.6rem 1.5rem 4rem}
+.pane{display:none}.pane.on{display:block}
+.yh{display:flex;gap:.8rem;align-items:center;margin-bottom:.4rem}
+h2{font-family:'Crimson Pro',serif;font-size:1.5rem}
+.code{font-size:.74rem;color:var(--m);border:1px solid var(--b);border-radius:6px;padding:.1rem .5rem}
+.pl{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m);margin:1.4rem 0 .7rem}
+.q{display:flex;gap:.8rem;align-items:flex-start;background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.75rem 1rem;margin-bottom:.55rem}
+.n{min-width:28px;height:28px;border-radius:6px;background:#7c4a96;color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.pb .n{background:#2f7f8f}
+.qt{flex:1;font-size:.9rem}
+.qt a{display:inline-block;margin-top:.25rem;font-size:.74rem;color:var(--m)}
+.qt a:hover{color:var(--a)}
+.mk{font-size:.72rem;color:var(--g);white-space:nowrap;margin-top:.2rem}
+.freq{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.7rem;margin:.8rem 0}
+.fc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.7rem 1rem;font-size:.86rem}
+.fc.hot{border-color:rgba(240,138,138,.45)}
+.fc b{display:block;font-size:.72rem;color:var(--r)}
+.tip{background:rgba(245,194,107,.08);border:1px solid rgba(245,194,107,.3);border-radius:8px;padding:.6rem .9rem;font-size:.84rem;color:var(--g)}
+</style>
+</head>
+<body>
+<div class="top"><a href="../index.html">← My B.Ed Companion</a> &nbsp;/&nbsp; Semester 4 / HC-12</div>
+<div class="hero">
+  <div class="badge">HC-12 · Semester 4</div>
+  <h1>Knowledge and Curriculum</h1>
+  <div class="chips">
+    <span class="chip g">6 papers: 2018 – 2024</span><span class="chip">Max. Marks: 70</span>
+    <span class="chip">Part A: 3 of 5 × 10 = 30</span><span class="chip">Part B: 8 of 12 × 5 = 40</span>
+  </div>
+  <a class="study" href="hc12_study.html">📖 Study Material →</a>
+</div>
+<div class="nav" id="nav"></div>
+<div class="wrap" id="wrap"></div>
+
+<script>
+var IMP=[
+['6/6','Types, concept and forms of knowledge','kn',1],
+['6/6','Knowledge vs information (also skill, truth, belief)','kn',1],
+['6/6','Education as a tool of modernization and democratic citizenship; modern values','mod',1],
+['6/6','Role of education in social change','mod',1],
+['6/6','Curriculum: meaning and characteristics (learner centered, humanistic and others)','cur',1],
+['6/6','National Curriculum Framework for Teacher Education 2009 (NCFTE)','fw',1],
+['6/6','School curriculum and national goals; analysis of state syllabus','fw',1],
+['6/6','Multicultural education / critical multiculturalism','mc',1],
+['5/6','Society in generating and disseminating knowledge','soc',1],
+['5/6','Sources of knowledge','kn',0],
+['5/6','Social reconstructivist curriculum; role of teacher','cur',0],
+['5/6','Humanistic curriculum','cur',0],
+['5/6','Salient features of NCF 2005','fw',0],
+['5/6','Curriculum framework; curriculum vs syllabus vs textbook','fw',0],
+['5/6','Recommendations of the Knowledge Commission','soc',0],
+['5/6','Knowledge management at school level','soc',0],
+['4/6','Meaning of education','kn',0],
+['3/6','Epistemological basis of curriculum','kn',0],
+['3/6','Sociological basis; knowledge explosion','soc',0],
+['3/6','Textbooks and digital learning material','fw',0]];
+var P=[
+{id:'n24',tab:'Sep/Oct 2024',code:'30553',
+A:[[1,'What is education? Explain the types of knowledge with relevant examples','2+8','kn'],
+[2,'a) What is curriculum? b) Need and characteristics of learner centered and community centered curriculum','2+8','cur'],
+[3,'a) What is multi-cultural and multi-lingual education? b) Strategies used by the teacher to incorporate multi-cultural and multilingual education','4+6','mc'],
+[4,'a) Recommendations of knowledge commission for creating knowledge society b) Role of society in generating and disseminating knowledge','5+5','soc'],
+[5,'a) Characteristics of curriculum b) What is social reconstructivist curriculum? Role of teacher in it','5+5','cur']],
+B:[[6,'Role of education in bringing social change in the society','5','mod'],
+[7,'Differences between knowledge and information','5','kn'],
+[8,'What is knowledge management? Its uses at the school level','2+3','soc'],
+[9,'What is knowledge explosion? How does it affect society?','2+3','soc'],
+[10,'Salient features of National Curriculum Framework 2005','5','fw'],
+[11,'"Education as a tool of modernisation and democratic citizenship" - justify','5','mod'],
+[12,'Analyse the state level school curriculum with reference to the recommendation of NCF-2009','5','fw'],
+[13,'How does school education curriculum help to achieve national goals of education?','5','fw'],
+[14,'Epistemological basis of curriculum','5','kn'],
+[15,'Differences between truth and belief with relevant examples','5','kn'],
+[16,'Relationship between curriculum and syllabus','5','fw'],
+[17,'What are the modern values of education? Explain any two of them','1+4','mod']]},
+{id:'n23',tab:'Oct/Nov 2023',code:'30553',
+A:[[1,'a) Meaning of curriculum b) Characteristics of learner centered and environment centered curriculum','2+8','cur'],
+[2,'a) "Society acts as an agent in generating and disseminating knowledge" - justify b) Different types of knowledge','5+5','soc'],
+[3,'a) Meaning and importance of curriculum framework b) Relation and difference between curriculum and syllabus','5+5','fw'],
+[4,'a) Role of education in bringing social change in society b) Sources of knowledge','5+5','mod'],
+[5,'a) Meaning of education b) How is education a tool of modernization and democratic citizenship?','5+5','mod']],
+B:[[6,'Differences and similarities between knowledge and information','5','kn'],
+[7,'What is meant by social reconstructive curriculum? Is it relevant to present day students? Justify','5','cur'],
+[8,'Salient features of national curriculum frame work 2009','5','fw'],
+[9,'Uses of knowledge management to a teacher','5','soc'],
+[10,'"Humanistic curriculum is a tool for self actualization" - justify','5','cur'],
+[11,'Recommendations of knowledge commission for creating knowledge society','5','soc'],
+[12,'How does school education curriculum help to achieve national goals of education?','5','fw'],
+[13,'What is multi-cultural education? Its uses in school education','1+4','mc'],
+[14,'Characteristics of curriculum','5','cur'],
+[15,'Modern values related to education in the present context','5','mod'],
+[16,'Critically examine any one state level high school text-book of your choice in concern with national goals','5','fw'],
+[17,'How is knowledge logical based?','5','kn']]},
+{id:'f23',tab:'Feb/Mar 2023',code:'30553',
+A:[[1,'a) How does education lead to knowledge generation? b) Similarities and differences between information and knowledge','5+5','kn'],
+[2,'a) How society acts as an agent in generating and disseminating knowledge b) Types of knowledge','5+5','soc'],
+[3,'a) Sources of knowledge b) How is knowledge logically based?','6+4','kn'],
+['–','Questions 4 and 5 were not in the scanned copy','','']],
+B:[['–','Questions 6 to 11 were not in the scanned copy','',''],
+[12,'How do determinants of curriculum such as multi-cultural aspects support the national concerns and goals?','5','mc'],
+[13,'Salient features of the national curriculum frame work of teacher education 2009 (NCFTE)','5','fw'],
+[14,'Role of education in bringing positive social change','5','mod'],
+[15,'Analyse the state school education syllabus in concern with national goals','5','fw'],
+[16,'Salient features of national curriculum frame work 2005','5','fw'],
+[17,'How a text book is a supplement for curriculum','5','fw']]},
+{id:'o21',tab:'Oct 2021',code:'30553',
+A:[[1,'a) What is education? b) Types of knowledge c) Differentiate: knowledge and information (and others)','2+4+4','kn'],
+[2,'a) What is curriculum? b) Characteristics of community centered and environment centered curriculum','2+4+4','cur'],
+[3,'a) Role of education in social change b) Sociological basis of education with regard to knowledge explosion and national concerns','5+5','mod'],
+[4,'a) What is National curriculum frame work? b) Importance of curriculum frame work c) Relationship between curriculum and syllabus','2+3+5','fw'],
+[5,'a) Role of education as a tool of modernization and democratic citizenship b) Modern values related to education in the present context','5+5','mod']],
+B:[[6,'How does society help in generating and disseminating knowledge? Justify with suitable examples','5','soc'],
+[7,'Characteristics of humanistic curriculum','5','cur'],
+[8,'Salient features of national curriculum frame work 2005','5','fw'],
+[9,'Concept and forms of knowledge','5','kn'],
+[10,'Recommendations of knowledge commission for creating knowledge society','5','soc'],
+[11,'Need for critical multi culturalism','5','mc'],
+[12,'What is social reconstructivistic curriculum? Role of teacher in this curriculum','2+3','cur'],
+[13,'Various sources of knowledge','5','kn'],
+[14,'Salient features of national curriculum frame work 2009','5','fw'],
+[15,'Analyse the state school education curriculum with respect to national goals of education','5','fw'],
+[16,'What is knowledge management? Strategies for knowledge management at school level','2+3','soc'],
+[17,'Characteristics of learner centered curriculum','5','cur']]},
+{id:'f20',tab:'Feb/Mar 2020',code:'PJ-772',
+A:[[1,'a) What is knowledge? b) Sources of knowledge with examples c) Differentiate: knowledge and skill; belief and truth','2+3+5','kn'],
+[2,'Modern values such as equity, equality and social justice are propagated through education. Justify with relevant examples','10','mod'],
+[3,'a) Why is there a need for critical multiculturalism? b) With regard to value concerns and gender differences of students','4+3+3','mc'],
+[4,'Salient features of (a) National Curriculum Framework 2005 (b) NCF for teacher education 2009','5+5','fw'],
+[5,'Define curriculum. Characteristics of learner centered and humanistic curriculum','2+4+4','cur']],
+B:[[6,'Role of education as a tool of modernization and democratic citizenship','5','mod'],
+[7,'Role of knowledge commission with regard to national and state recommendations for creating a knowledge society','5','soc'],
+[8,'Sociological basis of education with regard to knowledge explosion and national concerns','2½+2½','soc'],
+[9,'Meaning and characteristics of social reconstructivist curriculum','5','cur'],
+[10,'a) Epistemological basis of curriculum b) Concept and forms of knowledge','2+3','kn'],
+[11,'Essential features of curriculum framework; difference between curriculum and textbook','2½+2½','fw'],
+[12,'How does education play an important role in social change?','5','mod'],
+[13,'Importance of environmental centered curriculum at the school level','5','cur'],
+[14,'How do textbooks and digital learning material help in effective curriculum transaction?','5','fw'],
+[15,'a) What is Humanistic Curriculum? b) Its characteristics','2+3','cur'],
+[16,'Why are social sensitivity and economic diversity critical issues in the school programme?','2½+2½','mc'],
+[17,'a) What is knowledge management? b) Three strategies for knowledge management at school level','2+3','soc']]},
+{id:'m18',tab:'Mar 2018',code:'PG-844',
+A:[[1,'Meaning of education. Differentiate between knowledge and information, and knowledge and truth','2½+7½','kn'],
+[2,'How does society help in generating and disseminating knowledge? Justify with suitable examples','5+5','soc'],
+[3,'Why is education a tool of modernization and democratic citizenship? Modern values related to education in the present context','5+5','mod'],
+[4,'What is the epistemological basis of curriculum? Concept and forms of knowledge','4+6','kn'],
+[5,'a) Define curriculum b) Characteristics of learner centered curriculum and humanistic centered curriculum','2+4+4','cur']],
+B:[[6,'Meaning of structure of discipline; characteristics of disciplinary knowledge','2+3','kn'],
+[7,'Five recommendations made by knowledge commission for creating a knowledge society','5','soc'],
+[8,'What is knowledge management? Strategies for knowledge management at the school level','5','soc'],
+[9,'Role of teacher in implementing the social reconstructivist curriculum','5','cur'],
+[10,'Why is there a need for criticism of multiculturalism?','5','mc'],
+[11,'Impact of education on social change','5','mod'],
+[12,'What is knowledge? Different sources of knowledge','2+3','kn'],
+[13,'Meaning of curriculum frame work; relationship between syllabus and text book','2+3','fw'],
+[14,'Significance of National Curriculum Framework for teacher education 2009','5','fw'],
+[15,'Salient features of National Curriculum Framework 2005','5','fw'],
+[16,'How do text books and digital learning material help in effective curriculum transaction?','2½+2½','fw'],
+[17,'Analyse the school education curriculum of Central and State syllabus','5','fw']]}
+];
+var TOP={kn:'Knowledge',soc:'Society & Knowledge',mod:'Modernization & Social Change',cur:'Curriculum',fw:'Frameworks & National Goals',mc:'Multiculturalism'};
+var nav=document.getElementById('nav'),wrap=document.getElementById('wrap');
+function rows(list,cls){return list.map(function(q){var l=q[3]?'<br><a href="hc12_study.html#'+q[3]+'">Notes: '+TOP[q[3]]+' →</a>':'';return '<div class="q '+cls+'"><span class="n">'+q[0]+'</span><div class="qt">'+q[1]+l+'</div><span class="mk">'+(q[2]?q[2]+'M':'')+'</span></div>'}).join('')}
+var btns='<button class="on" data-p="imp">★ Important</button>';
+var panes='<div class="pane on" id="p-imp"><div class="yh"><h2>Important Questions</h2><span class="code">6 papers</span></div><div class="freq">'+IMP.map(function(i){return '<div class="fc'+(i[3]?' hot':'')+'"><b>'+(i[3]?'★ ':'')+i[0]+' papers</b>'+i[1]+'</div>'}).join('')+'</div><div class="tip">Types and forms of knowledge, knowledge vs information, modernization and democratic citizenship, curriculum types, NCFTE 2009, social change, multiculturalism and national goals appeared in every paper. Cover these first.</div></div>';
+P.forEach(function(p){
+  btns+='<button data-p="'+p.id+'">'+p.tab+'</button>';
+  panes+='<div class="pane" id="p-'+p.id+'"><div class="yh"><h2>'+p.tab+'</h2><span class="code">'+p.code+'</span></div><div class="pl">Part A · attempt any 3 (3×10=30)</div>'+rows(p.A,'')+'<div class="pl">Part B · attempt any 8 (8×5=40)</div>'+rows(p.B,'pb')+'</div>';
+});
+nav.innerHTML=btns;wrap.innerHTML=panes;
+nav.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('.nav button,.pane').forEach(function(x){x.classList.remove('on')});
+  b.classList.add('on');document.getElementById('p-'+b.dataset.p).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});});
+</script>
+</body>
+</html>
