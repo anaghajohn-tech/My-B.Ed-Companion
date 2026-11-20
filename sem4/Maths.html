@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Content and Pedagogy of Mathematics | B.Ed Companion</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Crimson+Pro:wght@600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0e100d;--s:#171a15;--s2:#1f241d;--b:#2f362c;--a:#8fbc88;--g:#f5c26b;--r:#f08a8a;--t:#e6eae3;--m:#97a093}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--t);font-family:'Outfit',sans-serif;line-height:1.6}
+a{color:var(--a);text-decoration:none}
+.top{padding:.9rem 1.5rem;border-bottom:1px solid var(--b);font-size:.85rem}
+.hero{padding:2.2rem 1.5rem 1.4rem;max-width:960px;margin:0 auto}
+.badge{display:inline-block;border:1px solid rgba(143,188,136,.4);color:var(--a);padding:.2rem .8rem;border-radius:99px;font-size:.75rem;font-weight:600;margin-bottom:.8rem}
+h1{font-family:'Crimson Pro',serif;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;margin-bottom:.6rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+.chip{background:var(--s2);border:1px solid var(--b);color:var(--m);padding:.2rem .65rem;border-radius:6px;font-size:.76rem}
+.chip.g{border-color:rgba(245,194,107,.4);color:var(--g)}
+.study{display:inline-block;border:1px solid rgba(143,188,136,.5);background:rgba(143,188,136,.1);color:var(--a);padding:.5rem 1.1rem;border-radius:8px;font-weight:600;font-size:.85rem}
+.study:hover{background:rgba(143,188,136,.2)}
+.nav{position:sticky;top:0;z-index:9;background:var(--s);border-bottom:1px solid var(--b);overflow-x:auto;white-space:nowrap;padding:0 1rem}
+.nav button{background:none;border:0;border-bottom:2px solid transparent;color:var(--m);font:500 .8rem 'Outfit',sans-serif;padding:.85rem .9rem;cursor:pointer}
+.nav button.on{color:var(--a);border-bottom-color:var(--a)}
+.wrap{max-width:960px;margin:0 auto;padding:1.6rem 1.5rem 4rem}
+.pane{display:none}.pane.on{display:block}
+.yh{display:flex;gap:.8rem;align-items:center;margin-bottom:.4rem}
+h2{font-family:'Crimson Pro',serif;font-size:1.5rem}
+.code{font-size:.74rem;color:var(--m);border:1px solid var(--b);border-radius:6px;padding:.1rem .5rem}
+.pl{font-size:.7rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--m);margin:1.4rem 0 .7rem}
+.q{display:flex;gap:.8rem;align-items:flex-start;background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.75rem 1rem;margin-bottom:.55rem}
+.n{min-width:28px;height:28px;border-radius:6px;background:#4a8544;color:#fff;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.pb .n{background:#2f7f8f}
+.qt{flex:1;font-size:.9rem}
+.qt a{display:inline-block;margin-top:.25rem;font-size:.74rem;color:var(--m)}
+.qt a:hover{color:var(--a)}
+.mk{font-size:.72rem;color:var(--g);white-space:nowrap;margin-top:.2rem}
+.freq{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:.7rem;margin:.8rem 0}
+.fc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:.7rem 1rem;font-size:.86rem}
+.fc.hot{border-color:rgba(240,138,138,.45)}
+.fc b{display:block;font-size:.72rem;color:var(--r)}
+.tip{background:rgba(245,194,107,.08);border:1px solid rgba(245,194,107,.3);border-radius:8px;padding:.6rem .9rem;font-size:.84rem;color:var(--g)}
+</style>
+</head>
+<body>
+<div class="top"><a href="../index.html">← My B.Ed Companion</a> &nbsp;/&nbsp; Semester 2 / Mathematics</div>
+<div class="hero">
+  <div class="badge">SC-MATHS I · Semester 2</div>
+  <h1>Content and Pedagogy of Mathematics</h1>
+  <div class="chips">
+    <span class="chip g">5 papers: 2022 – 2025</span><span class="chip">Max. Marks: 70</span>
+    <span class="chip">Part A: 3 of 5 × 10 = 30</span><span class="chip">Part B: 5 of 8 × 5 = 25 · Part C: 3 of 5 × 5 = 15</span>
+  </div>
+  <a class="study" href="maths_study.html">📖 Study Material →</a>
+</div>
+<div class="nav" id="nav"></div>
+<div class="wrap" id="wrap"></div>
+
+<script>
+var IMP=[
+['5/5','Characteristics and nature of mathematics','nat',1],
+['5/5','5E model: stages, example, implications','five',1],
+['5/5','Co-operative learning and Jig-saw technique','cam',1],
+['5/5','Achievement test: steps of construction','eval',1],
+['5/5','Oral work, written work and drill work','ps',1],
+['5/5','Lesson plan and unit plan: meaning, steps, differences','plan',1],
+['4/5','Van Hiele levels of geometrical thinking','vh',1],
+['4/5','Problem solving technique: steps with example','ps',1],
+['4/5','Concept attainment model','cam',1],
+['4/5','Content categories of mathematical knowledge','nat',1],
+['4/5','Mathematical proof: types; proof vs verification','eval',1],
+['3/5','Inductive and inducto-deductive method','ind',0],
+['3/5','Anderson revised Bloom taxonomy; instructional objectives','eval',0],
+['3/5','Objectives of teaching arithmetic, geometry, algebra, trigonometry','nat',0],
+['2/5','Analytic vs synthetic method','ind',0],
+['Part C','Construct a triangle (sum of two sides, or two angles, given): 4 of 5 papers','prob',1],
+['Part C','Factorisation, rational numbers, equations, quadrilaterals, (x⁵+a⁵)÷(x+a)','prob',0]];
+// [no, text, marks, topic(s)]
+var P=[
+{id:'n25',tab:'Oct/Nov 2025',code:'ED-041',
+A:[[1,'a) Characteristics of mathematics b) Stages of Van Hiele model of geometrical thinking','5+5','nat,vh'],
+[2,'a) Stages of 5E model with suitable examples b) Implications of 5E model in learning mathematics','6+4','five'],
+[3,'a) What is inductive method? b) Steps of inductive method with a mathematical example c) Differentiate between inductive and deductive method','2+4+4','ind'],
+[4,'a) What is an achievement test? b) Steps of constructing an achievement test in mathematics','2+8','eval'],
+[5,'a) What is a mathematics lesson plan? b) Characteristics of a good lesson plan c) Differentiate between lesson plan and unit plan','2+5+3','plan']],
+B:[[6,'Merits of written and drill work in mathematics','5','ps'],
+[7,'a) What is mathematical proof? b) Different types of mathematical proof','1+4','eval'],
+[8,'Content categories of mathematical knowledge with suitable examples','5','nat'],
+[9,'Steps of concept attainment model of teaching mathematics','5','cam'],
+[10,'a) What is co-operative learning strategy? b) Jig-saw co-operative strategy','1+4','cam'],
+[11,'a) What is mathematics unit plan? b) Steps of mathematics unit plan','1+4','plan'],
+[12,'a) What is diagnostic test? b) How does a diagnostic test help a teacher and a student?','1+4','eval'],
+[13,'Anderson revised Bloom taxonomy of cognitive domain','5','eval']],
+C:[[14,'Solve: i) (2x+7)/5 − (3x+11)/2 = (2x+8)/3 − 5   ii) 1/(x−1) + 2/(x−2) = 2/(x−3)','3+2','prob'],
+[15,'Find Q(x) and R(x) when (x⁵ + a⁵) ÷ (x + a)','5','prob'],
+[16,'Consider any three rational numbers; verify the associative property under addition and multiplication','5','prob'],
+[17,'a) What is a quadrilateral? b) Explain any two quadrilaterals with figure','1+4','prob'],
+[18,'Construct triangle ABC in which BC + CA = 10 cm, AB = 6.4 cm and ∠B = 60°. Measure all sides and angles','5','prob']]},
+{id:'n24',tab:'Nov/Dec 2024',code:'30516',
+A:[[1,'a) Differences between aims and objectives of teaching mathematics b) Objectives of teaching Algebra and Trigonometry','5+5','nat'],
+[2,'a) What is problem solving method? b) Steps of problem solving with an example','2+8','ps'],
+[3,'a) How does a unit plan differ from a lesson plan? b) Steps of unit plan in mathematics teaching','4+6','plan'],
+[4,'a) Characteristics of mathematics b) Stages of Van Hiele model of geometrical thinking','5+5','nat,vh'],
+[5,'a) How do the steps of a 5E lesson plan differ from those of an evaluation approach lesson plan? b) What is concept attainment model? Its stages','5+1+4','five,cam']],
+B:[[6,'Changes made in Anderson revised Bloom taxonomy with respect to cognitive domain','5','eval'],
+[7,'a) Criteria for selecting teaching learning material b) Write four instructional objectives under Understanding','2+3','plan'],
+[8,'a) How does content analysis differ from task analysis in a lesson plan? b) Task analysis of an instructional objective under Understanding','2+3','plan'],
+[9,'Differentiate between collaborative learning and cooperative learning strategies','5','cam'],
+[10,'a) How does drill work relate to oral work and written work? b) Importance of oral, written and drill work','2+3','ps'],
+[11,'Steps of achievement test in mathematics','5','eval'],
+[12,'Differentiate between analytic and synthetic methods of teaching mathematics','5','ind'],
+[13,'Content categories in mathematics with suitable examples','5','nat']],
+C:[[14,'Construct triangle ABC in which BC + CA = 8.8 cm, AB = 6.4 cm and ∠B = 60°. Measure all sides and angles','5','prob'],
+[15,'If α/β and γ/δ are two positive rational numbers, where does (α+γ)/(β+δ) lie with respect to them?','5','prob'],
+[16,'Speed of a boat in still water is 8 km/h. It goes 15 km upstream and 22 km downstream in 5 hours. Find the speed of the stream','5','prob'],
+[17,'U = {x : x ≤ 25, x ∈ N}, A = {x ∈ U : x ≤ 15}, B = {x ∈ U : 0 < x ≤ 25}. List the elements of (i) A′ (ii) A′ ∪ B′ and draw Venn diagram','5','prob'],
+[18,'Prove that any two parallelograms on the same base and between the same parallels are equal in area','5','prob']]},
+{id:'n23',tab:'Oct/Nov 2023',code:'30516',
+A:[[1,'a) Nature of mathematics b) Objectives of teaching arithmetic and trigonometry at secondary level','5+5','nat'],
+[2,'a) Stages of Van Hiele model of geometrical thinking b) Content categories in mathematics with examples','5+5','vh,nat'],
+[3,'a) Strategies of co-operative learning b) Steps of co-operative learning with a suitable example','2+8','cam'],
+[4,'a) What is a lesson plan? b) Steps of a lesson plan c) "Lesson plan is a road map to the instructor": justify with importance of lesson plan','2+5+3','plan'],
+[5,'a) What is an achievement test? b) Steps of constructing achievement test c) Uses of achievement test','2+6+2','eval']],
+B:[[6,'Steps of 5E model in teaching mathematics','5','five'],
+[7,'a) What is problem solving technique? b) Steps with a suitable example','2+3','ps'],
+[8,'Steps of concept attainment model','5','cam'],
+[9,'Differentiate between synthetic and analytic method of teaching mathematics','5','ind'],
+[10,'Importance of oral work and written work in teaching mathematics','2½+2½','ps'],
+[11,'Differences between proof and verification','5','eval'],
+[12,'a) What is concept mapping? b) Importance of concept mapping','2+3','cam'],
+[13,'Distinguish between aims and objectives of teaching mathematics','2½+2½','nat']],
+C:[[14,'a) Find the remainder when p(x) = x³ + 1 is divided by x + 1 by long division b) Check whether −2 and 2 are zeroes of the polynomial x + 2','3+2','prob'],
+[15,'Prove that angles opposite to equal sides of an isosceles triangle are equal','5','prob'],
+[16,'a) Locate √2 on the number line b) Rationalise the denominator of 2/(√5 + √2)','3+2','prob'],
+[17,'Find two consecutive odd positive integers, the sum of whose squares is 290','5','prob'],
+[18,'Show that the bisectors of angles of a parallelogram form a rectangle','5','prob']]},
+{id:'n22',tab:'Nov 2022',code:'BN-010',
+A:[[1,'a) What is mathematics? b) Characteristics of mathematics c) Nature of mathematics','2+4+4','nat'],
+[2,'a) What is inducto-deductive method? b) How will you use it while proving the Pythagoras theorem in your class?','2+8','ind'],
+[3,'a) What is an achievement test? b) Steps of constructing an achievement test in mathematics','2+8','eval'],
+[4,'a) What is co-operative learning in mathematics? b) Process of Jig-saw technique c) How does co-operative learning help in enhancing mathematics knowledge?','1+6+3','cam'],
+[5,'a) Steps of problem solving technique with an example b) Importance of drill work in mathematics','8+2','ps']],
+B:[[6,'Content categories of mathematical knowledge with suitable examples','5','nat'],
+[7,'Steps of concept attainment model of teaching mathematics','5','cam'],
+[8,'Five stages of 5E model with an example','5','five'],
+[9,'Importance of oral work and written work in the teaching of mathematics','5','ps'],
+[10,'a) What is unit plan? b) Steps of unit plan in teaching mathematics','1+4','plan'],
+[11,'Anderson revised Bloom taxonomy of instructional objectives','5','eval'],
+[12,'a) Different types of proofs b) Differences between proof and verification','2+3','eval'],
+[13,'Guided discovery method with its principles','5','ind']],
+C:[[14,'Factorise: i) x⁶ − 26x³ − 27   ii) 49m² − 36n²','3+2','prob'],
+[15,'Find Q(x) and R(x) when (x⁵ + a⁵) ÷ (x + a)','5','prob'],
+[16,'Construct triangle PQR in which PQ + PR = 6.5 cm, QR = 5.4 cm and ∠Q = 40°. Measure all sides and angles','5','prob'],
+[17,'Find the HCF and LCM of 6(m² + 10m + 24), 4(m² − m − 20) and 8(m² + 3m − 4)','5','prob'],
+[18,'a) Prove that the sum of angles of a quadrilateral is 360° b) Differentiate between parallelogram and rhombus','3+2','prob']]},
+{id:'a22',tab:'Apr 2022',code:'BA-010',
+A:[[1,'a) Characteristics of mathematics b) Stages of Van Hiele model of geometrical thinking','5+5','nat,vh'],
+[2,'a) Stages of 5E model b) How does the 5E model help bring desirable change in mathematics students?','6+4','five'],
+[3,'a) Steps of problem solving technique with suitable example b) Merits of problem solving technique','7+3','ps'],
+[4,'a) What is co-operative learning in mathematics? b) Process of Jig-saw technique c) How does it help in enhancing mathematics knowledge?','1+6+3','cam'],
+[5,'a) What is an achievement test? b) Steps of constructing an achievement test in mathematics','2+8','eval']],
+B:[[6,'How are facts, concepts and generalizations inter-related in mathematics?','5','nat'],
+[7,'a) What is mathematical proof? b) Different types of mathematical proofs','1+4','eval'],
+[8,'How does the disciplinary value of teaching mathematics help in disciplining students thinking?','5','nat'],
+[9,'Objectives of teaching arithmetic and geometry at secondary school level','3+2','nat'],
+[10,'a) What is inductive method? b) How does inducto-deductive method help in attaining concept formation?','1+4','ind'],
+[11,'a) What are instructional objectives? b) Select a topic and write two instructional objectives each under understanding and applying','1+4','eval'],
+[12,'Merits of written and drill work in mathematics','3+2','ps'],
+[13,'a) What is a lesson plan? b) Characteristics of a good lesson plan','2+3','plan']],
+C:[[14,'Factorise: i) 4(2a + b)² − (a − b)²   ii) 2ab²c − 2a + 3b³c − 3b − 4b²c² + 4c','3+2','prob'],
+[15,'Verify the associative property of addition of rational numbers −4/5, 7/10, −11/20','5','prob'],
+[16,'Solve: i) 1/(x−1) + 2/(x−2) = 3/(x−3)   ii) 5x − (4x + (5x−4)/7) = (4x−14)/3','2+3','prob'],
+[17,'a) What is a quadrilateral? b) Write the properties of a rectangle and a rhombus with a figure','1+4','prob'],
+[18,'Construct triangle PQR where ∠Q = 60°, ∠R = 70° and QR = 7.5 cm. Name the triangle and write the steps of construction','3+2','prob']]}
+];
+var TOP={nat:'Nature, Content & Aims',vh:'Van Hiele',five:'5E Model',ind:'Inductive, Deductive, Analytic, Synthetic',ps:'Problem Solving, Drill & Oral Work',cam:'Concept Attainment & Co-operative Learning',plan:'Lesson & Unit Plan',eval:'Tests, Bloom & Proof',prob:'Worked Solutions'};
+var GQ=[
+['nat',['Nature and characteristics of mathematics; history of mathematics for a teacher','Daily-life situations using mathematics; relationship between mathematics and the physical world','Content categories in mathematics with examples','Aims vs objectives; aims of teaching mathematics (utilitarian, cultural, recreational); how the aims help each other','Objectives of teaching algebra, geometry, arithmetic at secondary level','List ten specific behaviours under understanding and application; instructional objectives under cognitive domain']],
+['vh',['Stages of Van Hiele model of geometrical thinking']],
+['ind',['Inductive method: steps and uses; meaning of mathematical induction','Inductive-deductive method and its steps; differences between inductive and deductive','Analytic method and synthetic method with examples; distinguish between them','Guided discovery approach']],
+['ps',['Problem solving method: importance, steps, example, advantages','Oral work and drill work: importance, ten drill problems for class 9','Short note: problem solving, oral and written work, drill work']],
+['cam',['Concept attainment model and its syntax; meaning of concept','Collaborative and co-operative learning; jigsaw technique and its steps','Project method: steps and merits']],
+['five',['Five E model']],
+['plan',['Preparing a unit plan: content analysis, instructional objectives, task analysis','Selecting methods, strategies, techniques and models; teaching learning materials including ICT','Evaluation tools and lesson planning based on evaluation approach']],
+['eval',['Evaluation in mathematics','Construction and use of achievement test for summative assessment']],
+['prob',['Problem types: digits of a number, surface area and volume of prism and pyramid, instalment rate of interest, partnership, profit and loss, HCF of polynomials, quadratic and linear equations, pie chart, midpoint theorem, exterior angle theorem, congruence, remainder theorem, square roots']]];
+var nav=document.getElementById('nav'),wrap=document.getElementById('wrap');
+function rows(list,cls){return list.map(function(q){var l=q[3].split(',').map(function(t){return '<a href="maths_study.html#'+t+'">Notes: '+TOP[t]+' →</a>'}).join(' &nbsp;·&nbsp; ');return '<div class="q '+cls+'"><span class="n">'+q[0]+'</span><div class="qt">'+q[1]+'<br>'+l+'</div><span class="mk">'+q[2]+'M</span></div>'}).join('')}
+var btns='<button class="on" data-p="imp">★ Important</button>'+'<button data-p="gq">★ Teacher Imp Qs</button>';
+var panes='<div class="pane on" id="p-imp"><div class="yh"><h2>Important Questions</h2><span class="code">5 papers</span></div><div class="freq">'+IMP.map(function(i){return '<div class="fc'+(i[3]?' hot':'')+'"><b>'+(i[3]?'★ ':'')+i[0]+' papers</b>'+i[1]+'</div>'}).join('')+'</div><div class="tip">Part A and B repeat the same topics every year (5E, co-operative learning, achievement test, lesson and unit plan, oral and drill work). Part C is worked problems: practise the Worked Solutions tab.</div></div>';
+P.forEach(function(p){
+  btns+='<button data-p="'+p.id+'">'+p.tab+'</button>';
+  panes+='<div class="pane" id="p-'+p.id+'"><div class="yh"><h2>'+p.tab+'</h2><span class="code">'+p.code+'</span></div><div class="pl">Part A · attempt any 3 (3×10=30)</div>'+rows(p.A,'')+'<div class="pl">Part B · attempt any 5 (5×5=25)</div>'+rows(p.B,'pb')+'<div class="pl">Part C · attempt any 3 (3×5=15)</div>'+rows(p.C,'')+'</div>';
+});
+panes+='<div class="pane" id="p-gq"><div class="yh"><h2>Teacher\'s Important Questions</h2><span class="code">Teacher list · Sem 2</span></div><div class="tip">A teacher\'s expected-questions list, not an official paper. Tap a topic for notes.</div>'+GQ.map(function(g){return '<div class="pl"><a href="maths_study.html#'+g[0]+'">'+TOP[g[0]]+' →</a></div>'+g[1].map(function(t){return '<div class="q"><div class="qt">'+t+'</div></div>'}).join('')}).join('')+'</div>';
+nav.innerHTML=btns;wrap.innerHTML=panes;
+nav.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  document.querySelectorAll('.nav button,.pane').forEach(function(x){x.classList.remove('on')});
+  b.classList.add('on');document.getElementById('p-'+b.dataset.p).classList.add('on');window.scrollTo({top:0,behavior:'smooth'});});
+</script>
+</body>
+</html>
